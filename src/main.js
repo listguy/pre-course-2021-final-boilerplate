@@ -1,8 +1,12 @@
 const addButton = document.getElementById("add-button");
 const textInput = document.getElementById("text-input");
 const todoList = [];
-//clear input text on click
+let inputValue;
+
+// clear input text on click and save input value
 addButton.addEventListener("click", (e) => {
-    textInput.value = "";
+  inputValue = textInput.value;
+  textInput.value = "";
 });
+
 
