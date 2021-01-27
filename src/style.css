@@ -1,0 +1,86 @@
+:root {
+    --theme-back1: rgb(65, 65, 65);
+    --theme-back2: rgb(31, 28, 28);
+    --theme-main: rgb(20, 20, 20);
+    --shadow-main: rgb(15, 15, 15);
+    --text: white;
+    --todo-content-margin: 1em;
+}
+
+body {
+    background: linear-gradient(35deg, var(--theme-back1), var(--theme-back2));
+    padding-top: 5vh;
+    height: 100vh;
+    color: var(--text);
+    font-family: sans-serif;
+}
+
+main {
+    margin: auto;
+    background-color: var(--theme-main);
+    width: 85vw;
+    max-width: 600px;
+    min-height: 85vh;
+    padding-top: 1%;
+    padding-right: 3%;
+    padding-left: 3%;
+    box-shadow: 5px 5px 15px var(--shadow-main);
+}
+#control-section {
+    display: flex;
+    align-items: stretch;
+    height: 30px;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--text);
+    padding-bottom: 1%;
+    margin-bottom: 3%;
+}
+.control-element {
+    display: block;
+    margin: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-right: 1em;
+    border: unset;
+    font-size: 16px;
+}
+
+.adder {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/*todo entry*/
+.todo-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.4em;
+    background-color: var(--theme-back2);
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    padding-left: 0.3em; 
+    transition: 200ms all;
+}
+
+.todo-container:hover {
+    transform: scale(1.05);
+}
+
+.todo-priority {
+    display: inline-block;
+    margin-right: var(--todo-content-margin);
+}
+
+.todo-created-at {
+    display: inline-block;
+    margin-right: var(--todo-content-margin);
+}
+
+.todo-text {
+    display: inline-block;
+    overflow-wrap: break-word;
+    max-width: 65%;
+    margin-right: var(--todo-content-margin);
+}
