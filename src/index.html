@@ -4,7 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My TODO List</title>
-    <script src="utils.js"></script>
+    <script src="./utils.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/40e9ace6e8.js" crossorigin="anonymous"></script>
   </head>
-  <body></body>
+  <body>
+    <section id="add-section">
+      <input type="text" id="text-input" placeholder="Add to list...">
+      <select name="priority" id="priority-selector">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button id="add-button">ADD</button>
+    </section>
+
+    <section id="list-section">
+      <div id="title-container">
+        <h2 id="title">Your<br>To Do List</h2>
+      </div>
+      <br>
+      <div id="todo-container">
+        <ul id="todo-list"></ul>
+      </div>
+      <button id="open-add-section" type="submit"><i class="fas fa-plus-circle"></i></button>
+    </section>
+
+    <script src="./main.js"></script>
+  </body>
 </html>
