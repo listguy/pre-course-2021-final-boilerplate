@@ -3,7 +3,8 @@ let tasks = [];
 class Task{
     constructor(priority, text){
         this.priority = priority;
-        this.createdAt = getSQLDate(new Date());
+        date = new Date();
+        this.createdAt = date.toLocaleString("SQL");
         this.text = text;
     }
 }
@@ -59,18 +60,19 @@ function refreshCounter(){
     counter.append(tasks.length);
 }
 
-function getSQLDate(date){
-    return date.getFullYear() + "-" +
-     addZero(date.getMonth() + 1) + "-" +
-     addZero(date.getDate()) + " " +
-     addZero(date.getHours()) + ":" +
-     addZero(date.getMinutes()) + ":" +
-     addZero(date.getSeconds());
+function getData(){
+    let req = new XMLHttpRequest();
 
-    function addZero(number){
-        if (number < 10)
-            return "0" + number;
-        else
-            return number;
-    }
+    req.onreadystatechange = () => {
+      if (req.readyState == XMLHttpRequest.DONE) {
+        console.log(req.responseText);
+      }
+    };
+    
+    req.open("GET", "https://api.jsonbin.io/b/6011936f3126bb747e9fd00f", true);
+    req.send();
+
+    return req.responseText;
 }
+
+console.log(getData());
