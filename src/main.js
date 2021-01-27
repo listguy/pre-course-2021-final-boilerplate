@@ -39,6 +39,7 @@ async function onLoad() {
 
 function renderList() {
     viewSection.innerHTML = "";
+    counter.innerText = todoList.length;
     for(const todo of todoList) {
         const todoElement = createTodoElement(todo);
         viewSection.appendChild(todoElement);
