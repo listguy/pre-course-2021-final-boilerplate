@@ -31,9 +31,10 @@ if (typeof localJson === "string") {
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   const inputObject = convertValueToObject(inputValue);
+  console.log(inputObject)
   const todoJson = JSON.stringify(inputObject);
   console.log(todoJson);
-  jsonList.push(todoJson);
+  jsonList.push(inputObject);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   localStorage.setItem("my-todo", JSON.stringify(jsonList));
   viewSection.append(itemObjectToDiv(inputObject));
 });
@@ -82,7 +83,7 @@ function itemObjectToDiv(myTodoItem) {
 function listTodos() {
   const list = JSON.parse(localJson);
   for (let i = 0; i < list.length; i++) {
-    const object = JSON.parse(list[i]);
+    const object = list[i];
     viewSection.append(itemObjectToDiv(object));
   }
 }
