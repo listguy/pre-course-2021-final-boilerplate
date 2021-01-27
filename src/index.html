@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My TODO List</title>
-    <script src="utils.js"></script>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="utils.js"></script>
+  <title>My TODO List</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="controlSection">
+      <label for="newLine">New To Do:</label>
+      <input type="text" id="text-input" name="newLine">
+      <label for="priority">Priority:</label>
+      <select name="priority" id="priority-selector">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button id="add-button">Add</button>
+    </div>
+
+    <div class="viewSection"></div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
 </html>

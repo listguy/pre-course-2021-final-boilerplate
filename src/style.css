@@ -1,0 +1,14 @@
+.todo-container {
+    display: flex;
+    /* flex-direction: row; */
+    align-items: center;
+    justify-content: left;
+}
+
+.todo-container p {
+    flex: 1 2 5px;
+}
+
+.todo-container data {
+    flex: 2 1 5px;
+}
