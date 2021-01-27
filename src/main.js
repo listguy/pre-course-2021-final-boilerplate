@@ -1,6 +1,6 @@
 const addButton = document.getElementById("add-button");
 const textInput = document.getElementById("text-input");
-const numberOfTodo = document.getElementById("number-off-todo");
+const numberOfTodo = document.getElementById("counter");
 const todoList = [];
 let inputValue;
 
@@ -10,6 +10,10 @@ addButton.addEventListener("click", (e) => {
   textInput.value = "";
   todoList.push(convertValueToObject(inputValue));
   numberOfTodo.innerText = Number(numberOfTodo.innerText) + 1;
+});
+
+addButton.addEventListener("click", (e) => {
+    
 });
 
 function convertValueToObject(value) {
