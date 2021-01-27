@@ -20,7 +20,6 @@ async function onLoad() {
     todoList = await getPersistent(DB_NAME);
     if(!todoList) {
         todoList = [];
-        setPersistent(DB_NAME, todoList);
     }
     renderList();
     
@@ -30,7 +29,7 @@ async function onLoad() {
             priority: prioritySelector.value,
             date: new Date().getTime()
         };
-        todoList.push(todo); console.log(todo);
+        todoList.push(todo);
         setPersistent(DB_NAME, todoList);
         renderList();
         textInput.value = "";
