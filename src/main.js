@@ -32,10 +32,16 @@ function main() {
 
 	sortButton.addEventListener("click", (sort) => {
 		let sortedTasksArray = [];
-		for (let i = 1; i <= 5; i++) {
-			for (let task of tasksArray) {
-				if (Number(task.priority) === i) {
-					sortedTasksArray.push(task);
+		if (sortButton.sorted) {
+			sortedTasksArray = tasksArray;
+			sortButton.innerText = "Sort by priority";
+		} else {
+			sortButton.innerText = "Sort by date";
+			for (let i = 1; i <= 5; i++) {
+				for (let task of tasksArray) {
+					if (Number(task.priority) === i) {
+						sortedTasksArray.push(task);
+					}
 				}
 			}
 		}
