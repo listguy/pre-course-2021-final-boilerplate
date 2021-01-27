@@ -1,13 +1,19 @@
 let tasks = [];
+displayTasks();
 
 class Task{
     constructor(priority, text){
         this.priority = priority;
-        let date = new Date();
-        this.createdAt = date.toLocaleString("SQL");
+        this.createdAt = new Date().toLocaleString("SQL").replace(',','').replace('.','-').replace('.','-');
         this.text = text;
     }
 }
+
+
+
+document.getElementById("add-button").addEventListener("click", function() {
+    addTask();
+  });
 
 function addTask(){
     tasks.push(new Task(
@@ -15,7 +21,8 @@ function addTask(){
         document.getElementById("text-input").value),);
 
     document.getElementById("text-input").value = "";
-    displayTasks();
+    console.log(tasks);
+    sendToServer();
 }
 
 function sendToServer(){
@@ -24,16 +31,14 @@ function sendToServer(){
     req.onreadystatechange = () => {
       if (req.readyState == XMLHttpRequest.DONE) {
         console.log(req.responseText);
+        displayTasks();
       }
     };
     
     req.open("PUT", "https://api.jsonbin.io/b/6011936f3126bb747e9fd00f", true);
     req.setRequestHeader("Content-Type", "application/json");
-    req.send('[{"priority":3,"date":"2021-01-27 18:11:03","text":"apple"},{"priority": 4, "date": "2021-01-26 18:11:03","text": "orange"}]');
+    req.send(JSON.stringify(tasks));
 }
-
-sendToServer();
-displayTasks();
 
 function displayTasks(){
 
@@ -61,7 +66,7 @@ function displayTasks(){
     
             let todoCreatedAt = document.createElement('div');
             todoCreatedAt.classList.add('todo-created-at');
-            todoCreatedAt.append(task["date"]);
+            todoCreatedAt.append(task["createdAt"]);
     
             let todoText = document.createElement('div');
             todoText.classList.add('todo-text');
@@ -76,11 +81,6 @@ function displayTasks(){
     
     }
 }
-
-document.getElementById("add-button").addEventListener("click", function() {
-    addTask();
-    refreshCounter();
-  });
 
 function refreshCounter(){
     counter = document.getElementById("counter");
