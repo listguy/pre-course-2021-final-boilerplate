@@ -7,9 +7,11 @@ async function main() {
 		"https://api.jsonbin.io/v3" + BIN_ID + "/latest"
 	).then((res) => res.json());
 
-	console.log(fetchResponse.record);
+	console.log(fetchResponse.record["my-todo"]);
 	const tasksArray =
-		JSON.stringify(fetchResponse.record) !== `[{}]` ? fetchResponse.record : [];
+		JSON.stringify(fetchResponse.record["my-todo"]) !== `[{}]`
+			? fetchResponse.record["my-todo"]
+			: [];
 	// console.log(
 	// 	await fetch("https://api.jsonbin.io/v3" + BIN_ID.then((res) => res.json())
 	// );
@@ -43,7 +45,7 @@ async function main() {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(tasksArray),
+			body: `{"my-todo": ${JSON.stringify(tasksArray)}}`,
 		});
 		// localStorage.clear();
 		// localStorage.setItem("my-todo", JSON.stringify(tasksArray));
@@ -84,7 +86,7 @@ function printTask(toDoContainer, viewSection) {
 	toDoPriority.innerText = toDoContainer.priority;
 	const toDoDate = document.createElement("div");
 	toDoDate.className = "todo-created-at";
-	toDoDate.innerText = new Date(toDoContainer.date);
+	toDoDate.innerText = datePrinter(new Date(toDoContainer.date));
 	toDoContainerDiv.appendChild(toDoPriority);
 	toDoContainerDiv.appendChild(toDoDate);
 	toDoContainerDiv.appendChild(toDoText);
@@ -93,4 +95,22 @@ function printTask(toDoContainer, viewSection) {
 function updateCounter(tasksArray) {
 	const counter = document.querySelector("#counter");
 	counter.innerHTML = tasksArray.length;
+}
+
+function datePrinter(date) {
+	let out = {
+		year: date.getYear() - 100,
+		month: date.getMonth() + 1,
+		day: date.getDate(),
+		hours: date.getHours(),
+		minutes: date.getMinutes(),
+	};
+	console.log(out);
+	for (let number in out) {
+		if (Number(out.number) < 10) {
+			out.number = "0" + out.number;
+			console.log(number);
+		}
+	}
+	return `${out.day}/${out.month}/${out.year} at ${out.hours}:${out.minutes}`;
 }
