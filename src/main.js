@@ -9,14 +9,18 @@ let inputValue;
 
 // the add button
 addButton.addEventListener("click", (e) => {
-    inputValue = textInput.value;
-    textInput.value = "";
+    inputValue = textInput.value;  
     const inputObject = convertValueToObject(inputValue);
     todoList.push(inputObject);
     viewSection.append(itemObjectToDiv(inputObject));
     const containers = document.querySelectorAll(".todo-container");
     console.log(containers);
 });
+
+//removes text from input
+addButton.addEventListener('click', e => {
+    textInput.value = "";
+})
 
 //set counter to stay on refresh
 if (storedCounter) {
