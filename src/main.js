@@ -15,7 +15,14 @@ function onLoad() {
     prioritySelector = document.querySelector("#priority-selector");
     addButton = document.querySelector("#add-button");
     viewSection = document.querySelector("#view-section");
+
+    addButton.onclick = () => {
+        const todo = createTodo(textInput.value, prioritySelector.value);
+        viewSection.appendChild(todo);
+    };
 }
+
+
 
 function createTodo(text, priority) {
     const container = document.createElement("div");
@@ -26,6 +33,9 @@ function createTodo(text, priority) {
     todoPriority.classList.add("todo-priority");
     timeStamp.classList.add("todo-created-at");
     todoText.classList.add("todo-text");
+    todoPriority.innerText = priority;
+    timeStamp.innerText = dateToSQLFormat( new Date() );
+    todoText.innerText = text;
     container.append(todoPriority, timeStamp, todoText);
     return container;
 }
