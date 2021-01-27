@@ -1,24 +1,50 @@
 window.addEventListener("DOMContentLoaded", main);
 function main() {
-	const controlSection = document.querySelector("#control-section");
 	const viewSection = document.querySelector("#view-section");
 	const textInput = document.querySelector("#text-input");
-	const tasksArray = [];
+	const tasksArray =
+		localStorage.getItem("my-todo") !== null
+			? JSON.parse(localStorage.getItem("my-todo"))
+			: [];
 	const prioritySelector = document.querySelector("#priority-selector");
 	const addButton = document.querySelector("#add-button");
+	const sortButton = document.querySelector("#sort-button");
+	sortButton.sorted = false;
+	updateCounter(tasksArray);
+	for (let task of tasksArray) {
+		printTask(task, viewSection);
+	}
 	addButton.addEventListener("click", newTask);
 
 	function newTask(event) {
 		const toDoContainer = {
 			priority: prioritySelector.value,
 			text: textInput.value,
-			date: new Date(),
+			date: Number(new Date()), //for JSON adaptablity
 		};
 		textInput.value = ""; //resets input field
 		tasksArray.push(toDoContainer);
 		printTask(toDoContainer, viewSection);
-		console.log(tasksArray);
+		updateCounter(tasksArray);
+		localStorage.clear();
+		localStorage.setItem("my-todo", JSON.stringify(tasksArray));
 	}
+
+	sortButton.addEventListener("click", (sort) => {
+		let sortedTasksArray = [];
+		for (let i = 1; i <= 5; i++) {
+			for (let task of tasksArray) {
+				if (Number(task.priority) === i) {
+					sortedTasksArray.push(task);
+				}
+			}
+		}
+		viewSection.innerHTML = "";
+		for (let task of sortedTasksArray) {
+			printTask(task, viewSection);
+		}
+		sortButton.sorted = !sortButton.sorted;
+	});
 }
 
 function printTask(toDoContainer, viewSection) {
@@ -33,8 +59,13 @@ function printTask(toDoContainer, viewSection) {
 	toDoPriority.innerText = toDoContainer.priority;
 	const toDoDate = document.createElement("div");
 	toDoDate.className = "todo-created-at";
-	toDoDate.innerText = toDoContainer.date;
+	toDoDate.innerText = new Date(toDoContainer.date);
 	toDoContainerDiv.appendChild(toDoPriority);
 	toDoContainerDiv.appendChild(toDoDate);
 	toDoContainerDiv.appendChild(toDoText);
+}
+
+function updateCounter(tasksArray) {
+	const counter = document.querySelector("#counter");
+	counter.innerHTML = tasksArray.length;
 }
