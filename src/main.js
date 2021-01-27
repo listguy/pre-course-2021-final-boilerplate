@@ -1,4 +1,3 @@
-let tasks = [];
 displayTasks();
 
 class Task{
@@ -9,23 +8,34 @@ class Task{
     }
 }
 
-
-
 document.getElementById("add-button").addEventListener("click", function() {
     addTask();
   });
 
 function addTask(){
-    tasks.push(new Task(
-        document.getElementById("priority-selector").value,
-        document.getElementById("text-input").value),);
+    let requestURL = 'https://api.jsonbin.io/b/6011936f3126bb747e9fd00f/latest';
+    let request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.send();
 
-    document.getElementById("text-input").value = "";
-    console.log(tasks);
-    sendToServer();
+    request.onload = function() {
+        let binTasks = request.response;
+        
+        if (JSON.stringify(binTasks) === "[{}]")
+            binTasks = []
+
+        binTasks.push(new Task(
+            document.getElementById("priority-selector").value,
+            document.getElementById("text-input").value),);
+    
+        document.getElementById("text-input").value = "";
+        sendToServer(binTasks);
+    }
+
 }
 
-function sendToServer(){
+function sendToServer(binTasks){
     let req = new XMLHttpRequest();
 
     req.onreadystatechange = () => {
@@ -37,7 +47,7 @@ function sendToServer(){
     
     req.open("PUT", "https://api.jsonbin.io/b/6011936f3126bb747e9fd00f", true);
     req.setRequestHeader("Content-Type", "application/json");
-    req.send(JSON.stringify(tasks));
+    req.send(JSON.stringify(binTasks));
 }
 
 function displayTasks(){
@@ -54,31 +64,31 @@ function displayTasks(){
     request.send();
 
     request.onload = function() {
-        let superHeroes = request.response;
-    
-        for(task of superHeroes){
-            let todoContainer = document.createElement('div');
-            todoContainer.classList.add('todo-container');
+        let binTasks = request.response;
+        if (JSON.stringify(binTasks) !== "[{}]"){
+            for(task of binTasks){
+                let todoContainer = document.createElement('div');
+                todoContainer.classList.add('todo-container');
 
-            let todoPriority = document.createElement('div');
-            todoPriority.classList.add('todo-priority');
-            todoPriority.append(task["priority"]);
-    
-            let todoCreatedAt = document.createElement('div');
-            todoCreatedAt.classList.add('todo-created-at');
-            todoCreatedAt.append(task["createdAt"]);
-    
-            let todoText = document.createElement('div');
-            todoText.classList.add('todo-text');
-            todoText.append(task["text"]);
-            
-            todoContainer.append(todoPriority);
-            todoContainer.append(todoCreatedAt);
-            todoContainer.append(todoText);
+                let todoPriority = document.createElement('div');
+                todoPriority.classList.add('todo-priority');
+                todoPriority.append(task["priority"]);
+        
+                let todoCreatedAt = document.createElement('div');
+                todoCreatedAt.classList.add('todo-created-at');
+                todoCreatedAt.append(task["createdAt"]);
+        
+                let todoText = document.createElement('div');
+                todoText.classList.add('todo-text');
+                todoText.append(task["text"]);
+                
+                todoContainer.append(todoPriority);
+                todoContainer.append(todoCreatedAt);
+                todoContainer.append(todoText);
 
-            controlSection.append(todoContainer);
+                controlSection.append(todoContainer);
+            }
         }
-    
     }
 }
 
