@@ -4,7 +4,7 @@ const numberOfTodo = document.getElementById("counter");
 const viewSection = document.getElementById("view");
 const counter = document.getElementById("counter");
 let storedCounter = localStorage.getItem("counter");
-let localJson = localStorage.getItem("json list");
+let localJson = localStorage.getItem("my-todo");
 const todoList = [];
 let inputValue;
 let jsonList = [];
@@ -22,33 +22,21 @@ addButton.onclick = function () {
   localStorage.setItem(key, value);
 };
 
-
-//saves the list locally using JSON
+//saves the list locally using JSON and loading the local
 if (typeof localJson === "string") {
-    jsonList = JSON.parse(localJson);
-    listTodos();
+  jsonList = JSON.parse(localJson);
+  listTodos();
 }
 
 addButton.addEventListener("click", (e) => {
-    inputValue = textInput.value;
-    const inputObject = convertValueToObject(inputValue);
-    const todoJson = JSON.stringify(inputObject);
-    jsonList.push(todoJson);
-    console.log(todoJson); 
-    localStorage.setItem("json list", JSON.stringify(jsonList));
-    viewSection.append(itemObjectToDiv(inputObject));
+  inputValue = textInput.value;
+  const inputObject = convertValueToObject(inputValue);
+  const todoJson = JSON.stringify(inputObject);
+  console.log(todoJson);
+  jsonList.push(todoJson);
+  localStorage.setItem("my-todo", JSON.stringify(jsonList));
+  viewSection.append(itemObjectToDiv(inputObject));
 });
-
-
-
-
-// the add button
-// addButton.addEventListener("click", (e) => {
-//     const input = textInput.value;
-//     todoJson = 
-// });
-
-
 
 //removes text from input
 addButton.addEventListener("click", (e) => {
@@ -90,15 +78,11 @@ function itemObjectToDiv(myTodoItem) {
   return todoContainer;
 }
 
-function listTodos(){
-    const list = JSON.parse(localJson)
-    for (let i = 0; i < list.length; i++) {
-        const object = JSON.parse(list[i]);
-        viewSection.append(itemObjectToDiv(object));
-    }
+//loads the list from local storage
+function listTodos() {
+  const list = JSON.parse(localJson);
+  for (let i = 0; i < list.length; i++) {
+    const object = JSON.parse(list[i]);
+    viewSection.append(itemObjectToDiv(object));
+  }
 }
-// //creating a div and adding class
-// function elementAndClass(divName, className) {
-//     divName = document.createElement("div");
-//     divName.setAttribute('class', className);
-// }
