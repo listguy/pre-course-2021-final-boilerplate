@@ -1,11 +1,14 @@
 window.addEventListener("DOMContentLoaded", main);
-function main() {
+async function main() {
+	const API_KEY = "https://api.jsonbin.io/b/601189173126bb747e9fcc1e";
 	const viewSection = document.querySelector("#view-section");
 	const textInput = document.querySelector("#text-input");
-	const tasksArray =
-		localStorage.getItem("my-todo") !== null
-			? JSON.parse(localStorage.getItem("my-todo"))
-			: [];
+	const tasksArray = await fetch(API_KEY + "/latest").then((res) => res.json());
+	console.log(tasksArray);
+	// const tasksArray =
+	// 	localStorage.getItem("my-todo") !== null
+	// 		? JSON.parse(localStorage.getItem("my-todo"))
+	// 		: [];
 	const prioritySelector = document.querySelector("#priority-selector");
 	const addButton = document.querySelector("#add-button");
 	const sortButton = document.querySelector("#sort-button");
@@ -16,7 +19,7 @@ function main() {
 	}
 	addButton.addEventListener("click", newTask);
 
-	function newTask(event) {
+	async function newTask(event) {
 		const toDoContainer = {
 			priority: prioritySelector.value,
 			text: textInput.value,
@@ -26,8 +29,15 @@ function main() {
 		tasksArray.push(toDoContainer);
 		printTask(toDoContainer, viewSection);
 		updateCounter(tasksArray);
-		localStorage.clear();
-		localStorage.setItem("my-todo", JSON.stringify(tasksArray));
+		await fetch(API_KEY, {
+			method: "put",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(tasksArray),
+		});
+		// localStorage.clear();
+		// localStorage.setItem("my-todo", JSON.stringify(tasksArray));
 	}
 
 	sortButton.addEventListener("click", (sort) => {
@@ -37,7 +47,7 @@ function main() {
 			sortButton.innerText = "Sort by priority";
 		} else {
 			sortButton.innerText = "Sort by date";
-			for (let i = 1; i <= 5; i++) {
+			for (let i = 5; i >= 1; i--) {
 				for (let task of tasksArray) {
 					if (Number(task.priority) === i) {
 						sortedTasksArray.push(task);
