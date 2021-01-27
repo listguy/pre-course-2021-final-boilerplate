@@ -1,13 +1,18 @@
 window.addEventListener("DOMContentLoaded", main);
 async function main() {
-	const API_KEY = "https://api.jsonbin.io/b/601189173126bb747e9fcc1e";
+	const BIN_ID = "/b/601189173126bb747e9fcc1e";
 	const viewSection = document.querySelector("#view-section");
 	const textInput = document.querySelector("#text-input");
+	const fetchResponse = await fetch(
+		"https://api.jsonbin.io/v3" + BIN_ID + "/latest"
+	).then((res) => res.json());
+
+	console.log(fetchResponse.record);
 	const tasksArray =
-		(await fetch(API_KEY + "/latest").then((res) => res.text())) !== "[{}]"
-			? await fetch(API_KEY + "/latest").then((res) => res.json())
-			: [];
-	console.log(await fetch(API_KEY + "/latest").then((res) => res.json()));
+		JSON.stringify(fetchResponse.record) !== `[{}]` ? fetchResponse.record : [];
+	// console.log(
+	// 	await fetch("https://api.jsonbin.io/v3" + BIN_ID.then((res) => res.json())
+	// );
 	console.log(tasksArray);
 	// const tasksArray =
 	// 	localStorage.getItem("my-todo") !== null
@@ -33,7 +38,7 @@ async function main() {
 		tasksArray.push(toDoContainer);
 		printTask(toDoContainer, viewSection);
 		updateCounter(tasksArray);
-		await fetch(API_KEY, {
+		await fetch("https://api.jsonbin.io/v3" + BIN_ID, {
 			method: "put",
 			headers: {
 				"Content-Type": "application/json",
