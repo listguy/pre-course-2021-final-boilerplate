@@ -21,7 +21,6 @@ addButton.onclick = function () {
   counter.innerText = Number(counter.innerText) + 1;
   localStorage.setItem(key, value);
 };
-
 //saves the list locally using JSON and loading the local
 if (typeof localJson === "string") {
   jsonList = JSON.parse(localJson);
