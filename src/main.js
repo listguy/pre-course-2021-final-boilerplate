@@ -9,4 +9,8 @@ addButton.addEventListener("click", (e) => {
   textInput.value = "";
 });
 
-
+function convertValueToObject(value) {
+    const current = new Date();
+    const creationTime = current.toLocaleString;
+    const priority = getElementById('priority-selector');
+}
