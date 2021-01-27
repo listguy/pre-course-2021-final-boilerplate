@@ -22,18 +22,31 @@ addButton.onclick = function () {
   localStorage.setItem(key, value);
 };
 
+
 //saves the list locally using JSON
 if (typeof localJson === "string") {
-  jsonList = JSON.parse(localJson);
+    jsonList = JSON.parse(localJson);
+    listTodos();
 }
 
 addButton.addEventListener("click", (e) => {
-  inputValue = textInput.value;
-  const todoJson = JSON.stringify(convertValueToObject(inputValue));
-  jsonList.push(todoJson);
-  localStorage.setItem("json list", JSON.stringify(jsonList));
+    inputValue = textInput.value;
+    const inputObject = convertValueToObject(inputValue);
+    const todoJson = JSON.stringify(inputObject);
+    jsonList.push(todoJson);
+    console.log(todoJson); 
+    localStorage.setItem("json list", JSON.stringify(jsonList));
+    viewSection.append(itemObjectToDiv(inputObject));
 });
 
+
+
+
+// the add button
+// addButton.addEventListener("click", (e) => {
+//     const input = textInput.value;
+//     todoJson = 
+// });
 
 
 
@@ -77,6 +90,13 @@ function itemObjectToDiv(myTodoItem) {
   return todoContainer;
 }
 
+function listTodos(){
+    const list = JSON.parse(localJson)
+    for (let i = 0; i < list.length; i++) {
+        const object = JSON.parse(list[i]);
+        viewSection.append(itemObjectToDiv(object));
+    }
+}
 // //creating a div and adding class
 // function elementAndClass(divName, className) {
 //     divName = document.createElement("div");
