@@ -1,6 +1,7 @@
 const addButton = document.getElementById("add-button");
 const textInput = document.getElementById("text-input");
 const numberOfTodo = document.getElementById("counter");
+const viewSection = document.getElementById("view");
 const todoList = [];
 let inputValue;
 
@@ -8,22 +9,50 @@ let inputValue;
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   textInput.value = "";
-  todoList.push(convertValueToObject(inputValue));
+  const inputObject = convertValueToObject(inputValue);
+  todoList.push(inputObject);
   numberOfTodo.innerText = Number(numberOfTodo.innerText) + 1;
+  viewSection.append(itemObjectToDiv(inputObject));
 });
 
-addButton.addEventListener("click", (e) => {
-    
-});
+addButton.addEventListener("click", (e) => {});
 
 function convertValueToObject(value) {
   const current = new Date();
   const creationTime = current.toLocaleString();
   const priority = document.getElementById("priority-selector").value;
   const myTodoItem = {
-    "todo text": value,
-    "created at": creationTime,
-    priority: priority,
+    "text": value,
+    "date": creationTime,
+    "priority": priority,
   };
   return myTodoItem;
+}
+
+// //creating a div and adding class 
+// function elementAndClass(divName, className) {
+//     divName = document.createElement("div");
+//     divName.setAttribute('class', className);
+// }
+
+function itemObjectToDiv(myTodoItem) {
+    const todoContainer = document.createElement("div");
+    const todoPriority = document.createElement("div");
+    const todoCreatedAt = document.createElement("div");
+    const todoText = document.createElement("div");
+    
+    todoContainer.setAttribute("class", "todo-container");
+    todoPriority.setAttribute("class", "todo-priority");
+    todoCreatedAt.setAttribute("class", "todo-priority");
+    todoText.setAttribute("class", "todo-text");
+    
+    todoPriority.innerText = myTodoItem["priority"];
+    todoCreatedAt.innerText = myTodoItem["date"];
+    todoText.innerText = myTodoItem["text"];
+    
+    todoContainer.appendChild(todoPriority);
+    todoContainer.appendChild(todoCreatedAt);
+    todoContainer.appendChild(todoText);
+
+    return todoContainer;
 }
