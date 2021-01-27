@@ -6,16 +6,7 @@ const counter = document.getElementById("counter");
 let storedCounter = localStorage.getItem("counter");
 const todoList = [];
 let inputValue;
-
-// the add button
-addButton.addEventListener("click", (e) => {
-    inputValue = textInput.value;  
-    const inputObject = convertValueToObject(inputValue);
-    todoList.push(inputObject);
-    viewSection.append(itemObjectToDiv(inputObject));
-    const containers = document.querySelectorAll(".todo-container");
-    console.log(containers);
-});
+let jsonCounter = 0;
 
 //removes text from input
 addButton.addEventListener('click', e => {
@@ -34,6 +25,28 @@ addButton.onclick = function() {
     counter.innerText = Number(counter.innerText) + 1;
     localStorage.setItem(key, value);
 }
+
+// the add button
+// addButton.addEventListener("click", (e) => {
+//     inputValue = textInput.value;  
+//     const inputObject = convertValueToObject(inputValue);
+//     const todoJson = JSON.stringify(inputObject);
+
+//     todoList.push(inputObject);
+//     viewSection.append(itemObjectToDiv(inputObject));
+//     const containers = document.querySelectorAll(".todo-container");
+//     console.log(containers);
+// });
+
+// addButton.addEventListener('click', e => {
+//     inputValue = textInput.value;
+//     const todoJson = JSON.stringify(convertValueToObject(inputValue));
+//     console.log(todoJson);
+//     localStorage.setItem("json"+jsonCounter, todoJson);
+// })
+
+
+
 
 function convertValueToObject(value) {
   const current = new Date();
