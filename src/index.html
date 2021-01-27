@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My TODO List</title>
     <script src="utils.js"></script>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div class="control-section">
+      <input id="text-input" type="text" />
+      <select name="priority" id="priority-selector">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button id="add-button">Add</button>
+    </div>
+    <div class="view-section"></div>
     <script src="./main.js"></script>
   </body>
 </html>
