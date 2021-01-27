@@ -43,7 +43,7 @@ function itemObjectToDiv(myTodoItem) {
     
     todoContainer.setAttribute("class", "todo-container");
     todoPriority.setAttribute("class", "todo-priority");
-    todoCreatedAt.setAttribute("class", "todo-priority");
+    todoCreatedAt.setAttribute("class", "todo-created-at");
     todoText.setAttribute("class", "todo-text");
     
     todoPriority.innerText = myTodoItem["priority"];
