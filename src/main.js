@@ -31,10 +31,10 @@ if (typeof localJson === "string") {
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   const inputObject = convertValueToObject(inputValue);
-  console.log(inputObject)
+  console.log(inputObject);
   const todoJson = JSON.stringify(inputObject);
   console.log(todoJson);
-  jsonList.push(inputObject);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  jsonList.push(inputObject); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   localStorage.setItem("my-todo", JSON.stringify(jsonList));
   viewSection.append(itemObjectToDiv(inputObject));
 });
