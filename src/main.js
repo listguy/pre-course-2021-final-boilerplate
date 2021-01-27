@@ -1,14 +1,21 @@
+document.addEventListener("DOMContentLoaded", onLoad);
 
-const sqlTime = dateToSQLFormat(new Date()); 
-console.log(sqlTime);
+function onLoad() {
+
+}
+
 
 
 function dateToSQLFormat(date) {
     const year = date.getFullYear();
-    const month = date.getMonth() + 1; 
-    const day = date.getDate();
-    const hour = date.getHours();
-    const minutes = date.getMinutes(); 
-    const seconds = date.getSeconds(); 
+    const month = pad(date.getMonth() + 1); 
+    const day = pad(date.getDate());
+    const hour = pad(date.getHours());
+    const minutes = pad(date.getMinutes()); 
+    const seconds = pad(date.getSeconds()); 
     return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
+
+    function pad(num) {
+        return (num + "").length < 2 ? "0" + num : num;
+    }
 }
