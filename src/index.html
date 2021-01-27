@@ -6,26 +6,35 @@
 		<title>My TODO List</title>
 		<script src="./utils.js"></script>
 		<script src="./main.js"></script>
+		<link rel="stylesheet" href="./style.css" />
 	</head>
 	<body>
+		<header>To Do List</header>
 		<section id="control-section">
 			<input
 				type="text"
 				id="text-input"
 				placeholder="What's need to be done?"
 			/>
+			<label for="priority-selector">Priority:</label>
 			<select id="priority-selector" name="priority-selector">
-				<option value="1">1</option>
+				<option value="1">1-Most</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
 				<option value="4">4</option>
-				<option value="5">5</option>
+				<option value="5">5-Least</option>
 			</select>
 			<button id="add-button">Add</button>
+			<hr />
 			<div id="counter-line">
 				You have <span id="counter"></span> tasks on your To-Do List
 			</div>
 			<button id="sort-button">Sort by priority</button>
+		</section>
+		<section id="view-section-headers">
+			<div class="view-section-header">Priority</div>
+			<div class="view-section-header">Recieved date</div>
+			<div class="view-section-header">Task</div>
 		</section>
 
 		<section id="view-section"></section>
