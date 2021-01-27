@@ -23,6 +23,7 @@ async function addTask(){
             document.getElementById("text-input").value),);
 
         document.getElementById("text-input").value = "";
+        refreshCounter();
         sendToServer(tasks);
 }
 
@@ -80,6 +81,7 @@ async function fetchTasks(){
     else {
         alert("HTTP-Error: " + response.status);
     }
+    refreshCounter();
 }
 
 function displayTasks(tasks){
@@ -109,13 +111,13 @@ function displayTasks(tasks){
 
                 controlSection.append(todoContainer);
             }
-
+            refreshCounter();
 }
 
 function refreshCounter(){
     counter = document.getElementById("counter");
     counter.innerText = "";
-    counter.append(tasks.length);
+    counter.append(tasks["my-todo"].length);
 }
 
 function getSQLDate(date){
