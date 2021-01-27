@@ -2,20 +2,34 @@ const addButton = document.getElementById("add-button");
 const textInput = document.getElementById("text-input");
 const numberOfTodo = document.getElementById("counter");
 const viewSection = document.getElementById("view");
+const counter = document.getElementById("counter");
+let storedCounter = localStorage.getItem("counter");
 const todoList = [];
 let inputValue;
 
-// clear input text on click and save input value
+// the add button
 addButton.addEventListener("click", (e) => {
-  inputValue = textInput.value;
-  textInput.value = "";
-  const inputObject = convertValueToObject(inputValue);
-  todoList.push(inputObject);
-  numberOfTodo.innerText = Number(numberOfTodo.innerText) + 1;
-  viewSection.append(itemObjectToDiv(inputObject));
+    inputValue = textInput.value;
+    textInput.value = "";
+    const inputObject = convertValueToObject(inputValue);
+    todoList.push(inputObject);
+    viewSection.append(itemObjectToDiv(inputObject));
+    const containers = document.querySelectorAll(".todo-container");
+    console.log(containers);
 });
 
-addButton.addEventListener("click", (e) => {});
+//set counter to stay on refresh
+if (storedCounter) {
+    counter.innerText = storedCounter;
+}
+//update counter on every click
+addButton.onclick = function() {
+    const key = "counter";
+    let value = Number(counter.innerText);
+    value ++;
+    counter.innerText = Number(counter.innerText) + 1;
+    localStorage.setItem(key, value);
+}
 
 function convertValueToObject(value) {
   const current = new Date();
@@ -29,18 +43,13 @@ function convertValueToObject(value) {
   return myTodoItem;
 }
 
-// //creating a div and adding class 
-// function elementAndClass(divName, className) {
-//     divName = document.createElement("div");
-//     divName.setAttribute('class', className);
-// }
-
+//converts the todo item object into a div container
 function itemObjectToDiv(myTodoItem) {
     const todoContainer = document.createElement("div");
     const todoPriority = document.createElement("div");
     const todoCreatedAt = document.createElement("div");
     const todoText = document.createElement("div");
-    
+ 
     todoContainer.setAttribute("class", "todo-container");
     todoPriority.setAttribute("class", "todo-priority");
     todoCreatedAt.setAttribute("class", "todo-created-at");
@@ -56,3 +65,10 @@ function itemObjectToDiv(myTodoItem) {
 
     return todoContainer;
 }
+
+// //creating a div and adding class 
+// function elementAndClass(divName, className) {
+//     divName = document.createElement("div");
+//     divName.setAttribute('class', className);
+// }
+
