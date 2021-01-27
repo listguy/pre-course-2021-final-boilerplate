@@ -3,7 +3,7 @@ let tasks = [];
 class Task{
     constructor(priority, text){
         this.priority = priority;
-        this.createdAt = new Date();
+        this.createdAt = getSQLDate(new Date());
         this.text = text;
     }
 }
@@ -59,3 +59,18 @@ function refreshCounter(){
     counter.append(tasks.length);
 }
 
+function getSQLDate(date){
+    return date.getFullYear() + "-" +
+     addZero(date.getMonth() + 1) + "-" +
+     addZero(date.getDate()) + " " +
+     addZero(date.getHours()) + ":" +
+     addZero(date.getMinutes()) + ":" +
+     addZero(date.getSeconds());
+
+    function addZero(number){
+        if (number < 10)
+            return "0" + number;
+        else
+            return number;
+    }
+}
