@@ -31,9 +31,14 @@ async function onLoad() {
             date: new Date().getTime()
         };
         todoList.push(todo); console.log(todo);
-        setPersistent("my-todo", todoList);
+        setPersistent(DB_NAME, todoList);
         renderList();
         textInput.value = "";
+    };
+
+    sortButton.onclick = () => {
+        todoList.sort( (a,b) => Number(b.priority) - Number(a.priority) );
+        renderList();
     };
 }
 
