@@ -1,10 +1,34 @@
+"use strict"
 document.addEventListener("DOMContentLoaded", onLoad);
 
-function onLoad() {
+let counter;
+let sortButton;
+let textInput;
+let prioritySelector;
+let addButton;
+let viewSection;
 
+function onLoad() {
+    counter = document.querySelector("#counter");
+    sortButton = document.querySelector("#sort-button");
+    textInput = document.querySelector("#text-input");
+    prioritySelector = document.querySelector("#priority-selector");
+    addButton = document.querySelector("#add-button");
+    viewSection = document.querySelector("#view-section");
 }
 
-
+function createTodo(text, priority) {
+    const container = document.createElement("div");
+    const todoPriority = document.createElement("div");
+    const timeStamp = document.createElement("div");
+    const todoText = document.createElement("div");
+    container.classList.add("todo-container");
+    todoPriority.classList.add("todo-priority");
+    timeStamp.classList.add("todo-created-at");
+    todoText.classList.add("todo-text");
+    container.append(todoPriority, timeStamp, todoText);
+    return container;
+}
 
 function dateToSQLFormat(date) {
     const year = date.getFullYear();
