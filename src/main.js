@@ -7,10 +7,17 @@ let inputValue;
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   textInput.value = "";
+  todoList.push(convertValueToObject(inputValue));
 });
 
 function convertValueToObject(value) {
-    const current = new Date();
-    const creationTime = current.toLocaleString;
-    const priority = getElementById('priority-selector');
+  const current = new Date();
+  const creationTime = current.toLocaleString();
+  const priority = document.getElementById("priority-selector").value;
+  const myTodoItem = {
+    "todo text": value,
+    "created at": creationTime,
+    priority: priority,
+  };
+  return myTodoItem;
 }
