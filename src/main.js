@@ -40,9 +40,19 @@ async function onLoad() {
         renderList();
     };
 
-    clearButton.onclick = () => {
-        todoList = [];
-        renderList();
+    clearButton.onclick = event => {
+        if(!confirm("Are you sure?")) return;
+        const selectedElements = viewSection.querySelectorAll(".selected");
+        console.log(selectedElements);
+        if (selectedElements.length > 0) {
+            event.preventDefault();
+            for (const element of selectedElements) {
+                removeElement(element);
+            }
+        } else {
+            todoList = [];
+            renderList();
+        }
         setPersistent(DB_NAME, todoList);
     }
 
@@ -116,7 +126,7 @@ function hasClass(element, className) {
 
 //removes todo from html and todoList
 function removeElement(element) {
-    const todoElements = viewSection.querySelectorAll(".todo-container");
+    const todoElements = Array.from(viewSection.querySelectorAll(".todo-container"));
     const index = todoElements.indexOf(element);
     element.remove();
     todoList.splice(index, 1);
