@@ -16,6 +16,7 @@
 	<body>
 		<header>To Do List</header>
 		<section id="control-section">
+			<button id="dark-mode-button"></button>
 			<input
 				type="text"
 				id="text-input"
@@ -23,11 +24,11 @@
 			/>
 			<label for="priority-selector">Priority:</label>
 			<select id="priority-selector" name="priority-selector">
-				<option value="1">1-Least</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5-Most</option>
+				<option value="1" class="option priority1">1-Least</option>
+				<option value="2" class="option priority2">2</option>
+				<option value="3" class="option priority3">3</option>
+				<option value="4" class="option priority4">4</option>
+				<option value="5" class="option priority5">5-Most</option>
 			</select>
 			<button id="add-button">Add</button>
 			<hr />
@@ -39,6 +40,7 @@
 		<div id="all-view-section">
 			<section id="view-section"></section>
 			<img id="fridge" src="images/miniBar.webp" />
+			<div id="tip-window" hidden>Click to Delete task</div>
 		</div>
 	</body>
 </html>
