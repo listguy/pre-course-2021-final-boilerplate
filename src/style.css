@@ -68,7 +68,7 @@ header {
 	content: center;
 	flex: 0, 1, 30%;
 	border: 1px solid rgb(151, 113, 42);
-	height: 20vh;
+	height: 100px;
 	width: 25%;
 	margin-top: 15px;
 	margin-right: 3.5%;
@@ -79,11 +79,12 @@ header {
 	position: absolute;
 	right: 40%;
 	left: 40%;
-	top: -7px;
-	font-size: 14px;
+	top: -10px;
+	font-size: 16px;
 	border-radius: 50%;
-	height: 15px;
-	width: 15px;
+	height: 20px;
+	width: 20px;
+	line-height: 20px;
 	cursor: pointer;
 }
 .priority1 {
@@ -130,7 +131,6 @@ header {
 #edit-text-input {
 	position: fixed;
 	z-index: 999;
-	opacity: 50%;
 	width: fit-content;
 	height: 70px;
 }

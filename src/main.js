@@ -32,6 +32,7 @@ async function main() {
 	async function newTask(event) {
 		if (textInput.value === "" || textInput.value === " ") {
 			alert("You have to have somthing to do!");
+			textInput.focus();
 		} else {
 			const toDoContainer = {
 				priority: prioritySelector.value,
@@ -43,6 +44,7 @@ async function main() {
 			printTask(toDoContainer, viewSection);
 			updateCounter(tasksArray);
 			updateJSONBin(tasksArray);
+			textInput.focus();
 			// localStorage.clear();
 			// localStorage.setItem("my-todo", JSON.stringify(tasksArray));
 		}
@@ -139,7 +141,6 @@ async function main() {
 				containerDiv.hidden = true;
 				updateCounter(tasksArray);
 				updateJSONBin(tasksArray);
-				console.log(tasksArray);
 			});
 		}
 	});
@@ -205,8 +206,6 @@ async function main() {
 			tipWindow.hidden = false;
 			event.target.addEventListener("dblclick", (clickEvent) => {
 				clickEvent.preventDefault();
-				const originalTextKeeper = clickEvent.target.innerHTML;
-				clickEvent.target.innerHTML = "";
 				const containerDiv = clickEvent.target.parentNode;
 				const newTextForm = document.querySelector("#edit-text-input");
 				newTextForm.style.left =
@@ -217,6 +216,7 @@ async function main() {
 				newTextForm.style.top = originalText.getBoundingClientRect().top + "px";
 				newTextForm.hidden = false;
 				newTextInput = newTextForm.querySelector("input");
+				newTextInput.focus();
 				newTextForm.addEventListener("click", (saveEvent) => {
 					saveEvent.preventDefault();
 
@@ -228,8 +228,6 @@ async function main() {
 							updateJSONBin(tasksArray);
 							originalText.innerHTML = newTextInput.value;
 							newTextInput.value = "";
-						} else {
-							originalText.innerHTML = originalTextKeeper;
 						}
 					}
 				});
