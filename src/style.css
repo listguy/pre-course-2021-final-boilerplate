@@ -1,4 +1,5 @@
 body{
+    margin: 0 auto;
     background-color: #000c18;
     color: white;
     font-family: 'Courier New', Courier, monospace;
@@ -6,16 +7,34 @@ body{
     flex-direction: column;
 }
 
+main {
+    margin: auto;
+    background-color: #060621;
+    font-size: 1.5rem;
+    width: 50%;
+}
+
 .todo-container {
     display: flex;
-    justify-content: space-evenly;
-    background-color: #060621;
+    justify-content: space-around;
 }
 
 button {
     all: unset;
-    background-color: #bfcb41;
-    padding: 1%;
+    background-color: #d7ba7d;
+    padding: 1% 2%;
+    color: black;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #dec48d;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #c9ac70;
+    cursor: pointer;
 }
 
 input {
@@ -24,21 +43,51 @@ input {
     padding: 1%;
 }
 
-h1 {
+#title {
+    user-select: none;
     text-align: center;
     font-size: 5em;
+    font-weight: bold;
+}
+
+#counter {
+    display: inline;
+    color: #cbcb41;
 }
 
 select {
+    all: unset;
+    background-color: white;
+    color: black;
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #ddd;
+    font-weight: bold;
+    padding: 1% 2%;
+}
+
+label {
+    padding: 1% 0;
 }
 
 #control-section {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    background-color: #10192c;
+    padding: 1% 0;
 }
 
 #view-section {
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+#footer {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
