@@ -3,9 +3,12 @@ async function main() {
 	const BIN_ID = "/b/601189173126bb747e9fcc1e";
 	const viewSection = document.querySelector("#view-section");
 	const textInput = document.querySelector("#text-input");
+	const loadingGif = document.querySelector("#loading-gif");
+	loadingGif.hidden = false;
 	const fetchResponse = await fetch(
 		"https://api.jsonbin.io/v3" + BIN_ID + "/latest"
 	).then((res) => res.json());
+	loadingGif.hidden = true;
 
 	const tasksArray =
 		JSON.stringify(fetchResponse.record["my-todo"]) !== `[{}]`
@@ -141,6 +144,18 @@ async function main() {
 			const tipWindow = document.querySelector("#tip-window");
 
 			tipWindow.hidden = true;
+		}
+	});
+	document.addEventListener("click", (darkModeEvent) => {
+		if (darkModeEvent.target.id === "dark-mode-button") {
+			let cssLink = document.head.querySelector("#style-link");
+			if (darkModeEvent.target.innerText === "Dark mode") {
+				cssLink.href = "./dark-mode.css";
+				darkModeEvent.target.innerText = "Normal";
+			} else {
+				cssLink.href = "./style.css";
+				darkModeEvent.target.innerText = "Dark mode";
+			}
 		}
 	});
 }

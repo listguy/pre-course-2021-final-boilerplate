@@ -6,7 +6,7 @@
 		<title>My TODO List</title>
 		<script src="./utils.js"></script>
 		<script src="./main.js"></script>
-		<link rel="stylesheet" href="./style.css" />
+		<link id="style-link" rel="stylesheet" href="./style.css" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
@@ -16,7 +16,6 @@
 	<body>
 		<header>To Do List</header>
 		<section id="control-section">
-			<button id="dark-mode-button"></button>
 			<input
 				type="text"
 				id="text-input"
@@ -30,14 +29,21 @@
 				<option value="4" class="option priority4">4</option>
 				<option value="5" class="option priority5">5-Most</option>
 			</select>
-			<button id="add-button">Add</button>
+			<button id="add-button">Add</button> <br />
+			<button id="dark-mode-button">Dark mode</button>
+			<button id="sort-button">Sort by priority</button>
 			<hr />
 			<div id="counter-line">
 				You have <span id="counter"></span> tasks on your To-Do List
 			</div>
-			<button id="sort-button">Sort by priority</button>
+			<br />
 		</section>
 		<div id="all-view-section">
+			<img
+				id="loading-gif"
+				src="https://icon-library.com/images/animated-loading-icon/animated-loading-icon-25.jpg"
+				hidden
+			/>
 			<section id="view-section"></section>
 			<img id="fridge" src="images/miniBar.webp" />
 			<div id="tip-window" hidden>Click to Delete task</div>
