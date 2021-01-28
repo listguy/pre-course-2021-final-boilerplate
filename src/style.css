@@ -1,4 +1,44 @@
+body{
+    background-color: #000c18;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+}
+
 .todo-container {
     display: flex;
+    justify-content: space-evenly;
+    background-color: #060621;
+}
+
+button {
+    all: unset;
+    background-color: #bfcb41;
+    padding: 1%;
+}
+
+input {
+    all: unset;
+    background-color: #051336;
+    padding: 1%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 5em;
+}
+
+select {
+}
+
+#control-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#view-section {
+    flex-direction: row;
     justify-content: space-evenly;
 }
