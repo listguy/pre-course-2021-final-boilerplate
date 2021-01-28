@@ -27,19 +27,24 @@ async function addTask(){
         sendToServer(tasks);
 }
 
-function sendToServer(tasks){
-    let req = new XMLHttpRequest();
+// function sendToServer(tasks){
+//     let req = new XMLHttpRequest();
 
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE) {
-        console.log(req.responseText);
-        displayTasks(tasks);
-      }
-    };
+//     req.onreadystatechange = () => {
+//       if (req.readyState == XMLHttpRequest.DONE) {
+//         console.log(req.responseText);
+//         displayTasks(tasks);
+//       }
+//     };
     
-    req.open("PUT", "https://api.jsonbin.io/b/6011936f3126bb747e9fd00f", true);
-    req.setRequestHeader("Content-Type", "application/json");
-    req.send(JSON.stringify(tasks));
+//     req.open("PUT", "https://api.jsonbin.io/b/6011936f3126bb747e9fd00f", true);
+//     req.setRequestHeader("Content-Type", "application/json");
+//     req.send(JSON.stringify(tasks));
+// }
+
+async function sendToServer(tasks){
+    await fetch("https://api.jsonbin.io/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
+    displayTasks(tasks);
 }
 
 async function fetchTasks(){
