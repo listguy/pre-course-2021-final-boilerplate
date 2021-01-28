@@ -10,8 +10,12 @@ async function getPersistent(key) {
       headers: {
         "X-Master-Key": API_KEY
       }
-    });
+    }
+  );
+  const title = document.querySelector("h1");
+  title.innerText = "TO-DO List: Loading...";
   const response = await (await fetch(request)).json();
+  title.innerText = "TO-DO List:";
   console.log(response);
   return response.record[key];
   // return JSON.parse(localStorage.getItem(key));
@@ -31,7 +35,7 @@ async function setPersistent(key, data) {
       method: "PUT",
       body: dataString,
       headers: {
-        "Content-Type": "application/json",//; charset=UTF-8",
+        "Content-Type": "application/json",
         "X-Master-Key": API_KEY,
         "X-Bin-Versioning": false
       }

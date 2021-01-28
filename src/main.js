@@ -1,28 +1,31 @@
 "use strict"
 document.addEventListener("DOMContentLoaded", onLoad);
 
-let counter;
-let sortButton;
 let textInput;
 let prioritySelector;
 let addButton;
+let sortButton;
+let clearButton;
+let counter;
 let viewSection;
 let todoList;
 
+
 async function onLoad() {
-    counter = document.querySelector("#counter");
-    sortButton = document.querySelector("#sort-button");
+    //setup
     textInput = document.querySelector("#text-input");
     prioritySelector = document.querySelector("#priority-selector");
     addButton = document.querySelector("#add-button");
+    sortButton = document.querySelector("#sort-button");
+    clearButton = document.querySelector("#clear-button");
+    counter = document.querySelector("#counter");
     viewSection = document.querySelector("#view-section");
-    // todoList = JSON.parse( localStorage.getItem(DB_NAME) );
     todoList = await getPersistent(DB_NAME);
     if(!todoList) {
         todoList = [];
     }
     renderList();
-    
+    //UI elements events
     addButton.onclick = async () => {
         const todo = {
             text: textInput.value,
@@ -39,8 +42,14 @@ async function onLoad() {
         todoList.sort( (a,b) => Number(b.priority) - Number(a.priority) );
         renderList();
     };
-}
 
+    clearButton.onclick = () => {
+        todoList = [];
+        renderList();
+        setPersistent(DB_NAME, todoList);
+    }
+}
+//clears view-section & inserts items from todoList
 function renderList() {
     viewSection.innerHTML = "";
     counter.innerText = todoList.length;
@@ -49,9 +58,8 @@ function renderList() {
         viewSection.appendChild(todoElement);
     }
 }
-
+//builds an html element from todo object
 function createTodoElement(todo) {
-
     const container = document.createElement("div");
     const todoPriority = document.createElement("div");
     const timeStamp = document.createElement("div");
@@ -66,7 +74,7 @@ function createTodoElement(todo) {
     container.append(todoPriority, timeStamp, todoText);
     return container;
 }
-
+//returns SQL datetime format from Date object
 function dateToSQLFormat(date) {
     const year = date.getFullYear();
     const month = pad(date.getMonth() + 1); 
