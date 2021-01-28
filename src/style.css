@@ -118,22 +118,18 @@ body {
 .todo li {
     flex: 1;
 }
-.remove-button, .complete-button{
+.remove-button {
     
     color: white;
-    border: none;
-    padding: 1em;
+    border: none; 
     cursor: pointer;
     margin-bottom: 5px;
-}
-.remove-button {
     background-color: #B22222;
+    padding: 6px;
+    font-size: 0.9em;
 }
-.complete-button {
-    background-color: white;
-    color: #598cda;
-}
-/* #open-add-section{
+
+#open-add-section{
     border-radius: 50%;
     background-color:#598cda;
     color: white;
@@ -150,16 +146,5 @@ body {
 
 #open-add-section:focus{
     outline: none;
-} */
-#open-add-section {
-    font-size: 2.2em;
-    color: #598cda;
-    border: none;
-    margin-bottom: 5px;
-    cursor: pointer;
-    background-color: white;
 }
 
-#open-add-section:focus{
-    outline: none;
-}
