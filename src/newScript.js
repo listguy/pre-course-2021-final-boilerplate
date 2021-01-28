@@ -29,7 +29,6 @@ if (typeof localJson === "string") {
   listTodos();
 }
 
-
 //adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
@@ -38,8 +37,12 @@ addButton.addEventListener("click", (e) => {
   jsonList.push(inputObject);
   localStorage.setItem("my-todo", JSON.stringify(jsonList));
   viewSection.append(itemObjectToDiv(inputObject));
-  updateList()
 });
+
+//updates list on jsonbin.io
+// addButton.addEventListener("click", (e) => {
+//   updateList();
+// });
 
 //removes text from input on click
 addButton.addEventListener("click", (e) => {
@@ -58,6 +61,10 @@ sortButton.addEventListener("click", (e) => {
     viewSection.append(itemObjectToDiv(jsonList[i]));
   }
 });
+
+// sortButton.addEventListener("click", e => {
+//   updateList();
+// })
 
 function convertValueToObject(value) {
   const current = new Date();
@@ -119,7 +126,7 @@ async function uploadList() {
         "$2b$10$5P7RliLTaANiyqYHfkRvWepKYlCjfoARhVbWxxlqCTwQexhfzjuES",
       "X-Bin-Name": "new list",
       "X-Collection-Id": "6012bb849f55707f6dfd3c74",
-      'X-Bin-Private':false,
+      "X-Bin-Private": false,
     },
     body: JSON.stringify(data),
   })
@@ -131,12 +138,10 @@ async function uploadList() {
       console.error("Error:", error);
     });
 }
-// uploadList();
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!change the array!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 async function updateList() {
   await fetch("https://api.jsonbin.io/v3/b/6012d3f5c9033f74c42790b5", {
-    method: "PUT", 
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       "X-Master-Key":
@@ -153,12 +158,10 @@ async function updateList() {
     });
 }
 
-// updateList();
-
 //read list and returns an object
-function readList(){
-  fetch('https://api.jsonbin.io/v3/b/6012d3f5c9033f74c42790b5/latest')
-  .then(res => res.json())
-  .then(data => data)
+function readList() {
+  fetch("https://api.jsonbin.io/v3/b/6012d3f5c9033f74c42790b5/latest")
+    .then((res) => res.json())
+    .then((data) => data);
   return data;
 }
