@@ -12,7 +12,8 @@
 body {
     background: linear-gradient(35deg, var(--theme-back1), var(--theme-back2));
     padding-top: 5vh;
-    height: 100vh;
+    padding-bottom: 5vh;
+    min-height: 100vh;
     color: var(--text);
     font-family: sans-serif;
 }
@@ -38,6 +39,10 @@ main {
     border-bottom: 3px solid var(--text);
     padding-bottom: 1%;
     margin-bottom: 3%;
+}
+
+#view-section {
+    padding-bottom: 5%;
 }
 
 .control-element {
