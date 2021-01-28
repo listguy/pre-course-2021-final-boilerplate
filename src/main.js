@@ -9,14 +9,14 @@ let numberOfTasks = 0;
 counter.innerText = numberOfTasks;
 const openAddSection = document.querySelector('#open-add-section') ;
 let addSection = document.querySelector('#add-section');
-// addSection.hide();
+let sortButton = document.querySelector('#sort-buttone');
 
 
 //EVENT Listeners
 
 addButton.addEventListener('click', addToList);
 list.addEventListener('click', removes)
-
+sortButton.addEventListener('click', sortByPriority)
 
 
 
@@ -84,6 +84,10 @@ function removes(event){
     numberOfTasks -= 1;  //removes from the counter
     counter.innerText = numberOfTasks;
     //remove from local storage
+
+}
+
+function sortByPriority() {
   
 }
 

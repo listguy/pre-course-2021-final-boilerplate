@@ -91,7 +91,23 @@ body {
 #todo-counter {
     color: #a1abc9;
     font-size: 0.7em;
-    margin-top: 50px;
+    margin-top: 0px;
+    
+}
+
+#sort-button {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1.3rem;
+    color: #598cda;
+    border: none;
+    float: right;
+    margin-right: 13px;
+    background-color: #46529d5e;
+    margin-top: 10px;
+    cursor: pointer;
+    
 }
 
 #todo-container {
