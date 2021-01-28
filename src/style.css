@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0 auto;
     background-color: #000c18;
     color: white;
@@ -11,13 +11,13 @@ main {
     margin: auto;
     background-color: #060621;
     font-size: 1.5rem;
-    width: 50%;
 }
 
 button {
     all: unset;
     background-color: #d7ba7d;
     padding: 1% 2%;
+    margin: 1%;
     color: black;
     font-weight: bold;
     user-select: none;
@@ -37,6 +37,7 @@ input {
     all: unset;
     background-color: #051336;
     padding: 1%;
+    margin: 1%;
 }
 input:focus {
     box-shadow: inset 0px 0px 0px 1px #585858;
@@ -61,6 +62,7 @@ select {
     background: url('./br_down.webp') no-repeat 80% #ddd;
     font-weight: bold;
     padding: 1% 4%;
+    margin: 1%;
 }
 
 label {
@@ -69,10 +71,10 @@ label {
 
 #control-section {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: #10192c;
-    padding: 1% 0;
 }
 
 .todo-container {
