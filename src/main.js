@@ -1,6 +1,14 @@
+/*
+WEBSITE START
+*/
+
 let tasks = {"my-todo":[{}]};
 fetchTasks();
 refreshCounter();
+
+/*
+EVENT LISTENERS
+*/
 
 document.getElementById("sort-button").addEventListener("click", function() {sortTasks()});
 
@@ -35,12 +43,12 @@ async function addTask(){
 function sortTasks(){
     if (JSON.stringify(tasks) !== '{"my-todo":[{}]}')
         tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
-    displayTasks(tasks);
+    localTasks(tasks);
 }
 
 async function putTasks(tasks){
     await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
-    displayTasks(tasks);
+    localTasks(tasks);
 }
 
 async function fetchTasks(){
@@ -54,7 +62,6 @@ async function fetchTasks(){
     let recordResponse = jsonResponse["record"];
     tasks = recordResponse;
 
-    console.log("response-status:" + response.status);
     if (JSON.stringify(tasks) !== '{"my-todo":[{}]}'){
         for(task of tasks["my-todo"]){
             let todoContainer = document.createElement('div');
@@ -71,10 +78,19 @@ async function fetchTasks(){
             let todoText = document.createElement('div');
             todoText.classList.add('todo-text');
             todoText.append(task["text"]);
+
+            // let todoDelete = document.createElement('button');
+            // todoDelete.classList.add('delete-button');
+            // todoDelete.append("X");
+            
+            if (task["priority"] === '3') todoPriority.classList.add('yellow-text');
+            if (task["priority"] === '4') todoPriority.classList.add('orange-text');
+            if (task["priority"] === '5') todoPriority.classList.add('red-text');
             
             todoContainer.append(todoText);
             todoContainer.append(todoPriority);
             todoContainer.append(todoCreatedAt);
+            // todoContainer.append(todoDelete);
 
             viewSection.append(todoContainer);
         }
@@ -82,36 +98,42 @@ async function fetchTasks(){
     refreshCounter();
 }
 
-function displayTasks(tasks){
+function localTasks(tasks){
     let viewSection = document.getElementById("view-section");
     while(viewSection.firstChild){
         viewSection.removeChild(viewSection.firstChild);
     }
-            for(task of tasks["my-todo"]){
-                let todoContainer = document.createElement('div');
-                todoContainer.classList.add('todo-container');
+    for(task of tasks["my-todo"]){
+        let todoContainer = document.createElement('div');
+        todoContainer.classList.add('todo-container');
 
-                let todoPriority = document.createElement('div');
-                todoPriority.classList.add('todo-priority');
-                todoPriority.append(task["priority"]);
-        
-                let todoCreatedAt = document.createElement('div');
-                todoCreatedAt.classList.add('todo-created-at');
-                todoCreatedAt.append(task["createdAt"]);
-        
-                let todoText = document.createElement('div');
-                todoText.classList.add('todo-text');
-                todoText.append(task["text"]);
-                
-                todoContainer.append(todoText);
-                todoContainer.append(todoPriority);
-                todoContainer.append(todoCreatedAt);
-                
+        let todoPriority = document.createElement('div');
+        todoPriority.classList.add('todo-priority');
+        todoPriority.append(task["priority"]);
 
-                viewSection.append(todoContainer);
-            }
-            refreshCounter();
+        let todoCreatedAt = document.createElement('div');
+        todoCreatedAt.classList.add('todo-created-at');
+        todoCreatedAt.append(task["createdAt"]);
+
+        let todoText = document.createElement('div');
+        todoText.classList.add('todo-text');
+        todoText.append(task["text"]);
+        
+        if (task["priority"] === '3') todoPriority.classList.add('yellow-text');
+        if (task["priority"] === '4') todoPriority.classList.add('orange-text');
+        if (task["priority"] === '5') todoPriority.classList.add('red-text');
+
+        todoContainer.append(todoText);
+        todoContainer.append(todoPriority);
+        todoContainer.append(todoCreatedAt);
+        
+
+        viewSection.append(todoContainer);
+    }
+    refreshCounter();
 }
+
+
 
 function refreshCounter(){
     counter = document.getElementById("counter");

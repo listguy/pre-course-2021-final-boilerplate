@@ -14,6 +14,30 @@ main {
     width: 50%;
 }
 
+@media screen and (max-width: 900px) {
+    main {
+      width: 60%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    main {
+      width: 70%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    main {
+      width: 80%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    main {
+      width: 90%;
+    }
+}
+
 @media screen and (max-width: 600px) {
     main {
       width: 100%;
@@ -93,7 +117,7 @@ label {
 
 .todo-text{
     width: 45%;
-    text-align: justify;
+    text-align: left;
     padding: 2%;
     display: flex;
     align-items: center;
@@ -128,13 +152,22 @@ label {
 }
 
 .yellow-text{
-    color: orange;
+    color: yellow;
 }
 
 .orange-text{
-    color: orangered;
+    color: orange;
 }
 
 .red-text{
-    color: red;
+    color: orangered;
+}
+
+iframe {
+    all: unset;
+    width: 150px;
+    height: 150px;
+    z-index: 1;
+    top: 0;
+    left: 0;
 }
