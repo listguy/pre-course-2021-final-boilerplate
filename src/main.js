@@ -2,14 +2,14 @@ let tasks = {"my-todo":[{}]};
 fetchTasks();
 refreshCounter();
 
-document.getElementById("add-button").addEventListener("click", function() {addTask()});
 document.getElementById("sort-button").addEventListener("click", function() {sortTasks()});
 
-function sortTasks(){
-    if (JSON.stringify(tasks) !== '{"my-todo":[{}]}')
-        tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
-    displayTasks(tasks);
-}
+document.getElementById("add-button").addEventListener("click", function() {
+    if (document.getElementById("text-input").value === "")
+        alert("Please enter text.")
+    else
+        addTask()
+});
 
 class Task{
     constructor(priority, text){
@@ -32,15 +32,21 @@ async function addTask(){
         putTasks(tasks);
 }
 
+function sortTasks(){
+    if (JSON.stringify(tasks) !== '{"my-todo":[{}]}')
+        tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+    displayTasks(tasks);
+}
+
 async function putTasks(tasks){
     await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
     displayTasks(tasks);
 }
 
 async function fetchTasks(){
-    let controlSection = document.getElementById("control-section");
-    while(controlSection.firstChild){
-        controlSection.removeChild(controlSection.firstChild);
+    let viewSection = document.getElementById("view-section");
+    while(viewSection.firstChild){
+        viewSection.removeChild(viewSection.firstChild);
     }
 
     let response = await fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest');
@@ -66,20 +72,20 @@ async function fetchTasks(){
             todoText.classList.add('todo-text');
             todoText.append(task["text"]);
             
+            todoContainer.append(todoText);
             todoContainer.append(todoPriority);
             todoContainer.append(todoCreatedAt);
-            todoContainer.append(todoText);
 
-            controlSection.append(todoContainer);
+            viewSection.append(todoContainer);
         }
     }
     refreshCounter();
 }
 
 function displayTasks(tasks){
-    let controlSection = document.getElementById("control-section");
-    while(controlSection.firstChild){
-        controlSection.removeChild(controlSection.firstChild);
+    let viewSection = document.getElementById("view-section");
+    while(viewSection.firstChild){
+        viewSection.removeChild(viewSection.firstChild);
     }
             for(task of tasks["my-todo"]){
                 let todoContainer = document.createElement('div');
@@ -97,11 +103,12 @@ function displayTasks(tasks){
                 todoText.classList.add('todo-text');
                 todoText.append(task["text"]);
                 
+                todoContainer.append(todoText);
                 todoContainer.append(todoPriority);
                 todoContainer.append(todoCreatedAt);
-                todoContainer.append(todoText);
+                
 
-                controlSection.append(todoContainer);
+                viewSection.append(todoContainer);
             }
             refreshCounter();
 }
