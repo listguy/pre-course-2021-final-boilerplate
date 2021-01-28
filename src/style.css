@@ -27,6 +27,7 @@ main {
     box-shadow: 5px 5px 15px var(--shadow-main);
 }
 
+/* control section style */
 #control-section {
     display: flex;
     align-items: stretch;
@@ -36,7 +37,10 @@ main {
     padding-bottom: 1%;
     margin-bottom: 3%;
 }
+
 .control-element {
+    display: flex;
+    align-items: center;
     margin: 0;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -48,10 +52,12 @@ main {
     background-color: var(--theme-back1);
     color: var(--text);
 }
+
 .control-element:focus {
     outline: unset;
 }
-.inset{
+
+.inset {
     box-shadow: 0 0 10px 0 var(--shadow-main) inset;
 }
 .adder {
@@ -66,9 +72,14 @@ button {
     transition: 200ms all;
 
 }
-button:hover{
+
+button:hover {
     transform: scale(1.1);
     cursor: pointer;
+}
+
+button:active {
+    transform:translate(0, 2px);
 }
 
 #add-button {
@@ -80,8 +91,18 @@ button:hover{
     padding: 0;
     margin:auto;
 }
+
 #add-button:hover {
     background-color: green;
+}
+
+#counter-container {
+    background-color: transparent;
+}
+#counter,#counter-text{
+    margin: 0;
+    min-width: 25px;
+    justify-content: center;
 }
 
 /*todo entry*/

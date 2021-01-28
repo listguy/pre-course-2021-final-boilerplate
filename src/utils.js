@@ -42,5 +42,5 @@ async function setPersistent(key, data) {
     });
     const response = await fetch(request);
     console.log(response);
-  // return localStorage.setItem(key, JSON.stringify(data));
+    return response.ok;
   }
