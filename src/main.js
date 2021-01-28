@@ -1,5 +1,6 @@
 let tasks = {"my-todo":[{}]};
 fetchTasks();
+refreshCounter();
 
 class Task{
     constructor(priority, text){
@@ -27,23 +28,8 @@ async function addTask(){
         sendToServer(tasks);
 }
 
-// function sendToServer(tasks){
-//     let req = new XMLHttpRequest();
-
-//     req.onreadystatechange = () => {
-//       if (req.readyState == XMLHttpRequest.DONE) {
-//         console.log(req.responseText);
-//         displayTasks(tasks);
-//       }
-//     };
-    
-//     req.open("PUT", "https://api.jsonbin.io/b/6011936f3126bb747e9fd00f", true);
-//     req.setRequestHeader("Content-Type", "application/json");
-//     req.send(JSON.stringify(tasks));
-// }
-
 async function sendToServer(tasks){
-    await fetch("https://api.jsonbin.io/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
+    await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
     displayTasks(tasks);
 }
 
@@ -53,38 +39,35 @@ async function fetchTasks(){
         controlSection.removeChild(controlSection.firstChild);
     }
 
-    let response = await fetch('https://api.jsonbin.io/b/6011936f3126bb747e9fd00f/latest');
+    let response = await fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest');
+    let jsonResponse = await response.json(); 
+    let recordResponse = jsonResponse["record"];
+    tasks = recordResponse;
 
-    if (response.ok) {
-        tasks = await response.json();
-        console.log("response-status:" + response.status);
-        if (JSON.stringify(tasks) !== '{"my-todo":[{}]}'){
-            for(task of tasks["my-todo"]){
-                let todoContainer = document.createElement('div');
-                todoContainer.classList.add('todo-container');
+    console.log("response-status:" + response.status);
+    if (JSON.stringify(tasks) !== '{"my-todo":[{}]}'){
+        for(task of tasks["my-todo"]){
+            let todoContainer = document.createElement('div');
+            todoContainer.classList.add('todo-container');
 
-                let todoPriority = document.createElement('div');
-                todoPriority.classList.add('todo-priority');
-                todoPriority.append(task["priority"]);
-        
-                let todoCreatedAt = document.createElement('div');
-                todoCreatedAt.classList.add('todo-created-at');
-                todoCreatedAt.append(task["createdAt"]);
-        
-                let todoText = document.createElement('div');
-                todoText.classList.add('todo-text');
-                todoText.append(task["text"]);
-                
-                todoContainer.append(todoPriority);
-                todoContainer.append(todoCreatedAt);
-                todoContainer.append(todoText);
+            let todoPriority = document.createElement('div');
+            todoPriority.classList.add('todo-priority');
+            todoPriority.append(task["priority"]);
 
-                controlSection.append(todoContainer);
-            }
+            let todoCreatedAt = document.createElement('div');
+            todoCreatedAt.classList.add('todo-created-at');
+            todoCreatedAt.append(task["createdAt"]);
+
+            let todoText = document.createElement('div');
+            todoText.classList.add('todo-text');
+            todoText.append(task["text"]);
+            
+            todoContainer.append(todoPriority);
+            todoContainer.append(todoCreatedAt);
+            todoContainer.append(todoText);
+
+            controlSection.append(todoContainer);
         }
-    }
-    else {
-        alert("HTTP-Error: " + response.status);
     }
     refreshCounter();
 }
@@ -122,7 +105,10 @@ function displayTasks(tasks){
 function refreshCounter(){
     counter = document.getElementById("counter");
     counter.innerText = "";
-    counter.append(tasks["my-todo"].length);
+    if (JSON.stringify(tasks) === '{"my-todo":[{}]}')
+        counter.append('0');
+    else
+        counter.append(tasks["my-todo"].length);
 }
 
 function getSQLDate(date){

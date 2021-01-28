@@ -1,5 +1,10 @@
-let date = new Date().toLocaleString("SQL").replace(',',' ').replace('.','-').replace('.','-');
-;
-date.replace('.','-')
+funk();
 
-console.log(date);
+
+async function funk(){
+    let response = await fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest');
+
+    let text = await response.json(); 
+    let bunny = text["record"];
+    console.log(bunny);
+}
