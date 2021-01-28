@@ -26,6 +26,7 @@ main {
     padding-left: 3%;
     box-shadow: 5px 5px 15px var(--shadow-main);
 }
+
 #control-section {
     display: flex;
     align-items: stretch;
@@ -36,7 +37,6 @@ main {
     margin-bottom: 3%;
 }
 .control-element {
-    display: block;
     margin: 0;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -45,11 +45,43 @@ main {
     margin-right: 1em;
     border: unset;
     font-size: 16px;
+    background-color: var(--theme-back1);
+    color: var(--text);
 }
-
+.control-element:focus {
+    outline: unset;
+}
+.inset{
+    box-shadow: 0 0 10px 0 var(--shadow-main) inset;
+}
 .adder {
     display: flex;
     justify-content: flex-start;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 200ms all;
+
+}
+button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#add-button {
+    height: 30px;
+    width: 30px;
+    background-color: rgba(0, 128, 0, 0.295);
+    border-radius: 50%;
+    font-size: 25px;
+    padding: 0;
+    margin:auto;
+}
+#add-button:hover {
+    background-color: green;
 }
 
 /*todo entry*/
@@ -66,6 +98,7 @@ main {
 
 .todo-container:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .todo-priority {
