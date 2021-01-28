@@ -82,14 +82,14 @@ function printTask(toDoContainer, viewSection) {
 	toDoText.className = "todo-text"; //creates new div for to do text
 	toDoText.innerText = toDoContainer.text; // gives it the inner text of the input value
 	const toDoPriority = document.createElement("div");
-	toDoPriority.className = "todo-priority";
+	toDoPriority.className = `todo-priority priority${toDoContainer.priority}`;
 	toDoPriority.innerText = toDoContainer.priority;
 	const toDoDate = document.createElement("div");
 	toDoDate.className = "todo-created-at";
 	toDoDate.innerText = datePrinter(new Date(toDoContainer.date));
 	toDoContainerDiv.appendChild(toDoPriority);
-	toDoContainerDiv.appendChild(toDoDate);
 	toDoContainerDiv.appendChild(toDoText);
+	toDoContainerDiv.appendChild(toDoDate);
 }
 
 function updateCounter(tasksArray) {

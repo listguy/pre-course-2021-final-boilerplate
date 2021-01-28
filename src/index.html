@@ -18,11 +18,11 @@
 			/>
 			<label for="priority-selector">Priority:</label>
 			<select id="priority-selector" name="priority-selector">
-				<option value="1">1-Most</option>
+				<option value="1">1-Least</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
 				<option value="4">4</option>
-				<option value="5">5-Least</option>
+				<option value="5">5-Most</option>
 			</select>
 			<button id="add-button">Add</button>
 			<hr />
@@ -31,12 +31,9 @@
 			</div>
 			<button id="sort-button">Sort by priority</button>
 		</section>
-		<section id="view-section-headers">
-			<div class="view-section-header">Priority</div>
-			<div class="view-section-header">Recieved date</div>
-			<div class="view-section-header">Task</div>
-		</section>
-
-		<section id="view-section"></section>
+		<div id="all-view-section">
+			<section id="view-section"></section>
+			<img id="fridge" src="images/miniBar.webp" />
+		</div>
 	</body>
 </html>
