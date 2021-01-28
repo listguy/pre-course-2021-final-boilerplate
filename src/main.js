@@ -12,12 +12,20 @@ document.addEventListener('click', function (event) {
     switch (pressedId) {
         case 'add-button':
             addItem();
-            break
+            break;
+        case 'sort-button':
+            printTodoList(sortList(todoArray));
+            break;
+        case 'delete-all':
+            deleteList();
+            break;
         default:
             return;
     }
 
 })
+
+
 function addItem() {
     const viewSection = document.querySelector('.viewSection');
     const input = document.querySelector('#text-input');
@@ -49,9 +57,55 @@ function addItem() {
             "Task": temp,
             "CreationTime": currentDate,
             "priority": Number(priority.value)
-                };
+        };
         todoArray.push(item);
         counter++;
-        counterDiv.innerText = counter;
+        counterDiv.innerText = `Items Counter: ${counter}`;
     }
+}
+function printTodoList(arr) {
+    const viewSection = document.querySelector('.viewSection');
+    deleteList();
+    arr.forEach(element => {
+        const div = document.createElement('div');
+        div.classList.add('todo-container');
+        viewSection.append(div);
+        const todoText = document.createElement('p');
+        todoText.classList.add('todo-text');
+        todoText.innerText = element.Task;
+
+        const todoCreationTime = document.createElement('time');
+        todoCreationTime.classList.add('todo-created-at');
+        todoCreationTime.innerText = element.CreationTime;
+
+        const todoPriority = document.createElement('data');
+        todoPriority.innerText = element.priority;
+        todoPriority.classList.add('todo-priority');
+
+        div.append(todoText);
+        div.append(todoCreationTime);
+        div.append(todoPriority);
+    });
+    counterDiv.innerText = `Items Counter: ${counter}`;
+}
+
+function deleteList() {
+    const viewSection = document.querySelector('.viewSection');
+    let childOfViewSection = viewSection.firstChild;
+    while (childOfViewSection) {
+        viewSection.removeChild(childOfViewSection);
+        childOfViewSection = viewSection.firstChild;
+    }
+}
+
+function sortList(arr) {
+    const sortedArray = [];
+    for (let j = 1; j <= 5; j++) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].priority === j) {
+                sortedArray.push(arr[i]);
+            }
+        }
+    }
+    return sortedArray;
 }

@@ -6,9 +6,13 @@
 }
 
 .todo-container p {
-    flex: 1 2 5px;
+    flex: 1 0 5px;
 }
 
 .todo-container data {
-    flex: 2 1 5px;
+    flex: 1 0 5px;
+}
+
+.todo-container time {
+    flex: 1 0 5px;
 }
