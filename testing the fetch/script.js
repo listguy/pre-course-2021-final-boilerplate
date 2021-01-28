@@ -85,24 +85,18 @@ async function updateList() {
     },
     body: JSON.stringify(array),
   })
-    .then((response) => response.json())
-    .then((array) => {
-      console.log("Success:", array);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
 }
 
 // updateList();
 
 //TO READ LIST !!!!!!!!!!!!!!
 function readList(){
-  fetch('https://api.jsonbin.io/v3/b/6012d3f5c9033f74c42790b5/latest')
+  await fetch('https://api.jsonbin.io/v3/b/6012d3f5c9033f74c42790b5/latest')
   .then(res => res.json())
   .then(data => data)
   return data;
 }
+
 console.log(readList());
 
 
