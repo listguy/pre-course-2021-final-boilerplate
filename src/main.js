@@ -67,6 +67,7 @@ async function onLoad() {
                 }
             } 
             item.classList.add("selected");
+            event.preventDefault();
         } else {
             for (const element of todoElements) {
                 element.classList.remove("selected");

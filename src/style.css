@@ -4,7 +4,8 @@
     --theme-main: rgb(20, 20, 20);
     --shadow-main: rgb(15, 15, 15);
     --text: white;
-    --selection: rgba(5, 5, 104, 0.589);
+    --selection: rgba(46, 46, 133, 0.507);
+    --delete: rgb(133, 46, 46);
     --todo-content-margin: 1em;
 }
 
@@ -95,6 +96,10 @@ button:active {
 
 #add-button:hover {
     background-color: green;
+}
+
+#clear-button {
+    background-color: var(--delete);
 }
 
 #counter-container {
