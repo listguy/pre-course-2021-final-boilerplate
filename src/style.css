@@ -13,7 +13,7 @@ body {
 
 
 #add-section {
-    min-height: 5vh;
+    min-height: 8vh;
     /* display: flex; */
     justify-content: center;
     align-items: center;
@@ -61,7 +61,7 @@ body {
 }
 
 #list-section {
-    min-height: 50vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     background-color: white;

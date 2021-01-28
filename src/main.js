@@ -4,8 +4,9 @@ const priority = document.querySelector('#priority-selector');
 const addButton = document.querySelector ('#add-button');
 let list = document.querySelector('#todo-list');
 let todoCounter = document.querySelector('#todo-counter');
+let counter = document.querySelector('#counter');
 let numberOfTasks = 0;
-todoCounter.innerText = 'Tasks To Do: ' + numberOfTasks;
+counter.innerText = numberOfTasks;
 const openAddSection = document.querySelector('#open-add-section') ;
 let addSection = document.querySelector('#add-section');
 // addSection.hide();
@@ -37,11 +38,24 @@ function addToList (event){                          //adds the text from the in
     list.appendChild(todoDiv);
     let prioritySpan = document.createElement('span');
     prioritySpan.innerText = priority.value;
+    let inputValue = textInput.value;
+    let priorityValue = priority.value;
+    let currentTime = startTime();
+    let d = new Date();
+    let dateValue = d.getTime();
+
     //print to input
-    newTodo.innerText = prioritySpan.innerText + '- ' + textInput.value + ' ' +startTime();
+    newTodo.innerHTML = `<span style="color:#598cda"><strong>${prioritySpan.innerText}</strong></span> ${inputValue}, <i>${currentTime}</i>`;
     textInput.value = '';  //clears input after adding to list
     numberOfTasks += 1;      //adds to the counter
-    todoCounter.innerText = 'Tasks To Do: ' + numberOfTasks;
+    counter.innerText = numberOfTasks;
+    //add to local storage
+    let listObject = {
+      "text" : inputValue,
+      "priority" : priorityValue,
+      "date" : dateValue
+    }
+    localStorage.setItem("listItem", JSON.stringify(listObject));
 }
 
 
@@ -68,6 +82,9 @@ function removes(event){
     let item = event.target.closest('.todo');
     item.remove();      
     numberOfTasks -= 1;  //removes from the counter
-    todoCounter.innerText = 'Tasks To Do: ' + numberOfTasks;
+    counter.innerText = numberOfTasks;
+    //remove from local storage
+  
 }
 
+//localStorage.clear(); //clears local storage
