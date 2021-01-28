@@ -58,7 +58,7 @@ select {
     all: unset;
     background-color: white;
     color: black;
-    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat 80% #ddd;
+    background: url('./br_down.webp') no-repeat 80% #ddd;
     font-weight: bold;
     padding: 1% 4%;
 }
