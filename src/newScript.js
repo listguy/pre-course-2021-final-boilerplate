@@ -29,20 +29,16 @@ if (typeof localJson === "string") {
   listTodos();
 }
 
-//adds the item to the array and displays it
+//adds the item to the array and displays it + adds it to jsonbin.io
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   const inputObject = convertValueToObject(inputValue);
-  const todoJson = JSON.stringify(inputObject);
+  // const todoJson = JSON.stringify(inputObject);
   jsonList.push(inputObject);
+  updateList();
   localStorage.setItem("my-todo", JSON.stringify(jsonList));
   viewSection.append(itemObjectToDiv(inputObject));
 });
-
-//updates list on jsonbin.io
-// addButton.addEventListener("click", (e) => {
-//   updateList();
-// });
 
 //removes text from input on click
 addButton.addEventListener("click", (e) => {
@@ -52,7 +48,6 @@ addButton.addEventListener("click", (e) => {
 //on click sorts the array
 sortButton.addEventListener("click", (e) => {
   sortArrayByPriority(jsonList);
-  updateList();
   localStorage.setItem("my-todo", JSON.stringify(jsonList));
   for (let i = 0; i < jsonList.length; i++) {
     viewSection.removeChild(document.querySelectorAll(".todo-container")[0]);
@@ -60,11 +55,8 @@ sortButton.addEventListener("click", (e) => {
   for (let i = 0; i < jsonList.length; i++) {
     viewSection.append(itemObjectToDiv(jsonList[i]));
   }
+  
 });
-
-// sortButton.addEventListener("click", e => {
-//   updateList();
-// })
 
 function convertValueToObject(value) {
   const current = new Date();
@@ -149,13 +141,6 @@ async function updateList() {
     },
     body: JSON.stringify(jsonList),
   })
-    .then((response) => response.json())
-    .then((jsonList) => {
-      console.log("Success:", jsonList);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
 }
 
 //read list and returns an object
