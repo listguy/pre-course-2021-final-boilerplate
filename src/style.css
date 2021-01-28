@@ -1,3 +1,27 @@
-.todo-container {
-    border-style: solid;
+*{
+    font-family:Arial, Helvetica, sans-serif;
+}
+body{
+    text-align: center;
+}
+#main-title{
+    margin-top: 10%;
+}
+.todo-container{
+    transition: all 0.5s;
+}
+.todo-text{
+    display: inline;
+}
+.todo-created-at{
+    display: inline;
+}
+.todo-priority{
+    display: inline;
+}
+#sort-button{
+    display: inline;
+}
+#counter{
+    display: inline;
 }
