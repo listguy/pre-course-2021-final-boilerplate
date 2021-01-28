@@ -32,7 +32,8 @@ body {
     width: 75%;
     border-bottom: 1px #598cda solid;
     margin-right: 5px;
-    margin-top: ;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
 #text-input:focus{
@@ -97,6 +98,7 @@ body {
     font-display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1;
 
 }
 

@@ -8,7 +8,7 @@ let numberOfTasks = 0;
 todoCounter.innerText = 'Tasks To Do: ' + numberOfTasks;
 const openAddSection = document.querySelector('#open-add-section') ;
 let addSection = document.querySelector('#add-section');
-addSection.hide();
+// addSection.hide();
 
 
 //EVENT Listeners
