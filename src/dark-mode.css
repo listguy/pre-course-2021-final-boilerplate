@@ -3,7 +3,7 @@
 }
 body {
 	text-align: center;
-	background-color: rgb(73, 71, 41);
+	background-color: rgb(70, 70, 70);
 	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
 		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 	font-size: 21px;
@@ -37,6 +37,9 @@ select {
 #dark-mode-button {
 	width: 100px;
 }
+#search-input {
+	width: 150px;
+}
 #all-view-section {
 	position: relative;
 	margin: auto;
@@ -65,7 +68,7 @@ select {
 
 .todo-container {
 	position: relative;
-	background-color: rgb(68, 60, 22);
+	background-color: rgb(153, 104, 13);
 	box-shadow: 2px 8px 5px rgba(75, 75, 75, 0.589);
 	content: center;
 	flex: 0, 1, 30%;
@@ -73,8 +76,8 @@ select {
 	height: 20vh;
 	width: 25%;
 	margin-top: 15px;
-	margin-right: 5px;
-	margin-left: 5px;
+	margin-right: 3.5%;
+	margin-left: 3.5%;
 	overflow-wrap: break-word;
 }
 .todo-priority {
@@ -125,4 +128,7 @@ select {
 	background-color: rgba(0, 0, 0, 0.411);
 	z-index: 100;
 	text-align: center;
+}
+.highlighted {
+	background-color: rgba(153, 205, 50, 0.411);
 }

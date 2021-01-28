@@ -25,7 +25,9 @@ header {
 #dark-mode-button {
 	width: 100px;
 }
-
+#search-input {
+	width: 150px;
+}
 #all-view-section {
 	position: relative;
 	margin: auto;
@@ -69,8 +71,8 @@ header {
 	height: 20vh;
 	width: 25%;
 	margin-top: 15px;
-	margin-right: 5px;
-	margin-left: 5px;
+	margin-right: 3.5%;
+	margin-left: 3.5%;
 	overflow-wrap: break-word;
 }
 .todo-priority {
@@ -121,4 +123,7 @@ header {
 	background-color: rgba(245, 245, 245, 0.411);
 	z-index: 100;
 	text-align: center;
+}
+.highlighted {
+	background-color: yellowgreen;
 }

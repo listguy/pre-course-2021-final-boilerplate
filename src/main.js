@@ -30,18 +30,22 @@ async function main() {
 	addButton.addEventListener("click", newTask);
 
 	async function newTask(event) {
-		const toDoContainer = {
-			priority: prioritySelector.value,
-			text: textInput.value,
-			date: Number(new Date()), //for JSON adaptablity
-		};
-		textInput.value = ""; //resets input field
-		tasksArray.push(toDoContainer);
-		printTask(toDoContainer, viewSection);
-		updateCounter(tasksArray);
-		updateJSONBin(tasksArray);
-		// localStorage.clear();
-		// localStorage.setItem("my-todo", JSON.stringify(tasksArray));
+		if (textInput.value === "" || textInput.value === " ") {
+			alert("You have to have somthing to do!");
+		} else {
+			const toDoContainer = {
+				priority: prioritySelector.value,
+				text: textInput.value,
+				date: Number(new Date()), //for JSON adaptablity
+			};
+			textInput.value = ""; //resets input field
+			tasksArray.push(toDoContainer);
+			printTask(toDoContainer, viewSection);
+			updateCounter(tasksArray);
+			updateJSONBin(tasksArray);
+			// localStorage.clear();
+			// localStorage.setItem("my-todo", JSON.stringify(tasksArray));
+		}
 	}
 
 	sortButton.addEventListener("click", (sort) => {
@@ -155,6 +159,30 @@ async function main() {
 			} else {
 				cssLink.href = "./style.css";
 				darkModeEvent.target.innerText = "Dark mode";
+			}
+		}
+	});
+	document.addEventListener("click", (searchEvent) => {
+		if (searchEvent.target["id"] === "search-button") {
+			const searchValue = document.querySelector("#search-input").value;
+			const printedToDos = document.querySelectorAll(".todo-container");
+			if (searchValue === "" || searchValue === " ") {
+				alert("Can't search for nothing!");
+			} else {
+				for (let toDo of printedToDos) {
+					toDo.classList.remove("highlighted");
+				}
+				for (let toDo of printedToDos) {
+					if (
+						toDo
+							.querySelector(".todo-text")
+							.innerHTML.toLowerCase()
+							.includes(searchValue.toLowerCase())
+					) {
+						document.querySelector("#search-input").value = "";
+						toDo.classList.add("highlighted");
+					}
+				}
 			}
 		}
 	});
