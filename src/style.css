@@ -14,17 +14,13 @@ main {
     width: 50%;
 }
 
-.todo-container {
-    display: flex;
-    justify-content: space-around;
-}
-
 button {
     all: unset;
     background-color: #d7ba7d;
     padding: 1% 2%;
     color: black;
     font-weight: bold;
+    user-select: none;
 }
 
 button:hover {
@@ -41,6 +37,9 @@ input {
     all: unset;
     background-color: #051336;
     padding: 1%;
+}
+input:focus {
+    box-shadow: inset 0px 0px 0px 1px #585858;
 }
 
 #title {
@@ -59,9 +58,9 @@ select {
     all: unset;
     background-color: white;
     color: black;
-    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat right #ddd;
+    background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png) no-repeat 80% #ddd;
     font-weight: bold;
-    padding: 1% 2%;
+    padding: 1% 4%;
 }
 
 label {
@@ -76,9 +75,38 @@ label {
     padding: 1% 0;
 }
 
+.todo-container {
+    display: flex;
+    border-bottom: 1px solid #585858;
+}
+
 #view-section {
-    flex-direction: row;
-    justify-content: space-evenly;
+}
+
+.todo-text{
+    width: 45%;
+    text-align: justify;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+}
+
+.todo-priority {
+    width: 10%;
+    background-color: #152037;
+    padding: 2%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-created-at {
+    width: 45%;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
 }
 
 #footer {
@@ -90,4 +118,16 @@ label {
     color: black;
     font-weight: bold;
     font-size: 1.5rem;
+}
+
+.yellow-text{
+    color: orange;
+}
+
+.orange-text{
+    color: orangered;
+}
+
+.red-text{
+    color: red;
 }
