@@ -5,12 +5,19 @@ body {
     font-family: 'Courier New', Courier, monospace;
     display: flex;
     flex-direction: column;
+    font-size: 20px;
 }
 
 main {
     margin: auto;
     background-color: #060621;
-    font-size: 1.5rem;
+    width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+    main {
+      width: 100%;
+    }
 }
 
 button {
@@ -38,7 +45,9 @@ input {
     background-color: #051336;
     padding: 1%;
     margin: 1%;
+    flex-grow: 2;
 }
+
 input:focus {
     box-shadow: inset 0px 0px 0px 1px #585858;
 }
@@ -46,8 +55,8 @@ input:focus {
 #title {
     user-select: none;
     text-align: center;
-    font-size: 5em;
     font-weight: bold;
+    font-size: 5vw;
 }
 
 #counter {
@@ -116,7 +125,6 @@ label {
     text-align: center;
     color: black;
     font-weight: bold;
-    font-size: 1.5rem;
 }
 
 .yellow-text{
