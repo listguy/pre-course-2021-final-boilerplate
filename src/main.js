@@ -3,6 +3,7 @@ const textInput = document.getElementById("text-input");
 const numberOfTodo = document.getElementById("counter");
 const viewSection = document.getElementById("view");
 const counter = document.getElementById("counter");
+const sortButton = document.getElementById("sort-button");
 let storedCounter = localStorage.getItem("counter");
 let localJson = localStorage.getItem("my-todo");
 const todoList = [];
@@ -21,7 +22,8 @@ addButton.onclick = function () {
   counter.innerText = Number(counter.innerText) + 1;
   localStorage.setItem(key, value);
 };
-//saves the list locally using JSON and loading the local
+
+//saves the list locally as JSON and loading the local
 if (typeof localJson === "string") {
   jsonList = JSON.parse(localJson);
   listTodos();
@@ -30,17 +32,21 @@ if (typeof localJson === "string") {
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   const inputObject = convertValueToObject(inputValue);
-  console.log(inputObject);
+  // console.log(inputObject);
   const todoJson = JSON.stringify(inputObject);
-  console.log(todoJson);
+  // console.log(todoJson);
   jsonList.push(inputObject); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   localStorage.setItem("my-todo", JSON.stringify(jsonList));
   viewSection.append(itemObjectToDiv(inputObject));
 });
 
-//removes text from input
+//removes text from input on click
 addButton.addEventListener("click", (e) => {
   textInput.value = "";
+});
+
+sortButton.addEventListener("click", (e) => {
+  jsonList;
 });
 
 function convertValueToObject(value) {
@@ -86,3 +92,30 @@ function listTodos() {
     viewSection.append(itemObjectToDiv(object));
   }
 }
+
+function priorityToNumber(array) {
+  array.sort(function(a,b){
+    return b.priority - a.priority;
+  });
+  return array;
+}
+// const arr = [
+//   {
+//     name: "ophir",
+//     age: "23",
+//     lastName: "huberman",
+//   },
+//   {
+//     name: "bla",
+//     age: "32",
+//     lastName: "huberman",
+//   },
+//   {
+//     name: "yoyo",
+//     age: "14",
+//     lastName: "huberman",
+//   },
+// ];
+// arr.sort(function (a, b) {
+//   return b.age - a.age;
+// });
