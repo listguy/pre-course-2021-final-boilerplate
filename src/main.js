@@ -46,6 +46,13 @@ addButton.addEventListener("click", (e) => {
 //on click sorts the array
 sortButton.addEventListener("click", (e) => {
   sortArrayByPriority(jsonList);
+  localStorage.setItem("my-todo", JSON.stringify(jsonList));
+  for (let i = 0; i < jsonList.length; i++) {
+    viewSection.removeChild(document.querySelectorAll(".todo-container")[0]);
+  }
+  for (let i = 0; i < jsonList.length; i++) {
+    viewSection.append(itemObjectToDiv(jsonList[i]));
+  }
 });
 
 function convertValueToObject(value) {
@@ -98,4 +105,3 @@ function sortArrayByPriority(array) {
   });
   return array;
 }
-
