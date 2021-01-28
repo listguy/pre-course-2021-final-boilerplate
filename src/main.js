@@ -45,8 +45,9 @@ addButton.addEventListener("click", (e) => {
   textInput.value = "";
 });
 
+//on click sorts the array
 sortButton.addEventListener("click", (e) => {
-  jsonList;
+  sortArrayByPriority(jsonList);
 });
 
 function convertValueToObject(value) {
@@ -93,29 +94,10 @@ function listTodos() {
   }
 }
 
-function priorityToNumber(array) {
-  array.sort(function(a,b){
+function sortArrayByPriority(array) {
+  array.sort(function (a, b) {
     return b.priority - a.priority;
   });
   return array;
 }
-// const arr = [
-//   {
-//     name: "ophir",
-//     age: "23",
-//     lastName: "huberman",
-//   },
-//   {
-//     name: "bla",
-//     age: "32",
-//     lastName: "huberman",
-//   },
-//   {
-//     name: "yoyo",
-//     age: "14",
-//     lastName: "huberman",
-//   },
-// ];
-// arr.sort(function (a, b) {
-//   return b.age - a.age;
-// });
+
