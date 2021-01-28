@@ -23,19 +23,17 @@ addButton.onclick = function () {
   localStorage.setItem(key, value);
 };
 
-//saves the list locally as JSON and loading the local
+//whenever you reload the list isn't reset
 if (typeof localJson === "string") {
   jsonList = JSON.parse(localJson);
   listTodos();
 }
-
+//adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   const inputObject = convertValueToObject(inputValue);
-  // console.log(inputObject);
   const todoJson = JSON.stringify(inputObject);
-  // console.log(todoJson);
-  jsonList.push(inputObject); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  jsonList.push(inputObject);
   localStorage.setItem("my-todo", JSON.stringify(jsonList));
   viewSection.append(itemObjectToDiv(inputObject));
 });
