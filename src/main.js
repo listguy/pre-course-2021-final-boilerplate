@@ -2,6 +2,15 @@ let tasks = {"my-todo":[{}]};
 fetchTasks();
 refreshCounter();
 
+document.getElementById("add-button").addEventListener("click", function() {addTask()});
+document.getElementById("sort-button").addEventListener("click", function() {sortTasks()});
+
+function sortTasks(){
+    if (JSON.stringify(tasks) !== '{"my-todo":[{}]}')
+        tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+    displayTasks(tasks);
+}
+
 class Task{
     constructor(priority, text){
         this.priority = priority;
@@ -9,11 +18,6 @@ class Task{
         this.text = text;
     }
 }
-
-document.getElementById("add-button").addEventListener("click", function() {
-    addTask();
-  });
-
 
 async function addTask(){
         if (JSON.stringify(tasks) == '{"my-todo":[{}]}')
@@ -25,10 +29,10 @@ async function addTask(){
 
         document.getElementById("text-input").value = "";
         refreshCounter();
-        sendToServer(tasks);
+        putTasks(tasks);
 }
 
-async function sendToServer(tasks){
+async function putTasks(tasks){
     await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
     displayTasks(tasks);
 }

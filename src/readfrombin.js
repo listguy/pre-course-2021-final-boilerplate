@@ -1,10 +1,4 @@
-funk();
-
-
-async function funk(){
-    let response = await fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest');
-
-    let text = await response.json(); 
-    let bunny = text["record"];
-    console.log(bunny);
-}
+list = [{"fuck": "me", "number": 4}, {"fuck": "you", "number": 2}, {"fuck": "you", "number": 1}]
+console.log(list);
+list.sort((a, b) => (a["number"] > b["number"]) ? 1 : -1);
+console.log(list);
