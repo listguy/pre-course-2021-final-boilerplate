@@ -125,10 +125,11 @@ async function main() {
 		if (event.target.classList[0] === "todo-priority") {
 			const priority = event.target;
 			const tipWindow = document.querySelector("#tip-window");
+			tipWindow.innerHTML = "Click to delete task";
 			tipWindow.style.left =
 				priority.getBoundingClientRect().left +
 				priority.getBoundingClientRect().width / 2 -
-				50 +
+				70 +
 				`px`;
 			tipWindow.style.top = priority.getBoundingClientRect().top - 16 + "px";
 			tipWindow.hidden = false;
@@ -184,6 +185,63 @@ async function main() {
 					}
 				}
 			}
+		}
+	});
+	document.addEventListener("mouseover", (event) => {
+		if (event.target.classList[0] === "todo-text") {
+			const originalText = event.target;
+			const tipWindow = document.querySelector("#tip-window");
+			tipWindow.innerHTML = "Double-click to edit task";
+			tipWindow.style.left =
+				originalText.getBoundingClientRect().left +
+				originalText.getBoundingClientRect().width / 2 -
+				70 +
+				`px`;
+			tipWindow.style.top =
+				originalText.getBoundingClientRect().top +
+				originalText.getBoundingClientRect().height +
+				5 +
+				"px";
+			tipWindow.hidden = false;
+			event.target.addEventListener("dblclick", (clickEvent) => {
+				clickEvent.preventDefault();
+				const originalTextKeeper = clickEvent.target.innerHTML;
+				clickEvent.target.innerHTML = "";
+				const containerDiv = clickEvent.target.parentNode;
+				const newTextForm = document.querySelector("#edit-text-input");
+				newTextForm.style.left =
+					originalText.getBoundingClientRect().left +
+					originalText.getBoundingClientRect().width / 2 -
+					27 +
+					`px`;
+				newTextForm.style.top = originalText.getBoundingClientRect().top + "px";
+				newTextForm.hidden = false;
+				newTextInput = newTextForm.querySelector("input");
+				newTextForm.addEventListener("click", (saveEvent) => {
+					saveEvent.preventDefault();
+
+					if (saveEvent.target.id === "edit-text-button") {
+						newTextForm.hidden = true;
+						if (newTextInput.value !== "" && newTextInput.value !== " ") {
+							tasksArray[containerDiv.index]["text"] = newTextInput.value;
+							updateCounter(tasksArray);
+							updateJSONBin(tasksArray);
+							originalText.innerHTML = newTextInput.value;
+							newTextInput.value = "";
+						} else {
+							originalText.innerHTML = originalTextKeeper;
+						}
+					}
+				});
+			});
+		}
+	});
+	document.addEventListener("mouseout", (event) => {
+		if (event.target.classList[0] === "todo-text") {
+			const originalText = event.target;
+			const tipWindow = document.querySelector("#tip-window");
+
+			tipWindow.hidden = true;
 		}
 	});
 }

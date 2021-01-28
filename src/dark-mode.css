@@ -1,5 +1,5 @@
 * {
-	color: gray;
+	color: rgb(180, 180, 180);
 }
 body {
 	text-align: center;
@@ -124,11 +124,23 @@ select {
 	position: fixed;
 	font-size: 10px;
 	height: 12px;
-	width: 100px;
+	width: 140px;
 	background-color: rgba(0, 0, 0, 0.411);
 	z-index: 100;
 	text-align: center;
 }
 .highlighted {
 	background-color: rgba(153, 205, 50, 0.411);
+}
+#edit-text-input {
+	position: fixed;
+	z-index: 999;
+	opacity: 50%;
+	width: fit-content;
+	height: 70px;
+}
+.edit-text {
+	width: 50px;
+	height: 30px;
+	font-family: "Architects Daughter", cursive;
 }
