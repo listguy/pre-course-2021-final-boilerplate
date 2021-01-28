@@ -4,6 +4,7 @@
     --theme-main: rgb(20, 20, 20);
     --shadow-main: rgb(15, 15, 15);
     --text: white;
+    --selection: rgba(5, 5, 104, 0.589);
     --todo-content-margin: 1em;
 }
 
@@ -115,6 +116,10 @@ button:active {
     padding-bottom: 0.3em;
     padding-left: 0.3em; 
     transition: 200ms all;
+}
+
+.selected {
+    background-color: var(--selection);
 }
 
 .todo-container:hover {

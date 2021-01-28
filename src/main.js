@@ -45,6 +45,24 @@ async function onLoad() {
         renderList();
         setPersistent(DB_NAME, todoList);
     }
+
+    //selector event listener
+    document.addEventListener("click",  event => {
+        const item = event.target;
+        const todoElements = viewSection.querySelectorAll(".todo-container");
+        if (hasClass( item, "todo-container") ) {
+            if(!event.ctrlKey) {
+                for (const element of todoElements) {
+                    element.classList.remove("selected");
+                }
+            } 
+            item.classList.add("selected");
+        } else {
+            for (const element of todoElements) {
+                element.classList.remove("selected");
+            }
+        }
+    });
 }
 
 //helper functions
@@ -89,4 +107,17 @@ function dateToSQLFormat(date) {
     function pad(num) {//pads single digit value with 0
         return (num + "").length < 2 ? "0" + num : num;
     }
+}
+
+function hasClass(element, className) {
+    const classes = element.className.split(" ");
+    return classes.indexOf(className) > -1;
+}
+
+//removes todo from html and todoList
+function removeElement(element) {
+    const todoElements = viewSection.querySelectorAll(".todo-container");
+    const index = todoElements.indexOf(element);
+    element.remove();
+    todoList.splice(index, 1);
 }
