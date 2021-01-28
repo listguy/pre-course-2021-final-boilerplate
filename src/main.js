@@ -3,25 +3,34 @@ const textInput = document.querySelector('#text-input');
 const priority = document.querySelector('#priority-selector');
 const addButton = document.querySelector ('#add-button');
 let list = document.querySelector('#todo-list');
-
+let todoCounter = document.querySelector('#todo-counter');
+let numberOfTasks = 0;
+todoCounter.innerText = 'Tasks To Do: ' + numberOfTasks;
+const openAddSection = document.querySelector('#open-add-section') ;
+let addSection = document.querySelector('#add-section');
+addSection.hide();
 
 
 //EVENT Listeners
+
 addButton.addEventListener('click', addToList);
 list.addEventListener('click', removes)
 
+
+
+
+
 //FUNCTIONS
 
-
-function addToList (event){         //adds the text from the input to the List.
-    if (textInput.value === '') return;   //if input is empty not adds to list
+function addToList (event){                          //adds the text from the input to the List.
+    if (textInput.value === '') return;              //if input is empty not adds to list
     event.preventDefault();
-    const todoDiv = document.createElement('div');            //div of the list
-    const newTodo = document.createElement('li');             //the content of the TODO
+    const todoDiv = document.createElement('div');   //div of the list
+    const newTodo = document.createElement('li');    //the content of the TODO
     todoDiv.classList.add('todo');
     newTodo.classList.add('todoItem');
     todoDiv.appendChild(newTodo);
-    const removeButton = document.createElement('button');      //remove from list button
+    const removeButton = document.createElement('button');//remove from list button
     removeButton.classList.add('remove-button');
     todoDiv.appendChild(removeButton);
     removeButton.innerHTML = 'X';
@@ -30,7 +39,9 @@ function addToList (event){         //adds the text from the input to the List.
     prioritySpan.innerText = priority.value;
     //print to input
     newTodo.innerText = prioritySpan.innerText + '- ' + textInput.value + ' ' +startTime();
-    textInput.value = '';           //clears input after adding to list
+    textInput.value = '';  //clears input after adding to list
+    numberOfTasks += 1;      //adds to the counter
+    todoCounter.innerText = 'Tasks To Do: ' + numberOfTasks;
 }
 
 
@@ -55,5 +66,8 @@ function removes(event){
     if (event.target.className !== 'remove-button') return;
     console.log(event.target);
     let item = event.target.closest('.todo');
-    item.remove();
+    item.remove();      
+    numberOfTasks -= 1;  //removes from the counter
+    todoCounter.innerText = 'Tasks To Do: ' + numberOfTasks;
 }
+
