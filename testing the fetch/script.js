@@ -85,6 +85,13 @@ async function updateList() {
     },
     body: JSON.stringify(array),
   })
+    .then((response) => response.json())
+    .then((array) => {
+      console.log("Success:", array);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 // updateList();
@@ -101,3 +108,7 @@ console.log(readList());
 
 
 
+let response = await fetch('https://api.jsonbin.io/v3/b/60132a90ef99c57c734b3926/latest');
+let jsonResponse = await response.json(); 
+let objectResponse = jsonResponse["record"];
+jsonList = objectResponse;

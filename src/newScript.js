@@ -5,9 +5,8 @@ const viewSection = document.getElementById("view");
 const counter = document.getElementById("counter");
 const sortButton = document.getElementById("sort-button");
 let storedCounter = localStorage.getItem("counter");
-let inputValue = textInput.value;
+let inputValue;
 let jsonList = {"my-todo":[]};
-const todoList = [];
 
 //set counter to stay on refresh
 if (storedCounter) {
@@ -22,11 +21,21 @@ addButton.onclick = function () {
   localStorage.setItem(key, value);
 };
 
-
+document.addEventListener("DOMContentLoaded", async e => {
+  const todoList = [];
+  let response = await fetch('https://api.jsonbin.io/v3/b/60132e74b41a937c6d537a8a/latest');
+  let jsonResponse = await response.json(); 
+  let objectResponse = jsonResponse["record"];
+  jsonList = objectResponse;
+})
 //adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
+  inputValue = textInput.value;
   const object = convertValueToObject(inputValue);
-  jsonList["my-todo".push(object)]
+  todoList.push(object);
+  jsonList["my-todo"].push(object);
+  updateList();
+
 });
 
 //removes text from input on click
@@ -71,7 +80,6 @@ function itemObjectToDiv(myTodoItem) {
   return todoContainer;
 }
 
-
 function sortArrayByPriority(array) {
   array.sort(function (a, b) {
     return b.priority - a.priority;
@@ -79,14 +87,21 @@ function sortArrayByPriority(array) {
   return array;
 }
 
-async function updateList(jsonArray) {
-  await fetch("https://api.jsonbin.io/v3/b/6012d3f5c9033f74c42790b5", {
+async function updateList() {
+  await fetch("https://api.jsonbin.io/v3/b/60132e74b41a937c6d537a8a", {
     method: "PUT", 
     headers: {
       "Content-Type": "application/json",
       "X-Master-Key":
         "$2b$10$5P7RliLTaANiyqYHfkRvWepKYlCjfoARhVbWxxlqCTwQexhfzjuES",
     },
-    body: JSON.stringify(jsonArray),
+    body: JSON.stringify(jsonList),
   })
+    .then((response) => response.json())
+    .then((jsonList) => {
+      console.log("Success:", jsonList);
+    })
+    .catch((error) => {
+      console.error("Error:", jsonList);
+    });
 }
