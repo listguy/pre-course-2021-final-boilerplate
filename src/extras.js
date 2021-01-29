@@ -45,13 +45,6 @@ async function emptyJsonbin() {
     },
     body: JSON.stringify({ "my-todo": [] }),
   })
-    .then((response) => response.json())
-    .then(({ "my-todo": [] }) => {
-      console.log("Success:", { "my-todo": [] });
-    })
-    .catch((error) => {
-      console.error("Error:", { "my-todo": [] });
-    });
 }
 
 //gets an array filter property and property value returns an array without that value
