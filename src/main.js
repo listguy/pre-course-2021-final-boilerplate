@@ -181,13 +181,15 @@ async function main() {
 				`px`;
 			tipWindow.style.top = priority.getBoundingClientRect().top - 16 + "px";
 			tipWindow.hidden = false;
-			event.target.addEventListener("click", (clickEvent) => {
+			event.target.addEventListener("click", deleteEvent);
+			function deleteEvent(clickEvent) {
 				const containerDiv = clickEvent.target.parentNode;
 				tasksArray.splice(containerDiv.index, 1);
 				containerDiv.hidden = true;
 				updateCounter(tasksArray);
 				updateJSONBin(tasksArray);
-			});
+				clickEvent.target.removeEventListener("click", deleteEvent);
+			}
 		}
 	});
 	document.addEventListener("mouseout", (event) => {
