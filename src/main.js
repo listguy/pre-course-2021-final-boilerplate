@@ -66,13 +66,23 @@ async function onLoad() {
     document.addEventListener("click",  event => {
         const item = event.target;
         const todoElements = viewSection.querySelectorAll(".todo-container");
-        if (hasClass( item, "todo-container") ) {
+        const isContainer = hasClass( item, "todo-container");
+        const isContainerChild = hasClass(item.parentNode, "todo-container") && !hasClass(item, "todo-check");
+        if (isContainer) {
             if(!event.ctrlKey) {
                 for (const element of todoElements) {
                     element.classList.remove("selected");
                 }
             } 
             item.classList.add("selected");
+            event.preventDefault();
+        } else if (isContainerChild) {
+            if(!event.ctrlKey) {
+                for (const element of todoElements) {
+                    element.classList.remove("selected");
+                }
+            } 
+            item.parentNode.classList.add("selected");
             event.preventDefault();
         } else {
             for (const element of todoElements) {

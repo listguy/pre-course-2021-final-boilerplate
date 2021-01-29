@@ -29,8 +29,8 @@ main {
     padding-top: 1%;
     padding-right: 3%;
     padding-left: 3%;
-    box-shadow: 5px 5px 15px var(--shadow-main);
     padding-bottom: 5%;
+    box-shadow: 5px 5px 15px var(--shadow-main);
 }
 
 /* control section style */

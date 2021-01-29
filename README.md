@@ -30,9 +30,9 @@ Heres a link to the [GitHub Page](https://alontzafari.github.io/pre-course-2021-
 
 - Clicking anywhere else on the page will undo selection. [javascript.info](https://javascript.info/event-delegation)
 
-- while items are loaded from or to JSONbin a spinning loading icon appears.
+- while items are loaded from or to JSONbin a spinning loading icon appears. [fontawesome.com](https://fontawesome.com/v4.7.0/icons)
 
-- checkbox to every task for marking tasks as done without delete.
+- checkbox to every task for marking tasks as done. [stackoverflow.com](https://stackoverflow.com/questions/14544104/checkbox-check-event-listener)
 
 - General responsivity in style and UI. (elements pop, buttons are pressed)
 
