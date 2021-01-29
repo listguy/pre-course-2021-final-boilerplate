@@ -188,6 +188,14 @@ async function main() {
 			}
 		}
 	});
+	document.addEventListener("click", (clearEvent) => {
+		if (clearEvent.target["id"] === "clear-button") {
+			const printedToDos = document.querySelectorAll(".todo-container");
+			for (let toDo of printedToDos) {
+				toDo.classList.remove("highlighted");
+			}
+		}
+	});
 	document.addEventListener("mouseover", (event) => {
 		if (event.target.classList[0] === "todo-text") {
 			const originalText = event.target;
