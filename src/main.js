@@ -22,7 +22,9 @@ async function onLoad() {
     todoList = await getPersistent(DB_NAME);
     if(!todoList) todoList = [];
     renderList();
+
     //UI elements events
+    //add list entry
     addButton.onclick = async () => {
         const todo = {
             checked: false,
@@ -36,11 +38,13 @@ async function onLoad() {
         textInput.value = "";
     };
 
+    //sort
     sortButton.onclick = () => {
         todoList.sort( (a,b) => Number(b.priority) - Number(a.priority) );
         renderList();
     };
 
+    //delete Button
     clearButton.onclick = event => {
         if(!confirm("Are you sure?")) return;
         const selectedElements = viewSection.querySelectorAll(".selected");
@@ -86,7 +90,11 @@ async function onLoad() {
         const index = checkboxs.indexOf(checkbox);
         todoList[index].checked = checkbox.checked;
         setPersistent(DB_NAME, todoList);
-        renderList();
+        if (checkbox.checked) {
+            checkbox.parentNode.classList.add("checked-task");
+        } else {
+            checkbox.parentNode.classList.remove("checked-task");
+        }
     });
 }
 
