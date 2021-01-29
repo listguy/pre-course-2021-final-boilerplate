@@ -1,3 +1,4 @@
+/*variables*/
 :root {
     --theme-back1: rgb(65, 65, 65);
     --theme-back2: rgb(31, 28, 28);
@@ -9,6 +10,7 @@
     --todo-content-margin: 1em;
 }
 
+/*general settings*/
 body {
     background: linear-gradient(35deg, var(--theme-back1), var(--theme-back2));
     padding-top: 5vh;
@@ -67,6 +69,7 @@ main {
 .inset {
     box-shadow: 0 0 10px 0 var(--shadow-main) inset;
 }
+
 .adder {
     display: flex;
     justify-content: flex-start;
@@ -110,7 +113,8 @@ button:active {
 #counter-container {
     background-color: transparent;
 }
-#counter,#counter-text{
+
+#counter, #counter-text {
     margin: 0;
     min-width: 25px;
     justify-content: center;

@@ -84,7 +84,7 @@ async function onLoad() {
     //checkbox
     viewSection.addEventListener("change", event => {
         const checkbox = event.target;
-        if( !hasClass(checkbox, "todo-check") ) return;
+        if ( !hasClass(checkbox, "todo-check") ) return;
         let checkboxs = viewSection.querySelectorAll(".todo-check");
         checkboxs = Array.from(checkboxs);
         const index = checkboxs.indexOf(checkbox);
@@ -124,7 +124,7 @@ function createTodoElement(todo) {
     todoText.classList.add("todo-text");
     todoCheck.setAttribute("Type", "checkbox");
     todoCheck.checked = todo.checked;
-    if(todo.checked) container.classList.add("checked-task");
+    if (todo.checked) container.classList.add("checked-task");
     todoPriority.innerText = todo.priority;
     timeStamp.innerText = dateToSQLFormat( new Date(todo.date) );
     todoText.innerText = todo.text;
@@ -135,14 +135,15 @@ function createTodoElement(todo) {
 //returns SQL datetime format from Date object
 function dateToSQLFormat(date) {
     const year = date.getFullYear();
-    const month = pad(date.getMonth() + 1); 
-    const day = pad(date.getDate());
-    const hour = pad(date.getHours());
-    const minutes = pad(date.getMinutes()); 
-    const seconds = pad(date.getSeconds()); 
+    const month = pad( date.getMonth() + 1 ); 
+    const day = pad( date.getDate() );
+    const hour = pad( date.getHours() );
+    const minutes = pad( date.getMinutes() ); 
+    const seconds = pad( date.getSeconds() ); 
     return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
-
-    function pad(num) {//pads single digit value with 0
+    
+    //pads single digit value with 0
+    function pad(num) {
         return (num + "").length < 2 ? "0" + num : num;
     }
 }
@@ -154,7 +155,7 @@ function hasClass(element, className) {
 
 //removes todo from html and todoList
 function removeElement(element) {
-    const todoElements = Array.from(viewSection.querySelectorAll(".todo-container"));
+    const todoElements = Array.from( viewSection.querySelectorAll(".todo-container") );
     const index = todoElements.indexOf(element);
     element.remove();
     todoList.splice(index, 1);
