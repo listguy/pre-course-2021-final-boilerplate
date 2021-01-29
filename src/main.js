@@ -86,6 +86,7 @@ async function onLoad() {
         const index = checkboxs.indexOf(checkbox);
         todoList[index].checked = checkbox.checked;
         setPersistent(DB_NAME, todoList);
+        renderList();
     });
 }
 
@@ -97,7 +98,6 @@ function renderList() {
     counter.innerText = todoList.length;
     for(const todo of todoList) {
         const todoElement = createTodoElement(todo);
-        console.log(todoElement.querySelector(".todo-check").checked);
         viewSection.appendChild(todoElement);
     }
 }
@@ -116,6 +116,7 @@ function createTodoElement(todo) {
     todoText.classList.add("todo-text");
     todoCheck.setAttribute("Type", "checkbox");
     todoCheck.checked = todo.checked;
+    if(todo.checked) container.classList.add("checked-task");
     todoPriority.innerText = todo.priority;
     timeStamp.innerText = dateToSQLFormat( new Date(todo.date) );
     todoText.innerText = todo.text;

@@ -128,6 +128,11 @@ button:active {
     transition: 200ms all;
 }
 
+.checked-task {
+    color: rgba(255, 255, 255, 0.301);
+    text-decoration: line-through;
+}
+
 .selected {
     background-color: var(--selection);
 }
