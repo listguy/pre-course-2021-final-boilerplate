@@ -14,7 +14,7 @@ document.getElementById("sort-button").addEventListener("click", function() {sor
 
 document.getElementById("add-button").addEventListener("click", function() {
     if (document.getElementById("text-input").value === "")
-        alert("Please enter text.")
+        alert("Please enter text")
     else
         addTask()
 });
