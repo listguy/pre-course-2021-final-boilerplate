@@ -95,7 +95,12 @@ async function main() {
 	function updateCounter(tasksArray) {
 		const counter = document.querySelector("#counter");
 		const arrowsDiv = document.querySelector("#arrows");
-		counter.innerHTML = tasksArray.length;
+		if (tasksArray.length === 0) {
+			counter.innerHTML = "no";
+		} else {
+			counter.innerHTML = tasksArray.length;
+		}
+
 		if (tasksArray.length > 9) {
 			multiplePagesPrint(tasksArray);
 			arrowsDiv.hidden = false;
@@ -188,6 +193,8 @@ async function main() {
 				containerDiv.hidden = true;
 				updateCounter(tasksArray);
 				updateJSONBin(tasksArray);
+				const tipWindow = document.querySelector("#tip-window");
+				tipWindow.hidden = true;
 				clickEvent.target.removeEventListener("click", deleteEvent);
 			}
 		}
