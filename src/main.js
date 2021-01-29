@@ -49,6 +49,7 @@ async function onLoad() {
             for (const element of selectedElements) {
                 removeElement(element);
             }
+            counter.innerText = todoList.length;
         } else {
             todoList = [];
             renderList();
