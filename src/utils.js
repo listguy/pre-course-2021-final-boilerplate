@@ -35,6 +35,9 @@ async function setPersistent(key, data) {
     }
   };
   const request = new Request(DB_URL, init);
+  const title = document.querySelector("h1");
+  title.innerText = "TO-DO List: Uploading...";
   const response = await fetch(request);
+  title.innerText = "TO-DO List:";
   return response.ok;
 }
