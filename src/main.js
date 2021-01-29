@@ -138,7 +138,7 @@ function createTodoElement(todo) {
     todoPriority.innerText = todo.priority;
     timeStamp.innerText = dateToSQLFormat( new Date(todo.date) );
     todoText.innerText = todo.text;
-    container.append(todoCheck,todoPriority, timeStamp, todoText);
+    container.append(todoCheck, todoPriority, timeStamp, todoText);
     return container;
 }
 
