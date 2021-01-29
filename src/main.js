@@ -1,6 +1,34 @@
+// import axios from 'axios';
 "use strict";
 
-const todoArray = [];
+let todoArray = [];
+
+async function activateCode() {
+    await getJSON();
+    console.log(todoArray);
+    printTodoList(todoArray);
+}
+
+if (document.querySelector('todo-container') === null) {
+    activateCode();
+}
+
+async function getJSON() {
+    const myRequest = new Request('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e');
+    // let tempArray = [];
+    // const tempObject = {
+    //     "text": "",
+    //     "priority": "",
+    //     "date": ""
+    // };
+    
+    return fetch(myRequest)
+        .then(response => response.json())
+        .then(data => todoArray = data.record)
+        // console.log(data);
+
+    // console.log(obj);
+}
 
 
 const counterDiv = document.querySelector('#counter');
@@ -24,7 +52,6 @@ document.addEventListener('click', function (event) {
     }
 
 })
-
 
 function addItem() {
     const viewSection = document.querySelector('.viewSection');
