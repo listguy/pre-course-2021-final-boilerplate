@@ -194,3 +194,39 @@ button:active {
     color: white;
     font-weight: bold;
 }
+
+#spinner {
+    visibility: hidden;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+#spinner:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right: 0;
+    margin: auto;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: spin 1.2s linear infinite;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  #spinner.show {
+    visibility: visible;
+  }
+

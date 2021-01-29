@@ -115,7 +115,9 @@ function sortTasks(direction){
 
 // updates jsonbin.io with current tasks and refresh the tasks
 async function putTasks(tasks){
+    showSpinner();
     await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
+    hideSpinner();
     localTasks(tasks);
 }
 
@@ -125,7 +127,7 @@ async function fetchTasks(){
     while(viewSection.firstChild){
         viewSection.removeChild(viewSection.firstChild);
     }
-
+    
     let response = await fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest');
     let jsonResponse = await response.json(); 
     let recordResponse = jsonResponse["record"];
@@ -237,3 +239,21 @@ function getSQLDate(date){
             return number;
     }
 }
+
+/*
+LOADING SPINNER
+*/
+
+const spinner = document.getElementById("spinner");
+
+function showSpinner() {
+  spinner.className = "show";
+  setTimeout(() => {
+    spinner.className = spinner.className.replace("show", "");
+  }, 15000);
+}
+
+function hideSpinner() {
+  spinner.className = spinner.className.replace("show", "");
+}
+
