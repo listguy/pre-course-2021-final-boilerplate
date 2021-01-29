@@ -11,13 +11,23 @@ EVENT LISTENERS
 // pressing on add button
 document.getElementById("add-button").addEventListener("click", function() {
     if (document.getElementById("text-input").value === "") // no input
-        alert("Please enter text")
+        alert("Please enter text");
     else
-        addTask()
+        addTask();
 });
 
 // pressing on sort button
-document.getElementById("sort-button").addEventListener("click", function() {sortTasks()});
+let sortButton = document.getElementById("sort-button");
+sortButton.addEventListener("click", function() {
+    let buttonText = document.getElementById('sort-button').innerText;
+    if (buttonText === 'Priority 🠋' || buttonText === 'Priority ✖'){
+        sortTasks('higherUp');
+        sortButton.innerText = 'Priority 🠉'
+    } else {
+        sortTasks('higherDown');
+        sortButton.innerText = 'Priority 🠋';
+    }
+});
 
 let modeButton = document.getElementById("mode-button");
 modeButton.addEventListener("click", function() {
@@ -94,9 +104,12 @@ function deleteTask(createdAt){
 
 
 // sorts tasks by priority
-function sortTasks(){
+function sortTasks(direction){
     if (JSON.stringify(tasks) !== '{"my-todo":[{}]}')
-        tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+        if (direction === "higherUp")
+            tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+        else
+            tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? 1 : -1);
     localTasks(tasks);
 }
 
