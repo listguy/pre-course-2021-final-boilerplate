@@ -5,9 +5,12 @@ const containers = document.getElementsByClassName("todo-container");
 document.addEventListener("click", (e) => {
   if (e.target.className === "delete") {
     if (confirm("todo is going to be deleted")) {
-        const thisDiv = e.target.parentElement;
-        console.log(thisDiv)
-        viewSection.removeChild(thisDiv)
+      const thisDiv = e.target.parentElement;
+      //   console.log(thisDiv);
+      const divDate = thisDiv.getElementsByClassName("todo-created-at")[0]
+        .outerText;
+      console.log(divDate);
+      viewSection.removeChild(thisDiv);
     }
   }
 });
@@ -47,3 +50,13 @@ async function emptyJsonbin() {
       console.error("Error:", { "my-todo": [] });
     });
 }
+
+//gets an array filter property and property value returns an array without that value
+function filterByKey(array, filter, keyword){
+    let filteredArray = array.filter(function(obj) {
+        return obj[filter] !== keyword;
+    });
+    return filteredArray;
+}
+console.log(filterByKey(arr, 'date', "23.4.18"));
+
