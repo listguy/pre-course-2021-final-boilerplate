@@ -6,7 +6,7 @@ const counter = document.getElementById("counter");
 const sortButton = document.getElementById("sort-button");
 let storedCounter = localStorage.getItem("counter");
 let inputValue;
-let jsonList = {"my-todo":[]};
+let jsonList = { "my-todo": [] };
 let todoList = [];
 //set counter to stay on refresh
 if (storedCounter) {
@@ -21,22 +21,24 @@ addButton.onclick = function () {
   localStorage.setItem(key, value);
 };
 
-document.addEventListener("DOMContentLoaded", async e => {
-  let response = await fetch('https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce/latest');
-  let jsonResponse = await response.json(); 
+document.addEventListener("DOMContentLoaded", async (e) => {
+  let response = await fetch(
+    "https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce/latest"
+  );
+  let jsonResponse = await response.json();
   let objectResponse = jsonResponse["record"];
   jsonList = objectResponse;
   todoList = jsonList["my-todo"];
   localStorage.setItem("my-todo", JSON.stringify(todoList));
   arrayToDiv(todoList);
-})
+});
 
 //adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   const object = convertValueToObject(inputValue);
   todoList.push(object);
-  jsonList["my-todo"].push(object);
+  jsonList["my-todo"] = todoList;
   updateList();
   localStorage.setItem("my-todo", JSON.stringify(todoList));
   viewSection.append(itemObjectToDiv(object));
@@ -48,6 +50,21 @@ addButton.addEventListener("click", (e) => {
 });
 
 //on click sorts the array
+sortButton.addEventListener("click", (e) => {
+  sortArrayByPriority(jsonList["my-todo"]);
+  todoList = jsonList["my-todo"];
+  for (let i = 0; i < todoList.length; i++) {
+    viewSection.removeChild(document.querySelectorAll(".todo-container")[0]);
+  }
+  for (let i = 0; i < todoList.length; i++) {
+    viewSection.append(itemObjectToDiv(todoList[i]));
+  }
+  localStorage.setItem("my-todo", JSON.stringify(todoList));
+});
+
+// sortButton.addEventListener("click", e => {
+//   updateList();
+// })
 
 function convertValueToObject(value) {
   const current = new Date();
@@ -93,7 +110,7 @@ function sortArrayByPriority(array) {
 
 async function updateList() {
   await fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
-    method: "PUT", 
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       "X-Master-Key":
