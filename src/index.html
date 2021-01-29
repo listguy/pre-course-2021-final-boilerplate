@@ -12,34 +12,42 @@
 			href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
 			rel="stylesheet"
 		/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<header>To Do List</header>
-		<section id="control-section">
-			<input
-				type="text"
-				id="text-input"
-				placeholder="What's need to be done?"
-			/>
-			<label for="priority-selector">Priority:</label>
-			<select id="priority-selector" name="priority-selector">
-				<option value="1" class="option priority1">1-Least</option>
-				<option value="2" class="option priority2">2</option>
-				<option value="3" class="option priority3">3</option>
-				<option value="4" class="option priority4">4</option>
-				<option value="5" class="option priority5">5-Most</option>
-			</select>
-			<button id="add-button">Add</button> <br />
-			<button id="dark-mode-button">Dark mode</button>
-			<button id="sort-button">Sort by priority</button>
-			<input type="text" id="search-input" placeholder="Search..." />
-			<button id="search-button">Go!</button>
-			<hr />
-			<div id="counter-line">
-				You have <span id="counter"></span> tasks on your To-Do List
-			</div>
-			<br />
-		</section>
+		<div id="freezer-section">
+			<img id="freezer" src="images/freezer.jpeg" />
+			<section id="control-section">
+				<input type="text" id="text-input" placeholder="New Task" />
+				<label id="priority-label" for="priority-selector">Priority:</label>
+				<select id="priority-selector" name="priority-selector">
+					<option value="1" class="option priority1">1-Least</option>
+					<option value="2" class="option priority2">2</option>
+					<option selected value="3" class="option priority3">3</option>
+					<option value="4" class="option priority4">4</option>
+					<option value="5" class="option priority5">5-Most</option>
+				</select>
+				<button id="add-button">Add</button>
+				<div id="buttons-div">
+					<button id="dark-mode-button">Dark mode</button>
+					<button id="sort-button">Sort by priority</button>
+				</div>
+				<div id="search-input-div">
+					<input type="text" id="search-input" placeholder="Search..." />
+					<button id="search-button">Go!</button>
+					<button id="clear-button">Clear</button>
+				</div>
+				<div id="counter-line">
+					You have <span id="counter"></span> tasks To-Do
+				</div>
+				<br />
+			</section>
+		</div>
 		<div id="all-view-section">
 			<img
 				id="loading-gif"
@@ -47,7 +55,7 @@
 				hidden
 			/>
 			<section id="view-section"></section>
-			<img id="fridge" src="images/miniBar.webp" />
+			<img id="fridge" src="images/fridge-body.jpeg" />
 			<div id="tip-window" hidden>Click to Delete task</div>
 			<form id="edit-text-input" hidden>
 				<input
