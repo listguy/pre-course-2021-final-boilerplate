@@ -10,18 +10,19 @@ let jsonList = { "my-todo": [] };
 let todoList = [];
 
 //set counter to stay on refresh
-if (storedCounter) {
-  counter.innerText = storedCounter;
-}
+// if (storedCounter) {
+//   counter.innerText = storedCounter;
+// }
 
-//update counter on every click
-addButton.onclick = function () {
-  const key = "counter";
-  let value = Number(counter.innerText);
-  value++;
-  counter.innerText = Number(counter.innerText) + 1;
-  localStorage.setItem(key, value);
-};
+// //update counter on every click
+// addButton.onclick = function () {
+//   const key = "counter";
+//   let value = Number(counter.innerText);
+//   value++;
+//   counter.innerText = Number(counter.innerText) + 1;
+//   localStorage.setItem(key, value);
+// };
+
 
 //when the page is loaded its content is taken from jsonbin.io
 document.addEventListener("DOMContentLoaded", async (e) => {
@@ -32,12 +33,14 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   let objectResponse = jsonResponse["record"];
   jsonList = objectResponse;
   todoList = jsonList["my-todo"];
+  counter.innerText = todoList.length;
   localStorage.setItem("my-todo", JSON.stringify(todoList));
   arrayToDiv(todoList);
 });
 
 //adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
+  counter.innerText = Number(counter.innerText)+1
   inputValue = textInput.value;
   const object = convertValueToObject(inputValue);
   todoList.push(object);

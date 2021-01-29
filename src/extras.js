@@ -9,9 +9,15 @@ document.addEventListener("click", (e) => {
   }
 });
 
+document.addEventListener("click", e => {
+    if(e.target.id === "delete-all") {
+        deleteAll();
+    }
+})
 
 function deleteAll() {
   for (let i = 0; i < containers.length; i++) {
-      viewSection.removeChild(containers[0]);
+    let Child =  containers[0];
+    viewSection.removeChild(Child);
   }
 }
