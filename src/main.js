@@ -1,41 +1,62 @@
-// import axios from 'axios';
 "use strict";
 
-let todoArray = [];
-
-async function activateCode() {
-    await getJSON();
-    console.log(todoArray);
-    printTodoList(todoArray);
-}
-
-if (document.querySelector('todo-container') === null) {
-    activateCode();
-}
-
-async function getJSON() {
-    const myRequest = new Request('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e');
-    // let tempArray = [];
-    // const tempObject = {
-    //     "text": "",
-    //     "priority": "",
-    //     "date": ""
-    // };
-    
-    return fetch(myRequest)
-        .then(response => response.json())
-        .then(data => todoArray = data.record)
-        // console.log(data);
-
-    // console.log(obj);
-}
-
-
-const counterDiv = document.querySelector('#counter');
 let counter = 0;
+let todoArray = [];
+const counterDiv = document.querySelector('#counter');
+
+// resetJSON(); //used to reset the JSON.
+getJSON();
+
+// function resetJSON() {
+// const resetData = [{"taskText": ""}]
+//     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e', {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(resetData)
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log('Success:', data);
+//         })
+//         .catch((error) => {
+//             console.error('Error:', error);
+//         });
+// }
+
+function getJSON() {
+    fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e/latest').then(res => res.json())
+        .then(res => {
+            // console.log(res.record[0].taskText === "");
+            if (res.record[0].taskText === "") {
+                return;
+            } else {
+                todoArray = res.record;
+                console.log(todoArray);
+                printTodoList(todoArray);
+            }
+        })
+}
+
+function updateJSON() {
+    fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(todoArray)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
 
 document.addEventListener('click', function (event) {
-    // console.log(event.target)
     const pressedId = event.target.id;
     switch (pressedId) {
         case 'add-button':
@@ -50,7 +71,6 @@ document.addEventListener('click', function (event) {
         default:
             return;
     }
-
 })
 
 function addItem() {
@@ -81,16 +101,22 @@ function addItem() {
         div.append(todoCreationTime);
         div.append(todoPriority);
         const item = {
-            "Task": temp,
-            "CreationTime": currentDate,
+            "taskText": temp,
+            "creationTime": currentDate,
             "priority": Number(priority.value)
         };
+        console.log(todoArray)
         todoArray.push(item);
         counter++;
         counterDiv.innerText = `Items Counter: ${counter}`;
     }
+    updateJSON();
 }
 function printTodoList(arr) {
+    console.log(arr);
+    if (arr.length === 0) {
+        return;
+    }
     const viewSection = document.querySelector('.viewSection');
     deleteList();
     arr.forEach(element => {
@@ -99,11 +125,11 @@ function printTodoList(arr) {
         viewSection.append(div);
         const todoText = document.createElement('p');
         todoText.classList.add('todo-text');
-        todoText.innerText = element.Task;
+        todoText.innerText = element.taskText;
 
         const todoCreationTime = document.createElement('time');
         todoCreationTime.classList.add('todo-created-at');
-        todoCreationTime.innerText = element.CreationTime;
+        todoCreationTime.innerText = element.creationTime;
 
         const todoPriority = document.createElement('data');
         todoPriority.innerText = element.priority;
@@ -113,6 +139,8 @@ function printTodoList(arr) {
         div.append(todoCreationTime);
         div.append(todoPriority);
     });
+    const x = document.querySelectorAll('.todo-container');
+    counter = x.length;
     counterDiv.innerText = `Items Counter: ${counter}`;
 }
 
