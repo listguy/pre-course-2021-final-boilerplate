@@ -230,6 +230,8 @@ body {
 	bottom: 0;
 	font-size: 10px;
 	color: rgba(73, 29, 0, 0.87);
+	width: 100%;
+	text-align: center;
 }
 .todo-text {
 	position: absolute;

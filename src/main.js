@@ -105,12 +105,11 @@ async function main() {
 			minutes: date.getMinutes(),
 		};
 		for (let number in out) {
-			if (Number(out.number) < 10) {
-				out.number = "0" + out.number;
-				console.log(number);
+			if (Number(out[number]) < 10) {
+				out[number] = "0" + out[number];
 			}
 		}
-		return `${out.day}/${out.month}/${out.year} at ${out.hours}:${out.minutes}`;
+		return `${out.day}/${out.month}/${out.year} \n ${out.hours}:${out.minutes}`;
 	}
 
 	async function updateJSONBin(tasksArray) {
