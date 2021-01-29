@@ -22,11 +22,11 @@ async function main() {
 	const addButton = document.querySelector("#add-button");
 	const sortButton = document.querySelector("#sort-button");
 	sortButton.sorted = false;
-	updateCounter(tasksArray);
 	for (let task of tasksArray) {
 		task.index = tasksArray.indexOf(task); //adds index proprty for use in other functions.
 		printTask(task, viewSection);
 	}
+	updateCounter(tasksArray);
 	addButton.addEventListener("click", newTask);
 
 	async function newTask(event) {
@@ -93,7 +93,15 @@ async function main() {
 
 	function updateCounter(tasksArray) {
 		const counter = document.querySelector("#counter");
+		const arrowsDiv = document.querySelector("#arrows");
 		counter.innerHTML = tasksArray.length;
+		if (tasksArray.length > 9) {
+			multiplePagesPrint(tasksArray);
+			arrowsDiv.hidden = false;
+		} else {
+			arrowsDiv.hidden = true;
+			printPage([tasksArray], 0);
+		}
 	}
 
 	function datePrinter(date) {
@@ -120,6 +128,44 @@ async function main() {
 			},
 			body: `{"my-todo": ${JSON.stringify(tasksArray)}}`,
 		});
+	}
+	function multiplePagesPrint(tasksArray) {
+		const arrowsDiv = document.querySelector("#arrows");
+		const multyTaskArray = [[]];
+		for (let i = 0; i <= tasksArray.length / 9; i++) {
+			for (let j = 0; j < 9; j++) {
+				if (tasksArray[i * 9 + j]) {
+					multyTaskArray[i].push(tasksArray[i * 9 + j]);
+				}
+			}
+			multyTaskArray.push([]);
+		}
+		multyTaskArray.pop();
+		let pageIndex = 0;
+		printPage(multyTaskArray, pageIndex);
+		arrowsDiv.addEventListener("click", (arrowEvent) => {
+			const arrow = arrowEvent.target;
+			if (arrow.id === "right-arrow" && pageIndex < multyTaskArray.length - 1) {
+				pageIndex++;
+				printPage(multyTaskArray, pageIndex);
+			}
+			if (arrow.id === "left-arrow" && pageIndex > 0) {
+				pageIndex--;
+				printPage(multyTaskArray, pageIndex);
+			}
+		});
+	}
+	function printPage(multyTaskArray, pageIndex) {
+		const viewSection = document.querySelector("#view-section");
+		const oldNotes = document.querySelectorAll(".todo-container");
+		for (let i = 0; i < oldNotes.length; i++) {
+			viewSection.removeChild(oldNotes[i]);
+		}
+
+		for (let i = 0; i < multyTaskArray[pageIndex].length; i++) {
+			printTask(multyTaskArray[pageIndex][i], viewSection);
+			// console.log(multyTaskArray[pageIndex][i]);
+		}
 	}
 
 	document.addEventListener("mouseover", (event) => {
