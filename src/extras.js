@@ -1,7 +1,7 @@
 const deleteButtons = document.getElementsByClassName("delete");
 const containers = document.getElementsByClassName("todo-container");
 
-//remove the correct div
+//remove the correct div + deletes from jsonbin and storageData
 document.addEventListener("click", (e) => {
   if (e.target.className === "delete") {
     if (confirm("todo is going to be deleted")) {
@@ -9,8 +9,11 @@ document.addEventListener("click", (e) => {
       //   console.log(thisDiv);
       const divDate = thisDiv.getElementsByClassName("todo-created-at")[0]
         .outerText;
-      console.log(divDate);
       viewSection.removeChild(thisDiv);
+      todoList = filterByKey(todoList, 'date', divDate);
+      localStorage.setItem("my-todo", JSON.stringify(todoList));
+      jsonList["my-todo"] = todoList;
+      updateList();
     }
   }
 });
@@ -58,5 +61,5 @@ function filterByKey(array, filter, keyword){
     });
     return filteredArray;
 }
-console.log(filterByKey(arr, 'date', "23.4.18"));
+// console.log(filterByKey(arr, 'date', "23.4.18"));
 
