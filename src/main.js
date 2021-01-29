@@ -10,8 +10,18 @@ refreshCounter();
 EVENT LISTENERS
 */
 
+// pressing on add button
+document.getElementById("add-button").addEventListener("click", function() {
+    if (document.getElementById("text-input").value === "") // no input
+        alert("Please enter text")
+    else
+        addTask()
+});
+
+// pressing on sort button
 document.getElementById("sort-button").addEventListener("click", function() {sortTasks()});
 
+// pressing on delete button for task
 document.body.addEventListener('click', function (event) {
     if (event.target.className === 'delete-button') {
         let todoContainer = event.target.parentNode;
@@ -37,13 +47,6 @@ function deleteTask(createdAt){
         }
     }
 }
-
-document.getElementById("add-button").addEventListener("click", function() {
-    if (document.getElementById("text-input").value === "")
-        alert("Please enter text")
-    else
-        addTask()
-});
 
 class Task{
     constructor(priority, text){

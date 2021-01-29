@@ -45,11 +45,9 @@ main {
 @media screen and (max-width: 600px) {
     main {
       width: 100%;
+      font-size: 16px;
     }
 
-    #footer {
-        font-size: 16px;
-    }
 }
 
 #title {
@@ -70,6 +68,14 @@ main {
     flex-direction: row;
     justify-content: space-between;
     background-color: #10192c;
+}
+
+#features-section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #000c18;
 }
 
 input {
@@ -101,7 +107,7 @@ select {
     margin: 1%;
 }
 
-#add-button {
+button {
     all: unset;
     background-color: #d7ba7d;
     padding: 1% 2%;
@@ -111,12 +117,12 @@ select {
     user-select: none;
 }
 
-#add-button:hover {
+button:hover {
     background-color: #dec48d;
     cursor: pointer;
 }
 
-#add-button:active {
+button:active {
     background-color: #c9ac70;
     cursor: pointer;
 }
