@@ -1,15 +1,18 @@
 const deleteButtons = document.getElementsByClassName("delete");
 const containers = document.getElementsByClassName("todo-container");
 
+//remove the correct div
 document.addEventListener("click", (e) => {
   if (e.target.className === "delete") {
-    if (confirm("this is delete")) {
-      alert("item deleted");
+    if (confirm("todo is going to be deleted")) {
+        const thisDiv = e.target.parentElement;
+        console.log(thisDiv)
+        viewSection.removeChild(thisDiv)
     }
   }
 });
 
-//removes the divs and empties jsonbin.io + localStorage
+//removes the divs resets the counter and empties jsonbin.io + localStorage
 document.addEventListener("click", (e) => {
   if (e.target.id === "delete-all") {
     deleteAllDivs();
