@@ -1,0 +1,196 @@
+body {
+    margin: 0 auto;
+    background-color: #dddddd;
+    color: #0451a5;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+main {
+    margin: auto;
+    background-color: #f3f3f3;
+    width: 50%;
+}
+
+@media screen and (max-width: 1000px) {
+    main {
+      width: 60%;
+    }
+
+    label {
+        font-size: 0px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    main {
+      width: 70%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    main {
+      width: 80%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    main {
+      width: 90%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    main {
+      width: 100%;
+      font-size: 16px;
+    }
+
+}
+
+#title {
+    user-select: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 5vw;
+}
+
+#counter {
+    display: inline;
+    color: #cbcb41;
+}
+
+#features-section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #f4f4f4;
+}
+
+#control-section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #ececec;
+}
+
+input {
+    all: unset;
+    background-color: #ffffff;
+    padding: 1%;
+    margin: 1%;
+    flex-grow: 2;
+}
+
+input:focus {
+    box-shadow: inset 0px 0px 0px 1px #585858;
+}
+
+label {
+    padding: 1% 0;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+select {
+    all: unset;
+    background-color: white;
+    color: black;
+    background: url('./br_down.webp') no-repeat 80% #ddd;
+    font-weight: bold;
+    padding: 1% 4%;
+    margin: 1%;
+}
+
+button {
+    all: unset;
+    background-color: #d7ba7d;
+    padding: 1% 2%;
+    margin: 1%;
+    color: black;
+    font-weight: bold;
+    user-select: none;
+}
+
+button:hover {
+    background-color: #dec48d;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #c9ac70;
+    cursor: pointer;
+}
+
+.todo-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #585858;
+}
+
+.todo-text{
+    width: 40%;
+    text-align: left;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+}
+
+.todo-priority {
+    width: 4%;
+    background-color: #dddddd;
+    padding: 2%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yellow-text{color: yellow;}
+.orange-text{color: orange;}
+.red-text{color: orangered;}
+
+.todo-created-at {
+    width: 40%;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.delete-button {
+    all: unset;
+    background-color: #ff4242;
+    padding: 1% 1.5%;
+    margin: 1%;
+    color: black;
+    font-weight: bold;
+    user-select: none;
+    max-height: 1em;
+}
+
+.delete-button:hover {
+    background-color: #fb5b5b;
+    cursor: pointer;
+}
+
+.delete-button:active {
+    background-color: #cf4343;
+    cursor: pointer;
+}
+
+#footer {
+    background-color: #0451a5;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}

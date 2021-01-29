@@ -62,20 +62,20 @@ main {
     color: #cbcb41;
 }
 
+#features-section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #060621;
+}
+
 #control-section {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
     background-color: #10192c;
-}
-
-#features-section {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #000c18;
 }
 
 input {
@@ -142,7 +142,7 @@ button:active {
 }
 
 .todo-priority {
-    width: 10%;
+    width: 4%;
     background-color: #152037;
     padding: 2%;
     font-weight: bold;

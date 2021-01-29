@@ -1,15 +1,13 @@
 /*
 WEBSITE START
 */
-
 let tasks = {"my-todo":[{}]};
-fetchTasks();
-refreshCounter();
+fetchTasks(); 
+refreshCounter(); 
 
 /*
 EVENT LISTENERS
 */
-
 // pressing on add button
 document.getElementById("add-button").addEventListener("click", function() {
     if (document.getElementById("text-input").value === "") // no input
@@ -20,6 +18,22 @@ document.getElementById("add-button").addEventListener("click", function() {
 
 // pressing on sort button
 document.getElementById("sort-button").addEventListener("click", function() {sortTasks()});
+
+let modeButton = document.getElementById("mode-button");
+modeButton.addEventListener("click", function() {
+    let cssLink = document.getElementById('stylesheet');
+    if (modeButton.innerText === 'Light Mode'){
+        modeButton.innerText = 'Dark Mode';
+        cssLink.setAttribute('href', './lightmode.css');
+    } else {
+        modeButton.innerText = 'Light Mode';
+        cssLink.setAttribute('href', './darkmode.css');
+    }
+        
+
+});
+
+
 
 // pressing on delete button for task
 document.body.addEventListener('click', function (event) {
@@ -38,16 +52,9 @@ document.body.addEventListener('click', function (event) {
     }
 }, false);
 
-function deleteTask(createdAt){
-    for (let i = 0; i < tasks["my-todo"].length; i++){
-        if (tasks["my-todo"][i]["createdAt"] === createdAt){
-            console.log("createdAt" + tasks["my-todo"][i]["createdAt"]);
-            tasks["my-todo"].splice(i,1);
-            putTasks(tasks);
-        }
-    }
-}
-
+/*
+TASK CLASS
+*/
 class Task{
     constructor(priority, text){
         this.priority = priority;
@@ -56,6 +63,11 @@ class Task{
     }
 }
 
+/*
+FUNCTIONS
+*/
+
+// adds a task, refreshes the counter and updates jsonbin.io
 async function addTask(){
         if (JSON.stringify(tasks) == '{"my-todo":[{}]}')
             tasks["my-todo"] = [];
@@ -69,17 +81,32 @@ async function addTask(){
         putTasks(tasks);
 }
 
+// deletes a task and updates jsonbin.io
+function deleteTask(createdAt){
+    for (let i = 0; i < tasks["my-todo"].length; i++){
+        if (tasks["my-todo"][i]["createdAt"] === createdAt){
+            console.log("createdAt" + tasks["my-todo"][i]["createdAt"]);
+            tasks["my-todo"].splice(i,1);
+            putTasks(tasks);
+        }
+    }
+}
+
+
+// sorts tasks by priority
 function sortTasks(){
     if (JSON.stringify(tasks) !== '{"my-todo":[{}]}')
         tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
     localTasks(tasks);
 }
 
+// updates jsonbin.io with current tasks and refresh the tasks
 async function putTasks(tasks){
     await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
     localTasks(tasks);
 }
 
+// displays tasks from jsonbin.io
 async function fetchTasks(){
     let viewSection = document.getElementById("view-section");
     while(viewSection.firstChild){
@@ -129,6 +156,7 @@ async function fetchTasks(){
     refreshCounter();
 }
 
+// displays tasks (from local data)
 function localTasks(tasks){
     let viewSection = document.getElementById("view-section");
     while(viewSection.firstChild){
@@ -170,8 +198,7 @@ function localTasks(tasks){
     refreshCounter();
 }
 
-
-
+// refreshes the counter to correctly show task amount
 function refreshCounter(){
     counter = document.getElementById("counter");
     counter.innerText = "";
@@ -181,6 +208,7 @@ function refreshCounter(){
         counter.append(tasks["my-todo"].length);
 }
 
+// receives date object, returns string with the date in SQL format
 function getSQLDate(date){
     return date.getFullYear() + "-" +
      addZero(date.getMonth() + 1) + "-" +
