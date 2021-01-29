@@ -46,6 +46,7 @@ main {
 
 #loading {
     color: green;
+    animation-duration: 750ms;
 }
 
 .control-element {
