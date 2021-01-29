@@ -118,7 +118,7 @@ async function main() {
 				out[number] = "0" + out[number];
 			}
 		}
-		return `${out.day}/${out.month}/${out.year} \n ${out.hours}:${out.minutes}`;
+		return `${out.day}/${out.month}/${out.year} - ${out.hours}:${out.minutes}`;
 	}
 
 	async function updateJSONBin(tasksArray) {
