@@ -25,6 +25,7 @@ async function onLoad() {
     //UI elements events
     addButton.onclick = async () => {
         const todo = {
+            checked: false,
             text: textInput.value,
             priority: prioritySelector.value,
             date: new Date().getTime()
@@ -75,6 +76,17 @@ async function onLoad() {
             }
         }
     });
+
+    //checkbox
+    viewSection.addEventListener("change", event => {
+        const checkbox = event.target;
+        if( !hasClass(checkbox, "todo-check") ) return;
+        let checkboxs = viewSection.querySelectorAll(".todo-check");
+        checkboxs = Array.from(checkboxs);
+        const index = checkboxs.indexOf(checkbox);
+        todoList[index].checked = checkbox.checked;
+        setPersistent(DB_NAME, todoList);
+    });
 }
 
 //helper functions
@@ -85,6 +97,7 @@ function renderList() {
     counter.innerText = todoList.length;
     for(const todo of todoList) {
         const todoElement = createTodoElement(todo);
+        console.log(todoElement.querySelector(".todo-check").checked);
         viewSection.appendChild(todoElement);
     }
 }
@@ -92,17 +105,21 @@ function renderList() {
 //builds an html element from todo object
 function createTodoElement(todo) {
     const container = document.createElement("div");
+    const todoCheck = document.createElement("input");
     const todoPriority = document.createElement("div");
     const timeStamp = document.createElement("div");
     const todoText = document.createElement("div");
     container.classList.add("todo-container");
+    todoCheck.classList.add("todo-check");
     todoPriority.classList.add("todo-priority");
     timeStamp.classList.add("todo-created-at");
     todoText.classList.add("todo-text");
+    todoCheck.setAttribute("Type", "checkbox");
+    todoCheck.checked = todo.checked;
     todoPriority.innerText = todo.priority;
     timeStamp.innerText = dateToSQLFormat( new Date(todo.date) );
     todoText.innerText = todo.text;
-    container.append(todoPriority, timeStamp, todoText);
+    container.append(todoCheck,todoPriority, timeStamp, todoText);
     return container;
 }
 
