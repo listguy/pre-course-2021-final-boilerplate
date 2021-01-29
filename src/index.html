@@ -8,16 +8,19 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div id="main-title"><h1>My to do list</h1></div>
+    <div id="main-title"><h1>Hello Name</h1></div>
     <div class="control-section">
       <input id="text-input" type="text" placeholder="type to do here" />
-      <select name="priority" id="priority-selector">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
+      <div id="selection-area">
+        <span id="priority">Priority:</span>
+        <select name="priority" id="priority-selector">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
       <button id="add-button">Add</button>
       <button id="sort-button">sort</button>
       <div class="conter-area">
@@ -29,5 +32,6 @@
     <div id="view" class="view-section"></div>
     <script src="./newScript.js"></script>
     <script src="./extras.js"></script>
+    <script src="./greet.js"></script>
   </body>
 </html>
