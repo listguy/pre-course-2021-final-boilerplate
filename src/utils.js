@@ -11,10 +11,10 @@ async function getPersistent(key) {
     }
   };
   const request = new Request(DB_URL, init);
-  const title = document.querySelector("h1");
-  title.innerText = "TO-DO List: Loading...";
+  const loadIcon = document.querySelector("#loading");
+  loadIcon.style.visibility = "visible";
   const response = await ( await fetch(request) ).json();
-  title.innerText = "TO-DO List:";
+  loadIcon.style.visibility = "hidden";
   return response.record[key];
 }
 
@@ -35,9 +35,9 @@ async function setPersistent(key, data) {
     }
   };
   const request = new Request(DB_URL, init);
-  const title = document.querySelector("h1");
-  title.innerText = "TO-DO List: Uploading...";
+  const loadIcon = document.querySelector("#loading");
+  loadIcon.style.visibility = "visible";
   const response = await fetch(request);
-  title.innerText = "TO-DO List:";
+  loadIcon.style.visibility = "hidden";
   return response.ok;
 }

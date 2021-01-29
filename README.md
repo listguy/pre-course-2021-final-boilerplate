@@ -30,7 +30,7 @@ Heres a link to the [GitHub Page](https://alontzafari.github.io/pre-course-2021-
 
 - Clicking anywhere else on the page will undo selection. [javascript.info](https://javascript.info/event-delegation)
 
-- while items are loaded from or to JSONbin a "Loading..."/"Uploading..." text appears.
+- while items are loaded from or to JSONbin a spinning loading icon appears.
 
 - checkbox to every task for marking tasks as done without delete.
 

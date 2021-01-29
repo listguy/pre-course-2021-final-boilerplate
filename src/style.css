@@ -30,6 +30,7 @@ main {
     padding-right: 3%;
     padding-left: 3%;
     box-shadow: 5px 5px 15px var(--shadow-main);
+    padding-bottom: 5%;
 }
 
 /* control section style */
@@ -43,8 +44,8 @@ main {
     margin-bottom: 3%;
 }
 
-#view-section {
-    padding-bottom: 5%;
+#loading {
+    color: green;
 }
 
 .control-element {

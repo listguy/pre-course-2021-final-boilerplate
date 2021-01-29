@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My TODO List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./style.css">
     <script type="text/javascript" src="./utils.js"></script>
     <script type="text/javascript" src="./main.js"></script>
   </head>
   <body>
     <main>
-      <h1>TO-DO List:</h1>
+      <h1>TO-DO List: <i id = "loading" class="fa fa-spin fa-refresh" aria-hidden="true"></i></h1>
       <section id = "control-section">
         <div class = "adder">
           <input id = "text-input" class = "control-element inset" type = "text" placeholder="Enter task">
