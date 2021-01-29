@@ -52,24 +52,24 @@ main {
     }
 }
 
-button {
-    all: unset;
-    background-color: #d7ba7d;
-    padding: 1% 2%;
-    margin: 1%;
-    color: black;
-    font-weight: bold;
+#title {
     user-select: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 5vw;
 }
 
-button:hover {
-    background-color: #dec48d;
-    cursor: pointer;
+#counter {
+    display: inline;
+    color: #cbcb41;
 }
 
-button:active {
-    background-color: #c9ac70;
-    cursor: pointer;
+#control-section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #10192c;
 }
 
 input {
@@ -84,16 +84,11 @@ input:focus {
     box-shadow: inset 0px 0px 0px 1px #585858;
 }
 
-#title {
+label {
+    padding: 1% 0;
+    display: flex;
+    align-items: center;
     user-select: none;
-    text-align: center;
-    font-weight: bold;
-    font-size: 5vw;
-}
-
-#counter {
-    display: inline;
-    color: #cbcb41;
 }
 
 select {
@@ -106,28 +101,34 @@ select {
     margin: 1%;
 }
 
-label {
-    padding: 1% 0;
-    display: flex;
-    align-items: center;
+#add-button {
+    all: unset;
+    background-color: #d7ba7d;
+    padding: 1% 2%;
+    margin: 1%;
+    color: black;
+    font-weight: bold;
     user-select: none;
 }
 
-#control-section {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #10192c;
+#add-button:hover {
+    background-color: #dec48d;
+    cursor: pointer;
+}
+
+#add-button:active {
+    background-color: #c9ac70;
+    cursor: pointer;
 }
 
 .todo-container {
     display: flex;
+    align-items: center;
     border-bottom: 1px solid #585858;
 }
 
 .todo-text{
-    width: 45%;
+    width: 40%;
     text-align: left;
     padding: 2%;
     display: flex;
@@ -144,12 +145,37 @@ label {
     justify-content: center;
 }
 
+.yellow-text{color: yellow;}
+.orange-text{color: orange;}
+.red-text{color: orangered;}
+
 .todo-created-at {
-    width: 45%;
+    width: 40%;
     padding: 2%;
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
+}
+
+.delete-button {
+    all: unset;
+    background-color: #ff4242;
+    padding: 1% 1.5%;
+    margin: 1%;
+    color: black;
+    font-weight: bold;
+    user-select: none;
+    max-height: 1em;
+}
+
+.delete-button:hover {
+    background-color: #fb5b5b;
+    cursor: pointer;
+}
+
+.delete-button:active {
+    background-color: #cf4343;
+    cursor: pointer;
 }
 
 #footer {
@@ -160,25 +186,4 @@ label {
     text-align: center;
     color: black;
     font-weight: bold;
-}
-
-.yellow-text{
-    color: yellow;
-}
-
-.orange-text{
-    color: orange;
-}
-
-.red-text{
-    color: orangered;
-}
-
-iframe {
-    all: unset;
-    width: 150px;
-    height: 150px;
-    z-index: 1;
-    top: 0;
-    left: 0;
 }

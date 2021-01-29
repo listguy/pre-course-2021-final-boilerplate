@@ -12,6 +12,32 @@ EVENT LISTENERS
 
 document.getElementById("sort-button").addEventListener("click", function() {sortTasks()});
 
+document.body.addEventListener('click', function (event) {
+    if (event.target.className === 'delete-button') {
+        let todoContainer = event.target.parentNode;
+
+        let createdAt;
+        for (let i = 0; i < todoContainer.childNodes.length; i++) {
+            if (todoContainer.childNodes[i].className == "todo-created-at") {
+              createdAt = todoContainer.childNodes[i].innerText;
+              console.log(createdAt);
+              deleteTask(createdAt);
+              break;
+            }   
+        }
+    }
+}, false);
+
+function deleteTask(createdAt){
+    for (let i = 0; i < tasks["my-todo"].length; i++){
+        if (tasks["my-todo"][i]["createdAt"] === createdAt){
+            console.log("createdAt" + tasks["my-todo"][i]["createdAt"]);
+            tasks["my-todo"].splice(i,1);
+            putTasks(tasks);
+        }
+    }
+}
+
 document.getElementById("add-button").addEventListener("click", function() {
     if (document.getElementById("text-input").value === "")
         alert("Please enter text")
@@ -66,22 +92,23 @@ async function fetchTasks(){
         for(task of tasks["my-todo"]){
             let todoContainer = document.createElement('div');
             todoContainer.classList.add('todo-container');
-
+    
             let todoPriority = document.createElement('div');
             todoPriority.classList.add('todo-priority');
             todoPriority.append(task["priority"]);
-
+    
             let todoCreatedAt = document.createElement('div');
             todoCreatedAt.classList.add('todo-created-at');
             todoCreatedAt.append(task["createdAt"]);
-
+    
             let todoText = document.createElement('div');
             todoText.classList.add('todo-text');
             todoText.append(task["text"]);
-
-            // let todoDelete = document.createElement('button');
-            // todoDelete.classList.add('delete-button');
-            // todoDelete.append("X");
+            
+    
+            let deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-button');
+            deleteButton.append("X");
             
             if (task["priority"] === '3') todoPriority.classList.add('yellow-text');
             if (task["priority"] === '4') todoPriority.classList.add('orange-text');
@@ -90,8 +117,9 @@ async function fetchTasks(){
             todoContainer.append(todoText);
             todoContainer.append(todoPriority);
             todoContainer.append(todoCreatedAt);
-            // todoContainer.append(todoDelete);
-
+            todoContainer.append(deleteButton);
+            
+    
             viewSection.append(todoContainer);
         }
     }
@@ -119,13 +147,19 @@ function localTasks(tasks){
         todoText.classList.add('todo-text');
         todoText.append(task["text"]);
         
+
+        let deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        deleteButton.append("X");
+        
         if (task["priority"] === '3') todoPriority.classList.add('yellow-text');
         if (task["priority"] === '4') todoPriority.classList.add('orange-text');
         if (task["priority"] === '5') todoPriority.classList.add('red-text');
-
+        
         todoContainer.append(todoText);
         todoContainer.append(todoPriority);
         todoContainer.append(todoCreatedAt);
+        todoContainer.append(deleteButton);
         
 
         viewSection.append(todoContainer);
