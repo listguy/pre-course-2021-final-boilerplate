@@ -7,7 +7,7 @@ let control = document.getElementById("Control");
 
 pullTodoList();
 async function pullTodoList() {
-    let response = await fetch("https://api.jsonbin.io/b/60143f61ef99c57c734b9e06/1");
+    let response = await fetch("https://api.jsonbin.io/b/60143f61ef99c57c734b9e06/latest ");
     if (response.ok) {
         todoListJson = await response.json();
         for (let task of todoListJson) {
@@ -26,6 +26,7 @@ function addTodoItem(event) {
     let priority = document.getElementById("priority-selector").value;
     let task = newTask(text, priority);
     insertTask(task);
+    uploadJson();
     event.preventDefault();
 }
 
@@ -62,8 +63,18 @@ function insertTask(task) {
 
 }
 
-function uploadJson(){
-    
+function uploadJson() {
+    fetch("https://api.jsonbin.io/b/60143f61ef99c57c734b9e06", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(todoListJson),
+    })
+        .then(response => response.json())
+        .then(null,error => {
+            alert('Error:', error);
+        })
 }
 
 
