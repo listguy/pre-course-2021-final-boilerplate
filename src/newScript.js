@@ -7,7 +7,7 @@ const sortButton = document.getElementById("sort-button");
 let storedCounter = localStorage.getItem("counter");
 let inputValue;
 let jsonList = {"my-todo":[]};
-
+let todoList = [];
 //set counter to stay on refresh
 if (storedCounter) {
   counter.innerText = storedCounter;
@@ -22,12 +22,15 @@ addButton.onclick = function () {
 };
 
 document.addEventListener("DOMContentLoaded", async e => {
-  const todoList = [];
-  let response = await fetch('https://api.jsonbin.io/v3/b/60132e74b41a937c6d537a8a/latest');
+  let response = await fetch('https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce/latest');
   let jsonResponse = await response.json(); 
   let objectResponse = jsonResponse["record"];
   jsonList = objectResponse;
+  todoList = jsonList["my-todo"];
+  localStorage.setItem("my-todo", JSON.stringify(todoList));
+  arrayToDiv(todoList);
 })
+
 //adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
@@ -35,7 +38,8 @@ addButton.addEventListener("click", (e) => {
   todoList.push(object);
   jsonList["my-todo"].push(object);
   updateList();
-
+  localStorage.setItem("my-todo", JSON.stringify(todoList));
+  viewSection.append(itemObjectToDiv(object));
 });
 
 //removes text from input on click
@@ -88,7 +92,7 @@ function sortArrayByPriority(array) {
 }
 
 async function updateList() {
-  await fetch("https://api.jsonbin.io/v3/b/60132e74b41a937c6d537a8a", {
+  await fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
     method: "PUT", 
     headers: {
       "Content-Type": "application/json",
@@ -104,4 +108,11 @@ async function updateList() {
     .catch((error) => {
       console.error("Error:", jsonList);
     });
+}
+
+//prints the array as divs
+function arrayToDiv(array) {
+  for (const object of array) {
+    viewSection.append(itemObjectToDiv(object));
+  }
 }
