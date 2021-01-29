@@ -3,49 +3,70 @@
 let todoListJson;
 let body = document.body;
 let view = document.getElementById("View");
-pullTodoList(todoListJson);
+let control = document.getElementById("Control");
 
-async function pullTodoList(todoListJson) {
-    let response = await fetch("https://api.jsonbin.io/b/60143f61ef99c57c734b9e06");
+pullTodoList();
+async function pullTodoList() {
+    let response = await fetch("https://api.jsonbin.io/b/60143f61ef99c57c734b9e06/1");
     if (response.ok) {
         todoListJson = await response.json();
-        insertTodoList(todoListJson);
+        for (let task of todoListJson) {
+            insertTask(task)
+        }
     } else {
         alert("HTTP-Error: " + response.status);
     }
 }
 
-function insertTodoList(todoListJson) {
-    if (todoListJson === {}){
-        alert ("empty list");
-        return;
-    }
-    for (let todo of todoListJson) {
+let taskForm = document.getElementById("add-task");
+taskForm.addEventListener("submit", addTodoItem);
 
-        let textContainer = document.createElement("div");
-        textContainer.classList.add("todo-text");
-        let text = todo.text;
-        textContainer.append(text);
-
-        let dateContainer = document.createElement("div");
-        dateContainer.classList.add("todo-created-at");
-        let date = new Date(todo.date);
-        dateContainer.append(date);
-
-
-        let priorityContainer = document.createElement("div");
-        priorityContainer.classList.add("todo-priority");
-        let priority = todo.priority;
-        priorityContainer.append(priority);
-
-        let todoContainer = document.createElement("div");
-        todoContainer.classList.add("todo-container");
-        todoContainer.append(priorityContainer, dateContainer, textContainer);
-
-        view.append(todoContainer);
-
-    }
+function addTodoItem(event) {
+    let text = document.getElementById("text-input").value;
+    let priority = document.getElementById("priority-selector").value;
+    let task = newTask(text, priority);
+    insertTask(task);
+    event.preventDefault();
 }
+
+function newTask(text, priority, date = new Date()) {
+    todoListJson.push({
+        text,
+        priority,
+        date
+    });
+    return todoListJson[todoListJson.length - 1];
+
+}
+
+function insertTask(task) {
+    let text = task.text;
+    let date = (task.date instanceof Date) ? task.date : new Date(task.date);
+    let priority = task.priority;
+
+    let textContainer = document.createElement("div");
+    textContainer.classList.add("todo-text");
+    let dateContainer = document.createElement("div");
+    dateContainer.classList.add("todo-created-at");
+    let priorityContainer = document.createElement("div");
+    priorityContainer.classList.add("todo-priority");
+
+    dateContainer.append(date);
+    textContainer.append(text);
+    priorityContainer.append(priority);
+
+    let todoContainer = document.createElement("div");
+    todoContainer.classList.add("todo-container");
+    todoContainer.append(priorityContainer, dateContainer, textContainer);
+    view.append(todoContainer);
+
+}
+
+function uploadJson(){
+    
+}
+
+
 
 
 
