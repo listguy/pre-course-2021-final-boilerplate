@@ -62,10 +62,6 @@ sortButton.addEventListener("click", (e) => {
   localStorage.setItem("my-todo", JSON.stringify(todoList));
 });
 
-// sortButton.addEventListener("click", e => {
-//   updateList();
-// })
-
 function convertValueToObject(value) {
   const current = new Date();
   const creationTime = current.toLocaleString();
