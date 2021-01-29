@@ -1,7 +1,7 @@
 "use strict";
 
 let counter = 0;
-let todoArray = [];
+let myTodo = [];
 const counterDiv = document.querySelector('#counter');
 
 // resetJSON(); //used to reset the JSON.
@@ -32,9 +32,8 @@ function getJSON() {
             if (res.record[0].taskText === "") {
                 return;
             } else {
-                todoArray = res.record;
-                console.log(todoArray);
-                printTodoList(todoArray);
+                myTodo = res.record;
+                printTodoList(myTodo);
             }
         })
 }
@@ -45,7 +44,7 @@ function updateJSON() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(todoArray)
+        body: JSON.stringify(myTodo)
     })
         .then(response => response.json())
         .then(data => {
@@ -63,7 +62,9 @@ document.addEventListener('click', function (event) {
             addItem();
             break;
         case 'sort-button':
-            printTodoList(sortList(todoArray));
+            sortList()
+            printTodoList(myTodo);
+            updateJSON();
             break;
         case 'delete-all':
             deleteList();
@@ -105,8 +106,8 @@ function addItem() {
             "creationTime": currentDate,
             "priority": Number(priority.value)
         };
-        console.log(todoArray)
-        todoArray.push(item);
+        console.log(myTodo)
+        myTodo.push(item);
         counter++;
         counterDiv.innerText = `Items Counter: ${counter}`;
     }
@@ -153,14 +154,14 @@ function deleteList() {
     }
 }
 
-function sortList(arr) {
+function sortList() {
     const sortedArray = [];
     for (let j = 1; j <= 5; j++) {
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].priority === j) {
-                sortedArray.push(arr[i]);
+        for (let i = 0; i < myTodo.length; i++) {
+            if (myTodo[i].priority === j) {
+                sortedArray.push(myTodo[i]);
             }
         }
     }
-    return sortedArray;
+    myTodo = sortedArray;
 }
