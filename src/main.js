@@ -20,15 +20,17 @@ document.getElementById("add-button").addEventListener("click", function() {
 let sortButton = document.getElementById("sort-button");
 sortButton.addEventListener("click", function() {
     let buttonText = document.getElementById('sort-button').innerText;
-    if (buttonText === 'Priority 🠋' || buttonText === 'Priority ✖'){
+    if (buttonText === 'Sort by priority 🠋' || buttonText === 'Sort by priority ✖'){
         sortTasks('higherUp');
-        sortButton.innerText = 'Priority 🠉'
+        sortButton.innerText = 'Sort by priority 🠉'
     } else {
         sortTasks('higherDown');
-        sortButton.innerText = 'Priority 🠋';
+        sortButton.innerText = 'Sort by priority 🠋';
     }
 });
 
+
+// switch between dark and light mode
 let modeButton = document.getElementById("mode-button");
 modeButton.addEventListener("click", function() {
     let cssLink = document.getElementById('stylesheet');
@@ -127,7 +129,7 @@ async function fetchTasks(){
     while(viewSection.firstChild){
         viewSection.removeChild(viewSection.firstChild);
     }
-    
+
     let response = await fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest');
     let jsonResponse = await response.json(); 
     let recordResponse = jsonResponse["record"];
