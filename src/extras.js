@@ -6,11 +6,10 @@ document.addEventListener("click", (e) => {
   if (e.target.className === "delete") {
     if (confirm("todo is going to be deleted")) {
       const thisDiv = e.target.parentElement;
-      //   console.log(thisDiv);
       const divDate = thisDiv.getElementsByClassName("todo-created-at")[0]
         .outerText;
       viewSection.removeChild(thisDiv);
-      todoList = filterByKey(todoList, 'date', divDate);
+      todoList = filterByKey(todoList, "date", divDate);
       localStorage.setItem("my-todo", JSON.stringify(todoList));
       jsonList["my-todo"] = todoList;
       updateList();
@@ -44,15 +43,13 @@ async function emptyJsonbin() {
         "$2b$10$5P7RliLTaANiyqYHfkRvWepKYlCjfoARhVbWxxlqCTwQexhfzjuES",
     },
     body: JSON.stringify({ "my-todo": [] }),
-  })
+  });
 }
 
 //gets an array filter property and property value returns an array without that value
-function filterByKey(array, filter, keyword){
-    let filteredArray = array.filter(function(obj) {
-        return obj[filter] !== keyword;
-    });
-    return filteredArray;
+function filterByKey(array, filter, keyword) {
+  let filteredArray = array.filter(function (obj) {
+    return obj[filter] !== keyword;
+  });
+  return filteredArray;
 }
-// console.log(filterByKey(arr, 'date', "23.4.18"));
-

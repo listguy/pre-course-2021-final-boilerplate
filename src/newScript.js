@@ -9,20 +9,6 @@ let inputValue;
 let jsonList = { "my-todo": [] };
 let todoList = [];
 
-//set counter to stay on refresh
-// if (storedCounter) {
-//   counter.innerText = storedCounter;
-// }
-
-// //update counter on every click
-// addButton.onclick = function () {
-//   const key = "counter";
-//   let value = Number(counter.innerText);
-//   value++;
-//   counter.innerText = Number(counter.innerText) + 1;
-//   localStorage.setItem(key, value);
-// };
-
 //when the page is loaded its content is taken from jsonbin.io and updates the localStorage
 document.addEventListener("DOMContentLoaded", async (e) => {
   let response = await fetch(
