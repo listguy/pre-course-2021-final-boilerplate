@@ -66,9 +66,10 @@ async function main() {
 			}
 		}
 		viewSection.innerHTML = "";
-		for (let task of sortedTasksArray) {
-			printTask(task, viewSection);
-		}
+		// for (let task of sortedTasksArray) {
+		// 	printTask(task, viewSection);
+		// }
+		updateCounter(sortedTasksArray);
 		sortButton.sorted = !sortButton.sorted;
 	});
 
