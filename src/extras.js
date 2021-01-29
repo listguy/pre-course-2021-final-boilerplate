@@ -9,6 +9,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
+//removes the divs and empties jsonbin.io + localStorage
 document.addEventListener("click", (e) => {
   if (e.target.id === "delete-all") {
     deleteAllDivs();
@@ -17,13 +18,14 @@ document.addEventListener("click", (e) => {
   }
 });
 
-//deletes all the divs!!
+//deletes all the lists divs
 function deleteAllDivs() {
   while (viewSection.firstChild) {
     viewSection.removeChild(viewSection.firstChild);
   }
 }
 
+//empties the Jsonbin.io json
 async function emptyJsonbin() {
   await fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
     method: "PUT",
