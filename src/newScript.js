@@ -8,10 +8,12 @@ let storedCounter = localStorage.getItem("counter");
 let inputValue;
 let jsonList = { "my-todo": [] };
 let todoList = [];
+
 //set counter to stay on refresh
 if (storedCounter) {
   counter.innerText = storedCounter;
 }
+
 //update counter on every click
 addButton.onclick = function () {
   const key = "counter";
@@ -21,6 +23,7 @@ addButton.onclick = function () {
   localStorage.setItem(key, value);
 };
 
+//when the page is loaded its content is taken from jsonbin.io
 document.addEventListener("DOMContentLoaded", async (e) => {
   let response = await fetch(
     "https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce/latest"
@@ -53,15 +56,16 @@ addButton.addEventListener("click", (e) => {
 sortButton.addEventListener("click", (e) => {
   sortArrayByPriority(jsonList["my-todo"]);
   todoList = jsonList["my-todo"];
+  localStorage.setItem("my-todo", JSON.stringify(todoList));
   for (let i = 0; i < todoList.length; i++) {
     viewSection.removeChild(document.querySelectorAll(".todo-container")[0]);
   }
   for (let i = 0; i < todoList.length; i++) {
     viewSection.append(itemObjectToDiv(todoList[i]));
   }
-  localStorage.setItem("my-todo", JSON.stringify(todoList));
 });
 
+//converts the value into the correct object with time and priority
 function convertValueToObject(value) {
   const current = new Date();
   const creationTime = current.toLocaleString();
@@ -104,6 +108,7 @@ function sortArrayByPriority(array) {
   return array;
 }
 
+//updates the list and sends a success/error in console log
 async function updateList() {
   await fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
     method: "PUT",
