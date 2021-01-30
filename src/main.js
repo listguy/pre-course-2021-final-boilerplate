@@ -176,29 +176,32 @@ function removeElement(element) {
     todoList.splice(index, 1);
 }
 
+//finds index of a todo-container element in the view section
 function todoElementIndex(element) {
     const todoElements = Array.from( viewSection.querySelectorAll(".todo-container") );
     return todoElements.indexOf(element);
 }
 
-//edit button event handler. assigend in createTodoElement
+//edit button event handler.
 function createEditPrompt(event) {
     const editButton = event.currentTarget;
     if ( !hasClass(editButton, "todo-edit") ) return;
     const todoText = editButton.parentNode.querySelector(".todo-text");
+    //create prompt element:
     const editPromptContainer = document.createElement("div");
-    editPromptContainer.id = "edit-prompt-container";  
     const editPrompt = document.createElement("div");
-    editPrompt.id = "edit-prompt";
     const editTextInput = document.createElement("input");
-    editTextInput.classList.add("edit-input");
-    editTextInput.value = todoText.innerText;
     const confirmEditButton = document.createElement("button");
+    editPromptContainer.id = "edit-prompt-container";  
+    editPrompt.id = "edit-prompt";
+    editTextInput.classList.add("edit-input");
     confirmEditButton.classList.add("edit-confirm");
+    editTextInput.value = todoText.innerText;
     confirmEditButton.innerText = "Edit";
     editPrompt.append(editTextInput, confirmEditButton);
     editPromptContainer.appendChild(editPrompt);
     document.body.appendChild(editPromptContainer);
+    
     confirmEditButton.onclick = () => {
         todoText.innerText = editTextInput.value;
         const index = todoElementIndex(todoText.parentNode);
@@ -206,5 +209,4 @@ function createEditPrompt(event) {
         setPersistent(DB_NAME, todoList);
         editPromptContainer.remove();
     };
-    
 }
