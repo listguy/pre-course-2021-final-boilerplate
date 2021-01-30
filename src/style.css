@@ -177,6 +177,19 @@ h1 {
   position: absolute;
   
 }
+#delete-all{
+  position: relative;
+  top: -140px;
+  height: 1.8em;
+  width: fit-content;
+  border-radius: 15px;
+  font-size: 1.5em;
+  background-color:#514a9d;
+  color: white;
+}
+#delete-all:hover{
+  cursor: pointer;
+}
 
 /* @media screen and (max-width: 1000px) {
   #text-input {
