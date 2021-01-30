@@ -5,28 +5,6 @@ let myTodo = { "my-todo": [] };
 getJSON();
 const counterDiv = document.querySelector('#counter');
 
-// resetJSON(); //used to reset the JSON.
-
-// function resetJSON() {
-// const resetData = {
-//     "my-todo": []
-// }
-//     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e', {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(resetData)
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log('Success:', data);
-//         })
-//         .catch((error) => {
-//             console.error('Error:', error);
-//         });
-// }
-
 function getJSON() {
     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e/latest').then(res => res.json())
         .then(res => {
@@ -91,7 +69,8 @@ function addItem() {
 
         const todoCreationTime = document.createElement('time');
         todoCreationTime.classList.add('todo-created-at');
-        const currentDate = new Date().toLocaleString('he-IL');
+        // const currentDate = new Date().toLocaleString('he-IL');
+        const currentDate = sqlDate();
         todoCreationTime.innerText = currentDate;
 
         const todoPriority = document.createElement('data');
@@ -152,4 +131,19 @@ function deleteList() {
 function sortList() {
     myTodo["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
     printTodoList(myTodo["my-todo"]);
+}
+
+function sqlDate() {
+    const dt = new Date();
+    let dtString = dt.getFullYear()
+        + '-' + pad2(dt.getMonth() + 1)
+        + '-' + pad2(dt.getDate())
+        + ' ' + pad2(dt.getHours())
+        + ':' + pad2(dt.getMinutes())
+        + ':' + pad2(dt.getSeconds());
+    return dtString;
+}
+
+function pad2(number) {
+    return (number < 10 ? '0' : '') + number
 }

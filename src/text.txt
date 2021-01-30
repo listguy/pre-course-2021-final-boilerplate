@@ -1,0 +1,5 @@
+Resources:
+date to SQL format:
+https://electrictoolbox.com/format-date-time-javascript-database-format/
+
+
