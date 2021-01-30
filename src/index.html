@@ -11,29 +11,51 @@
 
 <body>
   <header id="Control">
-    <form id = "add-task" >
-    <label for="text-input">
-      Task:
-      <input id="text-input" placeholder="enter your task" name="text-input">
-    </label>
-    <br>
-    <label for="priority-selector">
-      Priority:
-      <select id="priority-selector" name="priority-selector">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-    </label>
-    <label for = "add-button">
-      <button type = "submit" id = "add-button">Submit</button>
-    </label>
-  </form>
+    <div id="basic-control" class="input-control">
+      <form id="add-task">
+        <label for="text-input">
+          Task:
+          <input id="text-input" placeholder="enter your task" name="text-input">
+        </label>
+        <br>
+        <label for="priority-selector">
+          Priority:
+          <select id="priority-selector" name="priority-selector">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+        <label for="add-button">
+          <button type="submit" id="add-button">Submit</button>
+        </label>
+      </form>
+    </div>
+    <div id="advanced-control" class="input-control">
+      temp text
+    </div>
   </header>
-  <main id = "View">
 
+  <main id="View">
+    <div class="todo-container" data-template = "task-template">
+      <label class="delete-checkbox">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+      <div class="todo-text">
+        
+      </div>
+      <div class = "created-at-container">
+        <span>Created At:</span>
+        <span class = "todo-created-at"></span>
+      </div>
+      <div class = "priority-container">
+        <span>Priority:</span>
+        <span class = "todo-priority"></span>
+      </div>
+    </div>
   </main>
   <footer>
 
@@ -44,4 +66,5 @@
 </body>
 </script>
 <script src="main.js"></script>
- </html>
+
+</html>
