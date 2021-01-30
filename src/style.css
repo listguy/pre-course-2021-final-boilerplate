@@ -1,7 +1,11 @@
-
+:root{
+    --backgroundColor:rgb(206, 201, 201);
+    --fontColor:black;
+    --headerBgColor:rgb(170, 218, 211);
+}
 
 body{
-    background-color: rgb(206, 201, 201);
+    background-color:var(--backgroundColor);
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
@@ -28,18 +32,24 @@ body{
     border-radius: 5px;
     padding: 10px 10px;
     cursor: text;
-    background: cornsilk;
+    background: var(--headerBgColor);
 }
 #text-input{
-    background: cornsilk;
+    background: var(--headerBgColor);
     border:0;
     border-radius: 5px;
     padding: 10px 10px;
-    width: 30vw;
+    width:100%;
+    box-sizing: border-box;
 }
 #text-input:focus{
     outline:none;
+}    
+/*makes background color note change on auto complete*/
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--headerBgColor) inset;
 }
+
 
 
 
