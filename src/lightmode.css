@@ -49,6 +49,9 @@ main {
       font-size: 16px;
     }
 
+    #footer {
+        font-size: 16px;
+    }
 }
 
 #title {
@@ -120,11 +123,13 @@ button {
 
 button:hover {
     background-color: #dec48d;
+    color: rgb(44, 44, 44);
     cursor: pointer;
 }
 
 button:active {
     background-color: #c9ac70;
+    color: rgb(44, 44, 44);
     cursor: pointer;
 }
 
@@ -151,11 +156,12 @@ button:active {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: black;
 }
 
-.yellow-text{color: yellow;}
-.orange-text{color: orange;}
-.red-text{color: orangered;}
+.yellow-text{color: yellow; text-shadow: 1px 1px black;}
+.orange-text{color: orange; text-shadow: 1px 1px black;}
+.red-text{color: orangered; text-shadow: 1px 1px black;}
 
 .todo-created-at {
     width: 40%;
@@ -178,11 +184,13 @@ button:active {
 
 .delete-button:hover {
     background-color: #fb5b5b;
+    color: rgb(44, 44, 44);
     cursor: pointer;
 }
 
 .delete-button:active {
     background-color: #cf4343;
+    color: rgb(44, 44, 44);
     cursor: pointer;
 }
 

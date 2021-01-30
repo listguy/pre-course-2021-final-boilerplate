@@ -48,6 +48,9 @@ main {
       font-size: 16px;
     }
 
+    #footer {
+        font-size: 16px;
+    }
 }
 
 #title {
@@ -119,12 +122,14 @@ button {
 
 button:hover {
     background-color: #dec48d;
+    color: rgb(44, 44, 44);
     cursor: pointer;
 }
 
 button:active {
     background-color: #c9ac70;
     cursor: pointer;
+    color: rgb(44, 44, 44);
 }
 
 .todo-container {
@@ -177,11 +182,13 @@ button:active {
 
 .delete-button:hover {
     background-color: #fb5b5b;
+    color: rgb(44, 44, 44);
     cursor: pointer;
 }
 
 .delete-button:active {
     background-color: #cf4343;
+    color: rgb(44, 44, 44);
     cursor: pointer;
 }
 

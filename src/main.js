@@ -2,8 +2,8 @@
 WEBSITE START
 */
 let tasks = {"my-todo":[{}]};
-fetchTasks(); 
-refreshCounter(); 
+fetchTasks();
+refreshCounter();
 
 /*
 EVENT LISTENERS
@@ -29,7 +29,6 @@ sortButton.addEventListener("click", function() {
     }
 });
 
-
 // switch between dark and light mode
 let modeButton = document.getElementById("mode-button");
 modeButton.addEventListener("click", function() {
@@ -44,8 +43,6 @@ modeButton.addEventListener("click", function() {
         
 
 });
-
-
 
 // pressing on delete button for task
 document.body.addEventListener('click', function (event) {
@@ -103,7 +100,6 @@ function deleteTask(createdAt){
         }
     }
 }
-
 
 // sorts tasks by priority
 function sortTasks(direction){
@@ -245,7 +241,6 @@ function getSQLDate(date){
 /*
 LOADING SPINNER
 */
-
 const spinner = document.getElementById("spinner");
 
 function showSpinner() {
