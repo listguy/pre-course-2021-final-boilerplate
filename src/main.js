@@ -253,4 +253,3 @@ function showSpinner() {
 function hideSpinner() {
   spinner.className = spinner.className.replace("show", "");
 }
-
