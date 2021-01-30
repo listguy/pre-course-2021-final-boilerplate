@@ -1,7 +1,8 @@
-window.addEventListener("DOMContentLoaded", main);
+window.addEventListener("DOMContentLoaded", main); //makes sure everything runs only after page loads
 async function main() {
 	const styleLink = document.head.querySelector("#style-link");
 	if (localStorage.getItem("mode") === "dark") {
+		//dark mode on local storage
 		styleLink.href = "./dark-mode.css";
 		const darkModeButton = document.querySelector("#dark-mode-button");
 		darkModeButton.innerText = "Normal";
@@ -15,31 +16,38 @@ async function main() {
 		"https://api.jsonbin.io/v3" + BIN_ID + "/latest"
 	).then((res) => res.json());
 	loadingGif.hidden = true;
-
-	const tasksArray =
-		JSON.stringify(fetchResponse.record["my-todo"]) !== `[{}]`
-			? fetchResponse.record["my-todo"]
-			: [];
-	// const tasksArray =
-	// 	localStorage.getItem("my-todo") !== null
-	// 		? JSON.parse(localStorage.getItem("my-todo"))
-	// 		: [];
+	// console.log(fetchResponse);
+	let tasksArray = [];
+	if (!fetchResponse.record) {
+		//if response isn't OK, expression is undefined, so !undefined is a thruthy expression
+		tasksArray =
+			localStorage.getItem("my-todo") !== null
+				? JSON.parse(localStorage.getItem("my-todo")) //local storage as a safety net
+				: [];
+	} else {
+		tasksArray =
+			JSON.stringify(fetchResponse.record["my-todo"]) !== `[{}]` //JSONBin as preffered database
+				? fetchResponse.record["my-todo"]
+				: [];
+	}
 	const prioritySelector = document.querySelector("#priority-selector");
 	const addButton = document.querySelector("#add-button");
 	const sortButton = document.querySelector("#sort-button");
-	sortButton.sorted = false;
+	sortButton.sorted = false; //property I added for toggle option
 	for (let task of tasksArray) {
 		task.index = tasksArray.indexOf(task); //adds index proprty for use in other functions.
 		printTask(task, viewSection);
 	}
 	updateCounter(tasksArray);
-	addButton.addEventListener("click", newTask);
+
+	addButton.addEventListener("click", newTask); //task add event
 	document.addEventListener("keypress", (event) => {
 		if (textInput.value && event.key === "Enter") {
 			newTask(event);
 		}
 	});
 
+	//function for adding a task
 	async function newTask(event) {
 		if (textInput.value === "" || textInput.value === " ") {
 			alert("You have to have somthing to do!");
@@ -57,11 +65,11 @@ async function main() {
 			updateCounter(tasksArray);
 			updateJSONBin(tasksArray);
 			textInput.focus();
-			// localStorage.clear();
-			// localStorage.setItem("my-todo", JSON.stringify(tasksArray));
+			localStorage.setItem("my-todo", JSON.stringify(tasksArray));
 		}
 	}
 
+	//sort event
 	sortButton.addEventListener("click", (sort) => {
 		let sortedTasksArray = [];
 		if (sortButton.sorted) {
@@ -78,13 +86,11 @@ async function main() {
 			}
 		}
 		viewSection.innerHTML = "";
-		// for (let task of sortedTasksArray) {
-		// 	printTask(task, viewSection);
-		// }
 		updateCounter(sortedTasksArray);
-		sortButton.sorted = !sortButton.sorted;
+		sortButton.sorted = !sortButton.sorted; // toggle option
 	});
 
+	//function for printing a task (not adding, just the visual aspect of it)
 	function printTask(toDoContainer, viewSection) {
 		const toDoContainerDiv = document.createElement("div");
 		toDoContainerDiv.className = "todo-container";
@@ -103,7 +109,7 @@ async function main() {
 		toDoContainerDiv.appendChild(toDoDate);
 		toDoContainerDiv.index = toDoContainer.index;
 	}
-
+	//updates counter, takes care of multipages
 	function updateCounter(tasksArray) {
 		const counter = document.querySelector("#counter");
 		const arrowsDiv = document.querySelector("#arrows");
@@ -114,6 +120,7 @@ async function main() {
 		}
 
 		if (tasksArray.length > 9) {
+			//9 notes on one page
 			multiplePagesPrint(tasksArray);
 			arrowsDiv.hidden = false;
 		} else {
@@ -122,6 +129,7 @@ async function main() {
 		}
 	}
 
+	//function to print dates in a nice looking way
 	function datePrinter(date) {
 		let out = {
 			year: date.getYear() - 100,
@@ -135,9 +143,10 @@ async function main() {
 				out[number] = "0" + out[number];
 			}
 		}
-		return `${out.day}/${out.month}/${out.year} - ${out.hours}:${out.minutes}`;
+		return `${out.day}/${out.month}/${out.year} - ${out.hours}:${out.minutes}`; // DD/MM/YYYY - HH:MM
 	}
 
+	//function to upload datebase
 	async function updateJSONBin(tasksArray) {
 		await fetch("https://api.jsonbin.io/v3" + BIN_ID, {
 			method: "put",
@@ -147,20 +156,22 @@ async function main() {
 			body: `{"my-todo": ${JSON.stringify(tasksArray)}}`,
 		});
 	}
+
+	//print multi pages
 	function multiplePagesPrint(tasksArray) {
 		const arrowsDiv = document.querySelector("#arrows");
 		const multyTaskArray = [[]];
 		for (let i = 0; i <= tasksArray.length / 9; i++) {
 			for (let j = 0; j < 9; j++) {
 				if (tasksArray[i * 9 + j]) {
-					multyTaskArray[i].push(tasksArray[i * 9 + j]);
+					multyTaskArray[i].push(tasksArray[i * 9 + j]); //divides to arrays of 9 elements
 				}
 			}
 			multyTaskArray.push([]);
 		}
 		multyTaskArray.pop();
 		let pageIndex = 0;
-		printPage(multyTaskArray, pageIndex);
+		printPage(multyTaskArray, pageIndex); // prints one page
 		arrowsDiv.addEventListener("click", (arrowEvent) => {
 			const arrow = arrowEvent.target;
 			if (arrow.id === "right-arrow" && pageIndex < multyTaskArray.length - 1) {
@@ -173,6 +184,8 @@ async function main() {
 			}
 		});
 	}
+
+	//function to print one page
 	function printPage(multyTaskArray, pageIndex) {
 		const viewSection = document.querySelector("#view-section");
 		const oldNotes = document.querySelectorAll(".todo-container");
@@ -234,7 +247,7 @@ async function main() {
 				cssLink.href = "./style.css";
 				document.body.style = "transition:800ms;";
 				darkModeEvent.target.innerText = "Dark mode";
-				localStorage.setItem("mode", "dark");
+				localStorage.setItem("mode", "normal");
 			}
 		}
 	});
