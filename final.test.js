@@ -252,4 +252,60 @@ describe(projectName, () => {
 		expect(text).toBe(mocks.fetchTest.record["my-todo"][0].text);
 		expect(priority).toBe(mocks.fetchTest.record["my-todo"][0].priority);
 	});
+
+	test("Dark mode button should turn the page dark", async () => {
+		await nock("https://api.jsonbin.io/v3")
+			.get(/.*/)
+			.reply(200, mocks.toDoAddSecondResponse);
+
+		await page.goto(path, { waitUntil: "networkidle0" });
+		const darkModeLink =
+			"file:///C:/Users/Ilay/Documents/GitHub/pre-course-2021-final-boilerplate/src/dark-mode.css";
+		await page.waitForSelector("#dark-mode-button");
+		await page.click("#dark-mode-button");
+		const styleLink = await page.$("#style-link");
+		const afterLink = await (await styleLink.getProperty("href")).jsonValue();
+		expect(afterLink).toBe(darkModeLink);
+	});
+	test("Can search for task and highlight it", async () => {
+		await nock("https://api.jsonbin.io/v3")
+			.get(/.*/)
+			.reply(200, mocks.toDoAddSecondResponse);
+
+		await page.goto(path, { waitUntil: "networkidle0" });
+
+		await page.type("#search-input", "first");
+		await page.click("#search-button");
+
+		await page.waitForSelector(".todo-container");
+
+		const elements = await page.$$(".todo-container");
+		const firstItemClass = await (
+			await elements[0].getProperty("className")
+		).jsonValue();
+
+		expect(firstItemClass).toBe("todo-container highlighted");
+	});
+	test("Clear button clears highlighting", async () => {
+		await nock("https://api.jsonbin.io/v3")
+			.get(/.*/)
+			.reply(200, mocks.toDoAddSecondResponse);
+
+		await page.goto(path, { waitUntil: "networkidle0" });
+
+		await page.type("#search-input", "first");
+		await page.click("#search-button");
+
+		await page.waitForSelector(".todo-container");
+
+		const elements = await page.$$(".todo-container");
+		const firstItemClass = await (
+			await elements[0].getProperty("className")
+		).jsonValue();
+
+		expect(firstItemClass).toBe("todo-container highlighted");
+		await page.click("#clear-button");
+		const highlightedTasks = await page.$$(".highlighted");
+		expect(highlightedTasks.length).toBe(0);
+	});
 });
