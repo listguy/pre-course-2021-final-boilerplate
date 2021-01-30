@@ -12,34 +12,45 @@
 <body>
   <div id="top-padding"></div>
   <section id="Control">
-    <div id="basic-control" class="input-control">
-      <form id="add-task">
-        <label for="text-input">
-          <div class="task-editor-editing-area">
-            <input id="text-input" placeholder="enter your task" name="text-input">
-          </div>
-        </label>
-        <label for="priority-selector">
+    <form id="add-task-form">
+      <div id="basic-control" class="input-control">
 
-          <select id="priority-selector" name="priority-selector" ="Priority">
-            <option value="" disabled selected>Priority</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </label>
+        <div class="task-input-wrapper">
+          <label for="text-input">
+            <input id="text-input" placeholder="enter your task" required>
+          </label>
+        </div>
+
+
+        <div id="priority-wrapper">
+          <label for="priority-list">
+            <select id="priority-list">
+              <option value="" disabled selected>Priority</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+        </div>
+
         <label for="add-button">
           <button type="submit" id="add-button">Submit</button>
         </label>
-      </form>
-    </div>
-    <!--
+        <label for="delete-button">
+          <button id="delete-button" type="button">Delete all</button>
+        </label>
+
+
+      </div>
+      <!--
     <div id="advanced-control" class="input-control">
       temp text
     </div>
   -->
+    </form>
+
   </section>
 
   <main id="View">
