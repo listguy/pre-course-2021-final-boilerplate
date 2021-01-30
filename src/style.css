@@ -36,6 +36,7 @@ h1 {
   right: -71px;
   border-radius: 5px;
   font-size: 1.5em;
+  border-color: white;
 }
 #selection-area {
   position: relative;
@@ -71,6 +72,56 @@ h1 {
 }
 #counter{
     display: inline;
+}
+.todo-text{
+  display: inline;
+  position: relative;
+  left: -50px;
+}
+.todo-created-at{
+  display: inline;
+  position: relative;
+  float: left;
+  font-size: 0.5em;
+  top: 30px;
+  left: 2px;
+}
+.todo-priority{
+  display: inline;
+  position: relative;
+  float: left;
+  left: -90px;
+}
+.todo-container{
+  border-style: solid;
+  width: 500px;
+  margin: auto;
+  height: 2em;
+  font-size: 1.5em;
+  border-top: white;
+  border-left: white;
+  border-right:white ;
+  border-radius: 5px;
+  border-width: 1px;
+}
+.view-section{
+  box-shadow: 3px 3px 15px 2px #888888;;
+  width:fit-content;
+  margin: auto;
+}
+.delete{
+  position: relative;
+  float: right;
+  top:10px;
+  right: 5px;
+  background-image: url(./images/icon-trash-can.jpg);
+  background-size: cover;
+  height: 25px;
+  width: 25px;
+  border-style: none;
+}
+.delete:hover{
+  cursor: pointer;
 }
 /* @media screen and (max-width: 1000px) {
   #text-input {

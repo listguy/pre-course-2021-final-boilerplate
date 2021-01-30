@@ -83,10 +83,10 @@ function itemObjectToDiv(myTodoItem) {
   todoPriority.innerText = myTodoItem["priority"];
   todoCreatedAt.innerText = myTodoItem["date"];
   todoText.innerText = myTodoItem["text"];
-  deleteButton.innerHTML = "delete";
+  deleteButton.innerHTML = "";
 
-  todoContainer.appendChild(todoText);
   todoContainer.appendChild(todoCreatedAt);
+  todoContainer.appendChild(todoText);
   todoContainer.appendChild(todoPriority);
   todoContainer.appendChild(deleteButton);
 
