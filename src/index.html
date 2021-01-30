@@ -10,14 +10,15 @@
 </head>
 
 <body>
-  <header id="Control">
+  <div id="top-padding"></div>
+  <section id="Control">
     <div id="basic-control" class="input-control">
       <form id="add-task">
         <label for="text-input">
-          Task:
+        <div class="task-editor-editing-area">
           <input id="text-input" placeholder="enter your task" name="text-input">
-        </label>
-        <br>
+        </div> 
+      </label>
         <label for="priority-selector">
           Priority:
           <select id="priority-selector" name="priority-selector">
@@ -33,34 +34,36 @@
         </label>
       </form>
     </div>
+    <!--
     <div id="advanced-control" class="input-control">
       temp text
     </div>
-  </header>
+  -->
+  </section>
 
   <main id="View">
-    <div class="todo-container" data-template = "task-template">
+    <div class="todo-container" data-template="task-template">
       <div class="delete-checkbox">
-        <input type="checkbox" >
+        <input type="checkbox">
         <span class="checkmark"></span>
       </div>
       <div class="todo-text">
-        
+
       </div>
-      <div class = "created-at-container">
+      <div class="created-at-container">
         <span>Created At:</span>
-        <span class = "todo-created-at"></span>
+        <span class="todo-created-at"></span>
       </div>
-      <div class = "priority-container">
+      <div class="priority-container">
         <span>Priority:</span>
-        <span class = "todo-priority"></span>
+        <span class="todo-priority"></span>
       </div>
     </div>
   </main>
-  
+
   <footer>
   </footer>
-  
+
 
 
 

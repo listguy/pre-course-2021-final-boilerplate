@@ -1,26 +1,82 @@
+
+
 body{
+    background-color: rgb(206, 201, 201);
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px auto;
+
+    position: absolute;
     width: 100%;
     min-height: 100vh;
-    margin: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding-top: 20px;
+    margin:0;
 }
-
-header{
+/*Control Section design*/
+#Control{
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;   
-    justify-items: center;
+    grid-template-columns: 1fr 4fr 1fr;   
 }
-.input-control, .todo-container{
+#basic-control{
     grid-column: 2/3;
 }
+.task-editor-editing-area{
+    border: 1px solid rgb(163, 42, 42);
+    border-radius: 5px;
+    padding: 10px 10px;
+    cursor: text;
+    background: cornsilk;
+}
+#text-input{
+    background: cornsilk;
+    border:0;
+    border-radius: 5px;
+    padding: 10px 10px;
+    width: 30vw;
+}
+#text-input:focus{
+    outline:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*View Section design*/
 
 main{
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;   
-    
+    grid-template-columns: 1fr 4fr 1fr;   
+}
+.todo-container{
+    grid-column: 2/3;
 }
 div[data-template]{
         display: none;
@@ -36,16 +92,15 @@ div[data-template]{
     "dc tx tx tx pr pr";
     align-content: center;
 }
+/*Left Tick Box Design*/
 .delete-checkbox{
     grid-area: dc;
     position: relative;
-
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-
 .delete-checkbox *{
     position: absolute;
     top: 50%;
@@ -79,14 +134,15 @@ div[data-template]{
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
-  }
+}
 .delete-checkbox input:checked ~ .checkmark::after {
     display:block
-  }
- .delete-checkbox .checkmark::after {
+}
+.delete-checkbox .checkmark::after {
      content:'\2714';
      font-size: 22px;
-/**/
+}
+/*Left Tick Box Design end*/
 
 
 
