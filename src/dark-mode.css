@@ -204,7 +204,7 @@ h1 {
   font-size: 1.5em;
   background: var(--Shadow-of-Dark-Blue);
   width: 100px;
-  color: white;
+  color: var(--Lighter-Blue);
 }
 #delete-all {
   position: relative;
