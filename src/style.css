@@ -7,15 +7,19 @@
     --text: white;
     --selection: rgba(46, 46, 133, 0.507);
     --delete: rgb(133, 46, 46);
+    --edit-prompt: rgb(34, 33, 33);
     --todo-content-margin: 1em;
 }
 
 /*general settings*/
 body {
     background: linear-gradient(35deg, var(--theme-back1), var(--theme-back2));
+    margin: 0;
+    padding-right: 0;
     padding-top: 5vh;
     padding-bottom: 5vh;
     min-height: 100vh;
+    height: 100%;
     color: var(--text);
     font-family: sans-serif;
 }
@@ -178,6 +182,46 @@ button:active {
 }
 
 .todo-edit:hover {
-    
     background-color: var(--theme-back1);
+}
+
+#edit-prompt-container {
+    display: flex;
+    flex-grow: 1;
+    position: fixed;
+    z-index: 1000;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.562);
+}
+#edit-prompt {
+    display: flex;
+    position: absolute;
+    width: 95vw;
+    max-width: 500px;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    background-color: var(--edit-prompt);
+}
+
+.edit-input {
+    background-color: transparent;
+    color: var(--text);
+    width: 70%;
+    border-right: 0 none transparent;
+    margin-right: 1em;
+}
+
+.edit-confirm {
+    background-color: var(--theme-back2);
+    color: var(--text);
+    border: unset;
+    padding: 0.3em;
 }

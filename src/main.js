@@ -67,7 +67,7 @@ async function onLoad() {
         const item = event.target;
         const todoElements = viewSection.querySelectorAll(".todo-container");
         const isContainer = hasClass( item, "todo-container");
-        const isContainerChild = hasClass(item.parentNode, "todo-container") && !hasClass(item, "todo-check") && !hasClass("todo-edit");
+        const isContainerChild = hasClass(item.parentNode, "todo-container") && !hasClass(item, "todo-check") && !hasClass(item, "todo-edit");
         if (isContainer) {
             if(!event.ctrlKey) {
                 for (const element of todoElements) {
@@ -106,6 +106,8 @@ async function onLoad() {
             checkbox.parentNode.classList.remove("checked-task");
         }
     });
+
+    
 }
 
 //helper functions
@@ -141,6 +143,7 @@ function createTodoElement(todo) {
     timeStamp.innerText = dateToSQLFormat( new Date(todo.date) );
     todoText.innerText = todo.text;
     todoEdit.innerHTML = `<i class="fa fa-pencil" aria-hidden="true"></i>`;
+    todoEdit.onclick = createEditPrompt;
     container.append(todoCheck, todoPriority, timeStamp, todoText, todoEdit);
     return container;
 }
@@ -168,8 +171,40 @@ function hasClass(element, className) {
 
 //removes todo from html and todoList
 function removeElement(element) {
-    const todoElements = Array.from( viewSection.querySelectorAll(".todo-container") );
-    const index = todoElements.indexOf(element);
+    const index = todoElementIndex(element);
     element.remove();
     todoList.splice(index, 1);
+}
+
+function todoElementIndex(element) {
+    const todoElements = Array.from( viewSection.querySelectorAll(".todo-container") );
+    return todoElements.indexOf(element);
+}
+
+//edit button event handler. assigend in createTodoElement
+function createEditPrompt(event) {
+    const editButton = event.currentTarget;
+    if ( !hasClass(editButton, "todo-edit") ) return;
+    const todoText = editButton.parentNode.querySelector(".todo-text");
+    const editPromptContainer = document.createElement("div");
+    editPromptContainer.id = "edit-prompt-container";  
+    const editPrompt = document.createElement("div");
+    editPrompt.id = "edit-prompt";
+    const editTextInput = document.createElement("input");
+    editTextInput.classList.add("edit-input");
+    editTextInput.value = todoText.innerText;
+    const confirmEditButton = document.createElement("button");
+    confirmEditButton.classList.add("edit-confirm");
+    confirmEditButton.innerText = "Edit";
+    editPrompt.append(editTextInput, confirmEditButton);
+    editPromptContainer.appendChild(editPrompt);
+    document.body.appendChild(editPromptContainer);
+    confirmEditButton.onclick = () => {
+        todoText.innerText = editTextInput.value;
+        const index = todoElementIndex(todoText.parentNode);
+        todoList[index].text = todoText.innerText;
+        setPersistent(DB_NAME, todoList);
+        editPromptContainer.remove();
+    };
+    
 }
