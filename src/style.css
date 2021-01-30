@@ -45,7 +45,7 @@ h1 {
   left: -85px;
   font-size: 1.5em;
 }
-#priority-selector{
+#priority-selector {
   position: absolute;
   top: 10px;
   font-size: 0.8em;
@@ -62,12 +62,11 @@ h1 {
   height: 1.8em;
   border-radius: 15px;
   font-size: 1.5em;
-  background:#ea93d9;
+  background: #ea93d9;
   opacity: 0.8;
   color: white;
-  
 }
-#add-button:hover{
+#add-button:hover {
   cursor: pointer;
   opacity: 1;
 }
@@ -81,11 +80,11 @@ h1 {
   width: 100px;
   border-radius: 15px;
   font-size: 1.5em;
-  background:#ea93d9;
+  background: #ea93d9;
   opacity: 0.8;
   color: white;
 }
-#sort-button:hover{
+#sort-button:hover {
   cursor: pointer;
   opacity: 1;
 }
@@ -96,15 +95,16 @@ h1 {
 #priority-selector:hover {
   cursor: pointer;
 }
-#counter{
-    display: inline;
+#counter {
+  display: inline;
 }
-.todo-text{
+.todo-text {
   display: inline;
   position: relative;
   left: -50px;
+  top: 5px;
 }
-.todo-created-at{
+.todo-created-at {
   display: inline;
   position: relative;
   float: left;
@@ -112,7 +112,7 @@ h1 {
   top: 33px;
   left: 2px;
 }
-.todo-priority{
+.todo-priority {
   display: inline;
   position: relative;
   float: left;
@@ -122,20 +122,32 @@ h1 {
   padding-bottom: 5px;
 }
 @-moz-keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.todo-container{
+.todo-container {
   -webkit-animation: fadeIn 250ms;
   -moz-animation: fadeIn 250ms;
   animation: fadeIn 250ms;
@@ -147,22 +159,22 @@ h1 {
   font-size: 1.5em;
   border-top: white;
   border-left: white;
-  border-right:white ;
+  border-right: white;
   border-radius: 5px;
   border-width: 1px;
 }
-.view-section{
-  box-shadow: 3px 3px 15px 2px #888888;;
-  width:fit-content;
+.view-section {
+  box-shadow: 3px 3px 15px 2px #888888;
+  width: fit-content;
   margin: auto;
   position: relative;
-  top: -170px;
+  top: -200px;
   background-color: white;
 }
-.delete{
+.delete {
   position: relative;
   float: right;
-  top:10px;
+  top: 10px;
   right: 5px;
   background-image: url(./images/icon-trash-can.jpg);
   background-size: cover;
@@ -170,27 +182,67 @@ h1 {
   width: 25px;
   border-style: none;
 }
-.delete:hover{
+.delete:hover {
   cursor: pointer;
 }
-.conter-area{
-  position: absolute;
-  
+.counter-area {
+  display: block;
+  text-align: center;
+  margin: auto;
+  position: relative;
+  top: -220px;
+  left: -200px;
+  border-radius: 15px;
+  font-size: 1.5em;
+  background: #ea93d9;
+  width: 100px;
 }
-#delete-all{
+#delete-all {
   position: relative;
   top: -135px;
   height: 1.8em;
   width: fit-content;
   border-radius: 15px;
   font-size: 1.5em;
-  background-color:#514a9d;
+  background-color: #514a9d;
   color: white;
 }
-#delete-all:hover{
+#delete-all:hover {
   cursor: pointer;
 }
-
+.edit {
+  position: relative;
+  top: 11px;
+  float: right;
+  right: 17px;
+  border-style: none;
+  border-radius: 5px;
+  height: 25px;
+  width: 25px;
+  background-size: cover;
+  background-image: url(./images/new-edit-icon.jpg);
+}
+.edit:hover {
+  cursor: pointer;
+  height: 27px;
+  width: 27px;
+}
+.done {
+  position: relative;
+  top: 11px;
+  float: right;
+  right: 17px;
+  border-style: none;
+  border-radius: 5px;
+  border-style: none;
+  height: 25px;
+  width: 25px;
+  background-size: cover;
+  background-image: url(./images/new-check-icon.jpg);
+}
+.done {
+  cursor: pointer;
+}
 /* @media screen and (max-width: 1000px) {
   #text-input {
     height: 5em;

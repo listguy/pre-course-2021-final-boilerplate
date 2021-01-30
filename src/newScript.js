@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
 //adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
-  counter.innerText = Number(counter.innerText)+1
+  counter.innerText = Number(counter.innerText) + 1;
   inputValue = textInput.value;
   const object = convertValueToObject(inputValue);
   todoList.push(object);
@@ -82,14 +82,15 @@ function itemObjectToDiv(myTodoItem) {
   todoText.setAttribute("class", "todo-text");
   deleteButton.setAttribute("class", "delete");
   doneButton.setAttribute("class", "done");
+  doneButton.setAttribute("hidden", "true");
   editButton.setAttribute("class", "edit");
 
   todoPriority.innerText = myTodoItem["priority"];
   todoCreatedAt.innerText = myTodoItem["date"];
   todoText.innerText = myTodoItem["text"];
   deleteButton.innerHTML = "";
-  doneButton.innerHTML = "done";
-  editButton.innerHTML = "edit";
+  doneButton.innerHTML = "";
+  editButton.innerHTML = "";
 
   todoContainer.appendChild(todoCreatedAt);
   todoContainer.appendChild(todoText);

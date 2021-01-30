@@ -23,6 +23,9 @@ document.addEventListener("click", (e) => {
     const parent = e.target.parentElement;
     const text = parent.getElementsByClassName("todo-text")[0];
     text.contentEditable = true;
+    const done = parent.getElementsByClassName("done")[0];
+    done.hidden = false;
+    e.target.hidden = true;
   }
 });
 
@@ -38,6 +41,9 @@ document.addEventListener("click", (e) => {
     localStorage.setItem("my-todo", JSON.stringify(todoList));
     jsonList["my-todo"] = todoList;
     updateList();
+    const edit = parent.getElementsByClassName("edit")[0];
+    edit.hidden = false;
+    e.target.hidden = true;
   }
 });
 
