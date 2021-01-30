@@ -112,7 +112,7 @@ function addItem() {
         };
         myTodo['my-todo'].push(item);
         counter++;
-        counterDiv.innerText = `Items Counter: ${counter}`;
+        counterDiv.innerText = counter;
     }
     updateJSON();
 }
@@ -141,7 +141,7 @@ function printTodoList(arr) {
     });
     const x = document.querySelectorAll('.todo-container');
     counter = x.length;
-    counterDiv.innerText = `Items Counter: ${counter}`;
+    counterDiv.innerText = counter;
 }
 
 function deleteList() {
