@@ -102,7 +102,6 @@ function checkTime(i) {
     return h + ":" + m;
   }
 
-
 function removes(event){
     if (event.target.className !== 'remove-button') return;
     console.log(event.target);
