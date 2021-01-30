@@ -17,6 +17,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
+//edit button that makes it possible to chang the text
 document.addEventListener("click", (e) => {
   if(e.target.className === "edit") {
     const parent = e.target.parentElement;
@@ -25,11 +26,20 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// document.addEventListener("keyup", e => {
-//   const text = getElementsByClassName("todo-text");
-//   text.contentEdible = false;
-//   backgroundColor = "white";
-// })
+//done button when clicked the content cannot be changed and updates local storage+jsoonbin.io
+document.addEventListener("click", (e) => {
+  if(e.target.className === "done") {
+    const parent = e.target.parentElement;
+    const text = parent.getElementsByClassName("todo-text")[0];
+    text.contentEditable = false;
+    const containerIndex = findChildNodeIndex(parent);
+    const newText = text.innerHTML;
+    todoList[containerIndex]["text"] = newText;
+    localStorage.setItem("my-todo", JSON.stringify(todoList));
+    jsonList["my-todo"] = todoList;
+    updateList();
+  }
+});
 
 //removes the divs resets the counter and empties jsonbin.io + localStorage
 document.addEventListener("click", (e) => {
@@ -67,3 +77,18 @@ function filterByKey(array, filter, keyword) {
   });
   return filteredArray;
 }
+
+//finds the index in relation to its parent
+ function findChildNodeIndex(child){
+  const parent = child.parentNode;
+  const childrenNodes = parent.childNodes;
+  const length = childrenNodes.length;
+  let childIndex;
+  for (let i = 0; i < length; i++) {
+    if(child === childrenNodes[i]){
+      childIndex = i;
+      break;
+    }
+  }
+  return childIndex;
+ }

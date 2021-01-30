@@ -73,6 +73,7 @@ function itemObjectToDiv(myTodoItem) {
   const todoCreatedAt = document.createElement("div");
   const todoText = document.createElement("div");
   const deleteButton = document.createElement("button");
+  const doneButton = document.createElement("button");
   const editButton = document.createElement("button");
 
   todoContainer.setAttribute("class", "todo-container");
@@ -80,18 +81,21 @@ function itemObjectToDiv(myTodoItem) {
   todoCreatedAt.setAttribute("class", "todo-created-at");
   todoText.setAttribute("class", "todo-text");
   deleteButton.setAttribute("class", "delete");
+  doneButton.setAttribute("class", "done");
   editButton.setAttribute("class", "edit");
 
   todoPriority.innerText = myTodoItem["priority"];
   todoCreatedAt.innerText = myTodoItem["date"];
   todoText.innerText = myTodoItem["text"];
   deleteButton.innerHTML = "";
+  doneButton.innerHTML = "done";
   editButton.innerHTML = "edit";
 
   todoContainer.appendChild(todoCreatedAt);
   todoContainer.appendChild(todoText);
   todoContainer.appendChild(todoPriority);
   todoContainer.appendChild(deleteButton);
+  todoContainer.appendChild(doneButton);
   todoContainer.appendChild(editButton);
 
   return todoContainer;
