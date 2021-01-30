@@ -1,10 +1,16 @@
 const deleteButtons = document.getElementsByClassName("delete");
 const containers = document.getElementsByClassName("todo-container");
 const darkMode = document.getElementById("dark-mode");
+const regular = document.getElementById("regular-mode");
+const style = document.getElementById("style");
 
 darkMode.addEventListener("click", (e) => {
-  
+  style.href = "./dark-mode.css"
 });
+
+regular.addEventListener("click", e=>{
+  style.href = "./style.css"
+})
 
 //remove the correct div + deletes from jsonbin and storageData
 document.addEventListener("click", (e) => {
