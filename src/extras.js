@@ -17,6 +17,20 @@ document.addEventListener("click", (e) => {
   }
 });
 
+document.addEventListener("click", (e) => {
+  if(e.target.className === "edit") {
+    const parent = e.target.parentElement;
+    const text = parent.getElementsByClassName("todo-text")[0];
+    text.contentEditable = true;
+  }
+});
+
+// document.addEventListener("keyup", e => {
+//   const text = getElementsByClassName("todo-text");
+//   text.contentEdible = false;
+//   backgroundColor = "white";
+// })
+
 //removes the divs resets the counter and empties jsonbin.io + localStorage
 document.addEventListener("click", (e) => {
   if (e.target.id === "delete-all") {
