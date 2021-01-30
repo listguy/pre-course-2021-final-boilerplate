@@ -12,7 +12,7 @@ body{
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 25px auto;
+    grid-template-rows: 25px min-content auto;
 
     position: absolute;
     width: 100%;
@@ -58,88 +58,6 @@ input:-webkit-autofill {
     background: var(--headerBgColor);
 }
 
-.select-button{
-    position: relative;
-    background: none;
-    border: none;
-    outline: none;
-    font-size: inherit;
-    border-bottom: 2px solid black;
-    padding-bottom: 8px;
-    min-width: 150px;
-    text-align: left;
-    outline: none;
-    cursor: pointer;
-    z-index: 2;
-}
-.select-button::after{
-    content: '▾';
-    position: absolute;
-    right: 0px;
-    top: 0%;
-}
-#priority-list{
-    position: relative;
-    /*
-    border:0;
-    width:100%;
-    background-color: transparent;
-    appearance: none;
-    */
-}
-#priority-list option{
-    margin: 0;
-    padding: 0;
-    background: white;
-    box-shadow: 0 2px 4px rgba(black, 0.24);
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    opacity: 0;
-    transform: scale(0.8) translate3d(-20px, 0px, 0);
-    transition: opacity 0.1s cubic-bezier(0.5,2,0.5,0.75), transform 0.3s cubic-bezier(0.5,2,0.5,0.75);
-    transform-origin: 0 100%;
-    z-index: 1;
-}
-#priority-list .open{
-    opacity: 1;
-    transform: scale(1) translate3d(0, 0, 0);
-    z-index: 5;
-}
-
-#priority-selector:focus{
-    outline:none;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*View Section design*/
@@ -147,19 +65,21 @@ input:-webkit-autofill {
 main{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;   
+    height:min-content;
 }
-.todo-container{
-    grid-column: 2/3;
+main *{
+        grid-column: 2/3;
 }
+
 div[data-template]{
         display: none;
 }
 .todo-container{
+
     border:orangered solid 2px;
-    border-bottom: 1px;
     display: grid;
     grid-template-columns: 40px repeat(6, auto);
-    grid-template-rows: repeat(2, minmax(25px,50%));
+    grid-template-rows: repeat(2,25px);
     grid-template-areas: 
     "dc tx tx tx ca ca"
     "dc tx tx tx pr pr";

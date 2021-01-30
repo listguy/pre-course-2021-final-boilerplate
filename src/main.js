@@ -5,11 +5,19 @@ let body = document.body;
 let view = document.getElementById("View");
 let control = document.getElementById("Control");
 
+let taskForm = document.getElementById("add-task-form");
+taskForm.addEventListener("submit", addNewTask);
+taskForm.addEventListener("click", eraseAll);
+let counter = document.getElementById("counter");
+
+
+
 pullTodoListFromWeb();
 async function pullTodoListFromWeb() {
     let response = await fetch("https://api.jsonbin.io/b/60143f61ef99c57c734b9e06/latest ");
     if (response.ok) {
         taskList = await response.json();
+        updateCounter();
         if (taskList[0] != false) {
             for (let task of taskList) {
                 insertTaskToHtml(task)
@@ -19,20 +27,21 @@ async function pullTodoListFromWeb() {
         alert("HTTP-Error: " + response.status);
     }
 }
-
-let taskForm = document.getElementById("add-task-form");
-taskForm.addEventListener("submit", addNewTask);
-
 function addNewTask(event) {
     let text = document.getElementById("text-input").value;
     let priority = document.getElementById("priority-list").value;
     let task = insertTaskToTaskArray(text, priority);
+
     insertTaskToHtml(task);
     uploadJson();
+    updateCounter()
+    taskForm.reset();
     event.preventDefault();
 }
-
 function insertTaskToTaskArray(text, priority, date = new Date()) {
+    if (taskList[0] === false) {
+        taskList = [];
+    }
     taskList.push({
         text,
         priority,
@@ -40,7 +49,6 @@ function insertTaskToTaskArray(text, priority, date = new Date()) {
     });
     return taskList[taskList.length - 1];
 }
-
 function insertTaskToHtml(task) {
     let text = task.text;
     let date = (task.date instanceof Date) ? task.date : new Date(task.date);
@@ -58,11 +66,9 @@ function insertTaskToHtml(task) {
     dateContainer.append(date);
     textContainer.append(text);
     priorityContainer.append(priority);
-
     view.append(todoContainer);
 
 }
-
 function uploadJson() {
     fetch("https://api.jsonbin.io/b/60143f61ef99c57c734b9e06", {
         method: "PUT",
@@ -76,8 +82,6 @@ function uploadJson() {
             alert('Error:', error);
         })
 }
-
-taskForm.addEventListener("click", eraseAll);
 function eraseAll(event) {
     let deleteBtn = document.getElementById("delete-button")
     if (event.target != deleteBtn)
@@ -87,11 +91,18 @@ function eraseAll(event) {
         taskList = [false];
         uploadJson();
         let tasks = document.querySelectorAll(".todo-container");
+        updateCounter();
         for (let task of tasks) {
             task.remove();
         }
     }
 }
+function updateCounter() {
+    let i;
+    i = (taskList[0] != false) ? taskList.length : 0;
+    counter.innerText = "You have: " + i + " tasks.";
+}
+
 
 
 
