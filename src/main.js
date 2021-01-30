@@ -38,6 +38,7 @@ async function main() {
 		task.index = tasksArray.indexOf(task); //adds index proprty for use in other functions.
 		printTask(task, viewSection);
 	}
+	localStorage.setItem("page-index", "0");
 	updateCounter(tasksArray);
 
 	addButton.addEventListener("click", newTask); //task add event
@@ -170,17 +171,20 @@ async function main() {
 			multyTaskArray.push([]);
 		}
 		multyTaskArray.pop();
-		let pageIndex = 0;
+		let pageIndex = Number(localStorage.getItem("page-index"));
 		printPage(multyTaskArray, pageIndex); // prints one page
+
 		arrowsDiv.addEventListener("click", (arrowEvent) => {
 			const arrow = arrowEvent.target;
 			if (arrow.id === "right-arrow" && pageIndex < multyTaskArray.length - 1) {
 				pageIndex++;
 				printPage(multyTaskArray, pageIndex);
+				localStorage.setItem("page-index", JSON.stringify(pageIndex));
 			}
 			if (arrow.id === "left-arrow" && pageIndex > 0) {
 				pageIndex--;
 				printPage(multyTaskArray, pageIndex);
+				localStorage.setItem("page-index", JSON.stringify(pageIndex));
 			}
 		});
 	}
