@@ -1,4 +1,19 @@
-.todo-container {
+*{
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: 25% 150px auto;
+    /* height: 100vh; */
+}
+
+.placeholder {
+    /* height: 20vh; */
+}
+
+/* .todo-container {
     display: flex;
     /* flex-direction: row; */
     align-items: center;
@@ -15,4 +30,4 @@
 
 .todo-container time {
     flex: 1 0 5px;
-}
+} */
