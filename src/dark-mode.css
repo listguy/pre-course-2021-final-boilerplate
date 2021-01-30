@@ -11,6 +11,7 @@
   body {
     margin: 0;
     text-align: center;
+    background-color:var(--Dark-Blue) ;
   }
   #main-title {
     background-image: url(./images/croped-dark-wallpaper.jpg);
@@ -26,6 +27,7 @@
     margin: 0;
     top: 80px;
     font-size: 5em;
+    color: var(--Lighter-Blue);
   }
   #text-input {
     position: relative;
@@ -37,6 +39,9 @@
     border-radius: 5px;
     font-size: 1.5em;
     border-color: white;
+    background-color: var(--Dark-Blue);
+    color: white;
+    border-color: black;
   }
   #selection-area {
     position: relative;
@@ -44,6 +49,7 @@
     top: -150px;
     left: -85px;
     font-size: 1.5em;
+    color: white;
   }
   #priority-selector {
     position: absolute;
@@ -62,9 +68,9 @@
     height: 1.8em;
     border-radius: 15px;
     font-size: 1.5em;
-    background: #ea93d9;
+    background: var(--Shadow-of-Dark-Blue);
     opacity: 0.8;
-    color: white;
+    color: var(--Lighter-Blue);
   }
   #add-button:hover {
     cursor: pointer;
@@ -80,9 +86,9 @@
     width: 100px;
     border-radius: 15px;
     font-size: 1.5em;
-    background: #ea93d9;
+    background: var(--Shadow-of-Dark-Blue);
     opacity: 0.8;
-    color: white;
+    color: var(--Lighter-Blue)
   }
   #sort-button:hover {
     cursor: pointer;
@@ -162,21 +168,23 @@
     border-right: white;
     border-radius: 5px;
     border-width: 1px;
+    background-color: var(--Dark-Blue);
+    color: white;
+    border-color: black;
   }
   .view-section {
-    box-shadow: 3px 3px 15px 2px #888888;
+    box-shadow: 3px 3px 15px 2px black;
     width: fit-content;
     margin: auto;
     position: relative;
     top: -200px;
-    background-color: white;
   }
   .delete {
     position: relative;
     float: right;
     top: 10px;
     right: 5px;
-    background-image: url(./images/icon-trash-can.jpg);
+    background-image: url(./images/inverted/blue-icon-trash-can.jpg);
     background-size: cover;
     height: 25px;
     width: 25px;
@@ -194,8 +202,9 @@
     left: -200px;
     border-radius: 15px;
     font-size: 1.5em;
-    background: #ea93d9;
+    background: var(--Shadow-of-Dark-Blue);
     width: 100px;
+    color: white;
   }
   #delete-all {
     position: relative;
@@ -204,12 +213,14 @@
     width: fit-content;
     border-radius: 15px;
     font-size: 1.5em;
-    background-color: #514a9d;
+    background-color: var(--Lighter-Blue);
     color: white;
     margin-bottom: 0;
   }
   #delete-all:hover {
     cursor: pointer;
+    background-color:  #0e1a22;
+    color: var(--Lighter-Blue);
   }
   .edit {
     position: relative;
@@ -221,7 +232,7 @@
     height: 25px;
     width: 25px;
     background-size: cover;
-    background-image: url(./images/new-edit-icon.jpg);
+    background-image: url(./images/inverted/blue-edit-icon.jpg);
   }
   .edit:hover {
     cursor: pointer;
@@ -239,7 +250,7 @@
     height: 25px;
     width: 25px;
     background-size: cover;
-    background-image: url(./images/new-check-icon.jpg);
+    background-image: url(./images/inverted/blue-check-icon.jpg);
   }
   .done {
     cursor: pointer;
@@ -249,10 +260,6 @@
     height: 70px;
     width: 70px;
     margin-bottom: 20px;
-  }
-  #contact-info img:hover {
-    height: 75px;
-    width: 75px;
   }
   #images {
     float: left;
@@ -265,6 +272,7 @@
   #my-info {
     position: relative;
     bottom: -100px;
+    color: white;
   }
   /* @media screen and (max-width: 1000px) {
     #text-input {

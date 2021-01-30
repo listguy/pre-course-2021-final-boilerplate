@@ -210,6 +210,8 @@ h1 {
 }
 #delete-all:hover {
   cursor: pointer;
+  background-color: white;
+  color:#514a9d;
 }
 .edit {
   position: relative;
@@ -249,10 +251,6 @@ h1 {
   height: 70px;
   width: 70px;
   margin-bottom: 20px;
-}
-#contact-info img:hover {
-  height: 75px;
-  width: 75px;
 }
 #images {
   float: left;
