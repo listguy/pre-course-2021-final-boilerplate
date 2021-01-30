@@ -199,13 +199,14 @@ h1 {
 }
 #delete-all {
   position: relative;
-  top: -135px;
+  top: -150px;
   height: 1.8em;
   width: fit-content;
   border-radius: 15px;
   font-size: 1.5em;
   background-color: #514a9d;
   color: white;
+  margin-bottom: 0;
 }
 #delete-all:hover {
   cursor: pointer;
@@ -242,6 +243,28 @@ h1 {
 }
 .done {
   cursor: pointer;
+}
+
+#contact-info img {
+  height: 70px;
+  width: 70px;
+  margin-bottom: 20px;
+}
+#contact-info img:hover {
+  height: 75px;
+  width: 75px;
+}
+#images {
+  float: left;
+  position: fixed;
+  top: 450px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+}
+#my-info {
+  position: relative;
+  bottom: -100px;
 }
 /* @media screen and (max-width: 1000px) {
   #text-input {
