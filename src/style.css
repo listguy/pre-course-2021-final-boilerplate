@@ -14,6 +14,9 @@ body {
 	display: flex;
 	flex-direction: column;
 }
+button:hover {
+	background-color: lightslategray;
+}
 #freezer-section {
 	position: relative;
 	margin: auto;
@@ -319,7 +322,6 @@ body {
 	height: 20px;
 	width: 20px;
 	line-height: 20px;
-	cursor: pointer;
 	border: 1px solid brown;
 	font-family: "Potta One", cursive;
 	box-shadow: 1px 2px 2px chocolate;
@@ -373,4 +375,13 @@ body {
 	position: absolute;
 	right: 115px;
 	bottom: 5px;
+}
+.contact-logo {
+	transition: 0s;
+}
+.contact-logo:hover {
+	height: 20px;
+	width: 20px;
+	margin-bottom: -2px;
+	margin-right: -2px;
 }

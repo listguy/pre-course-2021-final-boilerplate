@@ -182,7 +182,6 @@ async function main() {
 
 	document.addEventListener("mouseover", (event) => {
 		if (event.target.classList[0] === "todo-priority") {
-			console.log(event.target.parentNode.index);
 			const priority = event.target;
 			const tipWindow = document.querySelector("#tip-window");
 			tipWindow.innerHTML = "Click to delete task";
@@ -223,7 +222,7 @@ async function main() {
 			if (darkModeEvent.target.innerText === "Dark mode") {
 				cssLink.href = "./dark-mode.css";
 				darkModeEvent.target.innerText = "Normal";
-			} else {
+			} else if (darkModeEvent.target.innerText === "Normal") {
 				cssLink.href = "./style.css";
 				document.body.style = "transition:800ms;";
 				darkModeEvent.target.innerText = "Dark mode";
