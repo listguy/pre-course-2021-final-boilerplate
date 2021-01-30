@@ -1,5 +1,10 @@
 const deleteButtons = document.getElementsByClassName("delete");
 const containers = document.getElementsByClassName("todo-container");
+const darkMode = document.getElementById("dark-mode");
+
+darkMode.addEventListener("click", (e) => {
+  
+});
 
 //remove the correct div + deletes from jsonbin and storageData
 document.addEventListener("click", (e) => {
@@ -13,7 +18,7 @@ document.addEventListener("click", (e) => {
       localStorage.setItem("my-todo", JSON.stringify(todoList));
       jsonList["my-todo"] = todoList;
       updateList();
-      counter.innerText = Number(counter.innerText) -1;
+      counter.innerText = Number(counter.innerText) - 1;
     }
   }
 });
