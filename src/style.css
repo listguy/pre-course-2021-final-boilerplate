@@ -264,6 +264,19 @@ h1 {
   position: relative;
   bottom: -100px;
 }
+#regular-mode{
+  background-color: #ea93d9;
+}
+#regular-mode:hover{
+  cursor: pointer;
+}
+#dark-mode{
+  background-color: #0e1a22;
+  color: white;
+}
+#dark-mode:hover{
+  cursor: pointer;
+}
 /* @media screen and (max-width: 1000px) {
   #text-input {
     height: 5em;

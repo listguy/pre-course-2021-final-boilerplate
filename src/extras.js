@@ -6,10 +6,14 @@ const style = document.getElementById("style");
 
 darkMode.addEventListener("click", (e) => {
   style.href = "./dark-mode.css"
+  const instagram = document.getElementById("instagram");
+  instagram.src = "./images/blue-back-instagram-icon.png"
 });
 
 regular.addEventListener("click", e=>{
   style.href = "./style.css"
+  const instagram = document.getElementById("instagram");
+  instagram.src = "./images/blue-instagram-icon.png"
 })
 
 //remove the correct div + deletes from jsonbin and storageData
