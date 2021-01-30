@@ -164,3 +164,20 @@ button:active {
     max-width: 65%;
     margin-right: var(--todo-content-margin);
 }
+
+.todo-edit {
+    display: flex;
+    margin-right: 1%;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+    width: 1.3em;
+    height: 1.3em;
+    transition: 200ms all;
+    border-radius: 50%;
+}
+
+.todo-edit:hover {
+    
+    background-color: var(--theme-back1);
+}

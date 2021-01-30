@@ -67,7 +67,7 @@ async function onLoad() {
         const item = event.target;
         const todoElements = viewSection.querySelectorAll(".todo-container");
         const isContainer = hasClass( item, "todo-container");
-        const isContainerChild = hasClass(item.parentNode, "todo-container") && !hasClass(item, "todo-check");
+        const isContainerChild = hasClass(item.parentNode, "todo-container") && !hasClass(item, "todo-check") && !hasClass("todo-edit");
         if (isContainer) {
             if(!event.ctrlKey) {
                 for (const element of todoElements) {
@@ -127,18 +127,21 @@ function createTodoElement(todo) {
     const todoPriority = document.createElement("div");
     const timeStamp = document.createElement("div");
     const todoText = document.createElement("div");
+    const todoEdit = document.createElement("div");
     container.classList.add("todo-container");
     todoCheck.classList.add("todo-check");
     todoPriority.classList.add("todo-priority");
     timeStamp.classList.add("todo-created-at");
     todoText.classList.add("todo-text");
+    todoEdit.classList.add("todo-edit");
     todoCheck.setAttribute("Type", "checkbox");
     todoCheck.checked = todo.checked;
     if (todo.checked) container.classList.add("checked-task");
     todoPriority.innerText = todo.priority;
     timeStamp.innerText = dateToSQLFormat( new Date(todo.date) );
     todoText.innerText = todo.text;
-    container.append(todoCheck, todoPriority, timeStamp, todoText);
+    todoEdit.innerHTML = `<i class="fa fa-pencil" aria-hidden="true"></i>`;
+    container.append(todoCheck, todoPriority, timeStamp, todoText, todoEdit);
     return container;
 }
 
