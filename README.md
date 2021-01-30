@@ -34,6 +34,8 @@ Heres a link to the [GitHub Page](https://alontzafari.github.io/pre-course-2021-
 
 - checkbox to every task for marking tasks as done. [stackoverflow.com](https://stackoverflow.com/questions/14544104/checkbox-check-event-listener)
 
+- edit button ✎ lets you edit text content of an existing task. 
+
 - General responsivity in style and UI. (elements pop, buttons are pressed)
 
 
