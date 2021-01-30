@@ -5,16 +5,16 @@ const regular = document.getElementById("regular-mode");
 const style = document.getElementById("style");
 
 darkMode.addEventListener("click", (e) => {
-  style.href = "./dark-mode.css"
+  style.href = "./dark-mode.css";
   const instagram = document.getElementById("instagram");
-  instagram.src = "./images/blue-back-instagram-icon.png"
+  instagram.src = "./images/blue-back-instagram-icon.png";
 });
 
-regular.addEventListener("click", e=>{
-  style.href = "./style.css"
+regular.addEventListener("click", (e) => {
+  style.href = "./style.css";
   const instagram = document.getElementById("instagram");
-  instagram.src = "./images/blue-instagram-icon.png"
-})
+  instagram.src = "./images/blue-instagram-icon.png";
+});
 
 //remove the correct div + deletes from jsonbin and storageData
 document.addEventListener("click", (e) => {
