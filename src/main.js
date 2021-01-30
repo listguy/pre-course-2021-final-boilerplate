@@ -1,14 +1,18 @@
 "use strict";
 
 let counter = 0;
-let myTodo = [];
+let myTodo = {
+        "my-todo": []
+    };
 const counterDiv = document.querySelector('#counter');
 
 // resetJSON(); //used to reset the JSON.
 getJSON();
 
 // function resetJSON() {
-// const resetData = [{"taskText": ""}]
+// const resetData = {
+//     "my-todo": []
+// }
 //     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e', {
 //         method: 'PUT',
 //         headers: {
@@ -28,12 +32,12 @@ getJSON();
 function getJSON() {
     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e/latest').then(res => res.json())
         .then(res => {
-            // console.log(res.record[0].taskText === "");
-            if (res.record[0].taskText === "") {
+            console.log(res);
+            if (res.record['my-todo'].length === 0) {
                 return;
             } else {
-                myTodo = res.record;
-                printTodoList(myTodo);
+                myTodo['my-todo'] = res.record['my-todo'];
+                printTodoList(myTodo['my-todo']);
             }
         })
 }
@@ -63,7 +67,7 @@ document.addEventListener('click', function (event) {
             break;
         case 'sort-button':
             sortList()
-            printTodoList(myTodo);
+            printTodoList(myTodo['my-todo']);
             updateJSON();
             break;
         case 'delete-all':
@@ -102,22 +106,17 @@ function addItem() {
         div.append(todoCreationTime);
         div.append(todoPriority);
         const item = {
-            "taskText": temp,
-            "creationTime": currentDate,
+            "text": temp,
+            "date": currentDate,
             "priority": Number(priority.value)
         };
-        console.log(myTodo)
-        myTodo.push(item);
+        myTodo['my-todo'].push(item);
         counter++;
         counterDiv.innerText = `Items Counter: ${counter}`;
     }
     updateJSON();
 }
 function printTodoList(arr) {
-    console.log(arr);
-    if (arr.length === 0) {
-        return;
-    }
     const viewSection = document.querySelector('.viewSection');
     deleteList();
     arr.forEach(element => {
@@ -126,11 +125,11 @@ function printTodoList(arr) {
         viewSection.append(div);
         const todoText = document.createElement('p');
         todoText.classList.add('todo-text');
-        todoText.innerText = element.taskText;
+        todoText.innerText = element.text;
 
         const todoCreationTime = document.createElement('time');
         todoCreationTime.classList.add('todo-created-at');
-        todoCreationTime.innerText = element.creationTime;
+        todoCreationTime.innerText = element.date;
 
         const todoPriority = document.createElement('data');
         todoPriority.innerText = element.priority;
@@ -157,11 +156,11 @@ function deleteList() {
 function sortList() {
     const sortedArray = [];
     for (let j = 1; j <= 5; j++) {
-        for (let i = 0; i < myTodo.length; i++) {
-            if (myTodo[i].priority === j) {
-                sortedArray.push(myTodo[i]);
+        for (let i = 0; i < myTodo['my-todo'].length; i++) {
+            if (myTodo['my-todo'][i].priority === j) {
+                sortedArray.push(myTodo['my-todo'][i]);
             }
         }
     }
-    myTodo = sortedArray;
+    myTodo['my-todo'] = sortedArray;
 }
