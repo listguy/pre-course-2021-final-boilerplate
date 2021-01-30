@@ -1,5 +1,11 @@
 window.addEventListener("DOMContentLoaded", main);
 async function main() {
+	const styleLink = document.head.querySelector("#style-link");
+	if (localStorage.getItem("mode") === "dark") {
+		styleLink.href = "./dark-mode.css";
+		const darkModeButton = document.querySelector("#dark-mode-button");
+		darkModeButton.innerText = "Normal";
+	}
 	const BIN_ID = "/b/601189173126bb747e9fcc1e";
 	const viewSection = document.querySelector("#view-section");
 	const textInput = document.querySelector("#text-input");
@@ -221,11 +227,14 @@ async function main() {
 			let cssLink = document.head.querySelector("#style-link");
 			if (darkModeEvent.target.innerText === "Dark mode") {
 				cssLink.href = "./dark-mode.css";
+				document.body.style = "transition:800ms;";
 				darkModeEvent.target.innerText = "Normal";
+				localStorage.setItem("mode", "dark");
 			} else if (darkModeEvent.target.innerText === "Normal") {
 				cssLink.href = "./style.css";
 				document.body.style = "transition:800ms;";
 				darkModeEvent.target.innerText = "Dark mode";
+				localStorage.setItem("mode", "dark");
 			}
 		}
 	});

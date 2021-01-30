@@ -1,6 +1,6 @@
 * {
 	color: rgb(180, 180, 180);
-	transition: 800ms;
+	/* transition: 800ms; */
 }
 body {
 	text-align: center;
@@ -181,6 +181,15 @@ select {
 	justify-content: flex-start;
 	align-content: top;
 	z-index: 50;
+}
+#loading-gif {
+	opacity: 30%;
+	filter: brightness(30%);
+	height: 300px;
+	width: 300px;
+	position: absolute;
+	top: 30px;
+	z-index: 999;
 }
 #fridge {
 	z-index: 1;
