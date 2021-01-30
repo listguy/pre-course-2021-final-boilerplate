@@ -1,5 +1,6 @@
 * {
 	color: rgb(180, 180, 180);
+	transition: 800ms;
 }
 body {
 	text-align: center;

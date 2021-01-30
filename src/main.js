@@ -198,7 +198,6 @@ async function main() {
 	document.addEventListener("click", (clickEvent) => {
 		if (clickEvent.target.classList[0] === "todo-priority") {
 			let containerDiv = clickEvent.target.parentNode;
-			console.log(containerDiv.index);
 			tasksArray.splice(containerDiv.index, 1);
 			for (let i = 0; i < tasksArray.length; i++) {
 				tasksArray[i].index = i; //fixes index to match after deleting
@@ -226,6 +225,7 @@ async function main() {
 				darkModeEvent.target.innerText = "Normal";
 			} else {
 				cssLink.href = "./style.css";
+				document.body.style = "transition:800ms;";
 				darkModeEvent.target.innerText = "Dark mode";
 			}
 		}
