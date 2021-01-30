@@ -28,6 +28,11 @@ async function main() {
 	}
 	updateCounter(tasksArray);
 	addButton.addEventListener("click", newTask);
+	document.addEventListener("keypress", (event) => {
+		if (textInput.value && event.key === "Enter") {
+			newTask(event);
+		}
+	});
 
 	async function newTask(event) {
 		if (textInput.value === "" || textInput.value === " ") {
@@ -38,6 +43,7 @@ async function main() {
 				priority: prioritySelector.value,
 				text: textInput.value,
 				date: Number(new Date()), //for JSON adaptablity
+				index: tasksArray.length,
 			};
 			textInput.value = ""; //resets input field
 			tasksArray.push(toDoContainer);
@@ -176,6 +182,7 @@ async function main() {
 
 	document.addEventListener("mouseover", (event) => {
 		if (event.target.classList[0] === "todo-priority") {
+			console.log(event.target.parentNode.index);
 			const priority = event.target;
 			const tipWindow = document.querySelector("#tip-window");
 			tipWindow.innerHTML = "Click to delete task";
@@ -186,19 +193,23 @@ async function main() {
 				`px`;
 			tipWindow.style.top = priority.getBoundingClientRect().top - 16 + "px";
 			tipWindow.hidden = false;
-			event.target.addEventListener("click", deleteEvent);
-			function deleteEvent(clickEvent) {
-				const containerDiv = clickEvent.target.parentNode;
-				tasksArray.splice(containerDiv.index, 1);
-				containerDiv.hidden = true;
-				updateCounter(tasksArray);
-				updateJSONBin(tasksArray);
-				const tipWindow = document.querySelector("#tip-window");
-				tipWindow.hidden = true;
-				clickEvent.target.removeEventListener("click", deleteEvent);
-			}
 		}
 	});
+	document.addEventListener("click", (clickEvent) => {
+		if (clickEvent.target.classList[0] === "todo-priority") {
+			let containerDiv = clickEvent.target.parentNode;
+			console.log(containerDiv.index);
+			tasksArray.splice(containerDiv.index, 1);
+			for (let i = 0; i < tasksArray.length; i++) {
+				tasksArray[i].index = i; //fixes index to match after deleting
+			}
+			updateCounter(tasksArray);
+			updateJSONBin(tasksArray);
+			const tipWindow = document.querySelector("#tip-window");
+			tipWindow.hidden = true;
+		}
+	});
+
 	document.addEventListener("mouseout", (event) => {
 		if (event.target.classList[0] === "todo-priority") {
 			const priority = event.target;
