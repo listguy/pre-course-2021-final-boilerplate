@@ -19,7 +19,7 @@ document.addEventListener("click", (e) => {
 
 //edit button that makes it possible to chang the text
 document.addEventListener("click", (e) => {
-  if(e.target.className === "edit") {
+  if (e.target.className === "edit") {
     const parent = e.target.parentElement;
     const text = parent.getElementsByClassName("todo-text")[0];
     text.contentEditable = true;
@@ -28,7 +28,7 @@ document.addEventListener("click", (e) => {
 
 //done button when clicked the content cannot be changed and updates local storage+jsoonbin.io
 document.addEventListener("click", (e) => {
-  if(e.target.className === "done") {
+  if (e.target.className === "done") {
     const parent = e.target.parentElement;
     const text = parent.getElementsByClassName("todo-text")[0];
     text.contentEditable = false;
@@ -79,16 +79,16 @@ function filterByKey(array, filter, keyword) {
 }
 
 //finds the index in relation to its parent
- function findChildNodeIndex(child){
+function findChildNodeIndex(child) {
   const parent = child.parentNode;
   const childrenNodes = parent.childNodes;
   const length = childrenNodes.length;
   let childIndex;
   for (let i = 0; i < length; i++) {
-    if(child === childrenNodes[i]){
+    if (child === childrenNodes[i]) {
       childIndex = i;
       break;
     }
   }
   return childIndex;
- }
+}
