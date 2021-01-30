@@ -38,7 +38,6 @@ async function main() {
 		task.index = tasksArray.indexOf(task); //adds index proprty for use in other functions.
 		printTask(task, viewSection);
 	}
-	localStorage.setItem("page-index", "0");
 	updateCounter(tasksArray);
 
 	addButton.addEventListener("click", newTask); //task add event

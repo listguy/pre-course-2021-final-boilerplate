@@ -255,9 +255,14 @@ select {
 .todo-text {
 	position: absolute;
 	width: 100%;
+	height: 80%;
 	top: 10px;
 	font-size: 16px;
 	font-family: "Architects Daughter", cursive;
+	overflow-y: scroll;
+}
+.todo-text::-webkit-scrollbar {
+	display: none;
 }
 #tip-window {
 	position: fixed;
