@@ -13,6 +13,7 @@ document.addEventListener("click", (e) => {
       localStorage.setItem("my-todo", JSON.stringify(todoList));
       jsonList["my-todo"] = todoList;
       updateList();
+      counter.innerText = Number(counter.innerText) -1;
     }
   }
 });
