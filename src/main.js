@@ -1,13 +1,11 @@
 "use strict";
 
 let counter = 0;
-let myTodo = {
-        "my-todo": []
-    };
+let myTodo = { "my-todo": [] };
+getJSON();
 const counterDiv = document.querySelector('#counter');
 
 // resetJSON(); //used to reset the JSON.
-getJSON();
 
 // function resetJSON() {
 // const resetData = {
@@ -66,9 +64,7 @@ document.addEventListener('click', function (event) {
             addItem();
             break;
         case 'sort-button':
-            sortList()
-            printTodoList(myTodo['my-todo']);
-            updateJSON();
+            sortList();
             break;
         case 'delete-all':
             deleteList();
@@ -154,13 +150,6 @@ function deleteList() {
 }
 
 function sortList() {
-    const sortedArray = [];
-    for (let j = 1; j <= 5; j++) {
-        for (let i = 0; i < myTodo['my-todo'].length; i++) {
-            if (myTodo['my-todo'][i].priority === j) {
-                sortedArray.push(myTodo['my-todo'][i]);
-            }
-        }
-    }
-    myTodo['my-todo'] = sortedArray;
+    myTodo["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+    printTodoList(myTodo["my-todo"]);
 }

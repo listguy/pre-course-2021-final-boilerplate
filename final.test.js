@@ -64,9 +64,9 @@ const projectName = "pre.Todo App";
 describe(projectName, () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
-      headless: false, // Uncomment me to see tests running in browser
+      // headless: false, // Uncomment me to see tests running in browser
       args: ["--disable-web-security"],
-      slowMo: 50, // Uncomment and change me to slow down tests speed in browser.
+      // slowMo: 80, // Uncomment and change me to slow down tests speed in browser.
     });
     page = await browser.newPage();
     useNock(page, ["https://api.jsonbin.io/v3"]);
@@ -193,7 +193,8 @@ describe(projectName, () => {
     ).jsonValue();
     expect(currentCounter).toBe("2");
   });
-
+  
+  
   test("Can sort by priority", async () => {
     await nock("https://api.jsonbin.io/v3")
       .get(/.*/)
@@ -201,7 +202,6 @@ describe(projectName, () => {
 
     await page.goto(path, { waitUntil: "networkidle0" });
     const mockToDo = mockToDos[1];
-
     await page.click("#sort-button");
     const elements = await page.$$(".todo-text");
     const secondItem = await (
