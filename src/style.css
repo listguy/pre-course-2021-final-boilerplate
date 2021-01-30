@@ -179,7 +179,7 @@ body {
 	z-index: 1;
 	width: 100%;
 	max-width: 300px;
-	max-height: 400px;
+	height: 450px;
 }
 
 .todo-container {
@@ -290,4 +290,87 @@ body {
 	top: 0;
 	left: 0;
 	cursor: pointer;
+}
+#contact-note {
+	position: absolute;
+	bottom: 4%;
+	background-color: rgb(228, 198, 66);
+	box-shadow: 2px 8px 5px rgba(75, 75, 75, 0.589);
+	content: center;
+	flex: 0, 1, 30%;
+	border: 1px solid rgb(151, 113, 42);
+	height: 8%;
+	width: 275px;
+	left: 50%;
+	margin-left: -140px;
+	overflow-wrap: break-word;
+	z-index: 100;
+	text-align: left;
+	line-height: 50px;
+	font-size: 12px;
+	font-family: "Potta One", cursive;
+}
+.contact-magnet {
+	position: absolute;
+	margin-left: -10px;
+	top: -12px;
+	font-size: 14px;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
+	line-height: 20px;
+	cursor: pointer;
+	border: 1px solid brown;
+	font-family: "Potta One", cursive;
+	box-shadow: 1px 2px 2px chocolate;
+	text-align: center;
+}
+
+#letter1 {
+	background-color: red;
+	left: 5%;
+}
+#letter2 {
+	background-color: orange;
+	left: 20%;
+}
+#letter3 {
+	background-color: yellow;
+	left: 35%;
+}
+#letter4 {
+	background-color: green;
+	left: 50%;
+}
+#letter5 {
+	background-color: blue;
+	left: 65%;
+}
+#letter6 {
+	background-color: indigo;
+	left: 80%;
+}
+#letter7 {
+	background-color: violet;
+	left: 95%;
+}
+#facebook-link {
+	position: absolute;
+	right: 10px;
+	bottom: 5px;
+}
+#mail-link {
+	position: absolute;
+	right: 45px;
+	bottom: 5px;
+}
+#github-link {
+	position: absolute;
+	right: 80px;
+	bottom: 5px;
+}
+#whatsapp-link {
+	position: absolute;
+	right: 115px;
+	bottom: 5px;
 }

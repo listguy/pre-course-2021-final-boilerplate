@@ -182,7 +182,7 @@ select {
 	z-index: 1;
 	width: 100%;
 	max-width: 300px;
-	max-height: 400px;
+	height: 450px;
 	filter: brightness(50%);
 }
 
@@ -287,4 +287,87 @@ select {
 	top: 0;
 	left: 0;
 	cursor: pointer;
+}
+#contact-note {
+	position: absolute;
+	bottom: 4%;
+	background-color: rgb(153, 104, 13);
+	box-shadow: 2px 8px 5px rgba(75, 75, 75, 0.589);
+
+	border: 1px solid rgb(61, 46, 18);
+	height: 8%;
+	width: 275px;
+	left: 50%;
+	margin-left: -140px;
+
+	z-index: 100;
+	text-align: left;
+	line-height: 50px;
+	font-size: 12px;
+	font-family: "Potta One", cursive;
+}
+.contact-magnet {
+	position: absolute;
+	margin-left: -10px;
+	top: -12px;
+	font-size: 14px;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
+	line-height: 20px;
+	cursor: pointer;
+	border: 1px solid rgba(70, 18, 18, 0.507);
+	font-family: "Potta One", cursive;
+	box-shadow: 1px 2px 2px rgb(71, 36, 10);
+	text-align: center;
+}
+
+#letter1 {
+	background-color: rgb(139, 0, 0);
+	left: 5%;
+}
+#letter2 {
+	background-color: rgb(131, 85, 0);
+	left: 20%;
+}
+#letter3 {
+	background-color: rgb(114, 114, 0);
+	left: 35%;
+}
+#letter4 {
+	background-color: rgb(0, 70, 0);
+	left: 50%;
+}
+#letter5 {
+	background-color: rgb(0, 0, 129);
+	left: 65%;
+}
+#letter6 {
+	background-color: rgb(35, 0, 59);
+	left: 80%;
+}
+#letter7 {
+	background-color: rgb(99, 41, 99);
+	left: 95%;
+}
+#facebook-link {
+	position: absolute;
+	right: 10px;
+	bottom: 5px;
+	filter: brightness(50%);
+}
+#mail-link {
+	position: absolute;
+	right: 45px;
+	bottom: 5px;
+}
+#github-link {
+	position: absolute;
+	right: 80px;
+	bottom: 5px;
+}
+#whatsapp-link {
+	position: absolute;
+	right: 115px;
+	bottom: 5px;
 }
