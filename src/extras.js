@@ -53,6 +53,7 @@ document.addEventListener("click", (e) => {
     deleteAllDivs();
     emptyJsonbin();
     counter.innerText = 0;
+    todoList = [];
   }
 });
 
