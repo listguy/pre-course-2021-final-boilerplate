@@ -22,3 +22,6 @@ from any device and at any time.
 - Loading spinner for network requests
 - Fully responsive design
 - LIGHT 💡 MODE
+
+Link to the project:
+https://davidbinneun.github.io/pre-course-2021-final-boilerplate/src/index.html
