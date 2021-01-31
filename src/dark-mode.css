@@ -169,7 +169,7 @@ h1 {
   color: white;
   border-color: black;
 }
-.todo-container:hover{
+.todo-container:hover {
   height: 2.2em;
 }
 .view-section {
