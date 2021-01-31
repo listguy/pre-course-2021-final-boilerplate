@@ -3,9 +3,10 @@
 /**
  * taskList: the array of tasks.
 */
-let API_KEY = "https://api.jsonbin.io/v3/b/601734ae0ba5ca5799d1dc11";
-let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/601734ae0ba5ca5799d1dc11/latest";
+let API_KEY = "https://api.jsonbin.io/v3/b/60173c3d1380f27b1c205041";
+let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/60173c3d1380f27b1c205041/latest";
 let taskList;
+let jsonBin;
 let body = document.body;
 let view = document.getElementById("View");
 let control = document.getElementById("Control");
@@ -30,8 +31,8 @@ useCustomSelect();
 async function getTaskListFromWeb() {
     let response = await fetch(API_KEY_LATEST);
     if (response.ok) {
-        taskList = await response.json();
-        taskList = Array.from(taskList);/** Why was this needed? not needed a few hours ago */
+        jsonBin = await response.json();
+        taskList = jsonBin.record["my-todo"];
         insertTaskListToHtml();
     } else {
         alert("HTTP-Error: " + response.status);
@@ -39,7 +40,7 @@ async function getTaskListFromWeb() {
 }
 function insertTaskListToHtml() {
     updateCounter();
-    if (taskList[0] != false) {
+    if (taskList.length != 0) {
         for (let task of taskList) {
             insertTaskToHtml(task)
         }
@@ -76,6 +77,7 @@ function insertTaskToHtml(task) {
     let text = task.text;
     let date = (task.date instanceof Date) ? task.date : new Date(task.date);
     let priority = task.priority;
+    date = date.toISOString();
 
     let containerTemplate = document.querySelector("[data-template]");
     let todoContainer = containerTemplate.cloneNode(true);
@@ -106,7 +108,7 @@ function uploadJson() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(taskList),
+        body: JSON.stringify({ ["my-todo"]: [] }),
     })
         .then(response => response.json())
         .then(null, error => {
@@ -124,7 +126,7 @@ function eraseAll(event) {
     }
 }
 function clearTaskList() {
-    taskList = [false];
+    taskList = [];
     uploadJson();
     updateCounter();
 }
@@ -136,7 +138,7 @@ function clearListFromHtml() {
     }
 }
 function updateCounter() {
-    counter = (taskList[0] != false) ? taskList.length : 0;
+    counter = taskList.length;
     counterWrapper.innerText = counter;
 }
 //-------
