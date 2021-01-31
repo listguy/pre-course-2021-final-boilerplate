@@ -283,25 +283,38 @@ h1 {
 #dark-mode {
   background-color: #0e1a22;
   color: white;
-  margin-bottom: 5px;
+  margin-right: 15px;
 }
 #dark-mode:hover {
   cursor: pointer;
 }
 #themes{
-    position: fixed;
+    position: absolute;
+    display: flex;
     right: 20px;
-    top: 500px;
+    top: 30px;
   }
-/* @media screen and (max-width: 1000px) {
+  @media (max-width: 600px) {
     #text-input {
       height: 5em;
       font-size: 1.5em;
       width: 70%;
     }
     #selection-area {
-      font-size: 1.5em;
+      font-size: 1.4em;
       top: -110px;
-      left: -10%;
+      left: -15%;
     }
-  } */
+    body{
+      width: fit-content;
+    }
+    #images {
+      position: relative;
+      flex-direction: row;
+      top: -50px;
+      left: 100px;
+  }
+  #contact-info img {
+    margin-left: 5px;
+  }
+  }
