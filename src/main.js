@@ -65,34 +65,40 @@ function addItem() {
         const div = document.createElement('div');
         div.classList.add('todo-container');
         viewSection.append(div);
+
+        const todoCheckbox = document.createElement('input');
+        todoCheckbox.type = 'checkbox';
+        todoCheckbox.name = 'IsDone';
+
         const todoText = document.createElement('p');
-        todoText.classList.add('todo-text');
+        todoText.classList.add('todo', 'todo-text');
         todoText.innerText = temp;
 
         const todoCreationTime = document.createElement('time');
-        todoCreationTime.classList.add('todo-created-at');
+        todoCreationTime.classList.add('todo', 'todo-created-at');
         const currentDate = new Date();
-        console.log(`current date: ${currentDate}`);
         const formattedDate = sqlDate(currentDate);
-        console.log(`formatted date: ${formattedDate}`);
         todoCreationTime.innerText = formattedDate;
 
         const todoPriority = document.createElement('data');
         todoPriority.innerText = priority.value;
-        todoPriority.classList.add('todo-priority');
+        todoPriority.classList.add('todo', 'todo-priority');
 
         const todoTimeLeft = document.createElement('p');
         const timeLeft = "-";
         if (dueDateInput.value === "") {
             todoTimeLeft.innerText = timeLeft;
         } else {
-        const timeLeft = calculateTimeLeft(currentDate, dueDate);
-        todoTimeLeft.innerText = timeLeft;
+            const timeLeft = calculateTimeLeft(currentDate, dueDate);
+            todoTimeLeft.innerText = timeLeft;
         }
+        todoTimeLeft.classList.add('todo', 'todo-time-left')
 
+        div.append(todoCheckbox);
         div.append(todoText);
         div.append(todoCreationTime);
         div.append(todoPriority);
+        div.append(todoTimeLeft);
         const item = {
             "text": temp,
             "date": formattedDate,
@@ -132,12 +138,13 @@ function printTodoList(arr) {
 
         const todoTimeLeft = document.createElement('p');
         todoTimeLeft.innerText = element.timeLeft;
+        todoTimeLeft.classList.add('todo', 'todo-time-left')
 
         div.append(todoCheckbox);
         div.append(todoText);
         div.append(todoCreationTime);
         div.append(todoPriority);
-        div.append(todoTimeLeft)
+        div.append(todoTimeLeft);
     });
 
     const x = document.querySelectorAll('.todo-container');
@@ -178,6 +185,9 @@ function calculateTimeLeft(startDate, finishDate) {
     const miliSeconds = (finishDate - startDate);
     const diffDays = Math.ceil(miliSeconds / (1000 * 60 * 60 * 24));
     const diffHours = Math.ceil(miliSeconds / (1000 * 60 * 60));
-
-    return (diffDays > 1) ? `${diffDays} Days` : `${diffHours} Hours`;
+    if (miliSeconds <= 0) {
+        return 'Passed!';
+    } else {
+        return (diffDays > 1) ? `${diffDays} Days` : `${diffHours} Hours`;
+    }
 }
