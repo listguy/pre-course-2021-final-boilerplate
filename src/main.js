@@ -3,8 +3,8 @@
 /**
  * taskList: the array of tasks.
 */
-const API_KEY = "https://api.jsonbin.io/b/6016c28c13b20d48e8bf9540";
-const API_KEY_LATEST = "https://api.jsonbin.io/b/6016c28c13b20d48e8bf9540/latest"
+let API_KEY = "https://api.jsonbin.io/v3/b/601734ae0ba5ca5799d1dc11";
+let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/601734ae0ba5ca5799d1dc11/latest";
 let taskList;
 let body = document.body;
 let view = document.getElementById("View");
@@ -17,10 +17,11 @@ taskForm.addEventListener("click", eraseAll);
 let dateButton = document.getElementById("sort-date");
 dateButton.addEventListener("click", sortDate(), { once: false });
 
-let priorityButton = document.getElementById("sort-priority");
+let priorityButton = document.getElementById("sort-button");
 priorityButton.addEventListener("click", sortPriority(), { once: false });
 
-let counter = document.getElementById("counter");
+let counter;
+let counterWrapper = document.getElementById("counter");
 
 getTaskListFromWeb();
 useCustomSelect();
@@ -30,6 +31,7 @@ async function getTaskListFromWeb() {
     let response = await fetch(API_KEY_LATEST);
     if (response.ok) {
         taskList = await response.json();
+        taskList = Array.from(taskList);/** Why was this needed? not needed a few hours ago */
         insertTaskListToHtml();
     } else {
         alert("HTTP-Error: " + response.status);
@@ -43,14 +45,14 @@ function insertTaskListToHtml() {
         }
     }
 }
-
 function addNewTask(event) {
     let text = document.getElementById("text-input").value;
     let priority = document.getElementById("priority-selector").value;
     let task = insertTaskToTaskList(text, priority);
     if (text === "") {
-       let basicControl = document.getElementById("basic-control");
+        let basicControl = document.getElementById("basic-control");
         basicControl.setAttribute("shake", "on");
+        setTimeout('basicControl.setAttribute("shake", "off")', 5000);
         return;
     }
     insertTaskToHtml(task);
@@ -78,11 +80,19 @@ function insertTaskToHtml(task) {
     let containerTemplate = document.querySelector("[data-template]");
     let todoContainer = containerTemplate.cloneNode(true);
     todoContainer.removeAttribute("data-template");
+    todoContainer.classList.add("todo-container");
 
+    let textContainer = todoContainer.querySelector(".todo-text-template");
+    textContainer.classList.add("todo-text");
+    textContainer.classList.remove("todo-text-template");
 
-    let textContainer = todoContainer.querySelector(".todo-text")
-    let dateContainer = todoContainer.querySelector(".todo-created-at");
-    let priorityContainer = todoContainer.querySelector(".todo-priority");
+    let priorityContainer = todoContainer.querySelector(".todo-priority-template");
+    priorityContainer.classList.add("todo-priority");
+    priorityContainer.classList.remove("todo-priority-template");
+
+    let dateContainer = todoContainer.querySelector(".todo-created-at-template");
+    dateContainer.classList.add("todo-created-at");
+    dateContainer.classList.remove("todo-created-at-template");
 
     dateContainer.append(date);
     textContainer.append(text);
@@ -100,7 +110,7 @@ function uploadJson() {
     })
         .then(response => response.json())
         .then(null, error => {
-            alert('Error:', error);
+            alert('Error: ' + error);
         })
 }
 function eraseAll(event) {
@@ -126,10 +136,10 @@ function clearListFromHtml() {
     }
 }
 function updateCounter() {
-    let i;
-    i = (taskList[0] != false) ? taskList.length : 0;
-    counter.innerText = "You have: " + i + " tasks.";
+    counter = (taskList[0] != false) ? taskList.length : 0;
+    counterWrapper.innerText = counter;
 }
+//-------
 
 function useCustomSelect() {
     let customFirstOption;
@@ -211,6 +221,7 @@ function useCustomSelect() {
     });
 }
 
+//------
 function sortDate() {
     let latestOnTop = true;
     return function () {
@@ -224,7 +235,6 @@ function sortDate() {
         insertTaskListToHtml();
     }
 }
-
 function sortPriority() {
     let highestOnTop = true;
     return function () {

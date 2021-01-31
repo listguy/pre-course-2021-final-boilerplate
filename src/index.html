@@ -43,8 +43,8 @@
           <button id="sort-date" type="button">Sort by Date</button>
         </label>
         </label>
-        <label for="sort-priority">
-          <button id="sort-priority" type="button">Sort by Priority</button>
+        <label for="sort-button">
+          <button id="sort-button" type="button">Sort by Priority</button>
         </label>
         <label for="delete-button">
           <button id="delete-button" type="button">Delete all</button>
@@ -56,29 +56,30 @@
 
   <main id="View">
     <header>
-      <span id="counter">
-      </span>
+      <span>You have: </span><span id="counter"> </span><span> tasks.</span>
     </header>
-    <div class="todo-container" data-template="task-template">
-      <div class="delete-checkbox">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-      </div>
-      <div class="todo-text">
 
-      </div>
-      <div class="created-at-container">
-        <span>Created At:</span>
-        <span class="todo-created-at"></span>
-      </div>
-      <div class="priority-container">
-        <span>Priority:</span>
-        <span class="todo-priority"></span>
-      </div>
-    </div>
   </main>
 
+<footer>
+  <div class="todo-container" data-template="task-template">
+    <div class="delete-checkbox">
+      <input type="checkbox">
+      <span class="checkmark"></span>
+    </div>
+    <div class="todo-text-template">
 
+    </div>
+    <div class="created-at-container">
+      <span>Created At:</span>
+      <span class="todo-created-at-template"></span>
+    </div>
+    <div class="priority-container">
+      <span>Priority:</span>
+      <span class="todo-priority-template"></span>
+    </div>
+  </div>
+</footer>
 
 
 
