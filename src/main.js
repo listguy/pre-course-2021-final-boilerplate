@@ -82,8 +82,13 @@ function addItem() {
         todoPriority.classList.add('todo-priority');
 
         const todoTimeLeft = document.createElement('p');
+        const timeLeft = "-";
+        if (dueDateInput.value === "") {
+            todoTimeLeft.innerText = timeLeft;
+        } else {
         const timeLeft = calculateTimeLeft(currentDate, dueDate);
         todoTimeLeft.innerText = timeLeft;
+        }
 
         div.append(todoText);
         div.append(todoCreationTime);
