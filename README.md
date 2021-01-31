@@ -1,6 +1,7 @@
 <div align="center"><h1>Pre Course Project - Todo List</h1></div>
 
-## by Ophir Huberman 
+## by Ophir Huberman Github page: https://hubermanophir.github.io/pre-course-2021-final-boilerplate/src/index
+<br>
 
 ![my to do list](./src/images-and-videos/zoom-0.gif)
 
@@ -25,7 +26,7 @@ after you clicked on the delete button you will need to confirm your delete acti
 
 ![edit button](./src/images-and-videos/edit-button.PNG)
 
-once you click on the edit button the text inside the item can be changed, the pencil icon will be changed to a check mark just like so :
+once you click on the edit button the text inside the item can be changed, just *double click* the text and change it. the pencil icon will be changed to a check mark just like so :
 
 ![check mark](./src/images-and-videos/done.PNG)
 
@@ -43,3 +44,12 @@ by clicking the check mark you will confirm your edit. The list will then be upd
 
 6. On the left side you can see the links to my social accounts : instagram, github, codepan and my daily spotify mix highly recommended
 
+<br>
+
+## sources 
+
+- youtube of course and especially this guy: https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw
+- https://www.w3schools.com/ 
+- https://developer.mozilla.org/en-US/
+- https://www.javascripttutorial.net/
+- https://stackoverflow.com/
