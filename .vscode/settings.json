@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
         "checkmark"
+    ],
+    "cSpell.ignoreWords": [
+        "box",
+        "shadow",
+        "webkit"
     ]
 }
