@@ -48,6 +48,7 @@ html {
 }
 
 .top h1 {
+    font-family: 'Muli', sans-serif;
     font-size: 6rem;
     color: var(--my-blue);
     text-shadow: 2px 0 0 rgb(0, 0, 0), -2px 0 0 rgb(0, 0, 0), 0 2px 0 rgb(0, 0, 0), 0 -2px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
@@ -91,15 +92,15 @@ html {
 .controlSection {
     /* background:rgb(119, 119, 119); */
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     height: 3vh;
     padding: 20px;
     font-size: 1.9rem;
     font-weight: 500;
+    font-family: 'Fira Sans', sans-serif;
 }
-a
-.addTask {
+
+.addTask, .newPriority, .dueDate, .addButton  {
     flex: 1 1 auto;
 }
 
@@ -161,6 +162,7 @@ a
     font-size: 2rem;
     font-weight: 500;
     padding: 10px;
+    font-family: 'Fira Sans', sans-serif;
 }
 
 .sort {

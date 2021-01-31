@@ -56,6 +56,8 @@ function addItem() {
     const viewSection = document.querySelector('.viewSection');
     const input = document.querySelector('#text-input');
     const priority = document.querySelector('#priority-selector');
+    const dueDateInput = document.querySelector('#dueDate');
+    const dueDate = new Date(dueDateInput.value);
     const temp = input.value;
     input.value = "";
 
@@ -69,25 +71,33 @@ function addItem() {
 
         const todoCreationTime = document.createElement('time');
         todoCreationTime.classList.add('todo-created-at');
-        // const currentDate = new Date().toLocaleString('he-IL');
-        const currentDate = sqlDate();
-        todoCreationTime.innerText = currentDate;
+        const currentDate = new Date();
+        console.log(`current date: ${currentDate}`);
+        const formattedDate = sqlDate(currentDate);
+        console.log(`formatted date: ${formattedDate}`);
+        todoCreationTime.innerText = formattedDate;
 
         const todoPriority = document.createElement('data');
         todoPriority.innerText = priority.value;
         todoPriority.classList.add('todo-priority');
+
+        const todoTimeLeft = document.createElement('p');
+        const timeLeft = calculateTimeLeft(currentDate, dueDate);
+        todoTimeLeft.innerText = timeLeft;
 
         div.append(todoText);
         div.append(todoCreationTime);
         div.append(todoPriority);
         const item = {
             "text": temp,
-            "date": currentDate,
-            "priority": Number(priority.value)
+            "date": formattedDate,
+            "priority": Number(priority.value),
+            "timeLeft": timeLeft
         };
+
         myTodo['my-todo'].push(item);
         counter++;
-        counterDiv.innerText = counter;
+        counterDiv.innerText = `Tasks: ${counter}`;
     }
     updateJSON();
 }
@@ -115,15 +125,19 @@ function printTodoList(arr) {
         todoPriority.innerText = element.priority;
         todoPriority.classList.add('todo', 'todo-priority');
 
+        const todoTimeLeft = document.createElement('p');
+        todoTimeLeft.innerText = element.timeLeft;
+
         div.append(todoCheckbox);
         div.append(todoText);
         div.append(todoCreationTime);
         div.append(todoPriority);
+        div.append(todoTimeLeft)
     });
 
     const x = document.querySelectorAll('.todo-container');
     counter = x.length;
-    counterDiv.innerText = counter;
+    counterDiv.innerText = `Tasks: ${counter}`;
 }
 
 function deleteList() {
@@ -140,8 +154,7 @@ function sortList() {
     printTodoList(myTodo["my-todo"]);
 }
 
-function sqlDate() {
-    const dt = new Date();
+function sqlDate(dt) {
     let dtString = dt.getFullYear()
         + '-' + pad2(dt.getMonth() + 1)
         + '-' + pad2(dt.getDate())
@@ -153,4 +166,13 @@ function sqlDate() {
 
 function pad2(number) {
     return (number < 10 ? '0' : '') + number
+}
+
+function calculateTimeLeft(startDate, finishDate) {
+    console.log(`start date:  ${startDate} finish date: ${finishDate}`);
+    const miliSeconds = (finishDate - startDate);
+    const diffDays = Math.ceil(miliSeconds / (1000 * 60 * 60 * 24));
+    const diffHours = Math.ceil(miliSeconds / (1000 * 60 * 60));
+
+    return (diffDays > 1) ? `${diffDays} Days` : `${diffHours} Hours`;
 }
