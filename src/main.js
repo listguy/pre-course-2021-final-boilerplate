@@ -96,24 +96,31 @@ function printTodoList(arr) {
     deleteList();
     arr.forEach(element => {
         const div = document.createElement('div');
-        div.classList.add('todo-container');
+        div.classList.add('todo', 'todo-container');
         viewSection.append(div);
+
+        const todoCheckbox = document.createElement('input');
+        todoCheckbox.type = 'checkbox';
+        todoCheckbox.name = 'IsDone';
+
         const todoText = document.createElement('p');
-        todoText.classList.add('todo-text');
+        todoText.classList.add('todo', 'todo-text');
         todoText.innerText = element.text;
 
         const todoCreationTime = document.createElement('time');
-        todoCreationTime.classList.add('todo-created-at');
+        todoCreationTime.classList.add('todo', 'todo-created-at');
         todoCreationTime.innerText = element.date;
 
         const todoPriority = document.createElement('data');
         todoPriority.innerText = element.priority;
-        todoPriority.classList.add('todo-priority');
+        todoPriority.classList.add('todo', 'todo-priority');
 
+        div.append(todoCheckbox);
         div.append(todoText);
         div.append(todoCreationTime);
         div.append(todoPriority);
     });
+
     const x = document.querySelectorAll('.todo-container');
     counter = x.length;
     counterDiv.innerText = counter;

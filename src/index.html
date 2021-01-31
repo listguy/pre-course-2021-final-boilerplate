@@ -12,26 +12,51 @@
 
 <body>
   <div class="container">
-    <div class="placeholder"></div>
-    <div class="controlSection">
-      <div id="counter">Items Counter: 0</div>
-      <label for="newLine">New To Do:</label>
-      <input type="text" id="text-input" name="newLine">
-      <label for="priority">Priority:</label>
-      <button id="sort-button">sort</button>
-      <button id="delete-all">delete</button>
-      <select name="priority" id="priority-selector">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      <button id="add-button">Add</button>
+    <div class="top">
+      <h1>ToDo List</h1>
+      <img src="logo.png" alt="check-mark">
     </div>
-
-    <div class="viewSection"></div>
+    <div class="main">
+      <div class="controlSection">
+        <div class="addTask">
+          <label for="newLine">New Task:</label>
+          <input type="text" id="text-input" name="newLine">
+          <label for="priority">Priority:</label>
+          <select name="priority" id="priority-selector">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button class="button" id="add-button">Add</button>
+        </div>
+        <div id="counter">Items Counter: 0</div>
+      </div>
+      <hr>
+      <div class="sortContainer">
+        <div class="sortByAlphaBet">
+          <button class="sort" id="sort-alphabet">Sort By AlphaBet</button>
+        </div>
+        <div class="sortByDate">
+          <button class="sort" id="sort-date">Sort By Creation Date</button>
+        </div>
+        <div class="sortByPriority">
+          <button class="sort" id="sort-button">Sort By Priority</button>
+        </div>
+        <div class="sortByDueDate">
+          <button class="sort" id="sort-dueDate">Sort By Due Date</button>
+        </div>
+        <div class="sortButtons"></div>
+      </div>
+      <div class="viewSection">
+      </div>
+    </div>
   </div>
+  </div>
+  <div class="bottom"></div>
+  </div>
+
   <script src="main.js"></script>
 </body>
 

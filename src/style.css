@@ -1,33 +1,177 @@
-*{
+@import url('https://fonts.googleapis.com/css?family=Muli:400,800&display=swap');
+
+:root {
+    --my-blue: #3df;
+  }
+
+* {
     margin: 0;
     padding: 0;
 }
+
+html {
+    font-size: 10px;
+}
+
+.button {
+    font-family: 'Muli', sans-serif;
+    border: 2px solid #00d4ff;
+    color: #00d4ff;
+    background-color: #002a33;
+    font-weight: 800;
+    background: transparent;
+    min-width: 60px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    font-size: 1.6rem;
+    display: inline-block;
+    padding: 6px 8px;
+    margin: 0 3px 0 0;
+    cursor: pointer;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+
+}
+
+.button:hover {
+    border-color: var(--my-blue);
+    color: var(--my-blue);
+    background-color: #056;
+}
+ .button:focus {
+    border-color: var(--my-blue);
+    color: var(--my-blue);
+    background-color: #056;
+    padding: 16px 16px;
+    outline: 0;
+    border-radius: 12px;
+}
+
+.top h1 {
+    font-size: 6rem;
+    color: var(--my-blue);
+    text-shadow: 2px 0 0 rgb(0, 0, 0), -2px 0 0 rgb(0, 0, 0), 0 2px 0 rgb(0, 0, 0), 0 -2px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
+}
+
+.top img {
+    padding-left: 20px;
+    height: 55px;
+    width: auto;
+}
+
 .container {
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-    grid-template-rows: 25% 150px auto;
-    /* height: 100vh; */
-}
-
-.placeholder {
-    /* height: 20vh; */
-}
-
-/* .todo-container {
+    width: 60vw;
+    margin: auto;
     display: flex;
-    /* flex-direction: row; */
-    align-items: center;
-    justify-content: left;
+    flex-direction: column;
 }
 
-.todo-container p {
-    flex: 1 0 5px;
+.top {
+    /* background-color: red; */
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
 }
 
-.todo-container data {
-    flex: 1 0 5px;
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    border: 1px solid var(--my-blue);
+    /* background: rgb(0, 68, 255); */
 }
 
-.todo-container time {
-    flex: 1 0 5px;
-} */
+.bottom {
+    height: 100px;
+    /* background: rgb(7, 230, 81); */
+}
+
+.controlSection {
+    /* background:rgb(119, 119, 119); */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 3vh;
+    padding: 20px;
+    font-size: 1.9rem;
+    font-weight: 500;
+}
+a
+.addTask {
+    flex: 1 1 auto;
+}
+
+#counter {
+    flex: 0 1 auto;
+    align-self: flex-end;
+}
+
+.sortContainer {
+    padding-top: 10px;
+    display: flex;
+    max-height: 30px;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.sortByPriority {
+    flex: 1 1 auto;
+    /* background:chartreuse; */
+}
+
+.sortByAlphaBet {
+    /* padding-left: 70px; */
+    flex: 1 1 auto;
+    /* background:rgb(255, 0, 55); */
+}
+
+.sortByDate {
+    flex: 1 1 auto;
+    /* background:rgb(255, 0, 255); */
+}
+
+.sortByDueDate {
+    flex: 1 1 auto;
+    /* background:rgb(255, 238, 0); */
+}
+
+.sortButtons {
+    flex: 2 1 auto;
+    /* background:rgb(255, 238, 0); */
+}
+
+.todo-container {
+    display: flex;
+    text-align: center;
+    padding-left: 20px;
+}
+
+.todo-container input {
+    flex: 0 2 auto;
+}
+
+.todo {
+    flex: 1 1 auto;
+}
+
+.viewSection {
+    line-height: 1.8;
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 10px;
+}
+
+.sort {
+    font-family: 'Muli', sans-serif;
+    color: #000000;
+    background-color: #ffffff;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+}
