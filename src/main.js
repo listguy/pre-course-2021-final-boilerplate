@@ -12,7 +12,10 @@ let control = document.getElementById("Control");
 let taskForm = document.getElementById("add-task-form");
 taskForm.addEventListener("submit", addNewTask);
 taskForm.addEventListener("click", eraseAll);
-taskForm.addEventListener("click", sortDate(), { once: false });
+
+let dateButton = document.getElementById("sort-date");
+dateButton.addEventListener("click", sortDate(), { once: false });
+
 let counter = document.getElementById("counter");
 
 getTaskListFromWeb();
@@ -36,7 +39,6 @@ function insertTaskListToHtml() {
         }
     }
 }
-
 function addNewTask(event) {
     let text = document.getElementById("text-input").value;
     let priority = document.getElementById("priority-list").value;
@@ -110,7 +112,8 @@ function clearTaskList() {
 function clearListFromHtml() {
     let tasks = document.querySelectorAll(".todo-container");
     for (let task of tasks) {
-        task.remove();
+        if (task.dataset.template !== "task-template")
+            task.remove();
     }
 }
 function updateCounter() {
@@ -199,21 +202,17 @@ function useCustomSelect() {
     });
 }
 
-function sortDate(event) {
-    let dateButton = document.getElementById("sort-date");
-    if (event.target != dateButton)
-        return;
-    let latestOnTop = false;
+function sortDate() {
+    let latestOnTop = true;
     return function () {
         latestOnTop = !latestOnTop;
         if (latestOnTop) {
-            taskList.sort((a, b) => a.date - b.date);
+            taskList.sort((a, b) =>new Date(a.date) - new Date(b.date));
         } else {
-            taskList.sort((a, b) => b.date - a.date);
+            taskList.sort((a, b) => new Date(b.date) - new Date(a.date));
         }
-        clearListFromHtml();
-        uploadJson();
-        getTaskListFromWeb();
+        clearListFromHtml()
+        insertTaskListToHtml();
     }
 }
 
