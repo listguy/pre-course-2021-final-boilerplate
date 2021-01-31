@@ -313,7 +313,7 @@ async function main() {
 		const saveButton = document.querySelector("#edit-text-button");
 		let containerDiv = event.target.parentNode;
 		containerDiv.appendChild(newTextForm);
-		newTextInput.focus();
+		newTextInput.focus = true;
 		newTextForm.hidden = false;
 		saveButton.addEventListener("click", saveEvent);
 		function saveEvent(event) {
@@ -331,6 +331,8 @@ async function main() {
 			}
 			if (newDate.checked) {
 				tasksArray[containerDiv.index]["date"] = Number(new Date());
+				tasksArray.push(tasksArray[containerDiv.index]);
+				tasksArray.splice(containerDiv.index, 1); //to sort by date, if changed
 				changeMade = true;
 				newDate.checked = false;
 			}
