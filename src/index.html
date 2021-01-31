@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My TODO List</title>
+  <title>Todo app</title>
   <link rel="stylesheet" type="text/css" href="style.Css">
   <script src="utils.js"></script>
 </head>
@@ -13,25 +13,26 @@
   <div id="top-padding"></div>
   <section id="Control">
     <form id="add-task-form">
-      <div id="basic-control" class="input-control">
+      <div id="basic-control" class="input-control" shake="off">
 
         <div class="task-input-wrapper">
           <label for="text-input">
-            <input id="text-input" placeholder="enter your task" required>
+            <input id="text-input" placeholder="enter your task">
           </label>
         </div>
 
-        <div id="priority-wrapper" class = "custom-select">
-            <select id="priority-list" required>
-             <option value="" disabled selected> Priority</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
+        <div id="priority-wrapper" class="custom-select">
+          <select id="priority-selector">
+            <option value="" disabled selected> Priority</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
         </div>
-
+      </div>
+      <div id="submission-wrapper">
         <label for="add-button">
           <button type="submit" id="add-button">Submit</button>
         </label>
@@ -41,7 +42,10 @@
         <label for="sort-date">
           <button id="sort-date" type="button">Sort by Date</button>
         </label>
-
+        </label>
+        <label for="sort-priority">
+          <button id="sort-priority" type="button">Sort by Priority</button>
+        </label>
         <label for="delete-button">
           <button id="delete-button" type="button">Delete all</button>
         </label>
@@ -52,7 +56,7 @@
 
   <main id="View">
     <header>
-      <span id = "counter">
+      <span id="counter">
       </span>
     </header>
     <div class="todo-container" data-template="task-template">
