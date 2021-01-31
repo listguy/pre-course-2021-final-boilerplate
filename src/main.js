@@ -7,7 +7,7 @@ async function main() {
 		const darkModeButton = document.querySelector("#dark-mode-button");
 		darkModeButton.innerText = "Normal";
 	}
-	const BIN_ID = "/b/601189173126bb747e9fcc1e";
+	const BIN_ID = "/b/6016b4fcabdf9c55679565a0";
 	const viewSection = document.querySelector("#view-section");
 	const textInput = document.querySelector("#text-input");
 	const loadingGif = document.querySelector("#loading-gif");
@@ -331,12 +331,11 @@ async function main() {
 			}
 			if (newDate.checked) {
 				tasksArray[containerDiv.index]["date"] = Number(new Date());
-				tasksArray.push(tasksArray[containerDiv.index]);
-				tasksArray.splice(containerDiv.index, 1); //to sort by date, if changed
 				changeMade = true;
 				newDate.checked = false;
 			}
 			if (changeMade) {
+				localStorage.setItem("my-todo", JSON.stringify(tasksArray));
 				updateCounter(tasksArray);
 				updateJSONBin(tasksArray);
 			}
@@ -345,33 +344,6 @@ async function main() {
 			saveButton.removeEventListener("click", saveEvent);
 		}
 	}
-
-	// 			saveButton.addEventListener("click", (saveEvent) => {
-	// 				let changeMade = false; //avoid unneccesary calls to JSONBin
-	// 				saveEvent.preventDefault();
-	// 				if (newDate.checked) {
-	// 					tasksArray[containerDiv.index]["date"] = Number(new Date());
-	// 					changeMade = true;
-	// 					newDate.checked = false;
-	// 				}
-	// 				if (newTextInput.value !== "" && newTextInput.value !== " ") {
-	// 					tasksArray[containerDiv.index]["text"] = newTextInput.value;
-	// 					newTextInput.value = "";
-	// 					changeMade = true;
-	// 				}
-	// 				if (newPriority.value !== "") {
-	// 					tasksArray[containerDiv.index]["priority"] = newPriority.value;
-	// 					changeMade = true;
-	// 				}
-	// 				newTextForm.hidden = true;
-	// 				if (changeMade) {
-	// 					updateCounter(tasksArray);
-	// 					updateJSONBin(tasksArray);
-	// 				}
-
-	// 			});
-	// 		});
-	// 	});
 
 	document.addEventListener("mouseout", (event) => {
 		if (event.target.classList[0] === "todo-text") {
