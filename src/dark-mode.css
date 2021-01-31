@@ -169,6 +169,9 @@ h1 {
   color: white;
   border-color: black;
 }
+.todo-container:hover{
+  height: 2.2em;
+}
 .view-section {
   box-shadow: 3px 3px 15px 2px black;
   width: fit-content;
