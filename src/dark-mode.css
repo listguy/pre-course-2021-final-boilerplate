@@ -288,33 +288,39 @@ h1 {
 #dark-mode:hover {
   cursor: pointer;
 }
-#themes{
-    position: absolute;
-    display: flex;
-    right: 20px;
-    top: 30px;
+#themes {
+  position: absolute;
+  display: flex;
+  right: 20px;
+  top: 30px;
+}
+@media (max-width: 600px) {
+  #text-input {
+    height: 5em;
+    font-size: 1.5em;
+    width: 70%;
   }
-  @media (max-width: 600px) {
-    #text-input {
-      height: 5em;
-      font-size: 1.5em;
-      width: 70%;
-    }
-    #selection-area {
-      font-size: 1.4em;
-      top: -110px;
-      left: -15%;
-    }
-    body{
-      width: fit-content;
-    }
-    #images {
-      position: relative;
-      flex-direction: row;
-      top: -50px;
-      left: 100px;
+  #selection-area {
+    font-size: 1.4em;
+    top: -110px;
+    left: -15%;
+  }
+  body {
+    width: fit-content;
+  }
+  #images {
+    position: relative;
+    flex-direction: row;
+    top: -50px;
+    left: 100px;
   }
   #contact-info img {
     margin-left: 5px;
   }
+  #regular-mode {
+    font-size: 1em;
   }
+  #dark-mode {
+    font-size: 1em;
+  }
+}
