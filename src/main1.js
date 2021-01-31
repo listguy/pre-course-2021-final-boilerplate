@@ -34,6 +34,7 @@ for (let i = 1 ; i < localStorage.length ; i++){
     todoText.innerText = itemObjectFromStorage.text;
     todoCreatedAt.innerText = itemObjectFromStorage.date;
 }
+listCounter.innerText = document.querySelectorAll(".todo-list-container").length;
 
 
 //EVENT LISTENERS
@@ -82,6 +83,12 @@ function addToList(){
     todoText.innerText = textValue;
     todoCreatedAt.innerText = dateValue;
     textInput.value = '';  //clears input after adding to list
+    numberOfToDos();
+}
+
+function numberOfToDos() {
+    listCounter.innerText = document.querySelectorAll(".todo-list-container").length
+
 }
 
 function checkTime(i) {
@@ -98,3 +105,4 @@ function startTime() {
     m = checkTime(m);
     return h + ":" + m;
 }
+
