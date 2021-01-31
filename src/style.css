@@ -13,7 +13,7 @@ body {
 
 
 #add-section {
-    min-height: 8vh;
+    min-height: 5vh;
     /* display: flex; */
     justify-content: center;
     align-items: center;
@@ -61,7 +61,7 @@ body {
 }
 
 #list-section {
-    min-height: 90vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     background-color: white;
@@ -126,7 +126,7 @@ body {
     
 }
 
-.todo{
+.todo-container{
     background-color: white;
     margin: 0.5rem;
     font-size: 1.5em;
@@ -138,7 +138,7 @@ body {
     
 }
 
-.todo li {
+.todo-container li {
     flex: 1;
 }
 .remove-button {
