@@ -56,7 +56,8 @@ input:-webkit-autofill {
     width: 200px;
 }
 .custom-select select{
-    display:none;
+    display: none;
+
 }
 .custom-first-option{
     background-color: rgb(25, 47, 70);
@@ -91,6 +92,9 @@ input:-webkit-autofill {
     right: 0;
     z-index: 99;
 }
+.select-hide {
+    display: none;
+  }
 .custom-options-wrapper div:hover, .same-as-selected{
     background-color: rgba(0, 0, 0, 0.1)
 }

@@ -12,9 +12,11 @@ let control = document.getElementById("Control");
 let taskForm = document.getElementById("add-task-form");
 taskForm.addEventListener("submit", addNewTask);
 taskForm.addEventListener("click", eraseAll);
+taskForm.addEventListener("click", sortDate(), { once: false });
 let counter = document.getElementById("counter");
 
 getTaskListFromWeb();
+useCustomSelect();
 
 
 async function getTaskListFromWeb() {
@@ -117,83 +119,101 @@ function updateCounter() {
     counter.innerText = "You have: " + i + " tasks.";
 }
 
-useCustomSelect();
 function useCustomSelect() {
-    const customSelectList = document.querySelectorAll(".custom-select");
+    let customFirstOption;
+    let htmlSelectElement;
+    let customOptionsWrapper;
+
+    let customSelectList = document.querySelectorAll(".custom-select");
     for (let customSelect of customSelectList) {
-        const htmlSelectElement = customSelect.querySelector("select");
-        let customFirstOption = document.createElement("DIV");
+        //
+        htmlSelectElement = customSelect.querySelector("select");
+        htmlSelectElement.selectedIndex = 0;
+        customFirstOption = document.createElement("div");
         customFirstOption.classList.add("custom-first-option");
         customFirstOption.append(htmlSelectElement[0].innerHTML);
         customSelect.append(customFirstOption);
-
-        let customOptionsWrapper = document.createElement("DIV");
+        //
+        customOptionsWrapper = document.createElement("div");
         customOptionsWrapper.classList.add("custom-options-wrapper");
+        customOptionsWrapper.classList.add("select-hide");
 
-        customOptionsWrapper.hidden = true;
+        // adding custom options to replace option tag 
         for (let i = 1; i < htmlSelectElement.length; i++) {
-            let customOption = document.createElement("DIV");
+            let customOption = document.createElement("div");
             customOption.innerHTML = htmlSelectElement[i].innerHTML;
 
             customOption.addEventListener("click", clickCustomOption);
+            function clickCustomOption(event) {
+                let target = event.target;
+                for (let i = 1; i < htmlSelectElement.length; i++) {
+                    if (htmlSelectElement[i].innerHTML === target.innerHTML) {
+                        htmlSelectElement.selectedIndex = i;
+                        customFirstOption.innerHTML = target.innerHTML;
 
+                        let temp = target.parentNode.querySelectorAll(".same-as-selected");
+                        for (let j = 0; j < temp.length; j++) {
+                            temp[j].classList.remove("same-as-selected");
+                        }
+                        target.classList.add("same-as-selected");
+                        break;
+                    }
+                }
+                customFirstOption.click();
+            }
             customOptionsWrapper.append(customOption);
         }
         customSelect.append(customOptionsWrapper);
         customFirstOption.addEventListener("click", closeOpenBox);
-
-
-        function clickCustomOption(event) {
+        function closeOpenBox(event) {
             let target = event.target;
-            let i;
-            for (i = 0; i < htmlSelectElement.length; i++) {
-                if (htmlSelectElement[i].innerHTML == target.innerHTML) {
-                    htmlSelectElement.selectedIndex = i;
-                    customFirstOption.innerHTML = target.innerHTML;
-                    let temp = target.parentNode.querySelectorAll(".same-as-selected");
-                    for (let item of temp) {
-                        item.classList.remove("same-as-selected");
-                    }
-                    target.classList.add("same-as-selected");
-                    break;
-                }
-            }
-            customFirstOption.innerHTML.dispatchEvent("click");
+            event.stopPropagation();
+            closeAllSelect(target);
+            target.nextSibling.classList.toggle("select-hide");
+            target.classList.toggle("select-arrow-active");
         }
     }
-
-    function closeAllSelect(index = -1) {
+    function closeAllSelect(element) {
         let customOptionWrappers = document.querySelectorAll(".custom-options-wrapper");
         let customFirstOptions = document.querySelectorAll(".custom-first-option");
-
-        for (let customFirstOption of customFirstOptions) {
-            customFirstOption.classList.toggle("select-arrow-active");
+        let arr = [];
+        for (let i = 0; i < customFirstOptions.length; i++) {
+            if (element === customFirstOptions[i]) {
+                arr.push(i);
+            } else {
+                customFirstOptions[i].classList.remove("select-arrow-active");
+            }
         }
-
-        if (index > -1) {
-            customFirstOptions[index].classList.toggle("select-arrow-active");
+        for (let i = 0; i < customOptionWrappers.length; i++) {
+            if (arr.indexOf(i)) {
+                customOptionWrappers[i].classList.add("select-hide");
+            }
         }
-
-        for (let customOptionWrapper of customOptionWrappers) {
-            customOptionWrapper.hidden = true;
-        }
-        if (index > -1) {
-            customOptionWrappers[index].hidden = false;
-        }
-    }
-
-    function closeOpenBox(event) {
-        event.stopPropagation();
-        const temp = document.querySelectorAll(".custom-first-option");
-        for (let i = 0; i < temp.length; i++) {
-            if (temp[i] === event.target)
-                closeAllSelect(i);
-            break;
-        }
-        event.target.querySelector(".custom-options-wrapper").classList.toggle("select-arrow-active");
     }
     document.addEventListener("click", closeAllSelect);
-
+    taskForm.addEventListener("reset", function () {
+        htmlSelectElement.selectedIndex = 0;
+        customFirstOption.innerHTML = document.createElement("div");
+        customFirstOption.classList.add("custom-first-option");
+        customFirstOption.innerHTML = htmlSelectElement[0].innerHTML;
+    });
 }
 
+function sortDate(event) {
+    let dateButton = document.getElementById("sort-date");
+    if (event.target != dateButton)
+        return;
+    let latestOnTop = false;
+    return function () {
+        latestOnTop = !latestOnTop;
+        if (latestOnTop) {
+            taskList.sort((a, b) => a.date - b.date);
+        } else {
+            taskList.sort((a, b) => b.date - a.date);
+        }
+        clearListFromHtml();
+        uploadJson();
+        getTaskListFromWeb();
+    }
+}
 
