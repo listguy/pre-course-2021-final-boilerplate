@@ -42,11 +42,14 @@ document.addEventListener('click', function (event) {
             addItem();
             break;
         case 'sort-button':
-            sortList();
+            sortListByPriority();
             break;
         case 'delete-all':
             deleteList();
             break;
+            case 'sort-date':
+                sortListByCreationDate();
+                break;
         default:
             return;
     }
@@ -103,7 +106,8 @@ function addItem() {
             "text": temp,
             "date": formattedDate,
             "priority": Number(priority.value),
-            "timeLeft": timeLeft
+            "timeLeft": timeLeft,
+            "timeInMS": currentDate.getTime()
         };
 
         myTodo['my-todo'].push(item);
@@ -161,8 +165,13 @@ function deleteList() {
     }
 }
 
-function sortList() {
+function sortListByPriority() {
     myTodo["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+    printTodoList(myTodo["my-todo"]);
+}
+
+function sortListByCreationDate() {
+    myTodo['my-todo'].sort((a, b) => (a["timeInMS"] > b["timeInMS"]) ? -1 : 1);
     printTodoList(myTodo["my-todo"]);
 }
 

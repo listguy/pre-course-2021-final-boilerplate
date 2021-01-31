@@ -68,7 +68,6 @@ html {
 }
 
 .top {
-    /* background-color: red; */
     height: 15vh;
     display: flex;
     justify-content: center;
@@ -81,7 +80,6 @@ html {
     flex-direction: column;
     height: 70vh;
     border: 1px solid var(--my-blue);
-    /* background: rgb(0, 68, 255); */
 }
 
 .bottom {
@@ -103,6 +101,27 @@ html {
 .addTask, .newPriority, .dueDate, .addButton  {
     flex: 1 1 auto;
 }
+
+.newPriority select {
+    width: 30px;
+    height: 20px;
+}
+.controlSection input {
+    height: 20px;
+}
+.controlSection input:focus {
+    border: 1.5px solid var(--my-blue);
+}
+
+.newPriority select:focus {
+    border: 1.5px solid var(--my-blue);
+}
+
+.addTask input {
+    width: 250px;
+    height: 20px;
+}
+
 
 #counter {
     flex: 0 1 auto;
