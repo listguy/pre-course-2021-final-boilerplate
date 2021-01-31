@@ -75,6 +75,7 @@ function itemObjectToDiv(myTodoItem) {
   const deleteButton = document.createElement("button");
   const doneButton = document.createElement("button");
   const editButton = document.createElement("button");
+  const markAsDone = document.createElement("input");
 
   todoContainer.setAttribute("class", "todo-container");
   todoPriority.setAttribute("class", "todo-priority");
@@ -84,6 +85,8 @@ function itemObjectToDiv(myTodoItem) {
   doneButton.setAttribute("class", "done");
   doneButton.setAttribute("hidden", "true");
   editButton.setAttribute("class", "edit");
+  markAsDone.setAttribute("class", "mark-as-done")
+  markAsDone.setAttribute("type", "checkbox")
 
   todoPriority.innerText = myTodoItem["priority"];
   todoCreatedAt.innerText = myTodoItem["date"];
@@ -98,6 +101,7 @@ function itemObjectToDiv(myTodoItem) {
   todoContainer.appendChild(deleteButton);
   todoContainer.appendChild(doneButton);
   todoContainer.appendChild(editButton);
+  todoContainer.appendChild(markAsDone);
 
   return todoContainer;
 }
