@@ -65,13 +65,24 @@
 			<section id="view-section"></section>
 			<img id="fridge" src="images/fridge-body.jpeg" />
 			<div id="tip-window" hidden>Click to Delete task</div>
-			<form id="edit-text-input" hidden>
-				<input
+			<div id="edit-task-input" hidden>
+				<input id="edit-text" type="text" placeholder="Edit" /><br /><button
 					class="edit-text"
-					type="text"
-					placeholder="What's now?"
-				/><br /><button class="edit-text" id="edit-text-button">Save</button>
-			</form>
+					id="edit-text-button"
+				>
+					Save
+				</button>
+				<select id="priority-changer" name="priority-changer">
+					<option value="" class="option" selected>Priority</option>
+					<option value="1" class="option priority1">1-Least</option>
+					<option value="2" class="option priority2">2</option>
+					<option value="3" class="option priority3">3</option>
+					<option value="4" class="option priority4">4</option>
+					<option value="5" class="option priority5">5-Most</option>
+				</select>
+				<label for="date-changer" id="date-changer-label">New date</label>
+				<input type="checkbox" id="date-changer" name="date-changer" />
+			</div>
 			<div id="contact-note">
 				<div class="contact-magnet" id="letter1">C</div>
 				<div class="contact-magnet" id="letter2">O</div>

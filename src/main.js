@@ -288,50 +288,89 @@ async function main() {
 	});
 	document.addEventListener("mouseover", (event) => {
 		if (event.target.classList[0] === "todo-text") {
-			const originalText = event.target;
+			const containerDiv = event.target.parentNode;
 			const tipWindow = document.querySelector("#tip-window");
 			tipWindow.innerHTML = "Double-click to edit task";
 			tipWindow.style.left =
-				originalText.getBoundingClientRect().left +
-				originalText.getBoundingClientRect().width / 2 -
+				containerDiv.getBoundingClientRect().left +
+				containerDiv.getBoundingClientRect().width / 2 -
 				70 +
 				`px`;
 			tipWindow.style.top =
-				originalText.getBoundingClientRect().top +
-				originalText.getBoundingClientRect().height +
+				containerDiv.getBoundingClientRect().top +
+				containerDiv.getBoundingClientRect().height +
 				5 +
 				"px";
 			tipWindow.hidden = false;
-			event.target.addEventListener("dblclick", (clickEvent) => {
-				clickEvent.preventDefault();
-				const containerDiv = clickEvent.target.parentNode;
-				const newTextForm = document.querySelector("#edit-text-input");
-				newTextForm.style.left =
-					originalText.getBoundingClientRect().left +
-					originalText.getBoundingClientRect().width / 2 -
-					27 +
-					`px`;
-				newTextForm.style.top = originalText.getBoundingClientRect().top + "px";
-				newTextForm.hidden = false;
-				newTextInput = newTextForm.querySelector("input");
-				newTextInput.focus();
-				newTextForm.addEventListener("click", (saveEvent) => {
-					saveEvent.preventDefault();
-
-					if (saveEvent.target.id === "edit-text-button") {
-						newTextForm.hidden = true;
-						if (newTextInput.value !== "" && newTextInput.value !== " ") {
-							tasksArray[containerDiv.index]["text"] = newTextInput.value;
-							updateCounter(tasksArray);
-							updateJSONBin(tasksArray);
-							originalText.innerHTML = newTextInput.value;
-							newTextInput.value = "";
-						}
-					}
-				});
-			});
+			containerDiv.addEventListener("dblclick", editEvent);
 		}
 	});
+	function editEvent(event) {
+		const newTextForm = document.querySelector("#edit-task-input");
+		const newTextInput = document.querySelector("#edit-text");
+		const newPriority = document.querySelector("#priority-changer");
+		const newDate = document.querySelector("#date-changer");
+		const saveButton = document.querySelector("#edit-text-button");
+		let containerDiv = event.target.parentNode;
+		containerDiv.appendChild(newTextForm);
+		newTextInput.focus();
+		newTextForm.hidden = false;
+		saveButton.addEventListener("click", saveEvent);
+		function saveEvent(event) {
+			event.preventDefault();
+			let changeMade = false; //avoid unneccesary calls to JSONBin
+			if (newTextInput.value !== "" && newTextInput.value !== " ") {
+				tasksArray[containerDiv.index]["text"] = newTextInput.value;
+				changeMade = true;
+				newTextInput.value = "";
+			}
+			if (newPriority.value !== "") {
+				tasksArray[containerDiv.index]["priority"] = newPriority.value;
+				changeMade = true;
+				newPriority.firstElementChild.selected = true;
+			}
+			if (newDate.checked) {
+				tasksArray[containerDiv.index]["date"] = Number(new Date());
+				changeMade = true;
+				newDate.checked = false;
+			}
+			if (changeMade) {
+				updateCounter(tasksArray);
+				updateJSONBin(tasksArray);
+			}
+			newTextForm.hidden = true;
+			document.body.appendChild(newTextForm);
+			saveButton.removeEventListener("click", saveEvent);
+		}
+	}
+
+	// 			saveButton.addEventListener("click", (saveEvent) => {
+	// 				let changeMade = false; //avoid unneccesary calls to JSONBin
+	// 				saveEvent.preventDefault();
+	// 				if (newDate.checked) {
+	// 					tasksArray[containerDiv.index]["date"] = Number(new Date());
+	// 					changeMade = true;
+	// 					newDate.checked = false;
+	// 				}
+	// 				if (newTextInput.value !== "" && newTextInput.value !== " ") {
+	// 					tasksArray[containerDiv.index]["text"] = newTextInput.value;
+	// 					newTextInput.value = "";
+	// 					changeMade = true;
+	// 				}
+	// 				if (newPriority.value !== "") {
+	// 					tasksArray[containerDiv.index]["priority"] = newPriority.value;
+	// 					changeMade = true;
+	// 				}
+	// 				newTextForm.hidden = true;
+	// 				if (changeMade) {
+	// 					updateCounter(tasksArray);
+	// 					updateJSONBin(tasksArray);
+	// 				}
+
+	// 			});
+	// 		});
+	// 	});
+
 	document.addEventListener("mouseout", (event) => {
 		if (event.target.classList[0] === "todo-text") {
 			const originalText = event.target;
