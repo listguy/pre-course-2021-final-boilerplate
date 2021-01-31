@@ -73,7 +73,17 @@ async function main() {
 	sortButton.addEventListener("click", (sort) => {
 		let sortedTasksArray = [];
 		if (sortButton.sorted) {
+			let temp = null;
 			sortedTasksArray = tasksArray;
+			for (let i = 1; i < sortedTasksArray.length; i++) {
+				for (let j = i; j < sortedTasksArray.length; j++) {
+					if (sortedTasksArray[j - 1]["date"] > sortedTasksArray[j]["date"]) {
+						temp = sortedTasksArray[j];
+						sortedTasksArray[j] = sortedTasksArray[j - 1];
+						sortedTasksArray[j - 1] = temp;
+					}
+				}
+			}
 			sortButton.innerText = "Sort by priority";
 		} else {
 			sortButton.innerText = "Sort by date";
@@ -290,7 +300,7 @@ async function main() {
 		if (event.target.classList[0] === "todo-text") {
 			const containerDiv = event.target.parentNode;
 			const tipWindow = document.querySelector("#tip-window");
-			tipWindow.innerHTML = "Double-click to edit task";
+			tipWindow.innerHTML = "Click to edit task";
 			tipWindow.style.left =
 				containerDiv.getBoundingClientRect().left +
 				containerDiv.getBoundingClientRect().width / 2 -
@@ -302,7 +312,7 @@ async function main() {
 				5 +
 				"px";
 			tipWindow.hidden = false;
-			containerDiv.addEventListener("dblclick", editEvent);
+			containerDiv.addEventListener("click", editEvent);
 		}
 	});
 	function editEvent(event) {
