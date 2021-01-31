@@ -60,9 +60,9 @@ function addToList(){
     //prints to list
     todoPriority.innerText = priorityValue;
     todoText.innerText = textValue;
-    todoCreatedAt.innerText = dateValue;
+    todoCreatedAt.innerText = startTime(dateValue);
     textInput.value = '';  //clears input after adding to list
-    numberOfToDos();//counts the number of tasks
+    numberOfToDos();       //counts the number of tasks
 }
 
 function numberOfToDos() {
@@ -80,9 +80,16 @@ function startTime() {
     let today = new Date();
     let h = today.getHours();
     let m = today.getMinutes();
+    let month = today.getMonth();
+    let day = today.getDate();
     m = checkTime(m);
-    return h + ":" + m;
+    return h + ":" + m + ', ' + day + '.' + month + 1;
 }
+// function convertTimeToReadable(timeStamp) {
+//     let Month = timeStamp.getMonth();
+//     let Date = timeStamp.getDate();
+//     let Year = timeStamp.getFullYear();
+// }    
 
 //Sorts list By Priority
 function sortListItems(a, b) {
@@ -137,6 +144,6 @@ function printFromLocalStorage() {
         let itemObjectFromStorage = JSON.parse(localStorage.getItem(`my-todo${i}`));
         todoPriority.innerText = itemObjectFromStorage.priority;
         todoText.innerText = itemObjectFromStorage.text;
-        todoCreatedAt.innerText = itemObjectFromStorage.date;
+        todoCreatedAt.innerText = startTime(itemObjectFromStorage.date);
     }
 }
