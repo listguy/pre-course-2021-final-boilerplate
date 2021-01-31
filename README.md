@@ -1,6 +1,6 @@
 <div align="center"><h1>Pre Course Project - Todo List</h1></div>
 
-## by Ophir Huberman Github page: https://hubermanophir.github.io/pre-course-2021-final-boilerplate/src/index
+## by Ophir Huberman, Github page: https://hubermanophir.github.io/pre-course-2021-final-boilerplate/src/index
 <br>
 
 ![my to do list](./src/images-and-videos/zoom-0.gif)
