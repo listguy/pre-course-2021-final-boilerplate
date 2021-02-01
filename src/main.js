@@ -2,14 +2,16 @@
 "use strict"
 /**
  * taskList: the array of tasks.
+ * jsonBin an object with the structure {my-to:taskList}
 */
 let API_KEY = "https://api.jsonbin.io/v3/b/60173c3d1380f27b1c205041";
 let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/60173c3d1380f27b1c205041/latest";
 let taskList;
 let jsonBin;
 let body = document.body;
-let view = document.getElementById("View");
+let listWrapper = document.getElementById("list-wrapper");
 let control = document.getElementById("Control");
+let basicControl = document.getElementById("basic-control");
 
 let taskForm = document.getElementById("add-task-form");
 taskForm.addEventListener("submit", addNewTask);
@@ -23,6 +25,8 @@ priorityButton.addEventListener("click", sortPriority(), { once: false });
 
 let counter;
 let counterWrapper = document.getElementById("counter");
+
+let deleteCheckBox = document.querySelectorAll(".delete-checkbox input");
 
 getTaskListFromWeb();
 useCustomSelect();
@@ -50,17 +54,19 @@ function addNewTask(event) {
     let text = document.getElementById("text-input").value;
     let priority = document.getElementById("priority-selector").value;
     let task = insertTaskToTaskList(text, priority);
-    if (text === "") {
-        let basicControl = document.getElementById("basic-control");
+
+    if (text === "" || priority < 1) {
         basicControl.setAttribute("shake", "on");
-        setTimeout('basicControl.setAttribute("shake", "off")', 5000);
-        return;
+        event.preventDefault();
+        setTimeout('basicControl.setAttribute("shake", "off")', 1000);
+        setTimeout('return', 1000);
+    } else {
+        insertTaskToHtml(task);
+        uploadJson();
+        updateCounter()
+        taskForm.reset();
+        event.preventDefault();
     }
-    insertTaskToHtml(task);
-    uploadJson();
-    updateCounter()
-    taskForm.reset();
-    event.preventDefault();
 }
 function insertTaskToTaskList(text, priority, date = new Date()) {
     if (taskList[0] === false) {
@@ -99,7 +105,7 @@ function insertTaskToHtml(task) {
     dateContainer.append(date);
     textContainer.append(text);
     priorityContainer.append(priority);
-    view.append(todoContainer);
+    listWrapper.append(todoContainer);
 
 }
 function uploadJson() {

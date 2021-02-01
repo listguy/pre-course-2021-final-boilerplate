@@ -23,7 +23,7 @@
 
         <div id="priority-wrapper" class="custom-select">
           <select id="priority-selector">
-            <option value="" disabled selected> Priority</option>
+            <option value="0" disabled selected> Priority</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -58,6 +58,9 @@
     <header>
       <span>You have </span><span id="counter"> </span><span> tasks.</span>
     </header>
+    <div id = "list-wrapper">
+
+    </div>
 
   </main>
 
@@ -71,13 +74,15 @@
 
     </div>
     <div class="created-at-container">
-      <span>Created At:</span>
+      <span>Crated:</span>
       <span class="todo-created-at-template"></span>
     </div>
     <div class="priority-container">
       <span>Priority:</span>
       <span class="todo-priority-template"></span>
     </div>
+    <div class = "due-date">Due Date:</div>
+    <div class = "extras-wrapper">expend</div>
   </div>
 </footer>
 

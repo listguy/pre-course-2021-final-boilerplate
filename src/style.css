@@ -1,7 +1,8 @@
 :root{
-    --backgroundColor:rgb(206, 201, 201);
+    --backgroundColor:#efefef;
     --fontColor:black;
-    --headerBgColor:rgb(170, 218, 211);
+    --headerBgColor:#CAEBF2;
+    --tasksBorder:black;
 }
 
 body{
@@ -9,7 +10,7 @@ body{
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
-
+    color: var(--fontColor);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 25px min-content auto;
@@ -44,7 +45,6 @@ body{
     font-size: inherit;
     background: var(--headerBgColor);
     border:0;
-    border-radius: 5px;
     padding: 10px 10px;
     width:100%;
     box-sizing: border-box;
@@ -62,35 +62,35 @@ input:-webkit-autofill {
 
 .custom-select{
     position: relative;
-    width: 200px;
+    width: 120px;
+
 }
 .custom-select select{
     display: none;
-
 }
 .custom-first-option{
-    background-color: rgb(40, 119, 202);
+    background-color: hsl(191, 61%, 60%);
     border-radius: 10px;
     box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
--webkit-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
--moz-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
+    -webkit-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
+    -moz-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
 }
 .custom-first-option::after{
     position: absolute;
     content: "";
-    top: 15px;
+    top: 18px;
     right: 10px;
     width: 0;
     height: 0;
     border: 6px solid transparent;
-    border-color: #fff transparent transparent transparent;
+    border-color: rgb(0, 0, 0) transparent transparent transparent;
 }
 .custom-first-option.select-arrow-active::after{
-    border-color: transparent transparent #fff transparent;
+    border-color: transparent transparent rgb(0, 0, 0) transparent;
     top: 7px;
 }
 .custom-options-wrapper div, .custom-first-option{
-    color: #ffffff;
+    color: #030303;
     padding: 8px 16px;
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -98,7 +98,7 @@ input:-webkit-autofill {
 }
 .custom-options-wrapper{
     position: absolute;
-    background-color: DodgerBlue;
+    background-color: hsl(191, 60%, 70%);;
     top: 100%;
     left: 0;
     right: 0;
@@ -113,8 +113,8 @@ input:-webkit-autofill {
 }
 
 #basic-control[shake="on"] {
-    animation: shake 0.3s linear 0;
-    animation-iteration-count: 6;
+    animation: shake 0.25s linear 0;
+    animation-iteration-count: 1;
   }
 @keyframes shake {
     0% { transform: translate(2px, 2px) rotate(0deg); }
@@ -140,44 +140,76 @@ input:-webkit-autofill {
 
 main{
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;   
+    grid-template-columns:10vw 80vw 10vw;   
     height:min-content;
 }
 main *{
         grid-column: 2/3;
 }
-
-div[data-template]{
-        display: none;
+#list-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+  
 }
 .todo-container{
-    border:orangered solid 2px;
+    margin: 5px;
+    padding: 10px;
+    border-color: var(--tasksBorder);
+    border: solid 2px;
+    border-radius: 10px;
+    flex:0.33 1 250px;
+    
     display: grid;
-    grid-template-columns: 40px repeat(6, auto);
-    grid-template-rows: repeat(2,25px);
+    grid-template-columns: 35px;
+    /*    grid-template-columns: repeat(5, 35px) ;*/
+
+    grid-gap: 3px;
     grid-template-areas: 
-    "dc tx tx tx ca ca"
-    "dc tx tx tx pr pr";
+    "dc tx tx tx tx"
+    " . dd dd dd dd"
+    " . ca ca ca ca"
+    " . pr pr pr pr"
+    " . ex ex ex ex";
     align-content: center;
 }
+.todo-text{
+    word-break: break-word;
+    grid-area: tx;
+    border-bottom:rgb(87, 81, 81) solid 2px;
+
+}
+.extras-wrapper{
+    grid-area: ex;
+}
+.due-date{
+    grid-area: dd;
+}
+
+
 /*Left Tick Box Design*/
 .delete-checkbox{
     grid-area: dc;
-    position: relative;
+    /*position: relative;*/
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 .delete-checkbox *{
-    position: absolute;
+    /*position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 12px;
+    transform: translate(-50%, -50%);*/
     height: 25px;
     width: 25px;
     margin:0; 
     cursor: pointer;
+    -webkit-box-shadow: 2px 1px 3px 0px rgba(50, 50, 50, 0.68);
+    -moz-box-shadow: 2px 1px 3px 0px rgba(50, 50, 50, 0.68);
+    box-shadow: 2px 1px 3px 0px rgba(50, 50, 50, 0.68);
 }
 .delete-checkbox input{
     opacity: 0;
@@ -185,9 +217,10 @@ div[data-template]{
     width: 100%;
 }
 .checkmark{
-    background-color: #eee;
-    border-radius: 15%;
+    background-color:hsl(0, 0%, 80%);;
+    border-radius: 5px;
     z-index: -1;
+    width: 25px;
 }
 .delete-checkbox:hover input ~ .checkmark {
     background-color: #ccc;
@@ -196,11 +229,12 @@ div[data-template]{
     background-color: #2196F3;
 }
 .checkmark::after {
-    position: absolute;
-    content: "";
+   /* position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
+    content: "";
+
     display: none;
 }
 .delete-checkbox input:checked ~ .checkmark::after {
@@ -218,9 +252,10 @@ div[data-template]{
 
 
 
-.todo-text{
-    grid-area: tx;
+div[data-template]{
+    display: none;
 }
+
 .created-at-container{
     grid-area: ca;
 }
