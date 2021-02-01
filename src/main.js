@@ -1,5 +1,16 @@
 "use strict";
 
+const mode = localStorage.getItem("mode"); 
+const isDarkMode = window.matchMedia && 
+    window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (isDarkMode && mode !== 'light') {
+    localStorage.setItem("mode", "dark");
+}
+
+if (mode === 'dark') {
+    const theme = document.querySelector("#theme-link");
+    theme.href = "darkStyle.css";
+}
 let counter = 0;
 let id = 0;
 let tasks = { "my-todo": [] };
@@ -54,6 +65,16 @@ document.addEventListener('click', function (event) { //manages all the clicks
         case 'sort-dueDate':
             sortListByDueDate();
             break;
+        case 'mode-button':
+        const theme = document.querySelector("#theme-link");
+        if (theme.getAttribute("href") == "lightStyle.css") {
+            theme.href = "darkStyle.css";
+            localStorage.setItem("mode", "dark");
+        } else {
+            theme.href = "lightStyle.css";
+            localStorage.setItem("mode", "light");
+        }
+        break;
     }
     switch (pressedClass) {
         case 'checkbox':
@@ -288,9 +309,13 @@ function editItem(event) {
         }
     }
     const newText = prompt('Enter the task text.');
+    if (newText === '') {
+        return;
+    } else {
     tasks["my-todo"][selectedIndex].text = newText;
     printTodoList(tasks["my-todo"]);
     updateJSON();
+    }
 }
 
 function updateCounter() {
