@@ -4,7 +4,6 @@
     --headerBgColor:#CAEBF2;
     --tasksBorder:black;
 }
-
 body{
     background-color:var(--backgroundColor);
     font-size: 16px;
@@ -56,10 +55,10 @@ body{
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px var(--headerBgColor) inset;
 }
+/*priority select menu*/
 #priority-wrapper{
     display: inline-block;
 }
-
 .custom-select{
     position: relative;
     width: 120px;
@@ -130,14 +129,42 @@ input:-webkit-autofill {
     100% { transform: translate(2px, -2px) rotate(-2deg); }
   }
 
+#submission-wrapper{
+    padding: 5px;
+    display:flex;
+    justify-content:flex-start;
+}
+label[for="delete-marked"]{
+   flex: 1 0 auto;
+}
+label[for="delete-button"]{
+    flex: 3 0 auto;
+ }
+button{ 
+    border:1px solid transparent;
+    min-width: 100px;
+    background-color: hsl(191, 61%, 60%);
+    padding:5px;
+    margin:5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 5px 7px 7px 0px rgba(0,0,0,0.26); 
+    box-shadow: 5px 7px 7px 0px rgba(0,0,0,0.26);
 
-
-
-
-
+ }
+input[type="date"]{
+    margin-left:25px;
+    border: 1px solid transparent;
+    height:25px;
+    padding:8px 16px;
+    background-color: hsl(191, 61%, 60%);
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
+    -webkit-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
+    -moz-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
+    font-size: inherit;
+}
 
 /*View Section design*/
-
 main{
     display: grid;
     grid-template-columns:10vw 80vw 10vw;   
@@ -152,7 +179,6 @@ main *{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content:flex-start;
-  
 }
 .todo-container{
     margin: 5px;
@@ -164,15 +190,12 @@ main *{
     
     display: grid;
     grid-template-columns: 35px;
-    /*    grid-template-columns: repeat(5, 35px) ;*/
-
     grid-gap: 3px;
     grid-template-areas: 
     "dc tx tx tx tx"
-    " . dd dd dd dd"
     " . ca ca ca ca"
-    " . pr pr pr pr"
-    " . ex ex ex ex";
+    " . pr pr pr pr";
+
     align-content: center;
 }
 .todo-text{
@@ -181,13 +204,9 @@ main *{
     border-bottom:rgb(87, 81, 81) solid 2px;
 
 }
-.extras-wrapper{
-    grid-area: ex;
-}
 .due-date{
     grid-area: dd;
 }
-
 
 /*Left Tick Box Design*/
 .delete-checkbox{
@@ -241,15 +260,10 @@ main *{
      font-size: 22px;
 }
 /*Left Tick Box Design end*/
+
 div[data-marked="true"]{
     opacity: 30%;
 }
-
-
-
-
-
-
 
 div[data-template]{
     display: none;
@@ -261,6 +275,5 @@ div[data-template]{
 .priority-container{
     grid-area: pr;
 }
-
 
 

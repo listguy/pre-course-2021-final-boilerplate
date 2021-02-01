@@ -11,7 +11,7 @@ let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/60184040dde2a87f921c01ac/lates
 let taskList;
 let jsonBin;
 let body = document.body;
-let listWrapper = document.getElementById("list-wrapper");
+
 let control = document.getElementById("Control");
 let basicControl = document.getElementById("basic-control");
 
@@ -20,10 +20,10 @@ taskForm.addEventListener("submit", addNewTask);
 taskForm.addEventListener("click", eraseAll);
 taskForm.addEventListener("click", removeAllMarked);
 
-
 let counter;
 let counterWrapper = document.getElementById("counter");
 
+let listWrapper = document.getElementById("list-wrapper");
 listWrapper.addEventListener("click", markedTask, { once: false });
 
 let dateButton = document.getElementById("sort-date");
@@ -32,14 +32,8 @@ dateButton.addEventListener("click", sortDate(), { once: false });
 let priorityButton = document.getElementById("sort-button");
 priorityButton.addEventListener("click", sortPriority(), { once: false });
 
-
-
 useCustomSelect();
-
 let uploaded = getTaskListFromWeb();
-
-
-
 
 async function getTaskListFromWeb() {
     let response = await fetch(API_KEY_LATEST);
@@ -83,6 +77,8 @@ function insertTaskToTaskList(text, priority, date = new Date(), marked = false)
     if (taskList[0] === false) {
         taskList = [];
     }
+
+
     taskList.push({
         text,
         priority,
@@ -123,6 +119,7 @@ function insertTaskToHtml(task) {
     dateContainer.append(date);
     textContainer.append(text);
     priorityContainer.append(priority);
+
     listWrapper.append(todoContainer);
 
 }
@@ -309,7 +306,6 @@ function markedTask(event) {
     }
     uploadJson();
 }
-
 function removeAllMarked(event) {
     let deleteMarkBtm = document.getElementById("delete-marked")
     if (event.target != deleteMarkBtm) {
@@ -317,13 +313,13 @@ function removeAllMarked(event) {
     }
 
     let allTaskWrappers = document.querySelectorAll(".todo-container");
-     for (let task of allTaskWrappers) {
+    for (let task of allTaskWrappers) {
         if (task.dataset.template != "task-template" && task.dataset.marked === "true") {
             task.remove();
         }
     }
     for (let i = 0; i <= taskList.length; i++) {
-        if (i===taskList.length)
+        if (i === taskList.length)
             break;
         if (taskList[i].marked === true) {
             taskList.splice(i, 1);
@@ -331,7 +327,7 @@ function removeAllMarked(event) {
         }
         uploadJson();
     }
-     updateCounter();
+    updateCounter();
 }
 
 
