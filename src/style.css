@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -24,8 +25,6 @@ body {
     margin-right: auto;
     box-shadow: 5px 10px 10px #7e87c4;
     transition: 1s;
-    transform-origin: left;
-    transform: scaleX(1);
 }
 
 #text-input {
@@ -85,6 +84,35 @@ body {
     padding-left: 20px;
     color: white;
     font-size: 1.5em;
+    transition: 10s;
+
+    animation-name: animate;
+    animation-direction: alternate-reverse;
+    animation-duration: 60s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out;
+}
+@keyframes animate {
+    0% {
+        background-image: url(https://wallpaperaccess.com/full/31217.jpg);
+    }
+    20% {
+        background-image: url(https://wallpapercave.com/wp/cS487ew.jpg);
+    }
+    40% {
+        background-image: url(https://images-na.ssl-images-amazon.com/images/I/71qLS8RFLnL._AC_SL1200_.jpg);
+    }
+    60% {
+        background-image: url(https://storage.googleapis.com/checkfront-rogue.appspot.com/accounts/cf-94884/images/2020/large-LK94000828-E-6-1588586631566.jpg?alt=media&generation=1588586514955253);
+    }
+    80% {
+        background-image: url(https://seeksophie.imgix.net/images/05a702354e80196fd6635e7614c3e1d9.jpg?auto=format%2Ccompress&fit=crop&w=600);
+    }
+    100% {
+        background-image: url(https://i.pinimg.com/originals/e4/e6/6c/e4e66c557af78774d47484c43ba92701.jpg);
+    }
 }
 
 #title {
@@ -148,7 +176,8 @@ body {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px rgb(206, 206, 206) solid;
-    transition: all 1s ease;
+    transition: 1s ease;
+    cursor: pointer;
 }
 
 .todo-container{
@@ -161,7 +190,7 @@ body {
     justify-content: space-between;
     align-items: center;
     flex: 1;
-    transition: all 0.5s ease;
+    transition: all 1s ease;
 }
 
 .todo-text{
@@ -182,6 +211,13 @@ body {
     color: lightgrey;
 }
 
+.complete-animation {
+    opacity: 0.3;
+}
+.complete-animation .todo-text {
+    text-decoration: line-through;
+}
+
 .remove-button {
     order: 2;
     color: white;
@@ -190,6 +226,7 @@ body {
     background-color: #B22222;
     padding: 1px 8px;
     font-size: 1.2em;
+    text-decoration: none;
 }
 
 .remove-animation {
@@ -220,8 +257,19 @@ body {
 .fade-in {
     animation: fadeIn 1.7s;
 }
-
 @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.drop {
+    animation: pop 1.5s;
+}
+@keyframes pop {
     from {
         opacity: 0;
     }
@@ -248,9 +296,8 @@ body {
 }
 .todo-list-container:hover{
     background-color: whitesmoke;
-    
 }
-.todo-container:hover{
+.todo-list-container:hover .todo-container{
     background-color: whitesmoke;
     margin: 1.2rem;
 }
