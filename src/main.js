@@ -18,7 +18,7 @@ function getJSON() {
         })
 }
 
-function updateJSON() { 
+function updateJSON() {
     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e', {
         method: 'PUT',
         headers: {
@@ -50,6 +50,9 @@ document.addEventListener('click', function (event) { //manages all the clicks
             break;
         case 'sort-date':
             sortListByCreationDate();
+            break;
+        case 'sort-dueDate':
+            sortListByDueDate();
             break;
     }
     switch (pressedClass) {
@@ -142,7 +145,6 @@ function addItem() { //adds an task locally, and to the array as object.
 function printTodoList(arr) { //display the tasks from the array.
     const viewSection = document.querySelector('.viewSection');
     deleteList();
-    console.log(tasks);
     arr.forEach(element => {
         const div = document.createElement('div');
         div.classList.add('todo-container');
@@ -197,13 +199,42 @@ function deleteList() { //clears the tasks area
     }
 }
 
-function sortListByPriority() { 
-    tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+function sortListByPriority() {
+    const sortPriorityButton = document.querySelector('.sortByPriority');
+
+    if (sortPriorityButton.id === 'AscendingPriority') {
+        tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+        sortPriorityButton.id = 'DescendingPriority';
+    } else {
+        tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? 1 : -1);
+        sortPriorityButton.id = 'AscendingPriority';
+    }
     printTodoList(tasks["my-todo"]);
 }
 
 function sortListByCreationDate() {
-    tasks['my-todo'].sort((a, b) => (a["timeInMS"] > b["timeInMS"]) ? -1 : 1);
+    const sortDateButton = document.querySelector('.sortByDate');
+
+    if (sortDateButton.id === 'AscendingDate') {
+        tasks['my-todo'].sort((a, b) => (a["timeInMS"] > b["timeInMS"]) ? -1 : 1);
+        sortDateButton.id = 'DescendingDate';
+    } else {
+        tasks["my-todo"].sort((a, b) => (a["timeInMS"] > b["timeInMS"]) ? 1 : -1);
+        sortDateButton.id = 'AscendingDate';
+    }
+    printTodoList(tasks["my-todo"]);
+}
+
+function sortListByDueDate() {
+    const sortDueDateButton = document.querySelector('.sortByDueDate');
+
+    if (sortDueDateButton.id === 'AscendingDueDate') {
+        tasks['my-todo'].sort((a, b) => (a["dueDateRaw"] > b["dueDateRaw"]) ? -1 : 1);
+        sortDueDateButton.id = 'DescendingDueDate';
+    } else {
+        tasks["my-todo"].sort((a, b) => (a["dueDateRaw"] > b["dueDateRaw"]) ? 1 : -1);
+        sortDueDateButton.id = 'AscendingDueDate';
+    }
     printTodoList(tasks["my-todo"]);
 }
 
@@ -223,9 +254,7 @@ function pad2(number) {
 
 function calculateTimeLeft(finishDate) {
     const now = new Date().getTime();;
-    console.log(now, finishDate);
     const miliSeconds = (finishDate - now);
-    console.log(miliSeconds);
     const diffDays = Math.ceil(miliSeconds / (1000 * 60 * 60 * 24));
     const diffHours = Math.ceil(miliSeconds / (1000 * 60 * 60));
     if (miliSeconds <= 0) {
