@@ -211,7 +211,7 @@ async function main() {
 			// console.log(multyTaskArray[pageIndex][i]);
 		}
 	}
-
+	//priority tool tip show
 	document.addEventListener("mouseover", (event) => {
 		if (event.target.classList[0] === "todo-priority") {
 			const priority = event.target;
@@ -226,6 +226,7 @@ async function main() {
 			tipWindow.hidden = false;
 		}
 	});
+	//priority click to delete
 	document.addEventListener("click", (clickEvent) => {
 		if (clickEvent.target.classList[0] === "todo-priority") {
 			let containerDiv = clickEvent.target.parentNode;
@@ -239,7 +240,7 @@ async function main() {
 			tipWindow.hidden = true;
 		}
 	});
-
+	//ptiority tool tip hidden
 	document.addEventListener("mouseout", (event) => {
 		if (event.target.classList[0] === "todo-priority") {
 			const priority = event.target;
@@ -248,6 +249,7 @@ async function main() {
 			tipWindow.hidden = true;
 		}
 	});
+	//dark mode functionality
 	document.addEventListener("click", (darkModeEvent) => {
 		if (darkModeEvent.target.id === "dark-mode-button") {
 			let cssLink = document.head.querySelector("#style-link");
@@ -264,6 +266,7 @@ async function main() {
 			}
 		}
 	});
+	//search button
 	document.addEventListener("click", (searchEvent) => {
 		if (searchEvent.target["id"] === "search-button") {
 			const searchValue = document.querySelector("#search-input").value;
@@ -288,6 +291,7 @@ async function main() {
 			}
 		}
 	});
+	//clear button
 	document.addEventListener("click", (clearEvent) => {
 		if (clearEvent.target["id"] === "clear-button") {
 			const printedToDos = document.querySelectorAll(".todo-container");
@@ -296,6 +300,7 @@ async function main() {
 			}
 		}
 	});
+	//text edit tool tip
 	document.addEventListener("mouseover", (event) => {
 		if (event.target.classList[0] === "todo-text") {
 			const containerDiv = event.target.parentNode;
@@ -315,6 +320,7 @@ async function main() {
 			containerDiv.addEventListener("click", editEvent);
 		}
 	});
+	//edit event
 	function editEvent(event) {
 		const newTextForm = document.querySelector("#edit-task-input");
 		const newTextInput = document.querySelector("#edit-text");
@@ -354,7 +360,7 @@ async function main() {
 			saveButton.removeEventListener("click", saveEvent);
 		}
 	}
-
+	//edit tooltip hide
 	document.addEventListener("mouseout", (event) => {
 		if (event.target.classList[0] === "todo-text") {
 			const originalText = event.target;
