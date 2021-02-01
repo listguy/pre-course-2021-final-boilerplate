@@ -11,7 +11,7 @@
 2. To do can be set with a priority ranging from 1-5.
 3. You have the number of current todos to the left of the add button.
 4. To do items can be sorted using the sort button, items will be sorted from the highest priority to the lowest.
-5. List items are persistent using jsonbin.io to save the current list. The same list is loaded when page is refreshed. You will get notified in the console whether adding a certain to do item was successful or not.
+5. List items are persistent using jsonbin.io to save the current list. The same list is loaded when the page is refreshed. You will get notified in the console whether adding a certain to do item was successful or not.
 
 # extra features
 
@@ -19,22 +19,22 @@
 
 ![delete button](./src/images-and-videos/delete-button.PNG)
 
-after you clicked on the delete button you will need to confirm your delete action.
+After you clicked on the delete button you will need to confirm your delete action.
 
 
 2. Edit button next to each list item:
 
 ![edit button](./src/images-and-videos/edit-button.PNG)
 
-once you click on the edit button the text inside the item can be changed, just *double click* the text and change it. the pencil icon will be changed to a check mark just like so :
+Once you click on the edit button the text inside the item can be changed, just *double click* the text and change it. Upon clicking the pencil icon will be changed to a check mark just like so :
 
 ![check mark](./src/images-and-videos/done.PNG)
 
-by clicking the check mark you will confirm your edit. The list will then be updated in jsonbin.io and the local storage.
+By clicking the check mark you will confirm your edit. The list will then be updated in jsonbin.io and the local storage.
 
-3. Empty todos : once clicked the list will be emptied.
+3. Empty todos : Once clicked the list will be emptied.
 
-4. Dark mode: on the upper right of the screen you can see the selection between the regular mode which is shown above and the dark mode which can be easier on your eyes :) it looks like this :
+4. Dark mode: On the upper right of the screen you can see the selection between the regular mode which is shown above and the dark mode which can be easier on your eyes :) it looks like so :
 
 ![dark mode](./src/images-and-videos/dark-theme.PNG)
 
@@ -42,7 +42,7 @@ by clicking the check mark you will confirm your edit. The list will then be upd
 
 ![phone look](./src/images-and-videos/media-query.PNG)
 
-6. On the left side you can see the links to my social accounts : instagram, github, codepan and my daily spotify mix highly recommended
+6. On the left side you can see the links to my social accounts : instagram, github, codepan and my daily spotify mix, highly recommended.
 
 <br>
 
