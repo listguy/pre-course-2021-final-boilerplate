@@ -78,7 +78,6 @@ function insertTaskToTaskList(text, priority, date = new Date(), marked = false)
         taskList = [];
     }
 
-
     taskList.push({
         text,
         priority,
@@ -119,7 +118,6 @@ function insertTaskToHtml(task) {
     dateContainer.append(date);
     textContainer.append(text);
     priorityContainer.append(priority);
-
     listWrapper.append(todoContainer);
 
 }
@@ -160,7 +158,6 @@ function clearListFromHtml() {
             checkBox.checked === false;
         }
     }
-
 }
 function updateCounter() {
     counter = taskList.length;
@@ -283,7 +280,6 @@ function dateToSQL(date) {
         pad(date.getUTCHours()) + ':' +
         pad(date.getUTCMinutes()) + ':' +
         pad(date.getUTCSeconds());
-
     return sql;
 }
 function markedTask(event) {
