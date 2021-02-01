@@ -173,6 +173,7 @@ main{
     display: grid;
     grid-template-columns:10vw 80vw 10vw;   
     height:min-content;
+    padding-top: 20px;
 }
 main *{
         grid-column: 2/3;
