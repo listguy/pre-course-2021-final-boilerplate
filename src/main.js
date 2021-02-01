@@ -6,8 +6,8 @@
  * for problems with synchronizing 
  * uploaded.then(function(){ });
 */
-let API_KEY = "https://api.jsonbin.io/v3/b/60184040dde2a87f921c01ac";
-let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/60184040dde2a87f921c01ac/latest";
+let API_KEY = "https://api.jsonbin.io/v3/b/6018738fdde2a87f921c29a6";
+let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/6018738fdde2a87f921c29a6/latest";
 let taskList;
 let jsonBin;
 let body = document.body;
