@@ -14,22 +14,21 @@ html {
 }
 
 body {
-    background: rgb(249, 249, 249);
+    /* background: rgb(249, 249, 249); */
 }
 
 .button {
     font-family: 'Muli', sans-serif;
     border: 2px solid #00d4ff;
     color: #00d4ff;
-    background-color: #002a33;
     font-weight: 800;
-    background: transparent;
+    background: white;
     min-width: 60px;
     text-transform: uppercase;
     border-radius: 8px;
     font-size: 1.2rem;
     display: inline-block;
-    padding: 6px 8px;
+    padding: 4px;
     margin: 0 3px 0 0;
     cursor: pointer;
     transition-duration: 0.1s;
@@ -63,10 +62,11 @@ body {
     padding-left: 20px;
     height: 55px;
     width: auto;
+    padding-bottom: 8px;
 }
 
 .container {
-    width: 60vw;
+    width: 75vw;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -93,14 +93,16 @@ body {
 }
 
 .controlSection {
-    /* background:rgb(119, 119, 119); */
+    background: #056;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 3vh;
-    padding: 20px;
+    padding: 15px;
     font-size: 1.9rem;
     font-weight: 500;
     font-family: 'Fira Sans', sans-serif;
+    align-content: center;
+    color:white;
 }
 
 .addTask, .newPriority, .dueDate, .addButton, .themeMode  {
@@ -108,23 +110,28 @@ body {
 }
 
 .newPriority select {
-    width: 30px;
-    height: 20px;
+    width: 40px;
+    height: 25px;
+    border-radius: 4px;
 }
 .controlSection input {
-    height: 20px;
+    height: 25px;
+    border-radius: 4px;
+    border: none;
 }
 .controlSection input:focus {
-    border: 1.5px solid var(--my-blue);
+    border: 1px solid var(--my-blue);
+    outline: none; 
 }
 
 .newPriority select:focus {
     border: 1.5px solid var(--my-blue);
+
 }
 
 .addTask input {
     width: 250px;
-    height: 20px;
+    height: 25px;
 }
 
 
@@ -140,26 +147,28 @@ body {
     flex: 1 1 auto;
     text-align: center;
 }
-.sortContainer button {
+/* .sortContainer button {
     background: rgb(249,249,249);
-}
+} */
 .sortContainer button:hover {
     color: var(--my-blue);
 }
 
 .sortByPriority {
     flex: 1 1 auto;
+    padding-left: 100px;
     /* background:chartreuse; */
 }
 
 .sortByAlphaBet {
-    /* padding-left: 70px; */
-    flex: 1 1 auto;
+    padding-left: 180px;
+    flex: 2 0 auto;
     /* background:rgb(255, 0, 55); */
 }
 
 .sortByDate {
     flex: 1 1 auto;
+    padding-left: 180px;
     /* background:rgb(255, 0, 255); */
 }
 
@@ -179,17 +188,24 @@ body {
     padding-left: 20px;
 }
 
+.todo-text {
+    padding-left: 15px;
+    min-width: 400px;
+    text-align: left;
+}
+
 .todo-container input {
     flex: 0 2 auto;
 }
 
 .todo {
     flex: 1 1 auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.089);
 }
 
 .viewSection {
-    line-height: 1.8;
-    font-size: 2rem;
+    line-height: 2;
+    font-size: 1.8rem;
     font-weight: 500;
     padding: 10px;
     font-family: 'Fira Sans', sans-serif;
