@@ -49,6 +49,10 @@
         <label for="delete-button">
           <button id="delete-button" type="button">Delete all</button>
         </label>
+        <label for="delete-marked">
+          <button id="delete-marked" type="button">Delete Marked</button>
+        </label>
+
       </div>
     </form>
 
@@ -67,7 +71,7 @@
 <footer>
   <div class="todo-container" data-template="task-template" data-marked="false">
     <div class="delete-checkbox">
-      <input type="checkbox">
+      <input type="checkbox" class = "delete-checkbox-input">
       <span class="checkmark"></span>
     </div>
     <div class="todo-text-template">

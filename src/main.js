@@ -3,9 +3,11 @@
 /**
  * taskList: the array of tasks.
  * jsonBin an object with the structure {my-to:taskList}
+ * for problems with synchronizing 
+ * uploaded.then(function(){ });
 */
-let API_KEY = "https://api.jsonbin.io/v3/b/60173c3d1380f27b1c205041";
-let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/60173c3d1380f27b1c205041/latest";
+let API_KEY = "https://api.jsonbin.io/v3/b/60184040dde2a87f921c01ac";
+let API_KEY_LATEST = "https://api.jsonbin.io/v3/b/60184040dde2a87f921c01ac/latest";
 let taskList;
 let jsonBin;
 let body = document.body;
@@ -16,6 +18,13 @@ let basicControl = document.getElementById("basic-control");
 let taskForm = document.getElementById("add-task-form");
 taskForm.addEventListener("submit", addNewTask);
 taskForm.addEventListener("click", eraseAll);
+taskForm.addEventListener("click", removeAllMarked);
+
+
+let counter;
+let counterWrapper = document.getElementById("counter");
+
+listWrapper.addEventListener("click", markedTask, { once: false });
 
 let dateButton = document.getElementById("sort-date");
 dateButton.addEventListener("click", sortDate(), { once: false });
@@ -23,13 +32,13 @@ dateButton.addEventListener("click", sortDate(), { once: false });
 let priorityButton = document.getElementById("sort-button");
 priorityButton.addEventListener("click", sortPriority(), { once: false });
 
-let counter;
-let counterWrapper = document.getElementById("counter");
 
+
+useCustomSelect();
 
 let uploaded = getTaskListFromWeb();
 
-useCustomSelect();
+
 
 
 async function getTaskListFromWeb() {
@@ -70,14 +79,15 @@ function addNewTask(event) {
         event.preventDefault();
     }
 }
-function insertTaskToTaskList(text, priority, date = new Date()) {
+function insertTaskToTaskList(text, priority, date = new Date(), marked = false) {
     if (taskList[0] === false) {
         taskList = [];
     }
     taskList.push({
         text,
         priority,
-        date
+        date,
+        marked
     });
     return taskList[taskList.length - 1];
 }
@@ -86,6 +96,7 @@ function insertTaskToHtml(task) {
     let priority = task.priority;
     let date = (task.date instanceof Date) ? task.date : new Date(task.date);
     date = dateToSQL(date);
+    let marked = task.marked;
 
     let containerTemplate = document.querySelector("[data-template]");
     let todoContainer = containerTemplate.cloneNode(true);
@@ -103,6 +114,11 @@ function insertTaskToHtml(task) {
     let dateContainer = todoContainer.querySelector(".todo-created-at-template");
     dateContainer.classList.add("todo-created-at");
     dateContainer.classList.remove("todo-created-at-template");
+
+    if (marked) {
+        todoContainer.dataset.marked = "true";
+        todoContainer.querySelector(".delete-checkbox-input").checked = true;
+    }
 
     dateContainer.append(date);
     textContainer.append(text);
@@ -141,16 +157,19 @@ function clearTaskList() {
 function clearListFromHtml() {
     let tasks = document.querySelectorAll(".todo-container");
     for (let task of tasks) {
-        if (task.dataset.template !== "task-template")
+        if (task.dataset.template !== "task-template") {
             task.remove();
+            let checkBox = task.querySelector(".delete-checkbox input");
+            checkBox.checked === false;
+        }
     }
+
 }
 function updateCounter() {
     counter = taskList.length;
     counterWrapper.innerText = counter;
 }
 //-------
-
 function useCustomSelect() {
     let customFirstOption;
     let htmlSelectElement;
@@ -230,7 +249,6 @@ function useCustomSelect() {
         customFirstOption.innerHTML = htmlSelectElement[0].innerHTML;
     });
 }
-
 //------
 function sortDate() {
     let latestOnTop = true;
@@ -272,21 +290,56 @@ function dateToSQL(date) {
     return sql;
 }
 function markedTask(event) {
-    let container = event.target.parentNode.parentNode;
-    if (event.target.checked === true) {
+    let target = event.target;
+    if (target.className != "delete-checkbox-input")
+        return;
+    let container = event.target.closest("DIV").parentNode;
+    if (target.checked === true) {
         container.dataset.marked = "true";
-
     } else {
         container.dataset.marked = "false";
     }
+    /*enter marked to jsonBin */
+    let allTaskWrappers = document.querySelectorAll(".todo-container")
+    for (let i = 0; i < allTaskWrappers.length; i++) {
+        if (allTaskWrappers[i] === container) {
+            taskList[i].marked = target.checked;
+            break;
+        }
+    }
+    uploadJson();
 }
 
-uploaded.then(function () {
-    let deleteCheckbox = document.querySelectorAll("input[type='checkbox']");
-    for (let box of deleteCheckbox) {
-        box.addEventListener("click", markedTask, { once: false });
+function removeAllMarked(event) {
+    let deleteMarkBtm = document.getElementById("delete-marked")
+    if (event.target != deleteMarkBtm) {
+        return;
     }
-});
+
+    let allTaskWrappers = document.querySelectorAll(".todo-container");
+     for (let task of allTaskWrappers) {
+        if (task.dataset.template != "task-template" && task.dataset.marked === "true") {
+            task.remove();
+        }
+    }
+    for (let i = 0; i <= taskList.length; i++) {
+        if (i===taskList.length)
+            break;
+        if (taskList[i].marked === true) {
+            taskList.splice(i, 1);
+            i--;
+        }
+        uploadJson();
+    }
+     updateCounter();
+}
+
+
+
+
+
+
+
 
 
 
