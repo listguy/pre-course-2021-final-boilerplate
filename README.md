@@ -139,6 +139,7 @@ GOOD LUCK!
   4. Tasks can be deleted in two ways. First all tasks can be deleted at once with the "Delete All" button. Second you can delete only the marked tasks using the "Delete Marked" button.
   5. Shake animation to make sure the does not input a task without text and priority.
   6. The app utilizes flex box, CSS grid, and box alignment for design.
+  7. Tasks are color coded according to priority
 
 - Resources used:
   - [javascript.info](https://javascript.info/), for every thing and especially for working with a asynchronized functions, promises, await/async and fetch.
