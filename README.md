@@ -128,3 +128,13 @@ Note that each commit to `main` branch will trigger a github [action](https://do
 - Record a 5-10 min selfie video, describe yourself in a few words (age, location, military background, technological background). Also, talk about the solution you submitted (try to explain how your app works in general and which bonuses you added). Think about this video as an interview.
 
 GOOD LUCK!
+
+## Inbar's To-Do List
+
+- special features unique to this app:
+  1. Uses JsonBin to load and upload all content.
+  2. Priority drop down menu was completely redesigned, using CSS and JavaScript (maybe the most challenging part of this task).
+  3. For every task there is an option to mark it off. Once marked the task changes opacity. Tasks marked will remain marked 
+  even if the page reloads.
+  4. Tasks can be deleted in two ways. First all tasks can be deleted at once. Second you can delete only the marked tasks using the "Delete Marked button.
+  
