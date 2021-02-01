@@ -58,14 +58,14 @@ function insertTaskListToHtml() {
 function addNewTask(event) {
     let text = document.getElementById("text-input").value;
     let priority = document.getElementById("priority-selector").value;
-    let task = insertTaskToTaskList(text, priority);
 
     if (text === "" || priority < 1) {
         basicControl.setAttribute("shake", "on");
         event.preventDefault();
         setTimeout('basicControl.setAttribute("shake", "off")', 1000);
-        setTimeout('return', 1000);
+        setTimeout('return', 500);
     } else {
+        let task = insertTaskToTaskList(text, priority);
         insertTaskToHtml(task);
         uploadJson();
         updateCounter()

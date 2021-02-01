@@ -137,5 +137,6 @@ GOOD LUCK!
   3. For every task there is an option to mark it off. Once marked the task changes opacity. Tasks marked will remain marked 
   even if the page reloads.
   4. Tasks can be deleted in two ways. First all tasks can be deleted at once. Second you can delete only the marked tasks using the "Delete Marked button.
-  5. The app utilizes flex box, CSS grid, and box alignment for design.
+  5. Shake animation to make sure the does not input a task without text and priority.
+  6. The app utilizes flex box, CSS grid, and box alignment for design.
 
