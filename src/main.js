@@ -1,7 +1,7 @@
 "use strict";
 const spinner = document.getElementById("spinner");
-const mode = localStorage.getItem("mode"); 
-const isDarkMode = window.matchMedia && 
+const mode = localStorage.getItem("mode");
+const isDarkMode = window.matchMedia &&
     window.matchMedia('(prefers-color-scheme: dark)').matches;
 if (isDarkMode && mode !== 'light') {
     localStorage.setItem("mode", "dark");
@@ -68,15 +68,15 @@ document.addEventListener('click', function (event) { //manages all the clicks
             sortListByDueDate();
             break;
         case 'mode-button':
-        const theme = document.querySelector("#theme-link");
-        if (theme.getAttribute("href") == "lightStyle.css") {
-            theme.href = "darkStyle.css";
-            localStorage.setItem("mode", "dark");
-        } else {
-            theme.href = "lightStyle.css";
-            localStorage.setItem("mode", "light");
-        }
-        break;
+            const theme = document.querySelector("#theme-link");
+            if (theme.getAttribute("href") == "lightStyle.css") {
+                theme.href = "darkStyle.css";
+                localStorage.setItem("mode", "dark");
+            } else {
+                theme.href = "lightStyle.css";
+                localStorage.setItem("mode", "light");
+            }
+            break;
     }
     switch (pressedClass) {
         case 'checkbox':
@@ -88,7 +88,6 @@ document.addEventListener('click', function (event) { //manages all the clicks
             editItem(event);
             break;
     }
-
 })
 
 function addItem() { //adds an task locally, and to the array as object.
@@ -311,12 +310,13 @@ function editItem(event) {
         }
     }
     const newText = prompt('Enter the task text.');
-    if (newText === '') {
+    if (newText === '' || newText === null) {
         return;
     } else {
-    tasks["my-todo"][selectedIndex].text = newText;
-    printTodoList(tasks["my-todo"]);
-    updateJSON();
+        console.log('wow');
+        tasks["my-todo"][selectedIndex].text = newText;
+        printTodoList(tasks["my-todo"]);
+        updateJSON();
     }
 }
 
@@ -326,8 +326,8 @@ function updateCounter() {
 }
 
 function showSpinner() {
-  spinner.className = "show";
-  setTimeout(() => {
-    spinner.className = spinner.className.replace("show", "");
-  }, 5000);
+    spinner.className = "show";
+    setTimeout(() => {
+        spinner.className = spinner.className.replace("show", "");
+    }, 5000);
 }
