@@ -105,7 +105,7 @@ function addItem() { //adds an task locally, and to the array as object.
             todoTimeLeft.innerText = timeLeft;
         } else {
             const timeLeft = calculateTimeLeft(dueDate.getTime());
-            todoTimeLeft.innerText = timeLeft;
+            todoTimeLeft.innerHTML = timeLeft;
         }
         todoTimeLeft.classList.add('todo', 'todo-time-left')
 
@@ -164,7 +164,7 @@ function printTodoList(arr) { //display the tasks from the array.
         todoPriority.classList.add('todo', 'todo-priority');
 
         const todoTimeLeft = document.createElement('p');
-        todoTimeLeft.innerText = calculateTimeLeft(element.dueDateRaw);
+        todoTimeLeft.innerHTML = calculateTimeLeft(element.dueDateRaw);
         todoTimeLeft.classList.add('todo', 'todo-time-left')
 
         const todoOptions = document.createElement('div');
@@ -260,7 +260,7 @@ function calculateTimeLeft(finishDate) {
     if (miliSeconds <= 0) {
         return 'Passed!';
     } else {
-        return (diffDays > 1) ? `${diffDays} Days` : `${diffHours} Hours`;
+        return (diffDays > 1) ? `<i class="material-icons">access_time</i> &nbsp; &nbsp; ${diffDays} Days` : `<i class="material-icons">access_time</i> &nbsp; &nbsp; ${diffHours} Hours`;
     }
 }
 

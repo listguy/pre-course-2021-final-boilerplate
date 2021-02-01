@@ -13,10 +13,6 @@ html {
     font-size: 10px;
 }
 
-body {
-    /* background: rgb(249, 249, 249); */
-}
-
 .button {
     font-family: 'Muli', sans-serif;
     border: 2px solid #00d4ff;
@@ -26,7 +22,6 @@ body {
     min-width: 60px;
     text-transform: uppercase;
     border-radius: 8px;
-    font-size: 1.2rem;
     display: inline-block;
     padding: 4px;
     margin: 0 3px 0 0;
@@ -35,12 +30,12 @@ body {
     transition-timing-function: ease-in-out;
 }
 
-#mode-button {
+#mode-button, #add-button {
     background:#056 ;
     color:white;
 }
 
-#mode-button:hover {
+#mode-button:hover, #add-button:hover  {
     background:#056 ;
     color:var(--my-blue);
 }
@@ -95,20 +90,38 @@ body {
 .controlSection {
     background: #056;
     display: flex;
-    justify-content: flex-start;
-    height: 3vh;
+    height: auto;
     padding: 15px;
     font-size: 1.9rem;
     font-weight: 500;
     font-family: 'Fira Sans', sans-serif;
-    align-content: center;
     color:white;
 }
-
-.addTask, .newPriority, .dueDate, .addButton, .themeMode  {
-    flex: 1 1 auto;
+ .dueDate {
+    flex: 0 1 auto;
+    height: auto;
+}
+.addButton {
+    flex: 1 1 content;
+    padding-left: 10px;
 }
 
+
+.newPriority {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.addTask {
+    flex: 0 2 auto;
+}
+
+.themeMode  {
+    text-align: right;
+    flex: 3 0 auto;
+    height: auto;
+    
+}
 .newPriority select {
     width: 40px;
     height: 25px;
@@ -130,14 +143,16 @@ body {
 }
 
 .addTask input {
-    width: 250px;
+    width: 300px;
     height: 25px;
 }
 
 
 #counter {
-    flex: 1 1 auto;
-    align-self: flex-end;
+    flex: 1 2 auto;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 2.1rem;
 }
 
 .sortContainer {
@@ -164,11 +179,11 @@ body {
 
 .sortByDueDate {
     flex: 0 2 200px;
-    text-align: center;
+    text-align: left;
 }
 
 .sortButtons {
-    flex: 0 1 150px;
+    flex: 0 1 140px;
 }
 
 .todo {
@@ -183,7 +198,13 @@ body {
 }
 
 .todo-time-left {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.todo-time-left i {
+    align-self: center;
+    font-size:2.3rem;
 }
 
 .todo-text {
