@@ -26,9 +26,9 @@ priorityButton.addEventListener("click", sortPriority(), { once: false });
 let counter;
 let counterWrapper = document.getElementById("counter");
 
-let deleteCheckBox = document.querySelectorAll(".delete-checkbox input");
 
-getTaskListFromWeb();
+let uploaded = getTaskListFromWeb();
+
 useCustomSelect();
 
 
@@ -38,8 +38,10 @@ async function getTaskListFromWeb() {
         jsonBin = await response.json();
         taskList = jsonBin.record["my-todo"];
         insertTaskListToHtml();
+        return true;
     } else {
         alert("HTTP-Error: " + response.status);
+
     }
 }
 function insertTaskListToHtml() {
@@ -256,7 +258,6 @@ function sortPriority() {
         insertTaskListToHtml();
     }
 }
-
 function dateToSQL(date) {
     let pad = function (num) {
         return ('00' + num).slice(-2);
@@ -270,3 +271,23 @@ function dateToSQL(date) {
 
     return sql;
 }
+function markedTask(event) {
+    let container = event.target.parentNode.parentNode;
+    if (event.target.checked === true) {
+        container.dataset.marked = "true";
+
+    } else {
+        container.dataset.marked = "false";
+    }
+}
+
+uploaded.then(function () {
+    let deleteCheckbox = document.querySelectorAll("input[type='checkbox']");
+    for (let box of deleteCheckbox) {
+        box.addEventListener("click", markedTask, { once: false });
+    }
+});
+
+
+
+
