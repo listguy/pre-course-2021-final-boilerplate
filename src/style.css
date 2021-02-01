@@ -1,7 +1,7 @@
 :root{
     --backgroundColor:#efefef;
     --fontColor:black;
-    --headerBgColor:#CAEBF2;
+    --headerBgColor:hsl(182, 40%, 60%);
     --tasksBorder:black;
 }
 
