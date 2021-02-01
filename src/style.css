@@ -4,6 +4,17 @@
     --headerBgColor:#CAEBF2;
     --tasksBorder:black;
 }
+@media screen and (max-width: 900px) {
+    #submission-wrapper{
+      flex-wrap: wrap;
+    }
+    #counter-wrapper{
+        flex: 0 0 auto;  
+    }
+    #Control{
+        grid-template-columns: 1fr 15fr 1fr;   
+    }
+  }
 body{
     background-color:var(--backgroundColor);
     font-size: 16px;
@@ -145,7 +156,8 @@ input:-webkit-autofill {
 }
 button{ 
     border:1px solid transparent;
-    min-width: 100px;
+    width:100px;
+    min-width: max-content;
     background-color: hsl(191, 61%, 60%);
     padding:5px;
     margin:5px;
@@ -154,18 +166,7 @@ button{
     box-shadow: 5px 7px 7px 0px rgba(0,0,0,0.26);
     font-size: inherit;
  }
-input[type="date"]{
-    margin-left:25px;
-    border: 1px solid transparent;
-    height:25px;
-    padding:8px 16px;
-    background-color: hsl(191, 61%, 60%);
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
-    -webkit-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
-    -moz-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.19);
-    font-size: inherit;
-}
+
 
 
 /*View Section design*/
