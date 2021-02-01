@@ -1,5 +1,5 @@
 =>>>>>>I RECOMMEND TO CHECK THE OTHER BRANCH WHICH I MADE THE ADD SECTION TO PO-UP!!!!<<<<<<<=
-
+Or uncomment in the index.html row-37 and in main.js row-11 and the pop up option for the add-window would appear
 
 I added remove and complete option, to remove click the red-X to complete press on the item.
 Hover on items and buttons.
