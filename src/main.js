@@ -1,5 +1,5 @@
 "use strict";
-
+const spinner = document.getElementById("spinner");
 const mode = localStorage.getItem("mode"); 
 const isDarkMode = window.matchMedia && 
     window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -18,6 +18,7 @@ getJSON();
 
 
 function getJSON() {
+    showSpinner()
     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e/latest').then(res => res.json())
         .then(res => {
             if (res.record['my-todo'].length === 0) {
@@ -30,6 +31,7 @@ function getJSON() {
 }
 
 function updateJSON() {
+    showSpinner()
     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e', {
         method: 'PUT',
         headers: {
@@ -321,4 +323,11 @@ function editItem(event) {
 function updateCounter() {
     const counterDiv = document.querySelector('#counter');
     counterDiv.innerText = counter;
+}
+
+function showSpinner() {
+  spinner.className = "show";
+  setTimeout(() => {
+    spinner.className = spinner.className.replace("show", "");
+  }, 5000);
 }
