@@ -285,3 +285,128 @@ body {
     visibility: visible;
   }
   
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    
+    html {
+        font-size: 5px;
+    }
+    
+    .container {
+        width: 90vw;
+        height: 0vh;
+        margin: auto;
+    }
+
+    .button {
+        min-width: 15px;
+        border-radius: 8px;
+        padding: 4px;
+        margin: 0 3px 0 0;
+        font-size: 2rem;
+    }
+    
+    .top {
+        height: 5vh;
+        padding-bottom: 0.5vh;
+    }
+
+    .top img {
+        height: 3vh;
+    }
+    
+    .main {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 90vw;
+        border: 1px solid var(--my-blue);
+    }
+    
+    .controlSection {
+        flex-direction: column;
+        padding: 5px;
+        font-size: 2.7rem;
+        font-weight: 600;
+        font-family: 'Fira Sans', sans-serif;
+        color:white;
+    }
+    
+    #tasksIcon i {
+        display: none;
+    }
+
+     .dueDate {
+        flex: 0 1 auto;
+        padding-top: 1vh;
+    }
+    
+    .addButton {
+        flex: 1 1 content;
+        padding-left: 10px;
+        padding-top: 1vh;
+    }
+    
+    .newPriority {
+        flex: 1 1 auto;
+        padding-top: 1vh;
+        text-align: left;
+    }
+
+    .newPriority select {
+        height: 2.5vh;
+    }
+
+    .controlSection input {
+        height: 2vh;
+    }
+    
+    .addTask input {
+        width: 60vw;
+        height: 2vh;
+    }
+    
+    #counter {
+        padding-right: 8vw;
+        padding-top: 1vh;
+        font-size: 2.5rem;
+    }
+
+    .sortButtons {
+        flex: 0 1 0;
+    }
+    
+    .todo {
+        text-align: center;
+    }
+    
+    .todo-container {
+        width: 100%;
+        text-align: left;
+        padding-left: 0px;
+    }
+    
+    .todo-time-left i {
+        display: none;
+    }
+    
+    .todo-text {
+        min-width: 30vw;
+        padding-left: 0px;
+        text-align: left;
+    }
+    
+    .viewSection {
+        width: 100%;
+        flex-direction: column;
+        line-height: 1.6;
+        font-size: 2.5rem;
+        font-weight: 500;
+        padding: 10px;
+    }
+    
+    .sort {
+        font-size: 2rem;
+        padding: 2px;
+    }
+      }
