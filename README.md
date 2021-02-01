@@ -1,6 +1,6 @@
 # Pre Course Finals Project - Todo List 📋
 
-My attempt at an To-Do list webpage.
+My attempt at an To-Do list webpage
 
 ## link
 
@@ -9,11 +9,12 @@ https://michefraim.github.io/pre-course-2021-final-boilerplate/src/
 ## Features
 
 - Add tasks with text, creation date, due date, and priority.
-- The tasks list is dynamic - items are editable, and can be removed.
+- The tasks list is dynamic - items are editable, and can be removed
 - Your list is safe! the items are stored as **JSON** at jsonbin.io, and can be accessed anywhere, fully persistent!
-- Sort your items by priority, creation date, or due date - ascending or descending.
-- Dark mode for the comfort of your eyes available, should be detected automatically based on system option.
+- Sort your items by priority, creation date, or due date - ascending or descending
+- Dark mode for the comfort of your eyes available, should be detected automatically based on system option
 - Spinner on Ajax loadings
+- Mobile friendly
 
 ## Resources
 
@@ -38,4 +39,4 @@ https://htmldom.dev/detect-the-dark-mode
 - fetch calls spinner:
 https://dev.to/wangonya/displaying-a-css-spinner-on-ajax-calls-with-fetch-api-4ndo
 
-- stackoverflow came in handy for random problems.
+- stackoverflow came in handy for random problems
