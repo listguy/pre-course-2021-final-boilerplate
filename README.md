@@ -43,7 +43,7 @@ Once the check mark appears the user can change the "To Do" item name by *double
 
 ![phone look](./src/images-and-videos/media-query.PNG)
 
-6. To the left, my social account links : instagram, github, codepan and my daily spotify mix, highly recommended.
+6. To the left, my social account links : Instagram, Github, Codepan and my daily Spotify mix, highly recommended.
 
 <br>
 
