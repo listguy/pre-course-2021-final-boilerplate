@@ -58,7 +58,8 @@ document.addEventListener('click', function (event) {
         case 'button remove-button':
             removeItem(event);
             break;
-        case 'edit-button':
+        case 'button edit-button':
+            editItem(event);
             break;
     }
 
@@ -244,19 +245,31 @@ function calculateTimeLeft(startDate, finishDate) {
 function removeItem(event) {
     const selectedItem = event.target.closest('.todo-container');
     let selectedIndex = -1;
-    // console.log(Number(selectedItem.id));
     for (let i = 0; i < myTodo["my-todo"].length; i++) {
         if (Number(selectedItem.id) === myTodo["my-todo"][i].id) {
             selectedIndex = i;
         }
     }
-    // console.log(selectedIndex);
-    const removed = myTodo["my-todo"].splice(selectedIndex, 1);
-    console.log(removed);
+    myTodo["my-todo"].splice(selectedIndex, 1);
     selectedItem.remove();
     counter--;
     updateJSON();
     updateCounter();
+}
+
+function editItem(event) {
+    const selectedItem = event.target.closest('.todo-container');
+    let selectedIndex = -1;
+    for (let i = 0; i < myTodo["my-todo"].length; i++) {
+        if (Number(selectedItem.id) === myTodo["my-todo"][i].id) {
+            selectedIndex = i;
+        }
+    }
+    const newText = prompt('Enter the task text.');
+    myTodo["my-todo"][selectedIndex].text = newText;
+    printTodoList(myTodo["my-todo"]);
+    updateJSON();
+
 }
 
 function updateCounter() {
