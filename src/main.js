@@ -1,122 +1,191 @@
-//SLECTORS
+//--------------------------------------------------SELECTORS--------------------------------------------------------
 const textInput = document.querySelector('#text-input');
 const priority = document.querySelector('#priority-selector');
 const addButton = document.querySelector ('#add-button');
 let list = document.querySelector('#todo-list');
-let todoCounter = document.querySelector('#todo-counter');
-let counter = document.querySelector('#counter');
-let numberOfTasks = 0;
-counter.innerText = numberOfTasks;
-const openAddSection = document.querySelector('#open-add-section') ;
-let addSection = document.querySelector('#add-section');
-let sortButton = document.querySelector('#sort-buttone');
-let listArr = []
+let listCounter = document.querySelector('#counter');
+const sortButton = document.querySelector('#sort-button');
+const clearButton = document.querySelector('#clear-button');
+let addSectionWindow = document.querySelector('#add-section');
+let openAddSectionWindowButton = document.querySelector('#open-add-section');
+addSectionWindow.hidden = true;
 
+//COMMAND TO START WINDOW
+let taskCounter = JSON.parse(localStorage.getItem("numberOfTasksGiven")) || 1;
+printFromLocalStorage();
+numberOfToDos();  //counts the number of tasks
+let removedItems = JSON.parse(localStorage.getItem('removedItems')) || 0;
 
-//EVENT Listeners
-
+//--------------------------------------------------EVENT LISTENERS--------------------------------------------------
 addButton.addEventListener('click', addToList);
-list.addEventListener('click', removes)
-// sortButton.addEventListener('click', sortByPriority)
+textInput.addEventListener('keyup', enterAddToList);
+sortButton.addEventListener('click', sortListItems);
+clearButton.addEventListener('click', removeAll);
+list.addEventListener('click', removeItemFromList);
+openAddSectionWindowButton.addEventListener('click', opensAddSectionWindow)
 
-
-
-
-//FUNCTIONS
-
-function addToList (event){                          //adds the text from the input to the List.
-    if (textInput.value === '') return;              //if input is empty not adds to list
-    // event.preventDefault();
-    let inputValue = textInput.value;
+//--------------------------------------------------FUNCTIONS--------------------------------------------------------
+//Adds item to list and local storage
+function addToList(){
+    //adds to local storage
+    let textValue = textInput.value;
     let priorityValue = priority.value;
     let d = new Date();
     let dateValue = d.getTime();
-    let currentTime = startTime();
+    if (textValue === '') return;
     let listItemObject = {
-      text : inputValue,
-      priority : priorityValue,
-      date : dateValue
+        text : textValue,
+        priority : priorityValue,
+        date : dateValue,
+        id : taskCounter
     }
-    for (let i = 0 ; i <= localStorage.getItem.length ; i++){
-      if (localStorage.getItem.i.length === 0){
-        localStorage.setItem("listItem" + i, JSON.stringify(listItemObject));
-      }
-    }
+    let listItemObjectFixed = JSON.stringify(listItemObject);
+    localStorage.setItem("numberOfTasksGiven", taskCounter);
+    localStorage.setItem(`my-todo${taskCounter}`, listItemObjectFixed);
+    taskCounter ++ ;
+    localStorage.setItem('numberOfTasksGiven', taskCounter)
     const todoDiv = document.createElement('div');   //div of the list
     const newTodo = document.createElement('li');    //the content of the TODO
-    todoDiv.classList.add('todo');
-    newTodo.classList.add('todoItem');
-    todoDiv.appendChild(newTodo);
+    newTodo.id = `${listItemObject.id}`;
+    todoDiv.classList.add('todo-container');
+    newTodo.classList.add('todo-list-container');
+    newTodo.appendChild(todoDiv);
     const removeButton = document.createElement('button');//remove from list button
     removeButton.classList.add('remove-button');
-    todoDiv.appendChild(removeButton);
+    newTodo.appendChild(removeButton);
     removeButton.innerHTML = 'X';
-    list.appendChild(todoDiv);
-    let prioritySpan = document.createElement('span');
-    prioritySpan.innerText = priority.value;
-    
-    //add to local storage
-    // let listObjectLocal = {
-    //   text : inputValue,
-    //   priority : priorityValue,
-    //   date : dateValue
-    // }
-    // for (let i = 0 ; i <= localStorage.length ; i++){
-    //   if (localStorage.i.length === 0 ){
-    //     localStorage.setItem("listItem" + i, JSON.stringify(listObjectLocal));
-    //   }
-    // }
-    // listArr = localStorage;
-    // console.log(listArr);
-//     let itemObject = {
-//       text : inputValue,
-//       priority : priorityValue,
-//       date : dateValue
-//     }
-//     listArr.push(itemObject);
-//     localStorage = itemObject;
-//     //print to input
-//     newTodo.innerHTML = `<span style="color:#598cda"><strong>${prioritySpan.innerText}</strong></span> ${inputValue}, <i>${currentTime}</i>`;
-//     textInput.value = '';  //clears input after adding to list
-//     numberOfTasks += 1;      //adds to the counter
-//     counter.innerText = numberOfTasks;
-//     
-// //     listObject = listObjectLocal;
-// //     console.log(listObject);
+    list.appendChild(newTodo);
+    const todoText = document.createElement('div')
+    const todoPriority = document.createElement('div')
+    const todoCreatedAt = document.createElement('div')
+    todoText.classList.add('todo-text');
+    todoCreatedAt.classList.add('todo-created-at');
+    todoPriority.classList.add('todo-priority');
+    todoDiv.appendChild(todoPriority);
+    todoDiv.appendChild(todoText);
+    todoDiv.appendChild(todoCreatedAt);
+    //prints to list
+    todoPriority.innerText = priorityValue;
+    todoText.innerText = textValue;
+    todoCreatedAt.innerText = startTime(dateValue);
+    textInput.value = '';  //clears input after adding to list
+    numberOfToDos();       //counts the number of tasks
 }
 
+//by pressing enter the item will be added
+function enterAddToList(event) {
+    if (event.keyCode === 13) {
+        addToList();
+    } else {
+        return;
+    }
+}
 
-// add a zero in front of numbers<10
 function checkTime(i) {
     if (i < 10) {
-      i = "0" + i;
+        i = "0" + i;
     }
     return i;
-  }
-  //saving current time
-  function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    m = checkTime(m);
-    return h + ":" + m;
-  }
-
-function removes(event){
-    if (event.target.className !== 'remove-button') return;
-    console.log(event.target);
-    let item = event.target.closest('.todo');
-    item.remove();      
-    numberOfTasks -= 1;  //removes from the counter
-    counter.innerText = numberOfTasks;
-    //remove from local storage
-
 }
 
-// function sortByPriority() {
-//   for (let i = 0 ; i < list.length ; i++) {
-//     if (prioritySpan.innerText = h)
-//   }
-// }
+//saving current time
+function startTime() {
+    let today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+    m = checkTime(m);
+    return h + ":" + m + ', ' + day + '.' + month;
+}
 
-// localStorage.clear(); //clears local storage
+function numberOfToDos() {
+    listCounter.innerText = document.querySelectorAll('.todo-list-container').length
+}
+
+//Sorts list By Priority
+function sortListItems(a, b) {
+    let listArrSort = [];
+    listArrSort.push(JSON.parse(localStorage.getItem('numberOfTasksGiven')));
+    for (let i = 1 ; i < localStorage.length ; i++){
+        if ( JSON.parse(localStorage.getItem(`my-todo${i}`)) === null) {i++}
+        listArrSort.push(JSON.parse(localStorage.getItem(`my-todo${i}`)));
+    }
+    const comparator = (a, b) => {
+        return b.priority - a.priority;
+    }
+    listArrSort = listArrSort.sort(comparator);
+    localStorage.clear();
+    list.innerHTML = '';
+    localStorage.setItem(`numberOfTasksGiven`, listArrSort[0]);
+    for (let i = 1 ; i < listArrSort.length ; i++) {
+        let listArrSortObject = JSON.stringify(listArrSort[i]);
+        localStorage.setItem(`my-todo${i}`, listArrSortObject);
+    }
+    printFromLocalStorage();
+}
+
+//Clears all the List
+function removeAll(){
+    localStorage.clear();
+    location.reload();
+}
+
+//Prints data from localStorage
+function printFromLocalStorage() {
+    for (let i = 1 ; i < localStorage.length + JSON.parse(localStorage.getItem(`removedItems`)) ; i++){
+        for (let j = 0 ; j < localStorage.length ; j++) { 
+            if ( JSON.parse(localStorage.getItem(`my-todo${i}`)) === null) {i++}
+        }
+        if ( JSON.parse(localStorage.getItem(`my-todo${i}`)) === null) {return}
+        const todoDiv = document.createElement('div');   //div of the list
+        const newTodo = document.createElement('li');    //the content of the TODO
+        todoDiv.classList.add('todo-container');
+        newTodo.classList.add('todo-list-container');
+        newTodo.appendChild(todoDiv);
+        const removeButton = document.createElement('button');//remove from list button
+        removeButton.classList.add('remove-button');
+        newTodo.appendChild(removeButton);
+        removeButton.innerHTML = 'X';
+        list.appendChild(newTodo);
+        const todoText = document.createElement('div')
+        const todoPriority = document.createElement('div')
+        const todoCreatedAt = document.createElement('div')
+        todoText.classList.add('todo-text');
+        todoCreatedAt.classList.add('todo-created-at');
+        todoPriority.classList.add('todo-priority');
+        todoDiv.appendChild(todoPriority);
+        todoDiv.appendChild(todoText);
+        todoDiv.appendChild(todoCreatedAt);
+        //prints to list
+        let itemObjectFromStorage = JSON.parse(localStorage.getItem(`my-todo${i}`));
+        newTodo.id = `${itemObjectFromStorage.id}`;
+        todoPriority.innerText = itemObjectFromStorage.priority;
+        todoText.innerText = itemObjectFromStorage.text;
+        todoCreatedAt.innerText = startTime(itemObjectFromStorage.date);
+        
+    }
+}
+
+// removes Item From List
+function removeItemFromList(event) {
+    if (event.target.className !== 'remove-button') return;
+    let item = event.target.closest('.todo-list-container');
+    item.classList.add('remove-animation');
+    item.addEventListener('transitionend', function(){
+        item.remove();
+        numberOfToDos();
+    });
+    removedItems++;
+    localStorage.setItem('removedItems', removedItems);
+    localStorage.removeItem(`my-todo${item.id}`);
+}
+
+//opens add section
+function opensAddSectionWindow() {
+    if (addSectionWindow.hidden = true) {
+        addSectionWindow.hidden = false;
+        document.getElementById("text-input").focus();
+    } 
+    addSectionWindow.classList.add('fade-in');
+}

@@ -11,18 +11,21 @@ body {
     min-height: 100vh;
 }
 
-
+/* ------------------------------------ADD WINDOW------------------------------------ */
 #add-section {
     min-height: 5vh;
-    /* display: flex; */
+    max-height: 8vh;
     justify-content: center;
     align-items: center;
     background-color: #46529d;
     width: 400px;
-    margin-top: 100px;
+    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 5px 10px 10px #7e87c4;
+    transition: 1s;
+    transform-origin: left;
+    transform: scaleX(1);
 }
 
 #text-input {
@@ -60,6 +63,7 @@ body {
     cursor: pointer;
 }
 
+/* ------------------------------------LIST WINDOW------------------------------------ */
 #list-section {
     min-height: 85vh;
     display: flex;
@@ -85,7 +89,7 @@ body {
 
 #title {
     font-size: 1.5em;
-    font-weight:lighter;
+    font-weight: 500;
 }
 
 #todo-counter {
@@ -138,7 +142,6 @@ body {
     width: 400px;
     display: flex;
     flex-direction: column;
-    
 }
 
 .todo-list-container {
@@ -158,6 +161,7 @@ body {
     justify-content: space-between;
     align-items: center;
     flex: 1;
+    transition: all 0.5s ease;
 }
 
 .todo-text{
@@ -189,7 +193,6 @@ body {
 }
 
 .remove-animation {
-    /* transform: translateY(8rem) rotateZ(20deg); */
     transform: translateX(20rem);
     opacity: 0;
 }
@@ -211,4 +214,43 @@ body {
 
 #open-add-section:focus{
     outline: none;
+}
+
+/* opening the add section with fade */
+.fade-in {
+    animation: fadeIn 1.7s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* hover on buttons */
+#open-add-section:hover{
+    opacity: 0.7;
+}
+#sort-button:hover{
+    opacity: 0.7;
+}
+#clear-button:hover{
+    opacity: 0.7;
+}
+#add-button:hover{
+    opacity: 0.7;
+}
+.remove-button:hover{
+    opacity: 0.8;
+}
+.todo-list-container:hover{
+    background-color: whitesmoke;
+    
+}
+.todo-container:hover{
+    background-color: whitesmoke;
+    margin: 1.2rem;
 }
