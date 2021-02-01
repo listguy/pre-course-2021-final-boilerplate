@@ -8,7 +8,7 @@ const sortButton = document.querySelector('#sort-button');
 const clearButton = document.querySelector('#clear-button');
 let addSectionWindow = document.querySelector('#add-section');
 let openAddSectionWindowButton = document.querySelector('#open-add-section');
-// addSectionWindow.hidden = true;
+// addSectionWindow.hidden = true; //for the add-window pop up
 
 //COMMAND TO START WINDOW
 let taskCounter = JSON.parse(localStorage.getItem("numberOfTasksGiven")) || 1;
@@ -22,7 +22,7 @@ textInput.addEventListener('keyup', enterAddToList);
 sortButton.addEventListener('click', sortListItems);
 clearButton.addEventListener('click', removeAll);
 list.addEventListener('click', removeOrComplete);
-openAddSectionWindowButton.addEventListener('click', opensAddSectionWindow);
+openAddSectionWindowButton.addEventListener('click', opensAddSectionWindow);//for the add-window pop up
 
 //--------------------------------------------------FUNCTIONS--------------------------------------------------------
 //Adds item to list and local storage
@@ -202,6 +202,7 @@ function removeOrComplete(event) {
 }
 
 // opens add section
+//for the add-window pop up
 function opensAddSectionWindow() {
         addSectionWindow.hidden = false;
         addSectionWindow.classList.toggle('fade-in');

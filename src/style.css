@@ -254,6 +254,7 @@ body {
 }
 
 /* opening the add section with fade */
+/* for the add-window pop up */
 .fade-in {
     animation: fadeIn 1.7s;
 }
