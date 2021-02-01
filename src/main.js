@@ -75,9 +75,9 @@ function insertTaskToTaskList(text, priority, date = new Date()) {
 }
 function insertTaskToHtml(task) {
     let text = task.text;
-    let date = (task.date instanceof Date) ? task.date : new Date(task.date);
     let priority = task.priority;
-    date = date.toISOString();
+    let date = (task.date instanceof Date) ? task.date : new Date(task.date);
+    date = dateToSQL(date);
 
     let containerTemplate = document.querySelector("[data-template]");
     let todoContainer = containerTemplate.cloneNode(true);
@@ -108,7 +108,7 @@ function uploadJson() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ ["my-todo"]: [] }),
+        body: JSON.stringify({ ["my-todo"]: taskList }),
     })
         .then(response => response.json())
         .then(null, error => {
@@ -251,3 +251,16 @@ function sortPriority() {
     }
 }
 
+function dateToSQL(date) {
+    let pad = function (num) {
+        return ('00' + num).slice(-2);
+    }
+    let sql = date.getUTCFullYear() + '-' +
+        pad(date.getUTCMonth() + 1) + '-' +
+        pad(date.getUTCDate()) + ' ' +
+        pad(date.getUTCHours()) + ':' +
+        pad(date.getUTCMinutes()) + ':' +
+        pad(date.getUTCSeconds());
+
+    return sql;
+}
