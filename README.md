@@ -2,6 +2,10 @@
 
 My attempt at an To-Do list webpage.
 
+## link
+
+https://michefraim.github.io/pre-course-2021-final-boilerplate/src/
+
 ## Features
 
 - Add tasks with text, creation date, due date, and priority.
@@ -31,13 +35,3 @@ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 https://htmldom.dev/detect-the-dark-mode
 
 - stackoverflow for general help
-
-
-#
-
-- Change this file (README.md) and style it to showcase your solution (gifs, explanations, link to the github page, links to resources you used, etc...)
-- Submit your solution repo to the [ChallengeMe](http://challengeme.suvelocity.org/) system
-- Submit your repo link and github page and video to Google Classroom
-- Record a 5-10 min selfie video, describe yourself in a few words (age, location, military background, technological background). Also, talk about the solution you submitted (try to explain how your app works in general and which bonuses you added). Think about this video as an interview.
-
-GOOD LUCK!
