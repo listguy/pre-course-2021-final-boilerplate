@@ -6,20 +6,22 @@ let list = document.querySelector('#todo-list');
 let listCounter = document.querySelector('#counter');
 const sortButton = document.querySelector('#sort-button');
 const clearButton = document.querySelector('#clear-button');
+let addSectionWindow = document.querySelector('#add-section');
+let openAddSectionWindowButton = document.querySelector('#open-add-section');
+addSectionWindow.hidden = true;
 
-//PRINTS FROM LOCAL STORAGE
+//COMMAND TO START WINDOW
 let taskCounter = JSON.parse(localStorage.getItem("numberOfTasksGiven")) || 1;
 printFromLocalStorage();
 numberOfToDos();  //counts the number of tasks
 let removedItems = JSON.parse(localStorage.getItem('removedItems')) || 0;
-
-
 
 //--------------------------------------------------EVENT LISTENERS--------------------------------------------------
 addButton.addEventListener('click', addToList);
 sortButton.addEventListener('click', sortListItems);
 clearButton.addEventListener('click', removeAll);
 list.addEventListener('click', removeItemFromList);
+openAddSectionWindowButton.addEventListener('click', opensAddSectionWindow)
 
 //--------------------------------------------------FUNCTIONS--------------------------------------------------------
 //Adds item to list and local storage
@@ -162,7 +164,14 @@ function removeItemFromList(event) {
     removedItems++;
     localStorage.setItem('removedItems', removedItems);
     localStorage.removeItem(`my-todo${item.id}`);
-    // for (let i)
     item.remove();
     numberOfToDos();
+}
+
+//opens add section
+function opensAddSectionWindow() {
+    if (addSectionWindow.hidden = true) {
+        addSectionWindow.hidden = false;
+        document.getElementById("text-input").focus();
+    } 
 }
