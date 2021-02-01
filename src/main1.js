@@ -7,17 +7,19 @@ let listCounter = document.querySelector('#counter');
 const sortButton = document.querySelector('#sort-button');
 const clearButton = document.querySelector('#clear-button');
 
-
 //PRINTS FROM LOCAL STORAGE
 let taskCounter = JSON.parse(localStorage.getItem("numberOfTasksGiven")) || 1;
 printFromLocalStorage();
 numberOfToDos();  //counts the number of tasks
+let removedItems = JSON.parse(localStorage.getItem('removedItems')) || 0;
+
 
 
 //--------------------------------------------------EVENT LISTENERS--------------------------------------------------
 addButton.addEventListener('click', addToList);
 sortButton.addEventListener('click', sortListItems);
 clearButton.addEventListener('click', removeAll);
+list.addEventListener('click', removeItemFromList);
 
 //--------------------------------------------------FUNCTIONS--------------------------------------------------------
 //Adds item to list and local storage
@@ -31,7 +33,8 @@ function addToList(){
     let listItemObject = {
         text : textValue,
         priority : priorityValue,
-        date : dateValue
+        date : dateValue,
+        id : taskCounter
     }
     let listItemObjectFixed = JSON.stringify(listItemObject);
     localStorage.setItem("numberOfTasksGiven", taskCounter);
@@ -40,6 +43,7 @@ function addToList(){
     localStorage.setItem('numberOfTasksGiven', taskCounter)
     const todoDiv = document.createElement('div');   //div of the list
     const newTodo = document.createElement('li');    //the content of the TODO
+    newTodo.id = `${listItemObject.id}`;
     todoDiv.classList.add('todo-container');
     newTodo.classList.add('todo-list-container');
     newTodo.appendChild(todoDiv);
@@ -75,27 +79,24 @@ function checkTime(i) {
     }
     return i;
   }
+
 //saving current time
 function startTime() {
     let today = new Date();
     let h = today.getHours();
     let m = today.getMinutes();
-    let month = today.getMonth();
+    let month = today.getMonth() + 1;
     let day = today.getDate();
     m = checkTime(m);
-    return h + ":" + m + ', ' + day + '.' + month + 1;
+    return h + ":" + m + ', ' + day + '.' + month;
 }
-// function convertTimeToReadable(timeStamp) {
-//     let Month = timeStamp.getMonth();
-//     let Date = timeStamp.getDate();
-//     let Year = timeStamp.getFullYear();
-// }    
 
 //Sorts list By Priority
 function sortListItems(a, b) {
     let listArrSort = [];
     listArrSort.push(JSON.parse(localStorage.getItem('numberOfTasksGiven')));
     for (let i = 1 ; i < localStorage.length ; i++){
+        if ( JSON.parse(localStorage.getItem(`my-todo${i}`)) === null) {i++}
         listArrSort.push(JSON.parse(localStorage.getItem(`my-todo${i}`)));
     }
     const comparator = (a, b) => {
@@ -120,7 +121,11 @@ function removeAll(){
 
 //Prints data from localStorage
 function printFromLocalStorage() {
-    for (let i = 1 ; i < localStorage.length ; i++){
+    for (let i = 1 ; i < localStorage.length + JSON.parse(localStorage.getItem(`removedItems`)) ; i++){
+        for (let j = 0 ; j < localStorage.length ; j++) { 
+            if ( JSON.parse(localStorage.getItem(`my-todo${i}`)) === null) {i++}
+        }
+        if ( JSON.parse(localStorage.getItem(`my-todo${i}`)) === null) {return}
         const todoDiv = document.createElement('div');   //div of the list
         const newTodo = document.createElement('li');    //the content of the TODO
         todoDiv.classList.add('todo-container');
@@ -142,8 +147,22 @@ function printFromLocalStorage() {
         todoDiv.appendChild(todoCreatedAt);
         //prints to list
         let itemObjectFromStorage = JSON.parse(localStorage.getItem(`my-todo${i}`));
+        newTodo.id = `${itemObjectFromStorage.id}`;
         todoPriority.innerText = itemObjectFromStorage.priority;
         todoText.innerText = itemObjectFromStorage.text;
         todoCreatedAt.innerText = startTime(itemObjectFromStorage.date);
+        
     }
+}
+
+// removes Item From List
+function removeItemFromList(event) {
+    if (event.target.className !== 'remove-button') return;
+    let item = event.target.closest('.todo-list-container');
+    removedItems++;
+    localStorage.setItem('removedItems', removedItems);
+    localStorage.removeItem(`my-todo${item.id}`);
+    // for (let i)
+    item.remove();
+    numberOfToDos();
 }
