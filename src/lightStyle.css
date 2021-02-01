@@ -171,6 +171,7 @@ html {
 
 .sortByPriority {
     flex: 0 2 200px;
+    text-align: left;
 }
 
 .sortByDate {

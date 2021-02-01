@@ -35,14 +35,19 @@ body {
     transition-timing-function: ease-in-out;
 }
 
-#mode-button, #add-button {
+#add-button {
     background:#056 ;
     color:white;
 }
 
-#mode-button:hover, #add-button:hover  {
+#mode-button {
     background:#056 ;
     color:var(--my-blue);
+}
+
+#mode-button:hover, #add-button:hover  {
+    background:#056 ;
+    color:white;
 }
 
 .button:hover {
@@ -176,6 +181,7 @@ body {
 
 .sortByPriority {
     flex: 0 2 200px;
+    text-align: left;
 }
 
 .sortByDate {
