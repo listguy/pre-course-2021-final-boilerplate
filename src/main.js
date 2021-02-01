@@ -2,7 +2,7 @@
 
 let counter = 0;
 let id = 0;
-let myTodo = { "my-todo": [] };
+let tasks = { "my-todo": [] };
 getJSON();
 
 
@@ -12,19 +12,19 @@ function getJSON() {
             if (res.record['my-todo'].length === 0) {
                 return;
             } else {
-                myTodo['my-todo'] = res.record['my-todo'];
-                printTodoList(myTodo['my-todo']);
+                tasks['my-todo'] = res.record['my-todo'];
+                printTodoList(tasks['my-todo']);
             }
         })
 }
 
-function updateJSON() {
+function updateJSON() { 
     fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(myTodo)
+        body: JSON.stringify(tasks)
     })
         .then(response => response.json())
         .then(data => {
@@ -35,7 +35,7 @@ function updateJSON() {
         });
 }
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', function (event) { //manages all the clicks
     const pressedId = event.target.id;
     const pressedClass = event.target.getAttribute('class');
     switch (pressedId) {
@@ -65,7 +65,7 @@ document.addEventListener('click', function (event) {
 
 })
 
-function addItem() {
+function addItem() { //adds an task locally, and to the array as object.
     const viewSection = document.querySelector('.viewSection');
     const input = document.querySelector('#text-input');
     const priority = document.querySelector('#priority-selector');
@@ -75,15 +75,12 @@ function addItem() {
     id = counter + 1;
     input.value = "";
 
+
     if (temp) {
         const div = document.createElement('div');
         div.classList.add('todo-container');
         div.id = id;
         viewSection.append(div);
-
-        const todoCheckbox = document.createElement('input');
-        todoCheckbox.type = 'checkbox';
-        todoCheckbox.name = 'IsDone';
 
         const todoText = document.createElement('p');
         todoText.classList.add('todo', 'todo-text');
@@ -104,7 +101,7 @@ function addItem() {
         if (dueDateInput.value === "") {
             todoTimeLeft.innerText = timeLeft;
         } else {
-            const timeLeft = calculateTimeLeft(currentDate, dueDate);
+            const timeLeft = calculateTimeLeft(dueDate.getTime());
             todoTimeLeft.innerText = timeLeft;
         }
         todoTimeLeft.classList.add('todo', 'todo-time-left')
@@ -120,7 +117,6 @@ function addItem() {
         todoOptions.append(editButton);
         todoOptions.append(removeButton);
 
-        div.append(todoCheckbox);
         div.append(todoText);
         div.append(todoCreationTime);
         div.append(todoPriority);
@@ -132,29 +128,26 @@ function addItem() {
             "text": temp,
             "date": formattedDate,
             "priority": Number(priority.value),
-            "timeLeft": timeLeft,
-            "timeInMS": currentDate.getTime()
+            "timeInMS": currentDate.getTime(),
+            "dueDateRaw": dueDate.getTime()
         };
-        myTodo['my-todo'].push(item);
 
+        tasks['my-todo'].push(item);
         id++;
         counter++;
         updateCounter();
     }
     updateJSON();
 }
-function printTodoList(arr) {
+function printTodoList(arr) { //display the tasks from the array.
     const viewSection = document.querySelector('.viewSection');
     deleteList();
+    console.log(tasks);
     arr.forEach(element => {
         const div = document.createElement('div');
         div.classList.add('todo-container');
         div.id = element.id;
         viewSection.append(div);
-
-        const todoCheckbox = document.createElement('input');
-        todoCheckbox.type = 'checkbox';
-        todoCheckbox.name = 'IsDone';
 
         const todoText = document.createElement('p');
         todoText.classList.add('todo', 'todo-text');
@@ -169,7 +162,7 @@ function printTodoList(arr) {
         todoPriority.classList.add('todo', 'todo-priority');
 
         const todoTimeLeft = document.createElement('p');
-        todoTimeLeft.innerText = element.timeLeft;
+        todoTimeLeft.innerText = calculateTimeLeft(element.dueDateRaw);
         todoTimeLeft.classList.add('todo', 'todo-time-left')
 
         const todoOptions = document.createElement('div');
@@ -183,9 +176,6 @@ function printTodoList(arr) {
         todoOptions.append(editButton);
         todoOptions.append(removeButton);
 
-
-
-        div.append(todoCheckbox);
         div.append(todoText);
         div.append(todoCreationTime);
         div.append(todoPriority);
@@ -198,7 +188,7 @@ function printTodoList(arr) {
     updateCounter();
 }
 
-function deleteList() {
+function deleteList() { //clears the tasks area
     const viewSection = document.querySelector('.viewSection');
     let childOfViewSection = viewSection.firstChild;
     while (childOfViewSection) {
@@ -207,14 +197,14 @@ function deleteList() {
     }
 }
 
-function sortListByPriority() {
-    myTodo["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
-    printTodoList(myTodo["my-todo"]);
+function sortListByPriority() { 
+    tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+    printTodoList(tasks["my-todo"]);
 }
 
 function sortListByCreationDate() {
-    myTodo['my-todo'].sort((a, b) => (a["timeInMS"] > b["timeInMS"]) ? -1 : 1);
-    printTodoList(myTodo["my-todo"]);
+    tasks['my-todo'].sort((a, b) => (a["timeInMS"] > b["timeInMS"]) ? -1 : 1);
+    printTodoList(tasks["my-todo"]);
 }
 
 function sqlDate(dt) {
@@ -231,8 +221,11 @@ function pad2(number) {
     return (number < 10 ? '0' : '') + number
 }
 
-function calculateTimeLeft(startDate, finishDate) {
-    const miliSeconds = (finishDate - startDate);
+function calculateTimeLeft(finishDate) {
+    const now = new Date().getTime();;
+    console.log(now, finishDate);
+    const miliSeconds = (finishDate - now);
+    console.log(miliSeconds);
     const diffDays = Math.ceil(miliSeconds / (1000 * 60 * 60 * 24));
     const diffHours = Math.ceil(miliSeconds / (1000 * 60 * 60));
     if (miliSeconds <= 0) {
@@ -245,12 +238,12 @@ function calculateTimeLeft(startDate, finishDate) {
 function removeItem(event) {
     const selectedItem = event.target.closest('.todo-container');
     let selectedIndex = -1;
-    for (let i = 0; i < myTodo["my-todo"].length; i++) {
-        if (Number(selectedItem.id) === myTodo["my-todo"][i].id) {
+    for (let i = 0; i < tasks["my-todo"].length; i++) {
+        if (Number(selectedItem.id) === tasks["my-todo"][i].id) {
             selectedIndex = i;
         }
     }
-    myTodo["my-todo"].splice(selectedIndex, 1);
+    tasks["my-todo"].splice(selectedIndex, 1);
     selectedItem.remove();
     counter--;
     updateJSON();
@@ -260,16 +253,15 @@ function removeItem(event) {
 function editItem(event) {
     const selectedItem = event.target.closest('.todo-container');
     let selectedIndex = -1;
-    for (let i = 0; i < myTodo["my-todo"].length; i++) {
-        if (Number(selectedItem.id) === myTodo["my-todo"][i].id) {
+    for (let i = 0; i < tasks["my-todo"].length; i++) {
+        if (Number(selectedItem.id) === tasks["my-todo"][i].id) {
             selectedIndex = i;
         }
     }
     const newText = prompt('Enter the task text.');
-    myTodo["my-todo"][selectedIndex].text = newText;
-    printTodoList(myTodo["my-todo"]);
+    tasks["my-todo"][selectedIndex].text = newText;
+    printTodoList(tasks["my-todo"]);
     updateJSON();
-
 }
 
 function updateCounter() {
