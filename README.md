@@ -10,7 +10,7 @@ https://michefraim.github.io/pre-course-2021-final-boilerplate/src/
 
 - Add tasks with text, creation date, due date, and priority.
 - The tasks list is dynamic - items are editable, and can be removed.
-- Your list is safe! the items are stored as *JSON* at jsonbin.io, and can be accessed anywhere, fully persistent!
+- Your list is safe! the items are stored as **JSON** at jsonbin.io, and can be accessed anywhere, fully persistent!
 - Sort your items by priority, creation date, or due date - ascending or descending.
 - Dark mode for the comfort of your eyes available, should be detected automatically based on system option.
 - Spinner on Ajax loadings
