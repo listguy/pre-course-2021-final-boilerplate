@@ -4,19 +4,21 @@ const darkMode = document.getElementById("dark-mode");
 const regular = document.getElementById("regular-mode");
 const style = document.getElementById("style");
 
+//Switch to dark mode on click
 darkMode.addEventListener("click", (e) => {
   style.href = "./dark-mode.css";
   const instagram = document.getElementById("instagram");
   instagram.src = "./images/blue-back-instagram-icon.png";
 });
 
+//Switch to regular mode on click
 regular.addEventListener("click", (e) => {
   style.href = "./style.css";
   const instagram = document.getElementById("instagram");
   instagram.src = "./images/blue-instagram-icon.png";
 });
 
-//remove the correct div + deletes from jsonbin and storageData
+//Remove the correct div + deletes from jsonbin and storageData
 document.addEventListener("click", (e) => {
   if (e.target.className === "delete") {
     if (confirm("todo is going to be deleted")) {
@@ -33,7 +35,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-//edit button that makes it possible to chang the text
+//Edit button that makes it possible to chang the text
 document.addEventListener("click", (e) => {
   if (e.target.className === "edit") {
     const parent = e.target.parentElement;
@@ -45,7 +47,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-//done button when clicked the content cannot be changed and updates local storage+jsoonbin.io
+//Done button when clicked the content cannot be changed and updates local storage+jsoonbin.io
 document.addEventListener("click", (e) => {
   if (e.target.className === "done") {
     const parent = e.target.parentElement;
@@ -63,7 +65,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-//removes the divs resets the counter and empties jsonbin.io + localStorage
+//Removes the divs resets the counter and empties jsonbin.io + localStorage
 document.addEventListener("click", (e) => {
   if (e.target.id === "delete-all") {
     deleteAllDivs();
@@ -73,14 +75,16 @@ document.addEventListener("click", (e) => {
   }
 });
 
-//deletes all the lists divs
+//------------------------------------Functions------------------------------------//
+
+//Deletes all the lists divs
 function deleteAllDivs() {
   while (viewSection.firstChild) {
     viewSection.removeChild(viewSection.firstChild);
   }
 }
 
-//empties the Jsonbin.io json
+//Empties the Jsonbin.io json
 async function emptyJsonbin() {
   await fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
     method: "PUT",
@@ -93,7 +97,7 @@ async function emptyJsonbin() {
   });
 }
 
-//gets an array filter property and property value returns an array without that value
+//Gets an array, filter property and property value. Returns an array without that value
 function filterByKey(array, filter, keyword) {
   let filteredArray = array.filter(function (obj) {
     return obj[filter] !== keyword;
@@ -101,7 +105,7 @@ function filterByKey(array, filter, keyword) {
   return filteredArray;
 }
 
-//finds the index in relation to its parent
+//Finds the child index in relation to its parent
 function findChildNodeIndex(child) {
   const parent = child.parentNode;
   const childrenNodes = parent.childNodes;

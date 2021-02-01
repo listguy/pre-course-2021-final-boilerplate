@@ -9,7 +9,7 @@ let inputValue;
 let jsonList = { "my-todo": [] };
 let todoList = [];
 
-//when the page is loaded its content is taken from jsonbin.io and updates the localStorage
+//When the page is loaded its content is taken from jsonbin.io and updates the localStorage
 document.addEventListener("DOMContentLoaded", async (e) => {
   let response = await fetch(
     "https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce/latest"
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   arrayToDiv(todoList);
 });
 
-//adds the item to the array and displays it
+//Adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
   counter.innerText = Number(counter.innerText) + 1;
   inputValue = textInput.value;
@@ -35,12 +35,12 @@ addButton.addEventListener("click", (e) => {
   viewSection.append(itemObjectToDiv(object));
 });
 
-//removes text from input on click
+//Removes text from input on click
 addButton.addEventListener("click", (e) => {
   textInput.value = "";
 });
 
-//on click sorts the array
+//On click sorts the array
 sortButton.addEventListener("click", (e) => {
   sortArrayByPriority(jsonList["my-todo"]);
   todoList = jsonList["my-todo"];
@@ -53,7 +53,9 @@ sortButton.addEventListener("click", (e) => {
   }
 });
 
-//converts the value into the correct object with time and priority
+//-----------------------------------Functions-----------------------------------//
+
+//Converts the value into the correct object with time and priority
 function convertValueToObject(value) {
   const current = new Date();
   const creationTime = current.toLocaleString();
@@ -66,7 +68,7 @@ function convertValueToObject(value) {
   return myTodoItem;
 }
 
-//converts the todo item object into a div container
+//Converts the todo item object into a div container
 function itemObjectToDiv(myTodoItem) {
   const todoContainer = document.createElement("div");
   const todoPriority = document.createElement("div");
@@ -75,7 +77,7 @@ function itemObjectToDiv(myTodoItem) {
   const deleteButton = document.createElement("button");
   const doneButton = document.createElement("button");
   const editButton = document.createElement("button");
-
+  //Setting the attributes
   todoContainer.setAttribute("class", "todo-container");
   todoPriority.setAttribute("class", "todo-priority");
   todoCreatedAt.setAttribute("class", "todo-created-at");
@@ -84,14 +86,14 @@ function itemObjectToDiv(myTodoItem) {
   doneButton.setAttribute("class", "done");
   doneButton.setAttribute("hidden", "true");
   editButton.setAttribute("class", "edit");
-
+  //Setting the inner text
   todoPriority.innerText = myTodoItem["priority"];
   todoCreatedAt.innerText = myTodoItem["date"];
   todoText.innerText = myTodoItem["text"];
   deleteButton.innerHTML = "";
   doneButton.innerHTML = "";
   editButton.innerHTML = "";
-
+  //Appending into the to-do container
   todoContainer.appendChild(todoCreatedAt);
   todoContainer.appendChild(todoText);
   todoContainer.appendChild(todoPriority);
@@ -109,7 +111,7 @@ function sortArrayByPriority(array) {
   return array;
 }
 
-//updates the list and sends a success/error in console log
+//Updates the list and sends a success/error in console log
 async function updateList() {
   await fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
     method: "PUT",
@@ -129,7 +131,7 @@ async function updateList() {
     });
 }
 
-//prints the array as divs
+//Prints the array as div elements
 function arrayToDiv(array) {
   for (const object of array) {
     viewSection.append(itemObjectToDiv(object));

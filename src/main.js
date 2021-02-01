@@ -10,11 +10,12 @@ const todoList = [];
 let inputValue;
 let jsonList = [];
 
-//set counter to stay on refresh
+//Set counter to stay on refresh
 if (storedCounter) {
   counter.innerText = storedCounter;
 }
-//update counter on every click
+
+//Update counter on every click
 addButton.onclick = function () {
   const key = "counter";
   let value = Number(counter.innerText);
@@ -23,12 +24,13 @@ addButton.onclick = function () {
   localStorage.setItem(key, value);
 };
 
-//whenever you reload the list isn't reset
+//Whenever you reload the list isn't reset
 if (typeof localJson === "string") {
   jsonList = JSON.parse(localJson);
   listTodos();
 }
-//adds the item to the array and displays it
+
+//Adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
   inputValue = textInput.value;
   const inputObject = convertValueToObject(inputValue);
@@ -38,12 +40,12 @@ addButton.addEventListener("click", (e) => {
   viewSection.append(itemObjectToDiv(inputObject));
 });
 
-//removes text from input on click
+//Removes text from input on click
 addButton.addEventListener("click", (e) => {
   textInput.value = "";
 });
 
-//on click sorts the array
+//On click sorts the array
 sortButton.addEventListener("click", (e) => {
   sortArrayByPriority(jsonList);
   localStorage.setItem("my-todo", JSON.stringify(jsonList));
@@ -54,6 +56,8 @@ sortButton.addEventListener("click", (e) => {
     viewSection.append(itemObjectToDiv(jsonList[i]));
   }
 });
+
+//---------------------------------------Functions---------------------------------------//
 
 function convertValueToObject(value) {
   const current = new Date();
@@ -67,7 +71,7 @@ function convertValueToObject(value) {
   return myTodoItem;
 }
 
-//converts the todo item object into a div container
+//Converts the todo item object into a div container
 function itemObjectToDiv(myTodoItem) {
   const todoContainer = document.createElement("div");
   const todoPriority = document.createElement("div");
@@ -90,7 +94,7 @@ function itemObjectToDiv(myTodoItem) {
   return todoContainer;
 }
 
-//loads the list from local storage
+//Loads the list from local storage
 function listTodos() {
   const list = JSON.parse(localJson);
   for (let i = 0; i < list.length; i++) {
