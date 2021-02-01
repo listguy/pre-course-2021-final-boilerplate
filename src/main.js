@@ -97,6 +97,7 @@ function insertTaskToHtml(task) {
     let todoContainer = containerTemplate.cloneNode(true);
     todoContainer.removeAttribute("data-template");
     todoContainer.classList.add("todo-container");
+    todoContainer.dataset.priority=priority;
 
     let textContainer = todoContainer.querySelector(".todo-text-template");
     textContainer.classList.add("todo-text");

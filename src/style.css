@@ -4,17 +4,7 @@
     --headerBgColor:#CAEBF2;
     --tasksBorder:black;
 }
-@media screen and (max-width: 900px) {
-    #submission-wrapper{
-      flex-wrap: wrap;
-    }
-    #counter-wrapper{
-        flex: 0 0 auto;  
-    }
-    #Control{
-        grid-template-columns: 1fr 15fr 1fr;   
-    }
-  }
+
 body{
     background-color:var(--backgroundColor);
     font-size: 16px;
@@ -208,7 +198,6 @@ main *{
     word-break: break-word;
     grid-area: tx;
     border-bottom:rgb(87, 81, 81) solid 2px;
-
 }
 .due-date{
     grid-area: dd;
@@ -236,11 +225,12 @@ main *{
     opacity: 0;
     width: 25px;
     height: 25px;
+    z-index: 1;
 }
 .checkmark{
     background-color:hsl(0, 0%, 80%);;
     border-radius: 5px;
-    z-index: -1;
+    z-index: 0;
     width: 25px;
     height: 25px;
 }
@@ -281,5 +271,30 @@ div[data-template]{
 .priority-container{
     grid-area: pr;
 }
+div[data-priority="5"]{
+    background-color: hsl(182, 50%, 50%);
+}
+div[data-priority="4"]{
+    background-color: hsl(182, 40%, 50%);
+}
+div[data-priority="3"]{
+    background-color: hsl(182, 30%, 50%);;
+}
+div[data-priority="2"]{
+    background-color: hsl(182, 20%, 50%);;
+}
+div[data-priority="1"]{
+    background-color: hsl(182, 10%, 50%);;
+}
 
-
+@media screen and (max-width: 900px) {
+    #submission-wrapper{
+      flex-wrap: wrap;
+    }
+    #counter-wrapper{
+        flex: 1 0 auto;  
+    }
+    #Control{
+        grid-template-columns: 1fr 50fr 1fr;
+    }
+  }
