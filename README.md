@@ -13,6 +13,7 @@ https://michefraim.github.io/pre-course-2021-final-boilerplate/src/
 - Your list is safe! the items are stored as *JSON* at jsonbin.io, and can be accessed anywhere, fully persistent!
 - Sort your items by priority, creation date, or due date - ascending or descending.
 - Dark mode for the comfort of your eyes available, should be detected automatically based on system option.
+- Spinner on Ajax loadings
 
 ## Resources
 
@@ -34,4 +35,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 - automatic dark mode preference detect:
 https://htmldom.dev/detect-the-dark-mode
 
-- stackoverflow for general help
+- fetch calls spinner:
+https://dev.to/wangonya/displaying-a-css-spinner-on-ajax-calls-with-fetch-api-4ndo
+
+- stackoverflow came in handy for random problems.
