@@ -145,52 +145,50 @@ body {
     display: flex;
     max-height: 30px;
     flex: 1 1 auto;
+    justify-content: flex-end;
     text-align: center;
 }
-/* .sortContainer button {
-    background: rgb(249,249,249);
-} */
+
 .sortContainer button:hover {
     color: var(--my-blue);
+    text-align: right;
 }
 
 .sortByPriority {
-    flex: 1 1 auto;
-    padding-left: 100px;
-    /* background:chartreuse; */
-}
-
-.sortByAlphaBet {
-    padding-left: 180px;
-    flex: 2 0 auto;
-    /* background:rgb(255, 0, 55); */
+    flex: 0 2 200px;
 }
 
 .sortByDate {
-    flex: 1 1 auto;
-    padding-left: 180px;
-    /* background:rgb(255, 0, 255); */
+    flex: 0 2 200px;
 }
 
 .sortByDueDate {
-    flex: 1 1 auto;
-    /* background:rgb(255, 238, 0); */
+    flex: 0 2 200px;
+    text-align: center;
 }
 
 .sortButtons {
-    flex: 2 1 auto;
-    /* background:rgb(255, 238, 0); */
+    flex: 0 1 150px;
 }
 
+.todo {
+    flex: 1 1 auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.089);
+    text-align: center;
+}
 .todo-container {
     display: flex;
-    text-align: center;
+    text-align: left;
     padding-left: 20px;
+}
+
+.todo-time-left {
+    text-align: right;
 }
 
 .todo-text {
     padding-left: 15px;
-    min-width: 400px;
+    min-width: 620px;
     text-align: left;
 }
 
@@ -198,9 +196,8 @@ body {
     flex: 0 2 auto;
 }
 
-.todo {
-    flex: 1 1 auto;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.089);
+.options-buttons {
+    text-align: right;
 }
 
 .viewSection {

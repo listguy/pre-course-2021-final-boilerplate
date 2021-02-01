@@ -110,7 +110,7 @@ function addItem() { //adds an task locally, and to the array as object.
         todoTimeLeft.classList.add('todo', 'todo-time-left')
 
         const todoOptions = document.createElement('div');
-        todoOptions.classList.add('todo');
+        todoOptions.classList.add('todo', 'options-buttons');
         const editButton = document.createElement('button');
         const removeButton = document.createElement('button');
         editButton.classList.add('button', 'edit-button');
@@ -168,7 +168,7 @@ function printTodoList(arr) { //display the tasks from the array.
         todoTimeLeft.classList.add('todo', 'todo-time-left')
 
         const todoOptions = document.createElement('div');
-        todoOptions.classList.add('todo');
+        todoOptions.classList.add('todo', 'options-buttons');
         const editButton = document.createElement('button');
         const removeButton = document.createElement('button');
         editButton.classList.add('button', 'edit-button');
