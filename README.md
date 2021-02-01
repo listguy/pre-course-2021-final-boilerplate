@@ -5,36 +5,37 @@
 
 ![my to do list](./src/images-and-videos/zoom-0.gif)
 
-# Main features 
+# Main Features 
 
-1. You can add to do items, they will be added at the end of the list.
-2. To do can be set with a priority ranging from 1-5.
-3. You have the number of current todos to the left of the add button.
-4. To do items can be sorted using the sort button, items will be sorted from the highest priority to the lowest.
-5. List items are persistent using jsonbin.io to save the current list. The same list is loaded when the page is refreshed. You will get notified in the console whether adding a certain to do item was successful or not.
+1. Adding "To Do" items to the list. Each new "To Do" item is added at the end of the list
+2. "To Do" items can be set with a priority rank, ranging from 1-5.
+3. Left to the "Add" button, is the current count of "To Do" items.
+4. "To Do" items can be sorted descending using the "Sort" button.
+5. "To Do" items are automatically saved under "jsonbin.io" which makes them persistent across devices and browsers
 
-# extra features
 
-1. Delete button next to each list item : 
+# Extra Features
+
+1. "Delete" option next to each "To Do" task : 
 
 ![delete button](./src/images-and-videos/delete-button.PNG)
 
-After you clicked on the delete button you will need to confirm your delete action.
+Pressing the button generated a popup asking whether to complete the action.
 
 
-2. Edit button next to each list item:
+2. "Edit" button next to each "To Do" item:
 
 ![edit button](./src/images-and-videos/edit-button.PNG)
 
-Once you click on the edit button the text inside the item can be changed, just *double click* the text and change it. Upon clicking the pencil icon will be changed to a check mark just like so :
+Upon clicking the pencil icon a check mark will appear in its place:
 
 ![check mark](./src/images-and-videos/done.PNG)
 
-By clicking the check mark you will confirm your edit. The list will then be updated in jsonbin.io and the local storage.
+Once the check mark appears the user can change the "To Do" item name by *double clicking*.  Clicking the check mark confirms the edit. "To Do" list will be updated in "jsonbin.io" and locally.
 
-3. Empty todos : Once clicked the list will be emptied.
+3. "Empty Todos" : When clicked, list is emptied.
 
-4. Dark mode: On the upper right of the screen you can see the selection between the regular mode which is shown above and the dark mode which can be easier on your eyes :) it looks like so :
+4. "Dark" Mode: On the upper right hand corner of the screen a toggle option between "regular" mode (depicted above) and "dark" mode. See below:
 
 ![dark mode](./src/images-and-videos/dark-theme.PNG)
 
@@ -42,7 +43,7 @@ By clicking the check mark you will confirm your edit. The list will then be upd
 
 ![phone look](./src/images-and-videos/media-query.PNG)
 
-6. On the left side you can see the links to my social accounts : instagram, github, codepan and my daily spotify mix, highly recommended.
+6. To the left, my social account links : instagram, github, codepan and my daily spotify mix, highly recommended.
 
 <br>
 
