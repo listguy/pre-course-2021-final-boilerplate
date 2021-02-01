@@ -18,6 +18,7 @@ let removedItems = JSON.parse(localStorage.getItem('removedItems')) || 0;
 
 //--------------------------------------------------EVENT LISTENERS--------------------------------------------------
 addButton.addEventListener('click', addToList);
+textInput.addEventListener('keyup', enterAddToList);
 sortButton.addEventListener('click', sortListItems);
 clearButton.addEventListener('click', removeAll);
 list.addEventListener('click', removeItemFromList);
@@ -71,16 +72,21 @@ function addToList(){
     numberOfToDos();       //counts the number of tasks
 }
 
-function numberOfToDos() {
-    listCounter.innerText = document.querySelectorAll('.todo-list-container').length
+//by pressing enter the item will be added
+function enterAddToList(event) {
+    if (event.keyCode === 13) {
+        addToList();
+    } else {
+        return;
+    }
 }
 
 function checkTime(i) {
     if (i < 10) {
-      i = "0" + i;
+        i = "0" + i;
     }
     return i;
-  }
+}
 
 //saving current time
 function startTime() {
@@ -91,6 +97,10 @@ function startTime() {
     let day = today.getDate();
     m = checkTime(m);
     return h + ":" + m + ', ' + day + '.' + month;
+}
+
+function numberOfToDos() {
+    listCounter.innerText = document.querySelectorAll('.todo-list-container').length
 }
 
 //Sorts list By Priority
