@@ -108,7 +108,7 @@ h1 {
 .todo-text {
   display: inline;
   position: relative;
-  left: -50px;
+  left: -36px;
   top: 5px;
 }
 .todo-created-at {
