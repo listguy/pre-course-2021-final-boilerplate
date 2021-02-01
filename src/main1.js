@@ -171,10 +171,13 @@ function printFromLocalStorage() {
 function removeItemFromList(event) {
     if (event.target.className !== 'remove-button') return;
     let item = event.target.closest('.todo-list-container');
+    item.classList.add('remove-animation');
+    item.addEventListener('transitionend', function(){
+        item.remove();
+    });
     removedItems++;
     localStorage.setItem('removedItems', removedItems);
     localStorage.removeItem(`my-todo${item.id}`);
-    item.remove();
     numberOfToDos();
 }
 

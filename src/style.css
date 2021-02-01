@@ -145,6 +145,7 @@ body {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px rgb(206, 206, 206) solid;
+    transition: all 1s ease;
 }
 
 .todo-container{
@@ -185,6 +186,12 @@ body {
     background-color: #B22222;
     padding: 1px 8px;
     font-size: 1.2em;
+}
+
+.remove-animation {
+    /* transform: translateY(8rem) rotateZ(20deg); */
+    transform: translateX(20rem);
+    opacity: 0;
 }
 
 #open-add-section{
