@@ -1,6 +1,0 @@
-Resources:
-date to SQL format:
-https://electrictoolbox.com/format-date-time-javascript-database-format/
-
-Buttons:
-https://codepen.io/vastrideside/pen/LYEedXK
