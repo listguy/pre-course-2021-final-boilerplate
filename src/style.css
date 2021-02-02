@@ -14,8 +14,7 @@ body {
 
 /* ------------------------------------ADD WINDOW------------------------------------ */
 #add-section {
-    min-height: 5vh;
-    max-height: 8vh;
+    height: 50px;
     justify-content: center;
     align-items: center;
     background-color: #46529d;
