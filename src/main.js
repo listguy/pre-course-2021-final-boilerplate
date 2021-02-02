@@ -3,6 +3,7 @@ const spinner = document.getElementById("spinner");
 const mode = localStorage.getItem("mode");
 const isDarkMode = window.matchMedia &&
     window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 if (isDarkMode && mode !== 'light') {
     localStorage.setItem("mode", "dark");
 }
@@ -11,6 +12,7 @@ if (mode === 'dark') {
     const theme = document.querySelector("#theme-link");
     theme.href = "darkStyle.css";
 }
+
 let counter = 0;
 let id = 0;
 let tasks = { "my-todo": [] };
@@ -282,7 +284,8 @@ function calculateTimeLeft(finishDate) {
     if (miliSeconds <= 0) {
         return 'Passed!';
     } else {
-        return (diffDays > 1) ? `<i class="material-icons">access_time</i> &nbsp; &nbsp; ${diffDays} Days` : `<i class="material-icons">access_time</i> &nbsp; &nbsp; ${diffHours} Hours`;
+        return (diffDays > 1) ? `<i class="material-icons">access_time</i> &nbsp; &nbsp;
+        ${diffDays} Days` : `<i class="material-icons">access_time</i> &nbsp; &nbsp; ${diffHours} Hours`;
     }
 }
 
@@ -294,6 +297,7 @@ function removeItem(event) {
             selectedIndex = i;
         }
     }
+    
     tasks["my-todo"].splice(selectedIndex, 1);
     selectedItem.remove();
     counter--;
