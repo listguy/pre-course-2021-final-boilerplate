@@ -34,19 +34,16 @@ priorityButton.addEventListener("click", sortPriority(), { once: false });
 
 useCustomSelect();
 let uploaded = getTaskListFromWeb();
-
+uploaded.then(insertTaskListToHtml);
 async function getTaskListFromWeb() {
     let response = await fetch(API_KEY_LATEST);
-    if (response.ok) {
-        jsonBin = await response.json();
-        taskList = jsonBin.record["my-todo"];
-        insertTaskListToHtml();
-        return true;
-    } else {
-        alert("HTTP-Error: " + response.status);
-
+    if (!response.ok) {
+        throw new Error("HTTP-Error: " + response.status);
     }
+    jsonBin = await response.json();
+    taskList = jsonBin.record["my-todo"];
 }
+
 function insertTaskListToHtml() {
     updateCounter();
     if (taskList.length != 0) {
@@ -97,7 +94,7 @@ function insertTaskToHtml(task) {
     let todoContainer = containerTemplate.cloneNode(true);
     todoContainer.removeAttribute("data-template");
     todoContainer.classList.add("todo-container");
-    todoContainer.dataset.priority=priority;
+    todoContainer.dataset.priority = priority;
 
     let textContainer = todoContainer.querySelector(".todo-text-template");
     textContainer.classList.add("todo-text");
@@ -249,11 +246,10 @@ function sortDate() {
     let latestOnTop = true;
     return function () {
         latestOnTop = !latestOnTop;
-        if (latestOnTop) {
-            taskList.sort((a, b) => new Date(a.date) - new Date(b.date));
-        } else {
-            taskList.sort((a, b) => new Date(b.date) - new Date(a.date));
-        }
+        let sortFunction = (latestOnTop) ?
+            (a, b) => new Date(a.date) - new Date(b.date) :
+            (a, b) => new Date(b.date) - new Date(a.date);
+        taskList.sort(sortFunction);
         clearListFromHtml()
         insertTaskListToHtml();
     }
@@ -262,11 +258,10 @@ function sortPriority() {
     let highestOnTop = true;
     return function () {
         highestOnTop = !highestOnTop;
-        if (highestOnTop) {
-            taskList.sort((a, b) => a.priority - b.priority);
-        } else {
-            taskList.sort((a, b) => b.priority - a.priority);
-        }
+        let sortFunction = (highestOnTop) ?
+            (a, b) => a.priority - b.priority :
+            (a, b) => b.priority - a.priority;
+        taskList.sort(sortFunction);
         clearListFromHtml()
         insertTaskListToHtml();
     }
