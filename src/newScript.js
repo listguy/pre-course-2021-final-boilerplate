@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
 //Adds the item to the array and displays it
 addButton.addEventListener("click", (e) => {
+  if (textInput.value === "") {
+    alert("Enter a To Do item");
+    return;
+  }
   counter.innerText = Number(counter.innerText) + 1;
   inputValue = textInput.value;
   const object = convertValueToObject(inputValue);
