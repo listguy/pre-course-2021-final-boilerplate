@@ -117,6 +117,7 @@ async function addTask(){
             document.getElementById("text-input").value),);
 
         document.getElementById("text-input").value = "";
+        document.getElementById("text-input").focus();
         putTasks();
 }
 
