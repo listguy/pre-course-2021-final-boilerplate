@@ -110,6 +110,9 @@ h1 {
   position: relative;
   left: -36px;
   top: 5px;
+  /* width: 20px; */
+  /* word-wrap: break-word; */
+  overflow: hidden;
 }
 .todo-created-at {
   display: inline;
