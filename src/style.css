@@ -20,6 +20,9 @@ body{
     min-height: 100vh;
     margin:0;
 }
+body[data-loading="true"]{
+    opacity: 50%;
+}
 /*Control Section design*/
 #Control{
     display: grid;

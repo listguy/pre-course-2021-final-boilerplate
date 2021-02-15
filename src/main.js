@@ -27,14 +27,14 @@ let listWrapper = document.getElementById("list-wrapper");
 listWrapper.addEventListener("click", markedTask, { once: false });
 
 let dateButton = document.getElementById("sort-date");
-dateButton.addEventListener("click", sortDate(taskList), { once: false });
+dateButton.addEventListener("click", sortDate(), { once: false });
 
 let priorityButton = document.getElementById("sort-button");
-priorityButton.addEventListener("click", sortPriority(taskList), { once: false });
+priorityButton.addEventListener("click", sortPriority(), { once: false });
 useCustomSelect();
 
 
-getTaskListFromWeb().then(insertTaskListToHtml).catch(error => console.log(error));
+getTaskListFromWeb().then(insertTaskListToHtml).catch(error => alert(error));
 function getTaskListFromWeb() {
     return fetch(API_KEY_LATEST).then(response => {
         if (!response.ok)
@@ -48,7 +48,7 @@ function getTaskListFromWeb() {
 }
 
 function insertTaskListToHtml(taskList) {
-    updateCounter(taskList, counter);
+    updateCounter(taskList);
     if (taskList.length != 0) {
         for (let task of taskList) {
             insertTaskToHtml(task)
@@ -65,7 +65,7 @@ function addNewTask(event) {
         let task = insertTaskToTaskList(text, priority, new Date(), false, taskList);
         insertTaskToHtml(task);
         uploadJson(taskList);
-        updateCounter(taskList, counter);
+        updateCounter(taskList);
         taskForm.reset();
         event.preventDefault();
     }
@@ -76,7 +76,7 @@ function addNewTask(event) {
         setTimeout('return', 500);
     }
 }
-function insertTaskToTaskList(text, priority, date = new Date(), marked = false, taskList = taskList) {
+function insertTaskToTaskList(text, priority, date = new Date(), marked = false, taskList) {
     if (taskList[0] === false) {
         taskList = [];
     }
@@ -125,7 +125,8 @@ function insertTaskToHtml(task) {
     listWrapper.append(todoContainer);
 
 }
-function uploadJson(taskList = taskList) {
+function uploadJson(taskList) {
+    body.dataset.loading = true;
     fetch(API_KEY, {
         method: "PUT",
         headers: {
@@ -137,6 +138,8 @@ function uploadJson(taskList = taskList) {
         .catch(error => {
             alert('Error: ' + error);
         });
+    body.dataset.loading = false;
+
 }
 function eraseAll(event) {
     let deleteBtn = document.getElementById("delete-button")
@@ -148,10 +151,10 @@ function eraseAll(event) {
         clearListFromHtml();
     }
 }
-function clearTaskList(taskList = taskList) {
+function clearTaskList(taskList) {
     taskList = [];
     uploadJson(taskList);
-    updateCounter(taskList, counter);
+    updateCounter(taskList);
 }
 function clearListFromHtml() {
     let tasks = document.querySelectorAll(".todo-container");
@@ -163,7 +166,7 @@ function clearListFromHtml() {
         }
     }
 }
-function updateCounter(taskList = taskList, counter = counter) {
+function updateCounter(taskList) {
     counter = taskList.length;
     counterWrapper.innerText = counter;
 }
@@ -248,7 +251,7 @@ function useCustomSelect() {
     });
 }
 //------
-function sortDate(taskList = taskList) {
+function sortDate() {
     let latestOnTop = true;
     return function () {
         latestOnTop = !latestOnTop;
@@ -260,7 +263,7 @@ function sortDate(taskList = taskList) {
         insertTaskListToHtml();
     }
 }
-function sortPriority(taskList = taskList) {
+function sortPriority() {
     let highestOnTop = true;
     return function () {
         highestOnTop = !highestOnTop;
@@ -305,8 +308,8 @@ function markedTask(event) {
     uploadJson(taskList);
 }
 function removeAllMarked(event) {
-    let deleteMarkBtm = document.getElementById("delete-marked")
-    if (event.target != deleteMarkBtm) {
+    let deleteMarkBtn = document.getElementById("delete-marked")
+    if (event.target != deleteMarkBtn) {
         return;
     }
 
@@ -325,7 +328,7 @@ function removeAllMarked(event) {
         }
         uploadJson(taskList);
     }
-    updateCounter(taskList, counter);
+    updateCounter(taskList);
 }
 
 
