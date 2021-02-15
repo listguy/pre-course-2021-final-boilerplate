@@ -34,8 +34,9 @@ priorityButton.addEventListener("click", sortPriority(), { once: false });
 useCustomSelect();
 
 
-getTaskListFromWeb().then(insertTaskListToHtml).catch(error => alert(error));
+getTaskListFromWeb().then(insertTaskListToHtml).catch(error => alert(error)).finally(() => body.dataset.loading = false);;
 function getTaskListFromWeb() {
+    body.dataset.loading = true;
     return fetch(API_KEY_LATEST).then(response => {
         if (!response.ok)
             throw new Error("HTTP-Error: " + response.status);
@@ -137,9 +138,8 @@ function uploadJson(taskList) {
         .then(response => response.json())
         .catch(error => {
             alert('Error: ' + error);
-        });
-    body.dataset.loading = false;
-
+        })
+        .finally(() => body.dataset.loading = false);
 }
 function eraseAll(event) {
     let deleteBtn = document.getElementById("delete-button")
