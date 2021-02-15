@@ -170,9 +170,6 @@ h1 {
   border-color: black;
   padding-bottom: 15px;
 }
-.todo-container:hover {
-  height: 2.2em;
-}
 .view-section {
   box-shadow: 3px 3px 15px 2px black;
   width: fit-content;
@@ -296,13 +293,16 @@ h1 {
   top: 30px;
 }
 #spinner{
-  position: relative;
-  z-index: 10;
+  /* position: fixed; */
+  display:block;
   height: 10%;
-  bottom: 230px;
-}
-#spinner img{
-  height: 10%;;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-left: auto;
+  z-index: 1;
 }
 @media (max-width: 600px) {
   #text-input {

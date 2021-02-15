@@ -14,7 +14,7 @@ async function setPersistent(key, data) {
 
 //When the page is loaded its content is taken from jsonbin.io and updates the localStorage
 document.addEventListener("DOMContentLoaded", (e) => {
-  // spinner.hidden = false;
+  spinner.hidden = false;
   const resPromise = fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce/latest");
   
   resPromise.then((res)=> {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       counter.innerText = todoList.length;
       localStorage.setItem("my-todo", JSON.stringify(todoList));
       arrayToDiv(todoList);
-      // spinner.hidden = true;
+      spinner.hidden = true;
     })
   })
 });

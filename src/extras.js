@@ -3,7 +3,7 @@ const containers = document.getElementsByClassName("todo-container");
 const darkMode = document.getElementById("dark-mode");
 const regular = document.getElementById("regular-mode");
 const style = document.getElementById("style");
-const spinner = document.getElementById("spinner");
+const spinner = document.getElementById("spinner-img");
 
 //Switch to dark mode on click
 darkMode.addEventListener("click", (e) => {
