@@ -32,6 +32,9 @@ async function main() {
 				localStorage.setItem("my-todo", JSON.stringify(tasksArray));
 			},
 			(err) => {
+				const offlineBar = document.getElementById("loading-bar");
+				offlineBar.innerText = "You are offline, working on local storage";
+				offlineBar.hidden = false;
 				tasksArray =
 					localStorage.getItem("my-todo") !== null
 						? JSON.parse(localStorage.getItem("my-todo")) //local storage as a safety net
@@ -180,14 +183,43 @@ async function main() {
 	}
 
 	//function to upload datebase
-	async function updateJSONBin(tasksArray) {
-		await fetch("https://api.jsonbin.io/v3" + BIN_ID, {
+	function updateJSONBin(tasksArray) {
+		const loadingBar = document.getElementById("loading-bar");
+		loadingBar.hidden = false;
+		loadingBar.style = "transition :5000ms;";
+		loadingBar.style.backgroundColor = "white";
+		loadingBar.style.backgroundColor = "black";
+		const fetchTry = fetch("https://api.jsonbin.io/v3" + BIN_ID, {
 			method: "put",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: `{"my-todo": ${JSON.stringify(tasksArray)}}`,
 		});
+		fetchTry.then(success).catch(failure);
+		function failure(error) {
+			loadingBar.style.transition = "0ms";
+			loadingBar.style.backgroundColor = "tomato";
+			loadingBar.innerText = `couldn't complete action, please try again later (${error})`;
+			setTimeout(() => {
+				loadingBar.hidden = true;
+				loadingBar.style.transition = "5000ms";
+				loadingBar.style.backgroundColor = "white";
+				loadingBar.innerText = `Loading...`;
+			}, 3000);
+			return;
+		}
+		function success() {
+			loadingBar.style.transition = "0ms";
+			loadingBar.style.backgroundColor = "limegreen";
+			loadingBar.innerText = `Updated succesfully`;
+			setTimeout(() => {
+				loadingBar.hidden = true;
+				loadingBar.style.transition = "5000ms";
+				loadingBar.style.backgroundColor = "white";
+				loadingBar.innerText = `Loading...`;
+			}, 3000);
+		}
 	}
 
 	//print multi pages

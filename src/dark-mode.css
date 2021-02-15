@@ -438,3 +438,16 @@ select {
 	margin-bottom: -2px;
 	margin-right: -2px;
 }
+#loading-bar {
+	position: fixed;
+	bottom: 0;
+	background-color: black;
+	width: 100vw;
+	height: 5vh;
+	text-align: center;
+	line-height: 5vh;
+	z-index: 1000;
+	transition: 5000ms;
+	filter: brightness(50%);
+	color: white;
+}
