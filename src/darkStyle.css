@@ -59,7 +59,9 @@ body {
     font-family: 'Muli', sans-serif;
     font-size: 6rem;
     color: #2b6fad;
-    text-shadow: 1px 0 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
+    text-shadow: 1px 0 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0),
+     0 -1px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0),
+     1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
 }
 
 .top img {
@@ -87,7 +89,8 @@ body {
 .main {
     display: flex;
     flex-direction: column;
-    height: 75vh;
+    min-height: 75vh;
+    height: auto;
     border: 1px solid var(--my-blue);
 }
 
@@ -100,15 +103,16 @@ body {
     font-family: 'Fira Sans', sans-serif;
     color:white;
 }
+
  .dueDate {
     flex: 0 1 auto;
     height: auto;
 }
+
 .addButton {
     flex: 1 1 content;
     padding-left: 10px;
 }
-
 
 .newPriority {
     flex: 1 1 auto;
@@ -122,19 +126,21 @@ body {
 .themeMode  {
     text-align: right;
     flex: 3 0 auto;
-    height: auto;
-    
+    height: auto;    
 }
+
 .newPriority select {
     width: 40px;
     height: 25px;
     border-radius: 4px;
 }
+
 .controlSection input {
     height: 25px;
     border-radius: 4px;
     border: none;
 }
+
 .controlSection input:focus {
     border: 1px solid var(--my-blue);
     outline: none; 
@@ -149,7 +155,6 @@ body {
     width: 300px;
     height: 25px;
 }
-
 
 #counter {
     flex: 1 2 auto;
@@ -249,18 +254,15 @@ body {
     visibility: hidden;
     width: 80px;
     height: 80px;
-  
     border: 2px solid #f3f3f3;
     border-top:3px solid var(--my-blue);
     border-radius: 100%;
-  
     position: absolute;
     top:0;
     bottom:0;
     left:0;
     right: 0;
-    margin: auto;
-  
+    margin: auto;  
     animation: spin 1s infinite linear;
   }
   
