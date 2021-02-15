@@ -139,51 +139,15 @@ async function fetchTasks(){
         viewSection.removeChild(viewSection.firstChild);
     }
 
-    let response = await fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest');
-    let jsonResponse = await response.json(); 
-    let recordResponse = jsonResponse["record"];
-    tasks = recordResponse;
-
-    if (JSON.stringify(tasks) !== '{"my-todo":[{}]}'){
-        for(task of tasks["my-todo"]){
-            let todoContainer = document.createElement('div');
-            todoContainer.classList.add('todo-container');
-    
-            let todoPriority = document.createElement('div');
-            todoPriority.classList.add('todo-priority');
-            todoPriority.append(task["priority"]);
-    
-            let todoCreatedAt = document.createElement('div');
-            todoCreatedAt.classList.add('todo-created-at');
-            todoCreatedAt.append(task["createdAt"]);
-    
-            let todoText = document.createElement('div');
-            todoText.classList.add('todo-text');
-            todoText.append(task["text"]);
-            
-    
-            let deleteButton = document.createElement('button');
-            deleteButton.classList.add('delete-button');
-            deleteButton.append("X");
-            
-            if (task["priority"] === '3') todoPriority.classList.add('yellow-text');
-            if (task["priority"] === '4') todoPriority.classList.add('orange-text');
-            if (task["priority"] === '5') todoPriority.classList.add('red-text');
-            
-            todoContainer.append(todoText);
-            todoContainer.append(todoPriority);
-            todoContainer.append(todoCreatedAt);
-            todoContainer.append(deleteButton);
-            
-    
-            viewSection.append(todoContainer);
-        }
-    }
-    refreshCounter();
+    fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest')
+    .then(response => response.json())
+    .then(data => {tasks = data["record"];
+    localTasks();}
+    );
 }
 
 // displays tasks (from local data)
-function localTasks(tasks){
+function localTasks(){
     let viewSection = document.getElementById("view-section");
     while(viewSection.firstChild){
         viewSection.removeChild(viewSection.firstChild);
