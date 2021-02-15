@@ -1,7 +1,9 @@
 /*
 WEBSITE START
 */
+
 let tasks = {"my-todo":[{}]};
+setMode();
 fetchTasks();
 refreshCounter();
 
@@ -29,20 +31,31 @@ sortButton.addEventListener("click", function() {
     }
 });
 
-// switch between dark and light mode
+// switch between dark and light mode. saves the preference to localStorage
 let modeButton = document.getElementById("mode-button");
 modeButton.addEventListener("click", function() {
-    let cssLink = document.getElementById('stylesheet');
     if (modeButton.innerText === 'Light Mode'){
+        localStorage.setItem('mode', 'light');
+        setMode();
+    } else {
+        localStorage.setItem('mode', 'dark');
+        setMode();
+    }
+});
+
+// sets the mode on page load in accordance with the localStorage value
+function setMode() {
+    let mode = localStorage.getItem('mode');
+    let modeButton = document.getElementById("mode-button");
+    let cssLink = document.getElementById('stylesheet');
+    if (mode === 'light'){
         modeButton.innerText = 'Dark Mode';
         cssLink.setAttribute('href', './lightmode.css');
     } else {
         modeButton.innerText = 'Light Mode';
         cssLink.setAttribute('href', './darkmode.css');
     }
-        
-
-});
+}
 
 // pressing on delete button for task
 document.body.addEventListener('click', function (event) {
