@@ -11,6 +11,8 @@ async function getPersistent(key) {
 async function setPersistent(key, data) {
   return true;
 }
+
+//When the page is loaded its content is taken from jsonbin.io and updates the localStorage
 document.addEventListener("DOMContentLoaded", (e) => {
   const resPromise = fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce/latest");
   resPromise.then((res)=> {

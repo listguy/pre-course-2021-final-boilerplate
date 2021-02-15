@@ -292,6 +292,14 @@ h1 {
   right: 20px;
   top: 30px;
 }
+#spinner{
+  position: relative;
+  z-index: 10;
+  height: 10%;
+}
+#spinner img{
+  height: 10%;;
+}
 @media (max-width: 600px) {
   #text-input {
     height: 2em;
