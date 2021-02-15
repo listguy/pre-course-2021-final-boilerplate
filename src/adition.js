@@ -4,4 +4,3 @@ function addNode (tag, keys={id: '', classes: [], attributes:[]}, parent){
     
 }
 
-//test

@@ -27,25 +27,28 @@ let listWrapper = document.getElementById("list-wrapper");
 listWrapper.addEventListener("click", markedTask, { once: false });
 
 let dateButton = document.getElementById("sort-date");
-dateButton.addEventListener("click", sortDate(), { once: false });
+dateButton.addEventListener("click", sortDate(taskList), { once: false });
 
 let priorityButton = document.getElementById("sort-button");
-priorityButton.addEventListener("click", sortPriority(), { once: false });
-
+priorityButton.addEventListener("click", sortPriority(taskList), { once: false });
 useCustomSelect();
-let uploaded = getTaskListFromWeb();
-uploaded.then(insertTaskListToHtml);
-async function getTaskListFromWeb() {
-    let response = await fetch(API_KEY_LATEST);
-    if (!response.ok) {
-        throw new Error("HTTP-Error: " + response.status);
-    }
-    jsonBin = await response.json();
-    taskList = jsonBin.record["my-todo"];
+
+
+getTaskListFromWeb().then(insertTaskListToHtml).catch(error => console.log(error));
+function getTaskListFromWeb() {
+    return fetch(API_KEY_LATEST).then(response => {
+        if (!response.ok)
+            throw new Error("HTTP-Error: " + response.status);
+        else
+            return response.json();
+    }).then(json => {
+        taskList = json.record["my-todo"]
+        return taskList;
+    });
 }
 
-function insertTaskListToHtml() {
-    updateCounter();
+function insertTaskListToHtml(taskList) {
+    updateCounter(taskList, counter);
     if (taskList.length != 0) {
         for (let task of taskList) {
             insertTaskToHtml(task)
@@ -57,20 +60,23 @@ function addNewTask(event) {
     let priority = document.getElementById("priority-selector").value;
 
     if (text === "" || priority < 1) {
+        denyInput(text, priority)
+    } else {
+        let task = insertTaskToTaskList(text, priority, new Date(), false, taskList);
+        insertTaskToHtml(task);
+        uploadJson(taskList);
+        updateCounter(taskList, counter);
+        taskForm.reset();
+        event.preventDefault();
+    }
+    function denyInput(text, priority) {
         basicControl.setAttribute("shake", "on");
         event.preventDefault();
         setTimeout('basicControl.setAttribute("shake", "off")', 1000);
         setTimeout('return', 500);
-    } else {
-        let task = insertTaskToTaskList(text, priority);
-        insertTaskToHtml(task);
-        uploadJson();
-        updateCounter()
-        taskForm.reset();
-        event.preventDefault();
     }
 }
-function insertTaskToTaskList(text, priority, date = new Date(), marked = false) {
+function insertTaskToTaskList(text, priority, date = new Date(), marked = false, taskList = taskList) {
     if (taskList[0] === false) {
         taskList = [];
     }
@@ -119,7 +125,7 @@ function insertTaskToHtml(task) {
     listWrapper.append(todoContainer);
 
 }
-function uploadJson() {
+function uploadJson(taskList = taskList) {
     fetch(API_KEY, {
         method: "PUT",
         headers: {
@@ -128,9 +134,9 @@ function uploadJson() {
         body: JSON.stringify({ ["my-todo"]: taskList }),
     })
         .then(response => response.json())
-        .then(null, error => {
+        .catch(error => {
             alert('Error: ' + error);
-        })
+        });
 }
 function eraseAll(event) {
     let deleteBtn = document.getElementById("delete-button")
@@ -138,14 +144,14 @@ function eraseAll(event) {
         return;
     let answer = confirm("Are you sure you want to delete all existing tasks on the list?");
     if (answer) {
-        clearTaskList();
+        clearTaskList(taskList);
         clearListFromHtml();
     }
 }
-function clearTaskList() {
+function clearTaskList(taskList = taskList) {
     taskList = [];
-    uploadJson();
-    updateCounter();
+    uploadJson(taskList);
+    updateCounter(taskList, counter);
 }
 function clearListFromHtml() {
     let tasks = document.querySelectorAll(".todo-container");
@@ -157,7 +163,7 @@ function clearListFromHtml() {
         }
     }
 }
-function updateCounter() {
+function updateCounter(taskList = taskList, counter = counter) {
     counter = taskList.length;
     counterWrapper.innerText = counter;
 }
@@ -242,7 +248,7 @@ function useCustomSelect() {
     });
 }
 //------
-function sortDate() {
+function sortDate(taskList = taskList) {
     let latestOnTop = true;
     return function () {
         latestOnTop = !latestOnTop;
@@ -254,7 +260,7 @@ function sortDate() {
         insertTaskListToHtml();
     }
 }
-function sortPriority() {
+function sortPriority(taskList = taskList) {
     let highestOnTop = true;
     return function () {
         highestOnTop = !highestOnTop;
@@ -296,7 +302,7 @@ function markedTask(event) {
             break;
         }
     }
-    uploadJson();
+    uploadJson(taskList);
 }
 function removeAllMarked(event) {
     let deleteMarkBtm = document.getElementById("delete-marked")
@@ -317,9 +323,9 @@ function removeAllMarked(event) {
             taskList.splice(i, 1);
             i--;
         }
-        uploadJson();
+        uploadJson(taskList);
     }
-    updateCounter();
+    updateCounter(taskList, counter);
 }
 
 
