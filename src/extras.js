@@ -69,10 +69,12 @@ document.addEventListener("click", (e) => {
 //Removes the divs resets the counter and empties jsonbin.io + localStorage
 document.addEventListener("click", (e) => {
   if (e.target.id === "delete-all") {
-    deleteAllDivs();
-    emptyJsonbin();
-    counter.innerText = 0;
-    todoList = [];
+    if (confirm("Are you sure you want to delete all items?")) {
+      deleteAllDivs();
+      emptyJsonbin();
+      counter.innerText = 0;
+      todoList = [];
+    }
   }
 });
 
