@@ -116,8 +116,8 @@ function sortArrayByPriority(array) {
 }
 
 //Updates the list and sends a success/error in console log
-async function updateList() {
-  await fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
+function updateList() {
+  fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
