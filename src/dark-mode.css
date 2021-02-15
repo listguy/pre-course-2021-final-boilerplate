@@ -264,7 +264,7 @@ h1 {
 #images {
   float: left;
   position: fixed;
-  top: 405px;
+  bottom: 10px;
   left: 40px;
   display: flex;
   flex-direction: column;
