@@ -218,6 +218,8 @@ body {
 .todo-text {
     min-width: 620px;
     text-align: left;
+    overflow-wrap: break-word;
+    height: auto;
 }
 
 .todo-container input {
