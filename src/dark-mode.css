@@ -306,7 +306,7 @@ h1 {
     left: -15%;
   }
   body {
-    width:100%;
+    width:fit-content;
   }
   #images {
     position: relative;
