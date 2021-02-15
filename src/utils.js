@@ -14,7 +14,9 @@ async function setPersistent(key, data) {
 
 //When the page is loaded its content is taken from jsonbin.io and updates the localStorage
 document.addEventListener("DOMContentLoaded", (e) => {
+  // spinner.hidden = false;
   const resPromise = fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce/latest");
+  
   resPromise.then((res)=> {
     const jsonResponse = res.json();
     jsonResponse.then((json)=> {
@@ -24,12 +26,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
       counter.innerText = todoList.length;
       localStorage.setItem("my-todo", JSON.stringify(todoList));
       arrayToDiv(todoList);
+      // spinner.hidden = true;
     })
   })
 });
 
 //Updates the list and sends a success/error in console log
 function updateList() {
+  spinner.hidden = false;
   fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
     method: "PUT",
     headers: {
@@ -42,9 +46,11 @@ function updateList() {
     .then((response) => response.json())
     .then((jsonList) => {
       console.log("Success:", jsonList);
+      spinner.hidden = true;
     })
     .catch((error) => {
       console.error("Error:", jsonList);
+      spinner.hidden = true;
     });
 }
 
