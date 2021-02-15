@@ -111,7 +111,7 @@ h1 {
   left: -36px;
   top: 5px;
   /* width: 20px; */
-  /* word-wrap: break-word; */
+  word-wrap: break-word;
 }
 .todo-created-at {
   display: inline;
@@ -161,17 +161,15 @@ h1 {
   border-style: solid;
   width: 500px;
   margin: auto;
-  height: 2em;
   font-size: 1.5em;
   border-top: white;
   border-left: white;
   border-right: white;
   border-radius: 5px;
   border-width: 1px;
+  padding-bottom: 15px;
 }
-.todo-container:hover {
-  height: 2.2em;
-}
+
 .view-section {
   box-shadow: 3px 3px 15px 2px #888888;
   width: fit-content;
