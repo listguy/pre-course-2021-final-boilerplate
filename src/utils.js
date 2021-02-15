@@ -47,8 +47,8 @@ function updateList() {
 }
 
 //Empties the Jsonbin.io json
-async function emptyJsonbin() {
-  await fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
+function emptyJsonbin() {
+  fetch("https://api.jsonbin.io/v3/b/6013b6761de5467ca6bdb0ce", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
