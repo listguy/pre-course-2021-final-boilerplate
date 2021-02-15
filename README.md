@@ -3,6 +3,9 @@ HITLIST is a cloud-based task management platform.
 HITLIST uses JSONBIN.io to store your tasks and retrieve them to you,
 from any device and at any time.
 
+Link to the project:
+https://davidbinneun.github.io/HITLIST/src/index.html
+
 ## Why HITLIST( )
 - HITLIST( ) is extremely straight-forward and simple to use
 - HITLIST( ) stores your tasks on the cloud so you can access them anywhere
@@ -22,6 +25,3 @@ from any device and at any time.
 - Loading spinner for network requests
 - Fully responsive design
 - LIGHT 💡 MODE
-
-Link to the project:
-https://davidbinneun.github.io/pre-course-2021-final-boilerplate/src/index.html
