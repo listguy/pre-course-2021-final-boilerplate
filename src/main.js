@@ -1,9 +1,25 @@
 /*
+LOADING SPINNER
+*/
+const spinner = document.getElementById("spinner");
+
+function showSpinner() {
+  spinner.className = "show";
+  setTimeout(() => {
+    spinner.className = spinner.className.replace("show", "");
+  }, 15000);
+}
+
+function hideSpinner() {
+  spinner.className = spinner.className.replace("show", "");
+}
+
+/*
 WEBSITE START
 */
-
-let tasks = {"my-todo":[{}]};
+let tasks = [{}];
 setMode();
+showSpinner();
 fetchTasks();
 refreshCounter();
 
@@ -19,8 +35,7 @@ document.getElementById("add-button").addEventListener("click", function() {
 });
 
 // pressing on sort button
-let sortButton = document.getElementById("sort-button");
-sortButton.addEventListener("click", function() {
+document.getElementById("sort-button").addEventListener("click", function() {
     let buttonText = document.getElementById('sort-button').innerText;
     if (buttonText === 'Sort by priority 🠋' || buttonText === 'Sort by priority ✖'){
         sortTasks('higherUp');
@@ -32,8 +47,7 @@ sortButton.addEventListener("click", function() {
 });
 
 // switch between dark and light mode. saves the preference to localStorage
-let modeButton = document.getElementById("mode-button");
-modeButton.addEventListener("click", function() {
+document.getElementById("mode-button").addEventListener("click", function() {
     if (modeButton.innerText === 'Light Mode'){
         localStorage.setItem('mode', 'light');
         setMode();
@@ -42,20 +56,6 @@ modeButton.addEventListener("click", function() {
         setMode();
     }
 });
-
-// sets the mode on page load in accordance with the localStorage value
-function setMode() {
-    let mode = localStorage.getItem('mode');
-    let modeButton = document.getElementById("mode-button");
-    let cssLink = document.getElementById('stylesheet');
-    if (mode === 'light'){
-        modeButton.innerText = 'Dark Mode';
-        cssLink.setAttribute('href', './lightmode.css');
-    } else {
-        modeButton.innerText = 'Light Mode';
-        cssLink.setAttribute('href', './darkmode.css');
-    }
-}
 
 // pressing on delete button for task
 document.body.addEventListener('click', function (event) {
@@ -66,7 +66,6 @@ document.body.addEventListener('click', function (event) {
         for (let i = 0; i < todoContainer.childNodes.length; i++) {
             if (todoContainer.childNodes[i].className == "todo-created-at") {
               createdAt = todoContainer.childNodes[i].innerText;
-              console.log(createdAt);
               deleteTask(createdAt);
               break;
             }   
@@ -89,12 +88,26 @@ class Task{
 FUNCTIONS
 */
 
+// sets the mode on page load in accordance with the localStorage value
+function setMode() {
+    let mode = localStorage.getItem('mode');
+    let modeButton = document.getElementById("mode-button");
+    let cssLink = document.getElementById('stylesheet');
+    if (mode === 'light'){
+        modeButton.innerText = 'Dark Mode';
+        cssLink.setAttribute('href', './lightmode.css');
+    } else {
+        modeButton.innerText = 'Light Mode';
+        cssLink.setAttribute('href', './darkmode.css');
+    }
+}
+
 // adds a task, refreshes the counter and updates jsonbin.io
 async function addTask(){
-        if (JSON.stringify(tasks) == '{"my-todo":[{}]}')
-            tasks["my-todo"] = [];
+        if (JSON.stringify(tasks) == '[{}]')
+            tasks = [];
 
-        tasks["my-todo"].push(new Task(
+        tasks.push(new Task(
             document.getElementById("priority-selector").value,
             document.getElementById("text-input").value),);
 
@@ -105,10 +118,9 @@ async function addTask(){
 
 // deletes a task and updates jsonbin.io
 function deleteTask(createdAt){
-    for (let i = 0; i < tasks["my-todo"].length; i++){
-        if (tasks["my-todo"][i]["createdAt"] === createdAt){
-            console.log("createdAt" + tasks["my-todo"][i]["createdAt"]);
-            tasks["my-todo"].splice(i,1);
+    for (let i = 0; i < tasks.length; i++){
+        if (tasks[i]["createdAt"] === createdAt){
+            tasks.splice(i,1);
             putTasks(tasks);
         }
     }
@@ -116,18 +128,18 @@ function deleteTask(createdAt){
 
 // sorts tasks by priority
 function sortTasks(direction){
-    if (JSON.stringify(tasks) !== '{"my-todo":[{}]}')
+    if (JSON.stringify(tasks) !== '[{}]')
         if (direction === "higherUp")
-            tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
+            tasks.sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
         else
-            tasks["my-todo"].sort((a, b) => (a["priority"] > b["priority"]) ? 1 : -1);
+            tasks.sort((a, b) => (a["priority"] > b["priority"]) ? 1 : -1);
     localTasks(tasks);
 }
 
 // updates jsonbin.io with current tasks and refresh the tasks
 async function putTasks(tasks){
     showSpinner();
-    await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify(tasks)});
+    await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify({"my-todo": tasks})});
     hideSpinner();
     localTasks(tasks);
 }
@@ -140,50 +152,56 @@ async function fetchTasks(){
     }
 
     fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest')
-    .then(response => response.json())
-    .then(data => {tasks = data["record"];
-    localTasks();}
-    );
+        .then(response => response.json())
+        .then(data => {tasks = data["record"]["my-todo"];
+        localTasks();
+        hideSpinner();
+    });
 }
 
-// displays tasks (from local data)
+// displays tasks
 function localTasks(){
+
+    // clearing the current tasks from the document
     let viewSection = document.getElementById("view-section");
     while(viewSection.firstChild){
         viewSection.removeChild(viewSection.firstChild);
     }
-    for(task of tasks["my-todo"]){
-        let todoContainer = document.createElement('div');
-        todoContainer.classList.add('todo-container');
 
-        let todoPriority = document.createElement('div');
-        todoPriority.classList.add('todo-priority');
-        todoPriority.append(task["priority"]);
+    // shows the tasks on the document
+    if (JSON.stringify(tasks) !== '[]'){
+        for(task of tasks){
+            let todoContainer = document.createElement('div');
+            todoContainer.classList.add('todo-container');
 
-        let todoCreatedAt = document.createElement('div');
-        todoCreatedAt.classList.add('todo-created-at');
-        todoCreatedAt.append(task["createdAt"]);
+            let todoPriority = document.createElement('div');
+            todoPriority.classList.add('todo-priority');
+            todoPriority.append(task["priority"]);
 
-        let todoText = document.createElement('div');
-        todoText.classList.add('todo-text');
-        todoText.append(task["text"]);
-        
+            let todoCreatedAt = document.createElement('div');
+            todoCreatedAt.classList.add('todo-created-at');
+            todoCreatedAt.append(task["createdAt"]);
 
-        let deleteButton = document.createElement('button');
-        deleteButton.classList.add('delete-button');
-        deleteButton.append("X");
-        
-        if (task["priority"] === '3') todoPriority.classList.add('yellow-text');
-        if (task["priority"] === '4') todoPriority.classList.add('orange-text');
-        if (task["priority"] === '5') todoPriority.classList.add('red-text');
-        
-        todoContainer.append(todoText);
-        todoContainer.append(todoPriority);
-        todoContainer.append(todoCreatedAt);
-        todoContainer.append(deleteButton);
-        
+            let todoText = document.createElement('div');
+            todoText.classList.add('todo-text');
+            todoText.append(task["text"]);
+            
 
-        viewSection.append(todoContainer);
+            let deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-button');
+            deleteButton.append("X");
+            
+            if (task["priority"] === '3') todoPriority.classList.add('yellow-text');
+            if (task["priority"] === '4') todoPriority.classList.add('orange-text');
+            if (task["priority"] === '5') todoPriority.classList.add('red-text');
+            
+            todoContainer.append(todoText);
+            todoContainer.append(todoPriority);
+            todoContainer.append(todoCreatedAt);
+            todoContainer.append(deleteButton);
+            
+            viewSection.append(todoContainer);
+        }
     }
     refreshCounter();
 }
@@ -192,10 +210,10 @@ function localTasks(){
 function refreshCounter(){
     counter = document.getElementById("counter");
     counter.innerText = "";
-    if (JSON.stringify(tasks) === '{"my-todo":[{}]}')
+    if (JSON.stringify(tasks) === '[{}]')
         counter.append('0');
     else
-        counter.append(tasks["my-todo"].length);
+        counter.append(tasks.length);
 }
 
 // receives date object, returns string with the date in SQL format
@@ -213,20 +231,4 @@ function getSQLDate(date){
         else
             return number;
     }
-}
-
-/*
-LOADING SPINNER
-*/
-const spinner = document.getElementById("spinner");
-
-function showSpinner() {
-  spinner.className = "show";
-  setTimeout(() => {
-    spinner.className = spinner.className.replace("show", "");
-  }, 15000);
-}
-
-function hideSpinner() {
-  spinner.className = spinner.className.replace("show", "");
 }
