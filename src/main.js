@@ -10,35 +10,57 @@ async function main() {
 	const BIN_ID = "/b/6016b4fcabdf9c55679565a0";
 	const viewSection = document.querySelector("#view-section");
 	const textInput = document.querySelector("#text-input");
-	const loadingGif = document.querySelector("#loading-gif");
-	loadingGif.hidden = false;
-	const fetchResponse = await fetch(
-		"https://api.jsonbin.io/v3" + BIN_ID + "/latest"
-	).then((res) => res.json());
-	loadingGif.hidden = true;
-	// console.log(fetchResponse);
-	let tasksArray = [];
-	if (!fetchResponse.record) {
-		//if response isn't OK, expression is undefined, so !undefined is a thruthy expression
-		tasksArray =
-			localStorage.getItem("my-todo") !== null
-				? JSON.parse(localStorage.getItem("my-todo")) //local storage as a safety net
-				: [];
-	} else {
-		tasksArray =
-			JSON.stringify(fetchResponse.record["my-todo"]) !== `[{}]` //JSONBin as preffered database
-				? fetchResponse.record["my-todo"]
-				: [];
-	}
 	const prioritySelector = document.querySelector("#priority-selector");
 	const addButton = document.querySelector("#add-button");
 	const sortButton = document.querySelector("#sort-button");
 	sortButton.sorted = false; //property I added for toggle option
-	for (let task of tasksArray) {
-		task.index = tasksArray.indexOf(task); //adds index proprty for use in other functions.
-		printTask(task, viewSection);
-	}
-	updateCounter(tasksArray);
+	const loadingGif = document.querySelector("#loading-gif");
+	loadingGif.hidden = false;
+	let tasksArray = [];
+	// const fetchResponse =
+	fetch("https://api.jsonbin.io/v3" + BIN_ID + "/latest")
+		.then((res) => res.json())
+		.then(
+			(jsonRes) => {
+				console.log(jsonRes);
+				tasksArray =
+					JSON.stringify(jsonRes.record["my-todo"]) !== `[{}]` //JSONBin as preffered database
+						? jsonRes.record["my-todo"]
+						: [];
+				loadingGif.hidden = true;
+				console.log(tasksArray);
+				localStorage.setItem("my-todo", JSON.stringify(tasksArray));
+			},
+			(err) => {
+				tasksArray =
+					localStorage.getItem("my-todo") !== null
+						? JSON.parse(localStorage.getItem("my-todo")) //local storage as a safety net
+						: [];
+				loadingGif.hidden = true;
+			}
+		)
+		.finally(() => {
+			for (let task of tasksArray) {
+				task.index = tasksArray.indexOf(task); //adds index proprty for use in other functions.
+				printTask(task, viewSection);
+			}
+			updateCounter(tasksArray);
+		});
+	console.log(tasksArray);
+	// console.log(fetchResponse);
+	// loadingGif.hidden = true;
+	// if (!fetchResponse.record) {
+	// 	//if response isn't OK, expression is undefined, so !undefined is a thruthy expression
+	// 	tasksArray =
+	// 		localStorage.getItem("my-todo") !== null
+	// 			? JSON.parse(localStorage.getItem("my-todo")) //local storage as a safety net
+	// 			: [];
+	// } else {
+	// 	tasksArray =
+	// 		JSON.stringify(fetchResponse.record["my-todo"]) !== `[{}]` //JSONBin as preffered database
+	// 			? fetchResponse.record["my-todo"]
+	// 			: [];
+	// }
 
 	addButton.addEventListener("click", newTask); //task add event
 	document.addEventListener("keypress", (event) => {
@@ -53,6 +75,7 @@ async function main() {
 			alert("You have to have somthing to do!");
 			textInput.focus();
 		} else {
+			console.log(tasksArray);
 			const toDoContainer = {
 				priority: prioritySelector.value,
 				text: textInput.value,

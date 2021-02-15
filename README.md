@@ -1,28 +1,32 @@
 # ![Scale-Up Velocity](./readme-files/logo-main.png) Pre Course Project - Todo List 📋
 
 This is the final project for the first month of Cyber4s course.
+
 I made a todo list web app.
+
 It is available here: https://ilaytissona.github.io/Cyber4s-pre-course-final/src
 
 ## Cool features
 
-- Click sort button to sort by your choice
+- _Click sort button to sort by your choice_
 - ![Sort by priority/date](./readme-files/sort-gif.gif)
-- Click dark mode button to toggle dark mode
+- _Click dark mode button to toggle dark mode_
 - ![Dark mode](./readme-files/dark-mode-gif.gif)
-- Type your key word, and click search to highlight all notes including key word
+- _Type your key word, and click search to highlight all notes including key word_
 - ![Search & highlight](./readme-files/search-gif.gif)
-- Click on task text to edit
+- _Click on task text to edit_
 - ![Edit task](./readme-files/edit-gif.gif)
-- If the task is too long, no problem
+- _If the task is too long, no problem_
 - ![Long text scroll](./readme-files/overflow-gif.gif)
-- If the list is too long, also not a problem. Arrows appear on fridge's sides, to move from page to page
+- _If the list is too long, also not a problem. Arrows appear on fridge's sides, to move from page to page_
 - ![Multi-page display](./readme-files/multipage-gif.gif)
 
 ## Who am I?
 
 Ilay Tissona
+
 22 years old
+
 Live in Moshav Dekel - Eshkol Regional council.
 
 ## Resources
