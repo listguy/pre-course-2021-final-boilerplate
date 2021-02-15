@@ -207,7 +207,7 @@ h1 {
 }
 #delete-all {
   position: relative;
-  top: -150px;
+  top: -180px;
   height: 1.8em;
   width: fit-content;
   border-radius: 15px;
@@ -296,6 +296,7 @@ h1 {
   position: relative;
   z-index: 10;
   height: 10%;
+  bottom: 230px;
 }
 #spinner img{
   height: 10%;;
