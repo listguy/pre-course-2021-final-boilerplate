@@ -165,6 +165,7 @@ function addItem() { //adds an task locally, and to the array as object.
         updateCounter();
     }
     updateJSON();
+    input.focus();
 }
 function printTodoList(arr) { //display the tasks from the array.
     const viewSection = document.querySelector('.viewSection');

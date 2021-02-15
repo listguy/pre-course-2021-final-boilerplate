@@ -4,7 +4,7 @@ My attempt at an To-Do list webpage
 
 ## link
 
-https://michefraim.github.io/pre-course-2021-final-boilerplate/src/
+ https://michefraim.github.io/pre-course-final-to-do/src
 
 ## Features
 

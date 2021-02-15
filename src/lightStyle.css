@@ -169,7 +169,8 @@ html {
 }
 
 .sortByDate {
-    flex: 0 2 200px;
+    flex: 0 2 185px;
+    text-align: left;
 }
 
 .sortByDueDate {

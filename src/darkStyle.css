@@ -7,7 +7,6 @@
 
 * {
     margin: 0;
-    padding: 0;
 }
 
 html {
@@ -92,18 +91,12 @@ body {
     border: 1px solid var(--my-blue);
 }
 
-.bottom {
-    height: 50px;
-    /* background: rgb(7, 230, 81); */
-}
-
 .controlSection {
     background: #056;
     display: flex;
     height: auto;
     padding: 15px;
     font-size: 1.9rem;
-    font-weight: 500;
     font-family: 'Fira Sans', sans-serif;
     color:white;
 }
@@ -176,7 +169,6 @@ body {
 
 .sortContainer button:hover {
     color: var(--my-blue);
-    text-align: right;
 }
 
 .sortByPriority {
@@ -185,7 +177,8 @@ body {
 }
 
 .sortByDate {
-    flex: 0 2 200px;
+    flex: 0 2 185px;
+    text-align: left;
 }
 
 .sortByDueDate {
@@ -205,7 +198,6 @@ body {
 .todo-container {
     display: flex;
     text-align: left;
-    padding-left: 20px;
 }
 
 .todo-time-left {
@@ -219,7 +211,6 @@ body {
 }
 
 .todo-text {
-    padding-left: 15px;
     min-width: 620px;
     text-align: left;
 }
