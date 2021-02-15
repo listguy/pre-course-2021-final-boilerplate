@@ -1,27 +1,10 @@
 /*
-LOADING SPINNER
-*/
-const spinner = document.getElementById("spinner");
-
-function showSpinner() {
-  spinner.className = "show";
-  setTimeout(() => {
-    spinner.className = spinner.className.replace("show", "");
-  }, 15000);
-}
-
-function hideSpinner() {
-  spinner.className = spinner.className.replace("show", "");
-}
-
-/*
 WEBSITE START
 */
+const spinner = document.getElementById("spinner");
 let tasks = [{}];
 setMode();
-showSpinner();
 fetchTasks();
-refreshCounter();
 
 /*
 EVENT LISTENERS
@@ -47,7 +30,8 @@ document.getElementById("sort-button").addEventListener("click", function() {
 });
 
 // switch between dark and light mode. saves the preference to localStorage
-document.getElementById("mode-button").addEventListener("click", function() {
+let modeButton = document.getElementById("mode-button");
+modeButton.addEventListener("click", function() {
     if (modeButton.innerText === 'Light Mode'){
         localStorage.setItem('mode', 'light');
         setMode();
@@ -102,6 +86,27 @@ function setMode() {
     }
 }
 
+// updates jsonbin.io with current tasks and refresh the tasks
+async function putTasks(){
+    showSpinner();
+    fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify({"my-todo": tasks})})
+    .then(response => {
+        showTasks();
+        hideSpinner();
+    });
+}
+
+// displays tasks from jsonbin.io
+function fetchTasks(){
+    showSpinner();
+    fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest')
+        .then(response => response.json())
+        .then(data => {tasks = data["record"]["my-todo"];
+        showTasks();
+        hideSpinner();
+    });
+}
+
 // adds a task, refreshes the counter and updates jsonbin.io
 async function addTask(){
         if (JSON.stringify(tasks) == '[{}]')
@@ -112,8 +117,7 @@ async function addTask(){
             document.getElementById("text-input").value),);
 
         document.getElementById("text-input").value = "";
-        refreshCounter();
-        putTasks(tasks);
+        putTasks();
 }
 
 // deletes a task and updates jsonbin.io
@@ -121,7 +125,7 @@ function deleteTask(createdAt){
     for (let i = 0; i < tasks.length; i++){
         if (tasks[i]["createdAt"] === createdAt){
             tasks.splice(i,1);
-            putTasks(tasks);
+            putTasks();
         }
     }
 }
@@ -133,34 +137,11 @@ function sortTasks(direction){
             tasks.sort((a, b) => (a["priority"] > b["priority"]) ? -1 : 1);
         else
             tasks.sort((a, b) => (a["priority"] > b["priority"]) ? 1 : -1);
-    localTasks(tasks);
-}
-
-// updates jsonbin.io with current tasks and refresh the tasks
-async function putTasks(tasks){
-    showSpinner();
-    await fetch("https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f",{method:"put",headers: {"Content-Type": "application/json",},body: JSON.stringify({"my-todo": tasks})});
-    hideSpinner();
-    localTasks(tasks);
-}
-
-// displays tasks from jsonbin.io
-async function fetchTasks(){
-    let viewSection = document.getElementById("view-section");
-    while(viewSection.firstChild){
-        viewSection.removeChild(viewSection.firstChild);
-    }
-
-    fetch('https://api.jsonbin.io/v3/b/6011936f3126bb747e9fd00f/latest')
-        .then(response => response.json())
-        .then(data => {tasks = data["record"]["my-todo"];
-        localTasks();
-        hideSpinner();
-    });
+    showTasks();
 }
 
 // displays tasks
-function localTasks(){
+function showTasks(){
 
     // clearing the current tasks from the document
     let viewSection = document.getElementById("view-section");
@@ -208,7 +189,7 @@ function localTasks(){
 
 // refreshes the counter to correctly show task amount
 function refreshCounter(){
-    counter = document.getElementById("counter");
+    let counter = document.getElementById("counter");
     counter.innerText = "";
     if (JSON.stringify(tasks) === '[{}]')
         counter.append('0');
@@ -232,3 +213,17 @@ function getSQLDate(date){
             return number;
     }
 }
+
+/*
+LOADING SPINNER
+*/
+function showSpinner() {
+    spinner.className = "show";
+    setTimeout(() => {
+      spinner.className = spinner.className.replace("show", "");
+    }, 15000);
+  }
+  
+  function hideSpinner() {
+    spinner.className = spinner.className.replace("show", "");
+  }
