@@ -15,4 +15,15 @@ DB.get("/b/:fileName", (req, res) => {
   });
 });
 
+DB.put("/b/:fileName", (req, res) => {
+  // res.send(req.body);
+  FS.writeFile(
+    `./${req.params.fileName}.json`,
+    JSON.stringify(req.body),
+    () => {
+      res.send("200");
+    }
+  );
+});
+
 DB.listen(port);
