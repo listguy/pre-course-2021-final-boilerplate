@@ -1,6 +1,5 @@
 window.addEventListener("DOMContentLoaded", main); //makes sure everything runs only after page loads
 async function main() {
-  const USER = await userSelect();
   const styleLink = document.head.querySelector("#style-link");
   if (localStorage.getItem("mode") === "dark") {
     //dark mode on local storage
@@ -8,6 +7,9 @@ async function main() {
     const darkModeButton = document.querySelector("#dark-mode-button");
     darkModeButton.innerText = "Normal";
   }
+  const USER = localStorage.getItem("user")
+    ? localStorage.getItem("user")
+    : await userSelect();
   const BIN_ID = "/b/6016b4fcabdf9c55679565a0";
   const viewSection = document.querySelector("#view-section");
   const textInput = document.querySelector("#text-input");
@@ -16,6 +18,8 @@ async function main() {
   const sortButton = document.querySelector("#sort-button");
   sortButton.sorted = false; //property I added for toggle option
   const loadingGif = document.querySelector("#loading-gif");
+  const header = document.querySelector("#header");
+  header.innerText = `${USER}'s To-Do List`;
   loadingGif.hidden = false;
   let tasksArray = [];
   // const fetchResponse =
@@ -430,24 +434,54 @@ async function main() {
       tipWindow.hidden = true;
     }
   });
+
+  header.addEventListener("click", async (event) => {
+    let newUser = await userSelect();
+    localStorage.setItem("user", newUser);
+    location.reload();
+  });
 }
 
 async function userSelect() {
-  let userName = prompt("who are you?");
+  let userName = null;
+  userName = prompt("Who are you?");
+  while (!userName) {
+    alert("you must have a name!");
+    userName = prompt("Who are you?");
+  }
   let userList = await fetch(
     "http://localhost:3002/b/users/user-list"
   ).then((res) => res.json());
   for (let user of userList) {
     if (user.toLowerCase() === userName.toLowerCase()) {
+      localStorage.setItem("user", userName);
       return userName;
     }
   }
-  await fetch("http://localhost:3002/b/users/user-list", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ newUser: userName }),
-  });
+  if (userName) {
+    await fetch("http://localhost:3002/b/users/user-list", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newUser: userName }),
+    });
+  }
   return userName;
 }
+
+// async function userForm() {
+//   const form = document.getElementById("user-form");
+//   let textInput = "";
+//   const button = document.getElementById("user-input-button");
+//   form.hidden = false;
+//   button.addEventListener("click", (e) => {
+//     textInput = document.getElementById("user-input").value;
+//     if (textInput === "") {
+//       alert("You must have a name");
+//     } else {
+//       form.hidden = true;
+//       return textInput;
+//     }
+//   });
+// }

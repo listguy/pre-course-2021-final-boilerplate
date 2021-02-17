@@ -2,6 +2,7 @@ const express = require("express");
 const DB = express();
 const port = 3002;
 const FS = require("fs");
+const { text } = require("express");
 
 DB.use(express.json());
 
@@ -59,7 +60,7 @@ DB.put("/b/:user/:fileName", async (req, res) => {
   }
 });
 
-DB.post("/b/:fileName", (req, res) => {
+DB.post("/b/:user/:fileName", (req, res) => {
   if (
     FS.existsSync(
       `./backend/tasks/${req.params.user}/${req.params.fileName}.json`
