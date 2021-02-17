@@ -6,17 +6,21 @@ const FS = require("fs");
 DB.use(express.json());
 
 DB.get("/b/:fileName", (req, res) => {
-  FS.readFile(`./backend/${req.params.fileName}.json`, {}, (err, data) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.status(200).json(JSON.parse(data));
+  FS.readFile(
+    `./backend/tasks/${req.params.fileName}.json`,
+    {},
+    (err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).json(JSON.parse(data));
+      }
     }
-  });
+  );
 });
 
 DB.get("/b", (req, res) => {
-  const dir = FS.readdirSync(`./backend/`);
+  const dir = FS.readdirSync(`./backend/tasks`);
   const jsonFiles = [];
   let resData = [];
   for (let file of dir) {
@@ -25,21 +29,18 @@ DB.get("/b", (req, res) => {
     }
   }
   for (let file of jsonFiles) {
-    const fileData = FS.readFileSync(`./backend/${file}`);
+    const fileData = FS.readFileSync(`./backend/tasks/${file}`);
     resData.push(JSON.parse(fileData));
-    console.log(resData);
   }
-
-  console.log(resData);
   res.status(200).json(resData);
 });
 
 DB.put("/b/:fileName", (req, res) => {
-  if (!FS.existsSync(`./backend/${req.params.fileName}.json`)) {
+  if (!FS.existsSync(`./backend/tasks/${req.params.fileName}.json`)) {
     res.status(404).send("File does not exist!");
   }
   FS.writeFile(
-    `./backend/${req.params.fileName}.json`,
+    `./backend/tasks/${req.params.fileName}.json`,
     JSON.stringify(req.body),
     () => {
       res.sendStatus(200);
@@ -52,7 +53,7 @@ DB.post("/b/:fileName", (req, res) => {
     res.status(409).send("File already exists!");
   }
   FS.writeFile(
-    `./backend/${req.params.fileName}.json`,
+    `./backend/tasks/${req.params.fileName}.json`,
     JSON.stringify(req.body),
     () => {
       res.sendStatus(200);
@@ -61,10 +62,10 @@ DB.post("/b/:fileName", (req, res) => {
 });
 
 DB.delete("/b/:fileName", (req, res) => {
-  if (!FS.existsSync(`./backend/${req.params.fileName}.json`)) {
+  if (!FS.existsSync(`./backend/tasks/${req.params.fileName}.json`)) {
     res.status(409).send("File does not exist!");
   }
-  FS.unlinkSync(`./backend/${req.params.fileName}.json`);
+  FS.unlinkSync(`./backend/tasks/${req.params.fileName}.json`);
   res.sendStatus(200);
 });
 
