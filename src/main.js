@@ -18,15 +18,15 @@ async function main() {
   loadingGif.hidden = false;
   let tasksArray = [];
   // const fetchResponse =
-  fetch("http://localhost:3002/b/todo")
+  fetch("http://localhost:3002/b")
     .then((res) => {
       return res.json();
     })
     .then(
       (jsonRes) => {
         tasksArray =
-          JSON.stringify(jsonRes["my-todo"]) !== `[{}]` //JSONBin as preffered database
-            ? jsonRes["my-todo"]
+          JSON.stringify(jsonRes) !== `[{}]` //JSONBin as preffered database
+            ? jsonRes
             : [];
         loadingGif.hidden = true;
         console.log(tasksArray);
@@ -91,7 +91,7 @@ async function main() {
       tasksArray.push(toDoContainer);
       printTask(toDoContainer, viewSection);
       updateCounter(tasksArray);
-      updateJSONBin(tasksArray);
+      updateJSONBin(toDoContainer, "POST");
       textInput.focus();
       localStorage.setItem("my-todo", JSON.stringify(tasksArray));
     }
@@ -185,18 +185,19 @@ async function main() {
   }
 
   //function to upload datebase
-  function updateJSONBin(tasksArray) {
+  function updateJSONBin(task, act) {
+    console.log(task);
     const loadingBar = document.getElementById("loading-bar");
     loadingBar.hidden = false;
     loadingBar.style = "transition :5000ms;";
     loadingBar.style.backgroundColor = "white";
     loadingBar.style.backgroundColor = "black";
-    const fetchTry = fetch("http://localhost:3002/b/todo", {
-      method: "put",
+    const fetchTry = fetch("http://localhost:3002/b/task" + task.date, {
+      method: act,
       headers: {
         "Content-Type": "application/json",
       },
-      body: `{"my-todo": ${JSON.stringify(tasksArray)}}`,
+      body: JSON.stringify(task),
     });
     fetchTry.then(success).catch(failure);
     function failure(error) {
@@ -288,12 +289,13 @@ async function main() {
   document.addEventListener("click", (clickEvent) => {
     if (clickEvent.target.classList[0] === "todo-priority") {
       let containerDiv = clickEvent.target.parentNode;
+      updateJSONBin(tasksArray[containerDiv.index], "DELETE");
       tasksArray.splice(containerDiv.index, 1);
       for (let i = 0; i < tasksArray.length; i++) {
         tasksArray[i].index = i; //fixes index to match after deleting
       }
       updateCounter(tasksArray);
-      updateJSONBin(tasksArray);
+      // updateJSONBin(tasksArray[containerDiv.index], "DELETE");
       const tipWindow = document.querySelector("#tip-window");
       tipWindow.hidden = true;
     }
@@ -411,7 +413,7 @@ async function main() {
       if (changeMade) {
         localStorage.setItem("my-todo", JSON.stringify(tasksArray));
         updateCounter(tasksArray);
-        updateJSONBin(tasksArray);
+        updateJSONBin(tasksArray[containerDiv.index], "PUT");
       }
       newTextForm.hidden = true;
       document.body.appendChild(newTextForm);
