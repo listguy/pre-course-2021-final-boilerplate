@@ -6,15 +6,23 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/", (request, response) => {
-    const directoriesFound = [];
+    const listOfObjectsFound = [];
     try {
         fs.readdirSync('./backend/jsonFiles').forEach(file => {
-            directoriesFound.push(file);
+           const fileContent = fs.readFileSync(
+                `./backend/jsonFiles/${file}`,
+                { encoding: 'utf8', flag: 'r' });
+                const fileContentJson = JSON.parse(fileContent);
+                listOfObjectsFound.push(fileContentJson);
         });
-        response.send(directoriesFound);
+        response.send(listOfObjectsFound);
     }
     catch (e) {
-        response.status(500).json({ message: "server failed getting files list", error: e });
+        response.status(500).json({
+             "message": "Couldn't get files list", 
+             "error": e,
+             "success": false 
+            });
     }
 });
 
@@ -22,9 +30,10 @@ router.get("/:id", (request, response) => {
     const { id } = request.params;
     try {
         const data = fs.readFileSync(
-            `./jsonFiles/tasks-${id}.json`,
+            `./backend/jsonFiles/${id}.json`,
             { encoding: 'utf8', flag: 'r' });
-        response.status(200).send(data);
+            const dataJson = JSON.parse(data);
+        response.status(200).send(dataJson);
     }
     catch (e) {
         response.status(422).json({ message: "Bad ID, not found", error: e });
@@ -35,12 +44,18 @@ router.post("/", (request, response) => {
     const { body } = request;
     try {
         fs.writeFileSync(
-            `./jsonFiles/tasks-${Date.now()}.json`,
+            `./backend/jsonFiles/${Date.now()}.json`,
             JSON.stringify(body, null, 4)
         );
-        response.status(201).send("tasks file created");
+        response.status(200).json({
+            "body": body,
+        })
     } catch (e) {
-        response.status(500).json({ message: "Couldn't create file", error: e });
+        response.status(500).json({
+            "message": "Couldn't create file",
+            "error": e,
+            "success": false
+        });
     }
 });
 
@@ -56,7 +71,8 @@ router.put("/:id", (request, response) => {
             })
         return;
     }
-    fs.writeFileSync(`./jsonFiles/tasks-${id}.json`, JSON.stringify(body, null, 4))
+    fs.writeFileSync(`./jsonFiles/tasks-${id}.json`,
+        JSON.stringify(body, null, 4))
 });
 
 module.exports = router;
