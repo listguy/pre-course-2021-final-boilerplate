@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", main); //makes sure everything runs only after page loads
 async function main() {
+  const USER = await userSelect();
   const styleLink = document.head.querySelector("#style-link");
   if (localStorage.getItem("mode") === "dark") {
     //dark mode on local storage
@@ -18,7 +19,7 @@ async function main() {
   loadingGif.hidden = false;
   let tasksArray = [];
   // const fetchResponse =
-  fetch("http://localhost:3002/b")
+  fetch(`http://localhost:3002/b/${USER}`)
     .then((res) => {
       return res.json();
     })
@@ -192,7 +193,7 @@ async function main() {
     loadingBar.style = "transition :5000ms;";
     loadingBar.style.backgroundColor = "white";
     loadingBar.style.backgroundColor = "black";
-    const fetchTry = fetch("http://localhost:3002/b/task" + task.date, {
+    const fetchTry = fetch(`http://localhost:3002/b/${USER}/task` + task.date, {
       method: act,
       headers: {
         "Content-Type": "application/json",
@@ -429,4 +430,24 @@ async function main() {
       tipWindow.hidden = true;
     }
   });
+}
+
+async function userSelect() {
+  let userName = prompt("who are you?");
+  let userList = await fetch(
+    "http://localhost:3002/b/users/user-list"
+  ).then((res) => res.json());
+  for (let user of userList) {
+    if (user.toLowerCase() === userName.toLowerCase()) {
+      return userName;
+    }
+  }
+  await fetch("http://localhost:3002/b/users/user-list", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ newUser: userName }),
+  });
+  return userName;
 }
