@@ -1,5 +1,7 @@
+const { response } = require("express");
 const express = require("express");
 const fs = require("fs");
+const { request } = require("http");
 
 const router = express.Router();
 
@@ -62,17 +64,36 @@ router.post("/", (request, response) => {
 router.put("/:id", (request, response) => {
     const { id } = request.params;
     const { body } = request;
-    const fileExists = fs.existsSync(`./backend/jsonFiles/${id}`);
+    const fileExists = fs.existsSync(`./backend/jsonFiles/${id}.json`);
     if (!fileExists) {
         response.status(404).json(
             {
                 "message": "File not found",
                 "success": false
-            })
+            });
         return;
     }
-    fs.writeFileSync(`./jsonFiles/tasks-${id}.json`,
-        JSON.stringify(body, null, 4))
+    fs.writeFileSync(`./backend/jsonFiles/${id}.json`,
+        JSON.stringify(body, null, 4));
+        response.status(200).send(body);
 });
+
+router.delete("/:id", (request, response) => {
+    const { id } = request.params;
+    const fileExists = fs.existsSync(`./backend/jsonFiles/${id}.json`);
+    if (!fileExists) {
+        response.status(404).json(
+            {
+                "message": "File not found",
+                "success": false
+            });
+    return;
+        }
+        fs.unlinkSync(`./backend/jsonFiles/${id}.json`);
+        response.status(200).json({
+            "message": "File deleted",
+            "success": true
+        });
+})
 
 module.exports = router;
