@@ -8,7 +8,7 @@ router.use(express.json());
 router.get("/", (request, response) => {
     const directoriesFound = [];
     try {
-        fs.readdirSync('./jsonFiles').forEach(file => {
+        fs.readdirSync('./backend/jsonFiles').forEach(file => {
             directoriesFound.push(file);
         });
         response.send(directoriesFound);
@@ -47,15 +47,16 @@ router.post("/", (request, response) => {
 router.put("/:id", (request, response) => {
     const { id } = request.params;
     const { body } = request;
-    try {
-        fs.writeFileSync(
-            `./jsonFiles/tasks-${id}.json`,
-            JSON.stringify(body, null, 4)
-        );
-        response.json(body);
-    } catch (e) {
-        response.status(500).json({ message: "Error!", error: e });
+    const fileExists = fs.existsSync(`./backend/jsonFiles/${id}`);
+    if (!fileExists) {
+        response.status(404).json(
+            {
+                "message": "File not found",
+                "success": false
+            })
+        return;
     }
+    fs.writeFileSync(`./jsonFiles/tasks-${id}.json`, JSON.stringify(body, null, 4))
 });
 
 module.exports = router;
