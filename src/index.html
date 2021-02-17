@@ -1,125 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>My TODO List</title>
-		<script src="./utils.js"></script>
-		<script src="./main.js"></script>
-		<link id="style-link" rel="stylesheet" href="./style.css" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
-			rel="stylesheet"
-		/>
-		<link rel="preconnect" href="https://fonts.gstatic.com" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-	<body>
-		<header id="header">To Do List</header>
-		<div id="freezer-section">
-			<img id="freezer" src="./images/freezer.jpeg" />
-			<section id="control-section">
-				<input type="text" id="text-input" placeholder="New Task" />
-				<label id="priority-label" for="priority-selector">Priority:</label>
-				<select id="priority-selector" name="priority-selector">
-					<option value="1" class="option priority1">1-Least</option>
-					<option value="2" class="option priority2">2</option>
-					<option selected value="3" class="option priority3">3</option>
-					<option value="4" class="option priority4">4</option>
-					<option value="5" class="option priority5">5-Most</option>
-				</select>
-				<button id="add-button">Add</button>
-				<div id="buttons-div">
-					<button id="dark-mode-button">Dark mode</button>
-					<button id="sort-button">Sort by priority</button>
-				</div>
-				<div id="search-input-div">
-					<input type="text" id="search-input" placeholder="Search..." />
-					<button id="search-button">Go!</button>
-					<button id="clear-button">Clear</button>
-				</div>
-				<div id="counter-line">
-					You have <span id="counter"></span> tasks To-Do
-				</div>
-				<br />
-			</section>
-		</div>
-		<div id="all-view-section">
-			<img
-				id="loading-gif"
-				src="https://icon-library.com/images/animated-loading-icon/animated-loading-icon-25.jpg"
-				hidden
-			/>
-			<div id="arrows" hidden>
-				<img id="right-arrow" src="./images/arrow.png" />
-				<img
-					id="left-arrow"
-					src="./images/arrow.png"
-					style="transform: rotate(180deg)"
-				/>
-			</div>
-			<section id="view-section"></section>
-			<img id="fridge" src="images/fridge-body.jpeg" />
-			<div id="tip-window" hidden>Click to Delete task</div>
-			<div id="edit-task-input" hidden>
-				<input id="edit-text" type="text" placeholder="Edit" /><br /><button
-					class="edit-text"
-					id="edit-text-button"
-				>
-					Save
-				</button>
-				<select id="priority-changer" name="priority-changer">
-					<option value="" class="option" selected>Priority</option>
-					<option value="1" class="option priority1">1-Least</option>
-					<option value="2" class="option priority2">2</option>
-					<option value="3" class="option priority3">3</option>
-					<option value="4" class="option priority4">4</option>
-					<option value="5" class="option priority5">5-Most</option>
-				</select>
-				<label for="date-changer" id="date-changer-label">New date</label>
-				<input type="checkbox" id="date-changer" name="date-changer" />
-			</div>
-			<div id="contact-note">
-				<div class="contact-magnet" id="letter1">C</div>
-				<div class="contact-magnet" id="letter2">O</div>
-				<div class="contact-magnet" id="letter3">N</div>
-				<div class="contact-magnet" id="letter4">T</div>
-				<div class="contact-magnet" id="letter5">A</div>
-				<div class="contact-magnet" id="letter6">C</div>
-				<div class="contact-magnet" id="letter7">T</div>
-				<div id="contact-indormation">
-					Ilay Tissona
-					<a href="https://www.facebook.com/ilay.tissona" target="_blank"
-						><img
-							class="contact-logo"
-							id="facebook-link"
-							src="./images/facebook.png"
-					/></a>
-					<a href="https://github.com/IlayTissona" target="_blank"
-						><img
-							class="contact-logo"
-							id="github-link"
-							src="./images/github.png"
-					/></a>
-					<a href="mailto:ilay211@gmail.com" target="_blank">
-						<img class="contact-logo" id="mail-link" src="./images/email.png"
-					/></a>
-					<a
-						href="https://wa.me/972536204048?text=I%20like%20your%20ToDo%20list"
-						target="_blank"
-					>
-						<img
-							class="contact-logo"
-							id="whatsapp-link"
-							src="./images/whatsapp.png"
-					/></a>
-				</div>
-			</div>
-		</div>
-		<div id="loading-bar" hidden>Loading...</div>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My TODO List</title>
+    <script src="./utils.js"></script>
+    <script src="./main.js"></script>
+    <link id="style-link" rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header id="header">To Do List</header>
+    <div id="freezer-section">
+      <img id="freezer" src="./images/freezer.jpeg" />
+      <section id="control-section">
+        <input type="text" id="text-input" placeholder="New Task" />
+        <label id="priority-label" for="priority-selector">Priority:</label>
+        <select id="priority-selector" name="priority-selector">
+          <option value="1" class="option priority1">1-Least</option>
+          <option value="2" class="option priority2">2</option>
+          <option selected value="3" class="option priority3">3</option>
+          <option value="4" class="option priority4">4</option>
+          <option value="5" class="option priority5">5-Most</option>
+        </select>
+        <button id="add-button">Add</button>
+        <div id="buttons-div">
+          <button id="dark-mode-button">Dark mode</button>
+          <button id="sort-button">Sort by priority</button>
+        </div>
+        <div id="search-input-div">
+          <input type="text" id="search-input" placeholder="Search..." />
+          <button id="search-button">Go!</button>
+          <button id="clear-button">Clear</button>
+        </div>
+        <div id="counter-line">
+          You have <span id="counter"></span> tasks To-Do
+        </div>
+        <br />
+      </section>
+    </div>
+    <div id="all-view-section">
+      <img
+        id="loading-gif"
+        src="https://icon-library.com/images/animated-loading-icon/animated-loading-icon-25.jpg"
+        hidden
+      />
+      <div id="arrows" hidden>
+        <img id="right-arrow" src="./images/arrow.png" />
+        <img
+          id="left-arrow"
+          src="./images/arrow.png"
+          style="transform: rotate(180deg)"
+        />
+      </div>
+      <section id="view-section"></section>
+      <img id="fridge" src="images/fridge-body.jpeg" />
+      <div id="tip-window" hidden>Click to Delete task</div>
+      <div id="edit-task-input" hidden>
+        <input id="edit-text" type="text" placeholder="Edit" /><br /><button
+          class="edit-text"
+          id="edit-text-button"
+        >
+          Save
+        </button>
+        <select id="priority-changer" name="priority-changer">
+          <option value="" class="option" selected>Priority</option>
+          <option value="1" class="option priority1">1-Least</option>
+          <option value="2" class="option priority2">2</option>
+          <option value="3" class="option priority3">3</option>
+          <option value="4" class="option priority4">4</option>
+          <option value="5" class="option priority5">5-Most</option>
+        </select>
+        <label for="date-changer" id="date-changer-label">New date</label>
+        <input type="checkbox" id="date-changer" name="date-changer" />
+      </div>
+      <div id="contact-note">
+        <div class="contact-magnet" id="letter1">C</div>
+        <div class="contact-magnet" id="letter2">O</div>
+        <div class="contact-magnet" id="letter3">N</div>
+        <div class="contact-magnet" id="letter4">T</div>
+        <div class="contact-magnet" id="letter5">A</div>
+        <div class="contact-magnet" id="letter6">C</div>
+        <div class="contact-magnet" id="letter7">T</div>
+        <div id="contact-indormation">
+          Ilay Tissona
+          <a href="https://www.facebook.com/ilay.tissona" target="_blank"
+            ><img
+              class="contact-logo"
+              id="facebook-link"
+              src="./images/facebook.png"
+          /></a>
+          <a href="https://github.com/IlayTissona" target="_blank"
+            ><img
+              class="contact-logo"
+              id="github-link"
+              src="./images/github.png"
+          /></a>
+          <a href="mailto:ilay211@gmail.com" target="_blank">
+            <img class="contact-logo" id="mail-link" src="./images/email.png"
+          /></a>
+          <a
+            href="https://wa.me/972536204048?text=I%20like%20your%20ToDo%20list"
+            target="_blank"
+          >
+            <img
+              class="contact-logo"
+              id="whatsapp-link"
+              src="./images/whatsapp.png"
+          /></a>
+        </div>
+      </div>
+    </div>
+    <div id="loading-bar" hidden>Loading...</div>
+  </body>
 </html>

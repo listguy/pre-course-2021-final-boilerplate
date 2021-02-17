@@ -6,11 +6,13 @@ const FS = require("fs");
 DB.use(express.json());
 
 DB.get("/b/:fileName", (req, res) => {
-  FS.readFile(`./${req.params.fileName}.json`, {}, (err, data) => {
+  console.log("get");
+  FS.readFile(`./backend/v1/${req.params.fileName}.json`, {}, (err, data) => {
     if (err) {
       res.send(err);
     } else {
-      res.send(data);
+      // console.log(data);
+      res.status(200).json(JSON.parse(data));
     }
   });
 });
@@ -18,12 +20,17 @@ DB.get("/b/:fileName", (req, res) => {
 DB.put("/b/:fileName", (req, res) => {
   // res.send(req.body);
   FS.writeFile(
-    `./${req.params.fileName}.json`,
+    `./backend/v1/${req.params.fileName}.json`,
     JSON.stringify(req.body),
     () => {
-      res.send("200");
+      res.sendStatus(200);
     }
   );
 });
 
+DB.get("/b/", (req, res) => {
+  res.send(req.headers);
+});
+
 DB.listen(port);
+console.log("listening on port 3002");

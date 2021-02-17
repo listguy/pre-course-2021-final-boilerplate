@@ -18,23 +18,22 @@ async function main() {
   loadingGif.hidden = false;
   let tasksArray = [];
   // const fetchResponse =
-  fetch("http://localhost:3005/b/todo", { mode: "no-cors" })
+  fetch("http://localhost:3002/b/todo")
     .then((res) => {
-      console.log(res);
       return res.json();
     })
     .then(
       (jsonRes) => {
-        console.log(jsonRes);
         tasksArray =
-          JSON.stringify(jsonRes.record["my-todo"]) !== `[{}]` //JSONBin as preffered database
-            ? jsonRes.record["my-todo"]
+          JSON.stringify(jsonRes["my-todo"]) !== `[{}]` //JSONBin as preffered database
+            ? jsonRes["my-todo"]
             : [];
         loadingGif.hidden = true;
         console.log(tasksArray);
         localStorage.setItem("my-todo", JSON.stringify(tasksArray));
       },
       (err) => {
+        console.log(err);
         const offlineBar = document.getElementById("loading-bar");
         offlineBar.innerText = "You are offline, working on local storage";
         offlineBar.hidden = false;
@@ -192,9 +191,8 @@ async function main() {
     loadingBar.style = "transition :5000ms;";
     loadingBar.style.backgroundColor = "white";
     loadingBar.style.backgroundColor = "black";
-    const fetchTry = fetch("http://localhost:3005/b/todo", {
+    const fetchTry = fetch("http://localhost:3002/b/todo", {
       method: "put",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -210,6 +208,7 @@ async function main() {
         loadingBar.style.transition = "5000ms";
         loadingBar.style.backgroundColor = "white";
         loadingBar.innerText = `Loading...`;
+        console.log(error);
       }, 3000);
       return;
     }
