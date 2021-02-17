@@ -23,5 +23,9 @@
     "nock": "^13.0.6",
     "nock-puppeteer": "^1.0.2",
     "puppeteer": "^4.0.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
   }
 }
