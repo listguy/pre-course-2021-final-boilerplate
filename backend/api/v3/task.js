@@ -1,7 +1,6 @@
-const { response } = require("express");
 const express = require("express");
 const fs = require("fs");
-const { request } = require("http");
+const { v4: uuid } = require('uuid')
 
 const router = express.Router();
 
@@ -38,7 +37,7 @@ router.get("/:id", (request, response) => {
         response.status(200).send(dataJson);
     }
     catch (e) {
-        response.status(422).json({ message: "Bad ID, not found", error: e });
+        response.status(400).json({ message: "Bad ID, not found", error: e });
     }
 });
 
@@ -46,14 +45,14 @@ router.post("/", (request, response) => {
     const { body } = request;
     try {
         fs.writeFileSync(
-            `./backend/jsonFiles/${Date.now()}.json`,
-            JSON.stringify(body, null, 4)
+            `./backend/jsonFiles/${uuid()}.json`,
+                JSON.stringify(body, null, 4)
         );
         response.status(200).json({
             "body": body,
         })
     } catch (e) {
-        response.status(500).json({
+        response.status(400).json({
             "message": "Couldn't create file",
             "error": e,
             "success": false
@@ -82,7 +81,7 @@ router.delete("/:id", (request, response) => {
     const { id } = request.params;
     const fileExists = fs.existsSync(`./backend/jsonFiles/${id}.json`);
     if (!fileExists) {
-        response.status(404).json(
+        response.status(401).json(
             {
                 "message": "File not found",
                 "success": false

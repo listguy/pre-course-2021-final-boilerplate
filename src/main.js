@@ -21,12 +21,13 @@ getJSON();
 
 function getJSON() {
     showSpinner()
-    fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e/latest').then(res => res.json())
+    fetch('http://localhost:3000/api/v3/b/d6c19f28-1087-4663-ac83-99745e46f1df').then(res => res.json())
         .then(res => {
-            if (res.record['my-todo'].length === 0) {
+            if (res['my-todo'].length === 0) {
                 return;
             } else {
-                tasks['my-todo'] = res.record['my-todo'];
+                console.log(res['my-todo'])
+                tasks['my-todo'] = res['my-todo'];
                 printTodoList(tasks['my-todo']);
             }
         })
@@ -34,7 +35,7 @@ function getJSON() {
 
 function updateJSON() {
     showSpinner()
-    fetch('https://api.jsonbin.io/v3/b/6013f95e1de5467ca6bdcc4e', {
+    fetch('http://localhost:3000/api/v3/b/d6c19f28-1087-4663-ac83-99745e46f1df', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
