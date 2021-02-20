@@ -1,10 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My TODO List</title>
-    <script src="utils.js"></script>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b90118635a.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="lightStyle.css" id="theme-link">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="utils.js"></script>
+  <title>Michael's To-Do list</title>
+  <link rel="icon" href="./images/icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+  <div class="container">
+    <div class="top">
+      <h1>To-Do List</h1>
+      <img src="./images/logo.png" alt="check-mark">
+    </div>
+    <div class="main">
+      <div class="controlSection">
+        <div class="addTask">
+          <label for="newLine">New Task:</label>
+          <input type="text" id="text-input" name="newLine">
+        </div>
+        <div class="newPriority">
+          <label for="priority">Priority:</label>
+          <select name="priority" id="priority-selector">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="dueDate">
+          <label for="due-date">Due Date:</label>
+          <input type="date" id="dueDate" name="due-date" value="2021-02-05" min="2021-01-31" max="2021-12-31">
+        </div>
+        <div class="addButton">
+          <button class="button" id="add-button">Add</button>
+        </div>
+        <div class="themeMode">
+          <button class="button" id="mode-button">Dark Mode</button>
+        </div>
+        <div id="counter">0</div>
+        <div id="tasksIcon"><i class="fas fa-tasks"></i></div>
+      </div>
+      <div class="sortContainer">
+        <div class="sortByDate" id="AscendingDate">
+          <button class="sort" id="sort-date">Sort By Date</button>
+        </div>
+        <div class="sortByPriority" id="AscendingPriority">
+          <button class="sort" id="sort-button">Sort By Priority</button>
+        </div>
+        <div class="sortByDueDate" id="AscendingDueDate">
+          <button class="sort" id="sort-dueDate">Sort By Time Left</button>
+        </div>
+        <div class="sortButtons"></div>
+      </div>
+      <hr>
+      <div class="viewSection">
+        <div id="spinner"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
 </html>

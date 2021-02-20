@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:400,800&display=swap');
+
+:root {
+    --my-blue: #00d4ff;
+    --dark--bg:rgb(6, 41, 48);
+  }
+
+* {
+    margin: 0;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    background: var(--dark--bg);
+}
+
+.button {
+    font-family: 'Muli', sans-serif;
+    border: 2px solid #00d4ff;
+    color: #00d4ff;
+    font-weight: 800;
+    background: white;
+    min-width: 60px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 4px;
+    margin: 0 3px 0 0;
+    cursor: pointer;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+}
+
+#add-button {
+    background:#056 ;
+    color:white;
+}
+
+#mode-button {
+    background:#056 ;
+    color:var(--my-blue);
+}
+
+#mode-button:hover, #add-button:hover  {
+    background:#056 ;
+    color:white;
+}
+
+.button:hover {
+    border-color: var(--my-blue);
+    color: var(--my-blue);
+    background-color: #056;
+}
+
+.top h1 {
+    font-family: 'Muli', sans-serif;
+    font-size: 6rem;
+    color: #2b6fad;
+    text-shadow: 1px 0 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0),
+     0 -1px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0),
+     1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
+}
+
+.top img {
+    padding-left: 20px;
+    height: 55px;
+    width: auto;
+    padding-bottom: 8px;
+}
+
+.container {
+    width: 75vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.top {
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 75vh;
+    height: auto;
+    border: 1px solid var(--my-blue);
+}
+
+.controlSection {
+    background: #056;
+    display: flex;
+    height: auto;
+    padding: 15px;
+    font-size: 1.9rem;
+    font-family: 'Fira Sans', sans-serif;
+    color:white;
+}
+
+ .dueDate {
+    flex: 0 1 auto;
+    height: auto;
+}
+
+.addButton {
+    flex: 1 1 content;
+    padding-left: 10px;
+}
+
+.newPriority {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.addTask {
+    flex: 0 2 auto;
+}
+
+.themeMode  {
+    text-align: right;
+    flex: 3 0 auto;
+    height: auto;    
+}
+
+.newPriority select {
+    width: 40px;
+    height: 25px;
+    border-radius: 4px;
+}
+
+.controlSection input {
+    height: 25px;
+    border-radius: 4px;
+    border: none;
+}
+
+.controlSection input:focus {
+    border: 1px solid var(--my-blue);
+    outline: none; 
+}
+
+.newPriority select:focus {
+    border: 1.5px solid var(--my-blue);
+
+}
+
+.addTask input {
+    width: 300px;
+    height: 25px;
+}
+
+#counter {
+    flex: 1 2 auto;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 2.1rem;
+}
+
+.sortContainer {
+    padding-top: 10px;
+    display: flex;
+    max-height: 30px;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.sortContainer button:hover {
+    color: var(--my-blue);
+}
+
+.sortByPriority {
+    flex: 0 2 200px;
+    text-align: left;
+}
+
+.sortByDate {
+    flex: 0 2 185px;
+    text-align: left;
+}
+
+.sortByDueDate {
+    flex: 0 2 200px;
+    text-align: left;
+}
+
+.sortButtons {
+    flex: 0 1 140px;
+}
+
+.todo {
+    flex: 1 1 auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.089);
+    text-align: center;
+}
+.todo-container {
+    display: flex;
+    text-align: left;
+}
+
+.todo-time-left {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.todo-time-left i {
+    align-self: center;
+    font-size:2.3rem;
+}
+
+.todo-text {
+    min-width: 620px;
+    text-align: left;
+    overflow-wrap: break-word;
+    height: auto;
+}
+
+.todo-container input {
+    flex: 0 2 auto;
+}
+
+.options-buttons {
+    text-align: right;
+}
+
+.viewSection {
+    line-height: 2;
+    font-size: 1.8rem;
+    font-weight: 500;
+    padding: 10px;
+    font-family: 'Fira Sans', sans-serif;
+    color:white;
+}
+
+.sort {
+    font-family: 'Muli', sans-serif;
+    color: white;
+    background-color: var(--dark--bg);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+}
+
+#spinner{
+    visibility: hidden;
+    width: 80px;
+    height: 80px;
+    border: 2px solid #f3f3f3;
+    border-top:3px solid var(--my-blue);
+    border-radius: 100%;
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right: 0;
+    margin: auto;  
+    animation: spin 1s infinite linear;
+  }
+  
+  @keyframes spin {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+  }
+  
+  #spinner.show {
+    visibility: visible;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    
+    html {
+        font-size: 5px;
+    }
+    
+    .container {
+        width: 90vw;
+        height: 0vh;
+        margin: auto;
+    }
+
+    .button {
+        min-width: 15px;
+        border-radius: 8px;
+        padding: 4px;
+        margin: 0 3px 0 0;
+        font-size: 2rem;
+    }
+    
+    .top {
+        height: 5vh;
+        padding-bottom: 0.5vh;
+    }
+
+    .top img {
+        height: 3vh;
+    }
+    
+    .main {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 90vw;
+        border: 1px solid var(--my-blue);
+    }
+    
+    .controlSection {
+        flex-direction: column;
+        padding: 5px;
+        font-size: 2.7rem;
+        font-weight: 600;
+        font-family: 'Fira Sans', sans-serif;
+        color:white;
+    }
+    
+    #tasksIcon i {
+        display: none;
+    }
+
+     .dueDate {
+        flex: 0 1 auto;
+        padding-top: 1vh;
+    }
+    
+    .addButton {
+        flex: 1 1 content;
+        padding-left: 10px;
+        padding-top: 1vh;
+    }
+    
+    .newPriority {
+        flex: 1 1 auto;
+        padding-top: 1vh;
+        text-align: left;
+    }
+
+    .newPriority select {
+        height: 2.5vh;
+    }
+
+    .controlSection input {
+        height: 2vh;
+    }
+    
+    .addTask input {
+        width: 60vw;
+        height: 2vh;
+    }
+    
+    #counter {
+        padding-right: 8vw;
+        padding-top: 1vh;
+        font-size: 2.5rem;
+    }
+
+    .sortButtons {
+        flex: 0 1 0;
+    }
+    
+    .todo {
+        text-align: center;
+    }
+    
+    .todo-container {
+        width: 100%;
+        text-align: left;
+        padding-left: 0px;
+    }
+    
+    .todo-time-left i {
+        display: none;
+    }
+    
+    .todo-text {
+        min-width: 30vw;
+        padding-left: 0px;
+        text-align: left;
+    }
+    
+    .viewSection {
+        width: 100%;
+        flex-direction: column;
+        line-height: 1.6;
+        font-size: 2.5rem;
+        font-weight: 500;
+        padding: 10px;
+    }
+    
+    .sort {
+        font-size: 2rem;
+        padding: 2px;
+    }
+      }
